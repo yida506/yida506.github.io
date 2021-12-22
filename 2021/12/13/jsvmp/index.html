@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="什么是jsvmp(个人理解)？所谓jsvmp就是采用虚拟化的方法，将代码的运行逻辑隐式可见，主要的特征有:一个超长字符串，一部分取值函数，然后通过大量的ifelse抽取方法进行调用，最终达到生成函数的目的，进而能对参数进行加密，同时，里面还夹杂着许多对环境的检测，在浏览器中，可以直接对其进行调用，但是在node里，由于环境的缺失等问题、就导致在node运行出不了结果。 要解决它，就得深入理解它。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsvmp">
+<meta property="og:url" content="http://yida506.github.io/2021/12/13/jsvmp/index.html">
+<meta property="og:site_name" content="spider">
+<meta property="og:description" content="什么是jsvmp(个人理解)？所谓jsvmp就是采用虚拟化的方法，将代码的运行逻辑隐式可见，主要的特征有:一个超长字符串，一部分取值函数，然后通过大量的ifelse抽取方法进行调用，最终达到生成函数的目的，进而能对参数进行加密，同时，里面还夹杂着许多对环境的检测，在浏览器中，可以直接对其进行调用，但是在node里，由于环境的缺失等问题、就导致在node运行出不了结果。 要解决它，就得深入理解它。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E7%94%9F%E6%88%90%E5%B1%82.png">
+<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E9%9A%90%E5%90%AB%E5%B1%82.png">
+<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E5%8F%82%E6%95%B0%E5%B1%82.png">
+<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/for_if%E6%B5%81.png">
+<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E6%97%A5%E5%BF%971.png">
+<meta property="article:published_time" content="2021-12-13T14:00:57.000Z">
+<meta property="article:modified_time" content="2021-12-22T16:26:15.353Z">
+<meta property="article:author" content="Lan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E7%94%9F%E6%88%90%E5%B1%82.png">
+
+<link rel="canonical" href="http://yida506.github.io/2021/12/13/jsvmp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>jsvmp | spider</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">spider</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/13/jsvmp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jsvmp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-13 22:00:57" itemprop="dateCreated datePublished" datetime="2021-12-13T22:00:57+08:00">2021-12-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-23 00:26:15" itemprop="dateModified" datetime="2021-12-23T00:26:15+08:00">2021-12-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="什么是jsvmp-个人理解-？"><a href="#什么是jsvmp-个人理解-？" class="headerlink" title="什么是jsvmp(个人理解)？"></a>什么是jsvmp(个人理解)？</h3><p>所谓jsvmp就是采用虚拟化的方法，将代码的运行逻辑隐式可见，主要的特征有:一个超长字符串，一部分取值函数，然后通过大量的ifelse抽取方法进行调用，最终达到生成函数的目的，进而能对参数进行加密，同时，里面还夹杂着许多对环境的检测，在浏览器中，可以直接对其进行调用，但是在node里，由于环境的缺失等问题、就导致在node运行出不了结果。</p>
+<p>要解决它，就得深入理解它。</p>
+<h3 id="初探jsvmp"><a href="#初探jsvmp" class="headerlink" title="初探jsvmp:"></a>初探jsvmp:</h3><p>以某条为例，将生成参数指向的代码整体扣出来，写入html文件中对其进行静态分析，同时我们观察到，在我们打开html的时候，内置函数已经生成完毕，同时可以使用window.byted_acrawler.sign的方法生成参数，但是在node中，我们发现运行后会报错误，也就是说，在这串js中包含了对环境的检测，使得node中运行得不到我们想要的结果。</p>
+<p>接下来我们就需要知道，它在哪检测了环境，它怎么检测了环境。</p>
+<h4 id="代码结构："><a href="#代码结构：" class="headerlink" title="代码结构："></a>代码结构：</h4><p>整个代码呈三大块，第一块为生成层，主要特征为：部分具有实际意义的调用</p>
+<p><img src="/2021/12/13/jsvmp/%E7%94%9F%E6%88%90%E5%B1%82.png"></p>
+<p>第二块为隐含层（在该层中包含长串If流）:</p>
+<p><img src="/2021/12/13/jsvmp/%E9%9A%90%E5%90%AB%E5%B1%82.png"></p>
+<p>第三层为参数层(该层中包含大量字符，通过对其不断调用，最终达到生成函数的目的。)：</p>
+<p><img src="/2021/12/13/jsvmp/%E5%8F%82%E6%95%B0%E5%B1%82.png"></p>
+<p>我们要做的就是尽可能的了解到隐含层中在干什么，只要知道了其对什么进行检测，亦或者是调用了什么，那么我们就可以实现伪装，达到本地运行Js的目的。</p>
+<h5 id="隐含层分析"><a href="#隐含层分析" class="headerlink" title="隐含层分析"></a>隐含层分析</h5><p>在G函数中，我们发现存在两个大if流，是对传入的参数I进行了判断，我们首先进入第一个if流中，发现其中的内容为一个大for循环，然后里面有数不尽数的if流，在for循环到If流中有一段代码引人注意：</p>
+<p><img src="/2021/12/13/jsvmp/for_if%E6%B5%81.png"></p>
+<p>我们发现，其中j是由for循环的参数生成的，x由j计算得，A由3与x经过位运算计算，通过观察if流的条件我们可以知道，到底进入哪个If流实际上是由j决定的，接下来，我们就在O+=2和生成A的位置分别打上条件断点和日志断点，来看看运行流程到底是怎样的。按F5刷新，进入断点，反复重试后，我们发现，其运行流程其实一直是一样的，那么我们就只需要知道每一步都在干啥即可。 </p>
+<p><img src="/2021/12/13/jsvmp/%E6%97%A5%E5%BF%971.png"></p>
+<p>根据打印出的日志我们可以看到运行的过程中，不断的在对一个S数组进行操作，可以看到，该数组内容从什么都没有到开始慢慢有参数，通过类似object这种参数,这些地方都有可能是检测点。</p>
+<h5 id="if流内容分析"><a href="#if流内容分析" class="headerlink" title="if流内容分析"></a>if流内容分析</h5><p>由于在每次进入到if流的过程中,A,x的值都是固定的，同时观察其中的内容可以发现，充斥着大量的三元表达式，由于其流程往往由A的值确定，那么我们只需要找到其执行流程，其余的删掉即可，在此还需要了解另一个观点，即使把if流中的函数简洁化，由于if流的复杂性，我们在分析时，实际上并不能很好的Get到其点，这时就需要沿用另一种思想:流程平坦化，我们将复杂的if流转化为switch-case的形式，那么这样一来，代码的整体流程没变，逻辑上可以清晰不少。</p>
+<blockquote>
+<p>node中运行的结果和浏览器不同，对于赋值操作，在浏览器中很少出现undefied的这种情况，但是在node中加入global没有这种属性，那么在赋值的时候就会造成未定义的这种情况出现，进而导致生成对象生成缺失。</p>
+</blockquote>
+<p>在平坦化后，我们发现整体代码可以划分为如下n块:</p>
+<ol>
+<li>包含return 貌似是结尾</li>
+<li>数组赋值(直接借助已有的对象赋值)</li>
+<li>生成模型(采取类似for循环的方式，生成对象并赋值)</li>
+</ol>
+<p>也就是说，只有可能在生成模型里，生成了检测点，即我们需要针对性的分析生成赋值就可知道，到底缺少什么环境。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/28/ast/" rel="prev" title="AST语法树">
+      <i class="fa fa-chevron-left"></i> AST语法树
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" rel="next" title="补环境">
+      补环境 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFjsvmp-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3-%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是jsvmp(个人理解)？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E6%8E%A2jsvmp"><span class="nav-number">2.</span> <span class="nav-text">初探jsvmp:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">代码结构：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9A%90%E5%90%AB%E5%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">2.1.1.</span> <span class="nav-text">隐含层分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#if%E6%B5%81%E5%86%85%E5%AE%B9%E5%88%86%E6%9E%90"><span class="nav-number">2.1.2.</span> <span class="nav-text">if流内容分析</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
