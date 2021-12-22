@@ -113,6 +113,21 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
@@ -176,7 +191,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-22 00:15:24" itemprop="dateModified" datetime="2021-12-22T00:15:24+08:00">2021-12-22</time>
+                <time title="Modified: 2021-12-23 00:26:07" itemprop="dateModified" datetime="2021-12-23T00:26:07+08:00">2021-12-23</time>
               </span>
 
           
@@ -205,8 +220,32 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _N = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="string">&#x27;location.href=location.pathname+location.search.replace(/[\?|&amp;]captcha-challenge/,\&#x27;\&#x27;)&#x27;</span>, <span class="number">1500</span>);</span><br><span class="line">    <span class="built_in">document</span>.cookie = <span class="string">&#x27;__jsl_clearance=1640094880.604|0|&#x27;</span> + (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> _t = [<span class="function"><span class="keyword">function</span> (<span class="params">_N</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> _N</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">_t</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> _t</span><br><span class="line">            &#125;, (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> _N = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">                _N.innerHTML = <span class="string">&#x27;&lt;a href=\&#x27;/\&#x27;&gt;_1H&lt;/a&gt;&#x27;</span>;</span><br><span class="line">                _N = _N.firstChild.href;</span><br><span class="line">                <span class="keyword">var</span> _t = _N.match(<span class="regexp">/https?:\/\//</span>)[<span class="number">0</span>];</span><br><span class="line">                _N = _N.substr(_t.length).toLowerCase();</span><br><span class="line">                <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">_t</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> _1H = <span class="number">0</span>; _1H &lt; _t.length; _1H++) &#123;</span><br><span class="line">                        _t[_1H] = _N.charAt(_t[_1H])</span><br><span class="line">                    &#125;;</span><br><span class="line">                    <span class="keyword">return</span> _t.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)(), <span class="function"><span class="keyword">function</span> (<span class="params">_N</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> _t = <span class="number">0</span>; _t &lt; _N.length; _t++) &#123;</span><br><span class="line">                    _N[_t] = <span class="built_in">parseInt</span>(_N[_t]).toString(<span class="number">36</span>)</span><br><span class="line">                &#125;;</span><br><span class="line">                <span class="keyword">return</span> _N.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            &#125;],</span><br><span class="line">            _N = [<span class="string">&#x27;clD&#x27;</span>, [(-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;) + (-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;)], <span class="string">&#x27;V&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + [-~-~&#123;&#125;]], <span class="string">&#x27;fq&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + [-~[] - ~[] - ~!<span class="regexp">/!/</span> + (-~[] - ~[]) * [-~[] - ~[]]], (-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>]), (-~[] + [] + [[]][<span class="number">0</span>]) + [(+!![[][[]]][<span class="number">1</span>])]], <span class="string">&#x27;LBWywKW&#x27;</span>, [(<span class="number">2</span> - ~[-~-~&#123;&#125;] + [] + [[]][<span class="number">0</span>])], <span class="string">&#x27;%2FZyf&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>])], <span class="string">&#x27;6&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>])], <span class="string">&#x27;_b938d514e58d7772015c7ad84677513a&#x27;</span>, (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>]), <span class="string">&#x27;D&#x27;</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> _1H = <span class="number">0</span>; _1H &lt; _N.length; _1H++) &#123;</span><br><span class="line">            _N[_1H] = _t[[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>][_1H]](_N[_1H])</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> _N.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    &#125;)() + <span class="string">&#x27;;Expires=Tue, 12-Dec-30 09:50:26 GMT;Path=/;&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">if</span> ((<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> !!<span class="built_in">window</span>.addEventListener;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)()) &#123;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, _N, <span class="literal">false</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.attachEvent(<span class="string">&#x27;onreadystatechange&#x27;</span>, _N)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在上述代码中，我们可以看到形如document、window这些对象，在node中是不包含这种对象的，因此我们需要构造一个和浏览器一样的对象出来。</p>
-<p>很明显，这里的Window指代全局对象，document指代的是网页源码，DOM对象在node中无法补出来，因此我们换一种思路，只需要把其调用部分模拟出来不就行了嘛？</p>
-<h5 id="STEP1"><a href="#STEP1" class="headerlink" title="STEP1:"></a>STEP1:</h5>
+<p>很明显，这里的Window指代全局对象，document指代的是网页源码，DOM对象在node中无法完全模拟，因此我们换一种思路，只需要补到其不报错不就行了嘛？</p>
+<h5 id="STEP1-整体代码分析"><a href="#STEP1-整体代码分析" class="headerlink" title="STEP1 整体代码分析:"></a>STEP1 整体代码分析:</h5><p>先看第一个位置，setTimeout创建了一个定时器，我们在这里直接置空即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>由于在node中的全局为global,那么我们需要对其进行一个赋值操作，把window构建出来。</p>
+<p>同时由于后面还调用了document,我们先创建一个空对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span> = <span class="built_in">global</span>;</span><br><span class="line"><span class="built_in">document</span> = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="STEP2-环境搭建"><a href="#STEP2-环境搭建" class="headerlink" title="STEP2 环境搭建:"></a>STEP2 环境搭建:</h5><p>对于document.createElement(‘div’)，createElement(‘div’)明显是一个方法，在网页端返回了一个dom对象，同时我们发现其后续创建了innerHTML属性,然后通过firstChild.href重新赋值。这样一来，我们在网页中运行_N.firstChild.href,发现，打印的结果为’<a target="_blank" rel="noopener" href="https://www.python-spider.com/&#39;,%E5%90%8E%E7%BB%AD%E8%BF%98%E8%B7%9F%E4%B8%8A%E4%BA%86%E5%AF%B9%E5%85%B6%E7%9A%84%E6%93%8D%E4%BD%9C%E3%80%82%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E9%9C%80%E8%A6%81%E6%8A%8Ahref%E8%A1%A5%E5%87%BA%E6%9D%A5%EF%BC%8C%E5%90%8C%E6%97%B6%E8%AE%A9innerHTML%E5%B1%9E%E6%80%A7%E5%AD%98%E5%9C%A8%E5%8D%B3%E5%8F%AF%E3%80%82">https://www.python-spider.com/&#39;,后续还跟上了对其的操作。也就是说，我们只需要把href补出来，同时让innerHTML属性存在即可。</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _N = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">_N.innerHTML = <span class="string">&#x27;&lt;a href=\&#x27;/\&#x27;&gt;_1H&lt;/a&gt;&#x27;</span>;</span><br><span class="line">_N = _N.firstChild.href;</span><br><span class="line"><span class="keyword">var</span> _t = _N.match(<span class="regexp">/https?:\/\//</span>)[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.createElement = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">innerHTML</span>:<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">firstChild</span>:&#123;</span><br><span class="line">            <span class="attr">href</span>:<span class="string">&#x27;https://www.python-spider.com/&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在末尾我们还看到了形如addEventListener的这种调用，对于这种方法，我们不知道其返回了什么，那么我们就需要去<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%87%8C%E6%9F%A5%E6%89%BE%E3%80%82">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript官方文档里查找。</a></p>
+<p>最后补出来如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">document</span>.addEventListener = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;<span class="keyword">return</span> b()&#125;;</span><br><span class="line"><span class="built_in">document</span>.attachEvent = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="隐式检测"><a href="#隐式检测" class="headerlink" title="隐式检测"></a>隐式检测</h4><p>以显示检测的补环境来看，在代码结构清晰的情况下，我们可以很轻易的找到补环境入口，但是假使代码流程复杂，同时调用方法不是以上述形式调用，那么单纯的看代码几乎找不到补环境入口。</p>
+<p>先看如下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//type1</span></span><br><span class="line"><span class="built_in">window</span>[<span class="string">&#x27;hr&#x27;</span>+<span class="string">&#x27;ef&#x27;</span>];</span><br><span class="line"><span class="comment">//type2</span></span><br><span class="line">S = [<span class="built_in">window</span>,<span class="string">&#x27;hr&#x27;</span>,<span class="string">&#x27;ef&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> A = S[<span class="number">0</span>][S[<span class="number">1</span>]+S[<span class="number">2</span>]];</span><br></pre></td></tr></table></figure>
+
+<p>第一种为稍微明显的调用，但是假如被ASCII码混淆了呢，假如被Ob混淆了呢，当然，针对这种情况，我们可以直接放到node中运行，让其报错后在比对即可。但是，假如我们这里采用第二种方法检测环境，这样，即使在node中运行也不会报错，返回的是undefined，那么这样在运行的流程中就发生了变化，进而导致最终的结果与我们想要的所差甚远。</p>
+<p>我们想要知道到底缺少什么环境，可以通过插桩(logpoint)的方式去寻找。</p>
+<h5 id="某tiao分析"><a href="#某tiao分析" class="headerlink" title="某tiao分析"></a>某tiao分析</h5><p>在jsvmp一章节中，针对某tiao的分析，我们已经了解到jsvmp的本质，其实就是通过大数组不断地生成参数，反复对其调用，最终生成环境监测点、函数入口等。</p>
+<p>也就是说我们只需要在生成模型插桩即可溯源。</p>
+
       
     </div>
 
@@ -256,7 +295,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-20 23:39:49" itemprop="dateModified" datetime="2021-12-20T23:39:49+08:00">2021-12-20</time>
+                <time title="Modified: 2021-12-23 00:26:15" itemprop="dateModified" datetime="2021-12-23T00:26:15+08:00">2021-12-23</time>
               </span>
 
           
@@ -287,10 +326,16 @@
 <p><img src="/2021/12/13/jsvmp/%E6%97%A5%E5%BF%971.png"></p>
 <p>根据打印出的日志我们可以看到运行的过程中，不断的在对一个S数组进行操作，可以看到，该数组内容从什么都没有到开始慢慢有参数，通过类似object这种参数,这些地方都有可能是检测点。</p>
 <h5 id="if流内容分析"><a href="#if流内容分析" class="headerlink" title="if流内容分析"></a>if流内容分析</h5><p>由于在每次进入到if流的过程中,A,x的值都是固定的，同时观察其中的内容可以发现，充斥着大量的三元表达式，由于其流程往往由A的值确定，那么我们只需要找到其执行流程，其余的删掉即可，在此还需要了解另一个观点，即使把if流中的函数简洁化，由于if流的复杂性，我们在分析时，实际上并不能很好的Get到其点，这时就需要沿用另一种思想:流程平坦化，我们将复杂的if流转化为switch-case的形式，那么这样一来，代码的整体流程没变，逻辑上可以清晰不少。</p>
-<h6 id><a href="#" class="headerlink" title></a></h6><p>记录：</p>
+<blockquote>
 <p>node中运行的结果和浏览器不同，对于赋值操作，在浏览器中很少出现undefied的这种情况，但是在node中加入global没有这种属性，那么在赋值的时候就会造成未定义的这种情况出现，进而导致生成对象生成缺失。</p>
-<p>node中有的,node中没有的。</p>
-<p>​    href</p>
+</blockquote>
+<p>在平坦化后，我们发现整体代码可以划分为如下n块:</p>
+<ol>
+<li>包含return 貌似是结尾</li>
+<li>数组赋值(直接借助已有的对象赋值)</li>
+<li>生成模型(采取类似for循环的方式，生成对象并赋值)</li>
+</ol>
+<p>也就是说，只有可能在生成模型里，生成了检测点，即我们需要针对性的分析生成赋值就可知道，到底缺少什么环境。</p>
 
       
     </div>
@@ -341,7 +386,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-13 22:14:30" itemprop="dateModified" datetime="2021-12-13T22:14:30+08:00">2021-12-13</time>
+                <time title="Modified: 2021-12-23 00:26:10" itemprop="dateModified" datetime="2021-12-23T00:26:10+08:00">2021-12-23</time>
               </span>
 
           
@@ -606,7 +651,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-26 22:22:25" itemprop="dateModified" datetime="2021-11-26T22:22:25+08:00">2021-11-26</time>
+                <time title="Modified: 2021-12-23 00:27:33" itemprop="dateModified" datetime="2021-12-23T00:27:33+08:00">2021-12-23</time>
               </span>
 
           
