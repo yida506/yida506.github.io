@@ -28,7 +28,7 @@
 <meta property="og:description" content="补环境介绍对于存在js加密的网站，我们往往通过分析网站js，了解到其加密js的逻辑，然后通过本地运行的方式，获取加密后的参数，达到获取Js的目的。 对于加密代码量较少，亦或者是扣取复杂度较低的代码，我们可以通过扣代码，缺什么补什么，进而在本地扣取一个完整的加密算法，最终在本地运行。但是，对于加密量大，同时运行流程错纵复杂的代码，扣取其加密流程的复杂度呈几何倍的增长，因此，我们希望通过直接运行整个j">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-18T11:49:26.000Z">
-<meta property="article:modified_time" content="2021-12-24T14:24:47.453Z">
+<meta property="article:modified_time" content="2021-12-25T06:29:09.714Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-24 22:24:47" itemprop="dateModified" datetime="2021-12-24T22:24:47+08:00">2021-12-24</time>
+                <time title="Modified: 2021-12-25 14:29:09" itemprop="dateModified" datetime="2021-12-25T14:29:09+08:00">2021-12-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,7 +259,10 @@
 <h4 id="奇yin巧计"><a href="#奇yin巧计" class="headerlink" title="奇yin巧计"></a>奇yin巧计</h4><p>补环境可以通过半置空函数，判断其操作</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nullfunction = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="built_in">arguments</span>)&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>代理环境自吐proxy.</p>
+<p>代理环境proxy.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="keyword">new</span> <span class="built_in">Proxy</span>(test,&#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">target, key</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;获取了&#x27;</span>+key+<span class="string">&#x27;属性&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> target[key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>本质上是通过截取window.a，这种操作，把a打印到控制台，然后判断到底做了什么。</p>
 
     </div>
 
@@ -278,7 +281,10 @@
     <a href="/2021/12/13/jsvmp/" rel="prev" title="jsvmp">
       <i class="fa fa-chevron-left"></i> jsvmp
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/25/%E6%97%A0%E9%99%90debugger/" rel="next" title="无限debugger">
+      无限debugger <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -351,7 +357,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
