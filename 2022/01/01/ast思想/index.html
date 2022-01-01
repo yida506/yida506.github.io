@@ -20,25 +20,19 @@
     var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="什么是jsvmp(个人理解)？所谓jsvmp就是采用虚拟化的方法，将代码的运行逻辑隐式可见，主要的特征有:一个超长字符串，一部分取值函数，然后通过大量的ifelse抽取方法进行调用，最终达到生成函数的目的，进而能对参数进行加密，同时，里面还夹杂着许多对环境的检测，在浏览器中，可以直接对其进行调用，但是在node里，由于环境的缺失等问题、就导致在node运行出不了结果。 要解决它，就得深入理解它。">
+  <meta name="description" content="AST思考本篇重在介绍关于ast还原代码的一些逻辑。 首先，我们知道，以目前常见的混淆来讲，大部分其实是通过不断地调用一个类似生成函数的地方，来调用。 我们在分析时，往往想看到其直接调用的位置，那么，我们就需要将所谓的生成入口写入内存中，然后直接调用进而达到直接将调用的结果展示出来。 通常，普通的混淆生成入口有如下四种：  数组型 函数形 对象型 组合型  数组型所谓数组型，就是类似以数组的形式，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jsvmp">
-<meta property="og:url" content="http://yida506.github.io/2021/12/13/jsvmp/index.html">
+<meta property="og:title" content="ast思想">
+<meta property="og:url" content="http://yida506.github.io/2022/01/01/ast%E6%80%9D%E6%83%B3/index.html">
 <meta property="og:site_name" content="spider">
-<meta property="og:description" content="什么是jsvmp(个人理解)？所谓jsvmp就是采用虚拟化的方法，将代码的运行逻辑隐式可见，主要的特征有:一个超长字符串，一部分取值函数，然后通过大量的ifelse抽取方法进行调用，最终达到生成函数的目的，进而能对参数进行加密，同时，里面还夹杂着许多对环境的检测，在浏览器中，可以直接对其进行调用，但是在node里，由于环境的缺失等问题、就导致在node运行出不了结果。 要解决它，就得深入理解它。">
+<meta property="og:description" content="AST思考本篇重在介绍关于ast还原代码的一些逻辑。 首先，我们知道，以目前常见的混淆来讲，大部分其实是通过不断地调用一个类似生成函数的地方，来调用。 我们在分析时，往往想看到其直接调用的位置，那么，我们就需要将所谓的生成入口写入内存中，然后直接调用进而达到直接将调用的结果展示出来。 通常，普通的混淆生成入口有如下四种：  数组型 函数形 对象型 组合型  数组型所谓数组型，就是类似以数组的形式，">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E7%94%9F%E6%88%90%E5%B1%82.png">
-<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E9%9A%90%E5%90%AB%E5%B1%82.png">
-<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E5%8F%82%E6%95%B0%E5%B1%82.png">
-<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/for_if%E6%B5%81.png">
-<meta property="og:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E6%97%A5%E5%BF%971.png">
-<meta property="article:published_time" content="2021-12-13T14:00:57.000Z">
-<meta property="article:modified_time" content="2021-12-24T14:24:48.752Z">
+<meta property="article:published_time" content="2022-01-01T14:43:33.000Z">
+<meta property="article:modified_time" content="2022-01-01T16:40:48.342Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yida506.github.io/2021/12/13/jsvmp/%E7%94%9F%E6%88%90%E5%B1%82.png">
 
-<link rel="canonical" href="http://yida506.github.io/2021/12/13/jsvmp/">
+<link rel="canonical" href="http://yida506.github.io/2022/01/01/ast%E6%80%9D%E6%83%B3/">
 
 
 <script id="page-configurations">
@@ -51,7 +45,7 @@
   };
 </script>
 
-  <title>jsvmp | spider</title>
+  <title>ast思想 | spider</title>
   
 
 
@@ -171,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/13/jsvmp/">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/01/ast%E6%80%9D%E6%83%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -184,7 +178,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          jsvmp
+          ast思想
         </h1>
 
         <div class="post-meta">
@@ -194,14 +188,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-12-13 22:00:57" itemprop="dateCreated datePublished" datetime="2021-12-13T22:00:57+08:00">2021-12-13</time>
+              <time title="Created: 2022-01-01 22:43:33" itemprop="dateCreated datePublished" datetime="2022-01-01T22:43:33+08:00">2022-01-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-24 22:24:48" itemprop="dateModified" datetime="2021-12-24T22:24:48+08:00">2021-12-24</time>
+                <time title="Modified: 2022-01-02 00:40:48" itemprop="dateModified" datetime="2022-01-02T00:40:48+08:00">2022-01-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,33 +218,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="什么是jsvmp-个人理解-？"><a href="#什么是jsvmp-个人理解-？" class="headerlink" title="什么是jsvmp(个人理解)？"></a>什么是jsvmp(个人理解)？</h3><p>所谓jsvmp就是采用虚拟化的方法，将代码的运行逻辑隐式可见，主要的特征有:一个超长字符串，一部分取值函数，然后通过大量的ifelse抽取方法进行调用，最终达到生成函数的目的，进而能对参数进行加密，同时，里面还夹杂着许多对环境的检测，在浏览器中，可以直接对其进行调用，但是在node里，由于环境的缺失等问题、就导致在node运行出不了结果。</p>
-<p>要解决它，就得深入理解它。</p>
-<h3 id="初探jsvmp"><a href="#初探jsvmp" class="headerlink" title="初探jsvmp:"></a>初探jsvmp:</h3><p>以某条为例，将生成参数指向的代码整体扣出来，写入html文件中对其进行静态分析，同时我们观察到，在我们打开html的时候，内置函数已经生成完毕，同时可以使用window.byted_acrawler.sign的方法生成参数，但是在node中，我们发现运行后会报错误，也就是说，在这串js中包含了对环境的检测，使得node中运行得不到我们想要的结果。</p>
-<p>接下来我们就需要知道，它在哪检测了环境，它怎么检测了环境。</p>
-<h4 id="代码结构："><a href="#代码结构：" class="headerlink" title="代码结构："></a>代码结构：</h4><p>整个代码呈三大块，第一块为生成层，主要特征为：部分具有实际意义的调用</p>
-<p><img src="/2021/12/13/jsvmp/%E7%94%9F%E6%88%90%E5%B1%82.png"></p>
-<p>第二块为隐含层（在该层中包含长串If流）:</p>
-<p><img src="/2021/12/13/jsvmp/%E9%9A%90%E5%90%AB%E5%B1%82.png"></p>
-<p>第三层为参数层(该层中包含大量字符，通过对其不断调用，最终达到生成函数的目的。)：</p>
-<p><img src="/2021/12/13/jsvmp/%E5%8F%82%E6%95%B0%E5%B1%82.png"></p>
-<p>我们要做的就是尽可能的了解到隐含层中在干什么，只要知道了其对什么进行检测，亦或者是调用了什么，那么我们就可以实现伪装，达到本地运行Js的目的。</p>
-<h5 id="隐含层分析"><a href="#隐含层分析" class="headerlink" title="隐含层分析"></a>隐含层分析</h5><p>在G函数中，我们发现存在两个大if流，是对传入的参数I进行了判断，我们首先进入第一个if流中，发现其中的内容为一个大for循环，然后里面有数不尽数的if流，在for循环到If流中有一段代码引人注意：</p>
-<p><img src="/2021/12/13/jsvmp/for_if%E6%B5%81.png"></p>
-<p>我们发现，其中j是由for循环的参数生成的，x由j计算得，A由3与x经过位运算计算，通过观察if流的条件我们可以知道，到底进入哪个If流实际上是由j决定的，接下来，我们就在O+=2和生成A的位置分别打上条件断点和日志断点，来看看运行流程到底是怎样的。按F5刷新，进入断点，反复重试后，我们发现，其运行流程其实一直是一样的，那么我们就只需要知道每一步都在干啥即可。 </p>
-<p><img src="/2021/12/13/jsvmp/%E6%97%A5%E5%BF%971.png"></p>
-<p>根据打印出的日志我们可以看到运行的过程中，不断的在对一个S数组进行操作，可以看到，该数组内容从什么都没有到开始慢慢有参数，通过类似object这种参数,这些地方都有可能是检测点。</p>
-<h5 id="if流内容分析"><a href="#if流内容分析" class="headerlink" title="if流内容分析"></a>if流内容分析</h5><p>由于在每次进入到if流的过程中,A,x的值都是固定的，同时观察其中的内容可以发现，充斥着大量的三元表达式，由于其流程往往由A的值确定，那么我们只需要找到其执行流程，其余的删掉即可，在此还需要了解另一个观点，即使把if流中的函数简洁化，由于if流的复杂性，我们在分析时，实际上并不能很好的Get到其点，这时就需要沿用另一种思想:流程平坦化，我们将复杂的if流转化为switch-case的形式，那么这样一来，代码的整体流程没变，逻辑上可以清晰不少。</p>
-<blockquote>
-<p>node中运行的结果和浏览器不同，对于赋值操作，在浏览器中很少出现undefied的这种情况，但是在node中加入global没有这种属性，那么在赋值的时候就会造成未定义的这种情况出现，进而导致生成对象生成缺失。</p>
-</blockquote>
-<p>在平坦化后，我们发现整体代码可以划分为如下n块:</p>
-<ol>
-<li>包含return 貌似是结尾</li>
-<li>数组赋值(直接借助已有的对象赋值)</li>
-<li>生成模型(采取类似for循环的方式，生成对象并赋值)</li>
-</ol>
-<p>也就是说，只有可能在生成模型里，生成了检测点，即我们需要针对性的分析生成赋值就可知道，到底缺少什么环境。</p>
+        <h4 id="AST思考"><a href="#AST思考" class="headerlink" title="AST思考"></a>AST思考</h4><p>本篇重在介绍关于ast还原代码的一些逻辑。</p>
+<p>首先，我们知道，以目前常见的混淆来讲，大部分其实是通过不断地调用一个类似生成函数的地方，来调用。</p>
+<p>我们在分析时，往往想看到其直接调用的位置，那么，我们就需要将所谓的生成入口写入内存中，然后直接调用进而达到直接将调用的结果展示出来。</p>
+<p>通常，普通的混淆生成入口有如下四种：</p>
+<ul>
+<li>数组型</li>
+<li>函数形</li>
+<li>对象型</li>
+<li>组合型</li>
+</ul>
+<h5 id="数组型"><a href="#数组型" class="headerlink" title="数组型"></a>数组型</h5><p>所谓数组型，就是类似以数组的形式，通过数组下标访问。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrlist = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = arrlist[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>对于该种情况，我们抽象为如下四步：</p>
+<ul>
+<li>确定要遍历的对象，这里是VariableDeclarator。</li>
+<li>接下来是判断init部分的类型，因为可能还有许多声明其他变量的部分，我们希望的是只遍历右边是数组类型的。</li>
+<li>然后是将其写入内存，直接采用eval的方式(最好将其写入全局变量中)。</li>
+<li>最后是访问数组的作用域，找到其引用，然后直接替换节点即可。</li>
+</ul>
+<h5 id="函数形"><a href="#函数形" class="headerlink" title="函数形"></a>函数形</h5><p>所谓函数形，即声明的类型是函数，通过函数访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类型1</span></span><br><span class="line"><span class="keyword">var</span> add1 = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//类型2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add2</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> c = add1(<span class="number">1</span>,<span class="number">2</span>) + add2(<span class="number">3</span>,<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>该类情况与数组大致相同，只不过在遍历时候还需考虑第二种情况：</p>
+<ul>
+<li>确定要遍历的对象，这里是FunctionExpression，针对情况1，可以直接通过path.parent.id.name获取函数昵称，针对情况2，可以通过path.node.id.name获取函数昵称。</li>
+<li>接下来是对函数体结构的判断，必须要有该函数的引用，其次，该函数可以通过传入的值，直接计算出结果。</li>
+<li>然后是将其写入内存，直接采用eval的方式(最好将其写入全局变量中)。</li>
+<li>最后是访问函数的作用域，找到其引用，然后直接替换节点即可。</li>
+</ul>
+<h5 id="对象型"><a href="#对象型" class="headerlink" title="对象型"></a>对象型</h5><p>所谓对象型，就是声明了一个大对象，通过调用的方式访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	<span class="string">&#x27;a&#x27;</span>:<span class="number">123</span>,</span><br><span class="line">	<span class="string">&#x27;b&#x27;</span>:<span class="number">456</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> c = obj[<span class="string">&#x27;a&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>这个的本质与数组可以说是一模一样，在此不做赘述。</p>
+<h5 id="组合型"><a href="#组合型" class="headerlink" title="组合型"></a>组合型</h5><p>所谓的组合型，就是通过对象、数组、函数的组合方式，使得其变得复杂化，进而加大一键脱混淆的难度，进而使得我们需要针对型的修改插件，才能使得混淆得以脱掉。</p>
 
     </div>
 
@@ -266,13 +268,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/28/ast/" rel="prev" title="AST语法树">
-      <i class="fa fa-chevron-left"></i> AST语法树
+    <a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" rel="prev" title="app基础">
+      <i class="fa fa-chevron-left"></i> app基础
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" rel="next" title="补环境">
-      补环境 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -331,7 +330,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFjsvmp-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3-%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是jsvmp(个人理解)？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E6%8E%A2jsvmp"><span class="nav-number">2.</span> <span class="nav-text">初探jsvmp:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">代码结构：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9A%90%E5%90%AB%E5%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">2.1.1.</span> <span class="nav-text">隐含层分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#if%E6%B5%81%E5%86%85%E5%AE%B9%E5%88%86%E6%9E%90"><span class="nav-number">2.1.2.</span> <span class="nav-text">if流内容分析</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AST%E6%80%9D%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">AST思考</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">数组型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BD%A2"><span class="nav-number">1.2.</span> <span class="nav-text">函数形</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">对象型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">组合型</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
