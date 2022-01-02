@@ -28,7 +28,7 @@
 <meta property="og:description" content="补环境介绍对于存在js加密的网站，我们往往通过分析网站js，了解到其加密js的逻辑，然后通过本地运行的方式，获取加密后的参数，达到获取Js的目的。 对于加密代码量较少，亦或者是扣取复杂度较低的代码，我们可以通过扣代码，缺什么补什么，进而在本地扣取一个完整的加密算法，最终在本地运行。但是，对于加密量大，同时运行流程错纵复杂的代码，扣取其加密流程的复杂度呈几何倍的增长，因此，我们希望通过直接运行整个j">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-18T11:49:26.000Z">
-<meta property="article:modified_time" content="2021-12-25T06:29:09.714Z">
+<meta property="article:modified_time" content="2022-01-02T15:21:10.689Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-25 14:29:09" itemprop="dateModified" datetime="2021-12-25T14:29:09+08:00">2021-12-25</time>
+                <time title="Modified: 2022-01-02 23:21:10" itemprop="dateModified" datetime="2022-01-02T23:21:10+08:00">2022-01-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +256,7 @@
 
 <p>第一种为稍微明显的调用，但是假如被ASCII码混淆了呢，假如被Ob混淆了呢，当然，针对这种情况，我们可以直接放到node中运行，让其报错后在比对即可。但是，假如我们这里采用第二种方法检测环境，这样，即使在node中运行也不会报错，返回的是undefined，那么这样在运行的流程中就发生了变化，进而导致最终的结果与我们想要的所差甚远。</p>
 <p>我们想要知道到底缺少什么环境，可以通过插桩(logpoint)的方式去寻找。</p>
-<h4 id="奇yin巧计"><a href="#奇yin巧计" class="headerlink" title="奇yin巧计"></a>奇yin巧计</h4><p>补环境可以通过半置空函数，判断其操作</p>
+<h4 id="奇yin巧计"><a href="#奇yin巧计" class="headerlink" title="奇yin巧计"></a>奇yin巧计</h4><p>补环境可以通过半置空函数，判断其操作。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nullfunction = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="built_in">arguments</span>)&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>代理环境proxy.</p>
