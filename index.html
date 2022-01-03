@@ -160,6 +160,77 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" class="post-title-link" itemprop="url">事件监听</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-03 14:12:05 / Modified: 15:28:28" itemprop="dateCreated datePublished" datetime="2022-01-03T14:12:05+08:00">2022-01-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">JS逆向</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><p>在突破滑块的过程中，我们希望可以知道鼠标的位置的参数，以达到知晓是对什么参数进行的加密。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;geetest_slider_button&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">div.addEventListener(<span class="string">&#x27;pointermove&#x27;</span>,<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(event.clientX,event.clientX,<span class="built_in">Date</span>.now())&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上述直接对整个document添加了事件，这里获得的貌似是整个页面的坐标。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/01/ast%E6%80%9D%E6%83%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -562,7 +633,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-02 23:20:50" itemprop="dateModified" datetime="2022-01-02T23:20:50+08:00">2022-01-02</time>
+                <time title="Modified: 2022-01-03 23:41:52" itemprop="dateModified" datetime="2022-01-03T23:41:52+08:00">2022-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -622,12 +693,19 @@
 <li>接着调用原型链上的encrypt方法，同时传入了一个16位的随机数。</li>
 <li>最后生成256位结果。</li>
 </ol>
-<h5 id="轨迹加密"><a href="#轨迹加密" class="headerlink" title="轨迹加密"></a>轨迹加密</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">l = n[$_CJJIW(<span class="number">1078</span>)][$_CJJJd(<span class="number">1069</span>)](n[$_CJJIW(<span class="number">1078</span>)][$_CJJJd(<span class="number">1051</span>)](), n[$_CJJJd(<span class="number">13</span>)][$_CJJIW(<span class="number">1045</span>)], n[$_CJJIW(<span class="number">13</span>)][$_CJJIW(<span class="number">307</span>)]);</span><br><span class="line"><span class="comment">//手动还原</span></span><br><span class="line">l = n[<span class="string">&#x27;$_CIBw&#x27;</span>][<span class="string">&#x27;$_BBCA&#x27;</span>](n[<span class="string">&#x27;$_CIBw&#x27;</span>][<span class="string">&#x27;$_GEy&#x27;</span>](), n[<span class="string">&#x27;$_CIY&#x27;</span>][<span class="string">&#x27;c&#x27;</span>], n[<span class="string">&#x27;$_CIY&#x27;</span>][<span class="string">&#x27;s&#x27;</span>]);</span><br><span class="line">n[<span class="string">&#x27;$_CIBw&#x27;</span>](为一个大数组,看上去貌似是轨迹)，方法调用其原型链上的</span><br><span class="line">n[<span class="string">&#x27;$_CIY&#x27;</span>] 服务器返回，可写死</span><br><span class="line">n[<span class="string">&#x27;$_CIBw&#x27;</span>][<span class="string">&#x27;$_GEy&#x27;</span>]() 为轨迹生成</span><br></pre></td></tr></table></figure>
+<h5 id="l值"><a href="#l值" class="headerlink" title="l值"></a>l值</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">l = V[<span class="string">&quot;encrypt&quot;</span>](gt[<span class="string">&quot;stringify&quot;</span>](o), r[<span class="string">&quot;$_CBFG&quot;</span>]()),</span><br><span class="line"><span class="comment">//手动还原</span></span><br><span class="line">r[<span class="string">&quot;$_CBFG&quot;</span>]() </span><br><span class="line"><span class="comment">//这个会生成一个值,每次刷新都不一样，伪动态，同时跟进去分析发现,这个值其实返回的就是一个一开始初始化的值，逻辑就是u值的Ot,可改写为u_decode。</span></span><br><span class="line"><span class="comment">//gt[&quot;stringify&quot;](o)这一部分会返回一个对象，</span></span><br></pre></td></tr></table></figure>
 
+<p>通过对比可以发现o，传入了一系列参数，这也是导致两次运行结果不一致的主要原因，其中最后生成的rp也是一个不一致的参数。</p>
+<p>那么我们主要分析点就是o是如何生成的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">r = <span class="built_in">this</span>,</span><br><span class="line">i = r[<span class="string">&quot;$_CIY&quot;</span>],</span><br><span class="line">o = &#123;</span><br><span class="line">          <span class="string">&quot;lang&quot;</span>: i[<span class="string">&quot;lang&quot;</span>] || <span class="string">&quot;zh-cn&quot;</span>,</span><br><span class="line">          <span class="string">&quot;userresponse&quot;</span>: H(t, i[<span class="string">&quot;challenge&quot;</span>]),</span><br><span class="line">          <span class="string">&quot;passtime&quot;</span>: n,</span><br><span class="line">          <span class="string">&quot;imgload&quot;</span>: r[<span class="string">&quot;$_BJHF&quot;</span>],</span><br><span class="line">          <span class="string">&quot;aa&quot;</span>: e,</span><br><span class="line">          <span class="string">&quot;ep&quot;</span>: r[<span class="string">&quot;$_CBD_&quot;</span>]()</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
 
+<p>在这部分中，我们可以看到，使用了n、e、t这三个传进来的参数，貌似看起来和鼠标轨迹有关。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;$_CGHV&quot;</span>: <span class="function"><span class="keyword">function</span> (<span class="params">t, e</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> n = <span class="built_in">this</span>,</span><br><span class="line">           r = n[<span class="string">&quot;$_BAHt&quot;</span>],</span><br><span class="line">           i = n[<span class="string">&quot;$_BBGR&quot;</span>],</span><br><span class="line">           o = n[<span class="string">&quot;$_CIY&quot;</span>],</span><br><span class="line">           s = n[<span class="string">&quot;$&quot;</span>];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (i[<span class="string">&quot;$_HA_&quot;</span>]() !== $t) <span class="keyword">return</span>;</span><br><span class="line">         <span class="keyword">if</span> (n[<span class="string">&quot;$_CHHW&quot;</span>] &amp;&amp; <span class="string">&quot;pointerup&quot;</span> != t[<span class="string">&quot;type&quot;</span>]) <span class="keyword">return</span>;</span><br><span class="line">         v(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">           o[<span class="string">&quot;link&quot;</span>] &amp;&amp; s(<span class="string">&quot;.link&quot;</span>)[<span class="string">&quot;$_CBV&quot;</span>](&#123;</span><br><span class="line">             <span class="string">&quot;target&quot;</span>: <span class="string">&quot;_blank&quot;</span>,</span><br><span class="line">             <span class="string">&quot;href&quot;</span>: o[<span class="string">&quot;link&quot;</span>]</span><br><span class="line">           &#125;);</span><br><span class="line">         &#125;, <span class="number">0</span>), t[<span class="string">&quot;$_BGDK&quot;</span>](), i[<span class="string">&quot;$_GJD&quot;</span>](<span class="string">&quot;lock&quot;</span>);</span><br><span class="line">	<span class="comment">//u生成的位置</span></span><br><span class="line">         <span class="keyword">var</span> a = n[<span class="string">&quot;$_CFDP&quot;</span>],</span><br><span class="line">             _ = e ? n[<span class="string">&quot;lastPoint&quot;</span>][<span class="string">&quot;x&quot;</span>] : t[<span class="string">&quot;$_BGBX&quot;</span>]() / a - n[<span class="string">&quot;$_CHJg&quot;</span>],</span><br><span class="line">             c = e ? n[<span class="string">&quot;lastPoint&quot;</span>][<span class="string">&quot;y&quot;</span>] : n[<span class="string">&quot;$_CIAc&quot;</span>] - t[<span class="string">&quot;$_BGCq&quot;</span>]() / a;</span><br><span class="line"></span><br><span class="line">         n[<span class="string">&quot;$_CECK&quot;</span>] = $_HP() - n[<span class="string">&quot;$_CHIF&quot;</span>], n[<span class="string">&quot;$_CIBw&quot;</span>][<span class="string">&quot;$_BBBF&quot;</span>]([<span class="built_in">Math</span>[<span class="string">&quot;round&quot;</span>](_), <span class="built_in">Math</span>[<span class="string">&quot;round&quot;</span>](c), n[<span class="string">&quot;$_CECK&quot;</span>]]);</span><br><span class="line">         <span class="keyword">var</span> u = <span class="built_in">parseInt</span>(_),</span><br><span class="line">             l = n[<span class="string">&quot;$_CIBw&quot;</span>][<span class="string">&quot;$_BBCA&quot;</span>](n[<span class="string">&quot;$_CIBw&quot;</span>][<span class="string">&quot;$_GEy&quot;</span>](), n[<span class="string">&quot;$_CIY&quot;</span>][<span class="string">&quot;c&quot;</span>], n[<span class="string">&quot;$_CIY&quot;</span>][<span class="string">&quot;s&quot;</span>]);</span><br><span class="line">         r[<span class="string">&quot;$_CBCM&quot;</span>](u, l, n[<span class="string">&quot;$_CECK&quot;</span>]), n[<span class="string">&quot;$_CFGp&quot;</span>][<span class="string">&quot;$_EFJ&quot;</span>]();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (t) &#123;</span><br><span class="line">         r[<span class="string">&quot;$_DAK&quot;</span>](t);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 
-
-
+<p>在这里n、e、t分别对应u、l、n[“$_CECK”]，通过调试可以发现这三个估计分别对应距离、轨迹、时间。</p>
+<h6 id="小u"><a href="#小u" class="headerlink" title="小u:"></a>小u:</h6><p>这里的小u向上看，由于传进来的e为undefined，所以这里的流程只走向了后面一部分，同时，通过对滑块添加pointermove事件发现，这里的t[“$_BGBX”]为滑块停止的位置，在经过反复调试后，貌似a是个可以写死的东西，最后一项为初始位置，基本上该部分就是计算了一下偏移路径。</p>
+<h6 id="小l："><a href="#小l：" class="headerlink" title="小l："></a>小l：</h6><p>根据分析可知，该部分由一个函数传入了三个参数构成，后面两个参数为服务器返回，第一个参数为一个三维数组，第一维为一个x轴偏移，第二个为y轴偏移，第三个为时间戳偏移。</p>
+<h6 id="n-“-CECK”"><a href="#n-“-CECK”" class="headerlink" title="n[“$_CECK”]:"></a>n[“$_CECK”]:</h6><p>这项就是个时间戳之差，用结束时间戳减去开始的时间戳。</p>
 <h5 id="AST解混淆"><a href="#AST解混淆" class="headerlink" title="AST解混淆"></a>AST解混淆</h5><p>观察代码，我们可以发现，存在大量混淆，增加了阅读难度，所以首先使用AST解混淆。</p>
 <p>将代码放入在线网站解析，发现分为6块。</p>
 <ol>
@@ -672,6 +750,22 @@
 <blockquote>
 <p>其实还原到这一步了，代码的可读性已经很大程度提高了，其检测了什么环境已经一目了然，接下来就是去补环境了。</p>
 </blockquote>
+<h5 id="canvas"><a href="#canvas" class="headerlink" title="canvas"></a>canvas</h5><p>canvas为画布，在过验证码的过程中，我们发现服务器没返回图片，而是返回了两张webp格式的散乱图，也就是说，在代码中一定存在操作，使得返回的散乱图拼合成一个完整的图片，那么我们首先要做的就是找到其生成参数的位置。</p>
+<blockquote>
+<p>在该例中图片的格式为312*160</p>
+</blockquote>
+<h6 id="STEP1-观察图片生成原理"><a href="#STEP1-观察图片生成原理" class="headerlink" title="STEP1 观察图片生成原理:"></a>STEP1 观察图片生成原理:</h6><p>在事件断点中打上canvas断点，调试，发现该位置貌似是生成参数的位置，观察l发现，其width = 10、height = 80，我们将其webp格式的图片打开可以发现，其是将图片划分为了两层，也就是说，这里的操作实际上是对一个52块的图片进行一个拼合，而且这里也只循环了52次，接下来只需要搞清楚里面在干什么就能对整体进行还原了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> a = r / <span class="number">2</span>, _ = <span class="number">0</span>; _ &lt; <span class="number">52</span>; _ += <span class="number">1</span>) &#123;</span><br><span class="line">    					<span class="comment">//这里应该是确定图片位置</span></span><br><span class="line">                     <span class="keyword">var</span> c = Ut[_] % <span class="number">26</span> * <span class="number">12</span> + <span class="number">1</span></span><br><span class="line">                       , u = <span class="number">25</span> &lt; Ut[_] ? a : <span class="number">0</span></span><br><span class="line">                       , l = o[$_CJET(<span class="number">69</span>)](c, u, <span class="number">10</span>, a);</span><br><span class="line">    					<span class="comment">//这里是拼图的过程</span></span><br><span class="line">                     s[$_CJET(<span class="number">66</span>)](l, _ % <span class="number">26</span> * <span class="number">10</span>, <span class="number">25</span> &lt; _ ? a : <span class="number">0</span>);</span><br><span class="line">                 &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>目前思路是，先拼上面的26张，在拼下面的26张，这里的l是将分割的图片一个个展示在画布上，c是x轴坐标，u是y轴坐标，a为y轴高度。</p>
+<p>也就是说我们只需要将图片分割后，一快快的按顺序拼起来即可。</p>
+<blockquote>
+<p>这里每一小块的大小为12 * 80 然后在展示的时候只展示了 10 * 80的大小，最后拼成一张 260 * 160的图片，其中展示的顺序与传入的那个数组一样，数组中的值为其对应的位置，左上角为0，然后26代表从左下角开始。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//a 为传入的大数组</span><br><span class="line">new_img = Image.new(<span class="string">&#x27;RGB&#x27;</span>, (<span class="number">260</span>, <span class="number">160</span>))</span><br><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)):</span><br><span class="line">    <span class="comment">#获取当前位置的真实图的区域</span></span><br><span class="line">    x = _Ge[idx] % <span class="number">26</span> * <span class="number">12</span> + <span class="number">1</span></span><br><span class="line">    y = h_sep <span class="keyword">if</span> a[idx] &gt; <span class="number">25</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="comment">#图像裁剪</span></span><br><span class="line">    img_cut = _img.crop((x, y, x + w_sep, y + h_sep))</span><br><span class="line">   	new_x = idx % <span class="number">26</span> * <span class="number">10</span></span><br><span class="line">    new_y = h_sep <span class="keyword">if</span> idx &gt; <span class="number">25</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="comment">#将真实图回填</span></span><br><span class="line">    new_img.paste(img_cut, (new_x, new_y))</span><br></pre></td></tr></table></figure>
+
+<h6 id="STEP2-缺口识别："><a href="#STEP2-缺口识别：" class="headerlink" title="STEP2 缺口识别："></a>STEP2 缺口识别：</h6><h6 id="STEP3-轨迹模拟："><a href="#STEP3-轨迹模拟：" class="headerlink" title="STEP3 轨迹模拟："></a>STEP3 轨迹模拟：</h6><p>通过随机数，模拟轨迹。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_random_arr</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    :param num: 图片的路径差</span></span><br><span class="line"><span class="string">    :return: 三维数组,x轴,y轴,时间戳</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    x_arr = [-<span class="number">50</span>]</span><br><span class="line">    y_arr = [-<span class="number">10</span>]</span><br><span class="line">    time_arr = [<span class="number">0</span>]</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    temp_x = <span class="number">0</span></span><br><span class="line">    temp_y = <span class="number">0</span></span><br><span class="line">    temp_time = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (num-i &gt; <span class="number">0</span>):</span><br><span class="line">        temp_x += random.randint(<span class="number">1</span>,<span class="number">5</span>)</span><br><span class="line">        temp_y += <span class="number">0</span></span><br><span class="line">        temp_time += random.randint(<span class="number">20</span>,<span class="number">50</span>)</span><br><span class="line">        x_arr.append(temp_x)</span><br><span class="line">        y_arr.append(temp_y)</span><br><span class="line">        time_arr.append(temp_time)</span><br><span class="line">        i += temp_x</span><br><span class="line">    result = [[x_arr[i],y_arr[i],time_arr[i]] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(x_arr))]</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1346,7 +1440,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
