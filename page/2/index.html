@@ -22,26 +22,26 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="spider">
-<meta property="og:url" content="http://yida506.github.io/categories/app%E9%80%86%E5%90%91/index.html">
+<meta property="og:url" content="http://yida506.github.io/page/2/index.html">
 <meta property="og:site_name" content="spider">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yida506.github.io/categories/app%E9%80%86%E5%90%91/">
+<link rel="canonical" href="http://yida506.github.io/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>Category: app逆向 | spider</title>
+  <title>spider</title>
   
 
 
@@ -154,52 +154,112 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/11/14/js%E9%80%86%E5%90%91/">
 
-  
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">app逆向
-          <small>Category</small>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/14/js%E9%80%86%E5%90%91/" class="post-title-link" itemprop="url">js逆向</a>
         </h2>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-14 14:00:27" itemprop="dateCreated datePublished" datetime="2021-11-14T14:00:27+08:00">2021-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-24 22:24:48" itemprop="dateModified" datetime="2021-12-24T22:24:48+08:00">2021-12-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">JS逆向</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+          <h4 id="1-XHR请求"><a href="#1-XHR请求" class="headerlink" title="1.XHR请求"></a>1.XHR请求</h4><p>在理解逆向时，首先要明白数据是如何产生的，现在大部分数据都采用异步加载的方式，也有少量数据直接写在网页上，直接在网页上的静态数据在此不做阐述。</p>
+<p>以目前的情况来看，我们想要获得的数据主要都是异步产生的，异步与同步的差别主要在于，同步需要执行完所有的过程数据才显示，异步就是可以中途显示数据，要使中途显示数据有很多种方法，例如和函数绑定，这样就可以实现翻页，页面的数据改变。</p>
+<p>在类似翻页过程中，我们实际上是用鼠标点击了页面页码、下一页等操作，该位置通常绑定了click事件，这样我们在点击时，就会运行click函数， 然后向服务器传递了请求，服务器给我们返回了对应的数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">startID=&gt;start: 点击事件(携带参数)</span><br><span class="line">operation1=&gt;operation: 回调函数</span><br><span class="line">operation2=&gt;operation: 调用ajax</span><br><span class="line">operation3=&gt;operation: 返回数据</span><br><span class="line">endID=&gt;end: 浏览器渲染数据</span><br><span class="line"></span><br><span class="line">startID-&gt;operation1-&gt;operation2-&gt;operation3-&gt;endID</span><br></pre></td></tr></table></figure>
+
+
+
+<p>从实际来看，我们从点击翻页到页面数据渲染只发生了取值，发送，返回，渲染四大步骤。</p>
+<h5 id="2-反爬"><a href="#2-反爬" class="headerlink" title="2.反爬"></a>2.反爬</h5><p>而所谓的反爬，就是在上述XHR请求的各个流程中添加措施，从而达到反爬虫的作用。</p>
+<p>而反爬可以具体分为如下几种：</p>
+<ul>
+<li>参数加密</li>
+</ul>
+<h6 id="1-参数加密"><a href="#1-参数加密" class="headerlink" title="1.参数加密"></a>1.参数加密</h6><p>我们知道，在与服务器交互的过程中，交互的过程实际上就是参数传递的过程，比如，我们可以把一开始携带的页码，在上传到服务器前，对其进行加密，同时在服务端根据其上传的参数进行校验，这样就达到了参数加密的效果。</p>
+<h6 id="2-字体加密"><a href="#2-字体加密" class="headerlink" title="2.字体加密"></a>2.字体加密</h6><p>  CSS加密：所谓css加密就是给与一个字体字典，然后在浏览器渲染数据之前，用给定的字典对于返回的数据包解码，这样即可以保证用户看得到实际的数据，爬虫获取的数据是为解码的。而CSS加密按照其类别又可以分为静态CSS加密、动态CSS加密。</p>
+<p>静态CSS加密:对于静态CSS加密，往往可以忽略加载的字体文件，因为它里面的内容是一一对应的，我们可以手动构建字典，然后达到还原的目的。</p>
+<p>动态CSS加密:对于动态CSS加密，我们发现每次加载的字体文件都不一样，但是返回的参数却是一样的，那么我们就需要进入到字体文件里面进行分析。</p>
+<p>font文件解析：</p>
+<ul>
+<li><GlyphOrder>  待解析的序号和unicode编码</GlyphOrder></li>
+<li><TTGLyph> unicode编码解析后的图片 </TTGLyph></li>
+<li><cmap> unicode编码和ASCII码的映射表</cmap></li>
+</ul>
+<p>总结：对于字体加密类型，首先就是需要将其字体文件下下来，然后根据其中的内容，以及网页返回的内容判断其属于静态还是动态，针对静态的，若混销量不大，可考虑手动建立字典的方式还原，若为动态的，就需要对其字体文件进行分析，然后构建自动化还原表，以达到还原的目的。</p>
+<p>雪碧图加密：</p>
+<p>雪碧图加密是以图的形式对文件进行上传，然后再根据顺序调用的原理，将其渲染到页面上，以达到降低开销的目的。</p>
+<h6 id="3-请求头检测"><a href="#3-请求头检测" class="headerlink" title="3.请求头检测"></a>3.请求头检测</h6>
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-01-01T21:47:13+08:00"
-              content="2022-01-01">
-          01-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" itemprop="url">
-            <span itemprop="name">app基础</span>
-          </a>
-      </div>
-
-    </header>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
   </article>
-
-    </div>
-  </div>
   
   
   
 
+
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 

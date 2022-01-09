@@ -160,6 +160,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/09/jy%E6%BB%91%E5%9D%97/" class="post-title-link" itemprop="url">jy滑块</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-09 20:18:41 / Modified: 22:48:37" itemprop="dateCreated datePublished" datetime="2022-01-09T20:18:41+08:00">2022-01-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">验证码专题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
+<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png" alt="image-20220109214733411"></p>
+<p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
+<p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
+<blockquote>
+<p>此处w值主要是通过三个流程：</p>
+<ol>
+<li>u值：生成随机数作为公钥，对其进行加密。</li>
+<li>l值：对一个初始对象以及公钥进行组合加密成一个数组</li>
+<li>h值：对l值进行一个处理。</li>
+<li>w=h+u;</li>
+</ol>
+</blockquote>
+<p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
+<h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
+<p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109221913141.png" alt="image-20220109221913141"></p>
+<p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
+<blockquote>
+<ol>
+<li>首先初始化一系列参数，包含对鼠标轨迹初始化的流程、空数组初始化、长字符串生成(包含时间戳)、随机生成的字符串、大对象(包含gt、challenge、aeskey、时间戳、s等).</li>
+<li>接下来对上述参数进行一系列处理，然后在初始化一个对象(对象中包含鼠标开始位置数据、鼠标结束数据、显卡类型等一系列参数)和一个包含时间戳的大字符串。</li>
+<li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
+</ol>
+</blockquote>
+<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
+<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -633,7 +725,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-05 00:04:17" itemprop="dateModified" datetime="2022-01-05T00:04:17+08:00">2022-01-05</time>
+                <time title="Modified: 2022-01-09 22:02:27" itemprop="dateModified" datetime="2022-01-09T22:02:27+08:00">2022-01-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -641,7 +733,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">JS逆向</span></a>
+                  <a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">验证码专题</span></a>
                 </span>
             </span>
 
@@ -657,7 +749,7 @@
 
       
           <h3 id="极验滑块："><a href="#极验滑块：" class="headerlink" title="极验滑块："></a>极验滑块：</h3><p><a target="_blank" rel="noopener" href="https://www.geetest.com/demo/slide-bind.html">https://www.geetest.com/demo/slide-bind.html</a></p>
-<p>F12，点击登录，弹出滑块界面，出现滑块图和背景图，拖动滑块，会发送请求：</p>
+<h4 id="登录参数w值"><a href="#登录参数w值" class="headerlink" title="登录参数w值"></a>登录参数w值</h4><p>F12，点击登录，弹出滑块界面，出现滑块图和背景图，拖动滑块，会发送请求：</p>
 <p>参数如下:gt\challenge\w\callback(其余的貌似不为加密)</p>
 <p>明显，在该请求中生成了这些参数。</p>
 <p>跟值，找到生成参数的位置。</p>
@@ -776,7 +868,11 @@
 <h6 id="STEP3-轨迹模拟："><a href="#STEP3-轨迹模拟：" class="headerlink" title="STEP3 轨迹模拟："></a>STEP3 轨迹模拟：</h6><p>通过随机数，模拟轨迹。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_random_arr</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    :param num: 图片的路径差</span></span><br><span class="line"><span class="string">    :return: 三维数组,x轴,y轴,时间戳</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    x_arr = [-<span class="number">50</span>]</span><br><span class="line">    y_arr = [-<span class="number">10</span>]</span><br><span class="line">    time_arr = [<span class="number">0</span>]</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    temp_x = <span class="number">0</span></span><br><span class="line">    temp_y = <span class="number">0</span></span><br><span class="line">    temp_time = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (num-i &gt; <span class="number">0</span>):</span><br><span class="line">        temp_x += random.randint(<span class="number">1</span>,<span class="number">5</span>)</span><br><span class="line">        temp_y += <span class="number">0</span></span><br><span class="line">        temp_time += random.randint(<span class="number">20</span>,<span class="number">50</span>)</span><br><span class="line">        x_arr.append(temp_x)</span><br><span class="line">        y_arr.append(temp_y)</span><br><span class="line">        time_arr.append(temp_time)</span><br><span class="line">        i += temp_x</span><br><span class="line">    result = [[x_arr[i],y_arr[i],time_arr[i]] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(x_arr))]</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
-
+<h4 id="初始化页面w值"><a href="#初始化页面w值" class="headerlink" title="初始化页面w值"></a>初始化页面w值</h4><h5 id="加密逻辑"><a href="#加密逻辑" class="headerlink" title="加密逻辑"></a>加密逻辑</h5><p>咋分析页面的时候，我们发现，整体的流程如下：</p>
+<p>首先访问页面，初始化，生成一个随机数，随机数生成gt、challage两个参数，然后通过fullpage.js生成w值，接着传入w、gt、challage获取一串json(包含初始化以及返回的验证码图片)，接着拖动滑块在在在slider.js中获取轨迹参数w，最终通过校验。</p>
+<p>页面初始化的逻辑只有l值不同，因为它传进去的不是轨迹，而是一系列参数。</p>
+<h5 id="参数分析"><a href="#参数分析" class="headerlink" title="参数分析"></a>参数分析</h5><p>逻辑与上面类似。</p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4>
       
     </div>
 
@@ -1285,107 +1381,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/11/14/js%E9%80%86%E5%90%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/14/js%E9%80%86%E5%90%91/" class="post-title-link" itemprop="url">js逆向</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-14 14:00:27" itemprop="dateCreated datePublished" datetime="2021-11-14T14:00:27+08:00">2021-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-24 22:24:48" itemprop="dateModified" datetime="2021-12-24T22:24:48+08:00">2021-12-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">JS逆向</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-XHR请求"><a href="#1-XHR请求" class="headerlink" title="1.XHR请求"></a>1.XHR请求</h4><p>在理解逆向时，首先要明白数据是如何产生的，现在大部分数据都采用异步加载的方式，也有少量数据直接写在网页上，直接在网页上的静态数据在此不做阐述。</p>
-<p>以目前的情况来看，我们想要获得的数据主要都是异步产生的，异步与同步的差别主要在于，同步需要执行完所有的过程数据才显示，异步就是可以中途显示数据，要使中途显示数据有很多种方法，例如和函数绑定，这样就可以实现翻页，页面的数据改变。</p>
-<p>在类似翻页过程中，我们实际上是用鼠标点击了页面页码、下一页等操作，该位置通常绑定了click事件，这样我们在点击时，就会运行click函数， 然后向服务器传递了请求，服务器给我们返回了对应的数据。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">startID=&gt;start: 点击事件(携带参数)</span><br><span class="line">operation1=&gt;operation: 回调函数</span><br><span class="line">operation2=&gt;operation: 调用ajax</span><br><span class="line">operation3=&gt;operation: 返回数据</span><br><span class="line">endID=&gt;end: 浏览器渲染数据</span><br><span class="line"></span><br><span class="line">startID-&gt;operation1-&gt;operation2-&gt;operation3-&gt;endID</span><br></pre></td></tr></table></figure>
-
-
-
-<p>从实际来看，我们从点击翻页到页面数据渲染只发生了取值，发送，返回，渲染四大步骤。</p>
-<h5 id="2-反爬"><a href="#2-反爬" class="headerlink" title="2.反爬"></a>2.反爬</h5><p>而所谓的反爬，就是在上述XHR请求的各个流程中添加措施，从而达到反爬虫的作用。</p>
-<p>而反爬可以具体分为如下几种：</p>
-<ul>
-<li>参数加密</li>
-</ul>
-<h6 id="1-参数加密"><a href="#1-参数加密" class="headerlink" title="1.参数加密"></a>1.参数加密</h6><p>我们知道，在与服务器交互的过程中，交互的过程实际上就是参数传递的过程，比如，我们可以把一开始携带的页码，在上传到服务器前，对其进行加密，同时在服务端根据其上传的参数进行校验，这样就达到了参数加密的效果。</p>
-<h6 id="2-字体加密"><a href="#2-字体加密" class="headerlink" title="2.字体加密"></a>2.字体加密</h6><p>  CSS加密：所谓css加密就是给与一个字体字典，然后在浏览器渲染数据之前，用给定的字典对于返回的数据包解码，这样即可以保证用户看得到实际的数据，爬虫获取的数据是为解码的。而CSS加密按照其类别又可以分为静态CSS加密、动态CSS加密。</p>
-<p>静态CSS加密:对于静态CSS加密，往往可以忽略加载的字体文件，因为它里面的内容是一一对应的，我们可以手动构建字典，然后达到还原的目的。</p>
-<p>动态CSS加密:对于动态CSS加密，我们发现每次加载的字体文件都不一样，但是返回的参数却是一样的，那么我们就需要进入到字体文件里面进行分析。</p>
-<p>font文件解析：</p>
-<ul>
-<li><GlyphOrder>  待解析的序号和unicode编码</GlyphOrder></li>
-<li><TTGLyph> unicode编码解析后的图片 </TTGLyph></li>
-<li><cmap> unicode编码和ASCII码的映射表</cmap></li>
-</ul>
-<p>总结：对于字体加密类型，首先就是需要将其字体文件下下来，然后根据其中的内容，以及网页返回的内容判断其属于静态还是动态，针对静态的，若混销量不大，可考虑手动建立字典的方式还原，若为动态的，就需要对其字体文件进行分析，然后构建自动化还原表，以达到还原的目的。</p>
-<p>雪碧图加密：</p>
-<p>雪碧图加密是以图的形式对文件进行上传，然后再根据顺序调用的原理，将其渲染到页面上，以达到降低开销的目的。</p>
-<h6 id="3-请求头检测"><a href="#3-请求头检测" class="headerlink" title="3.请求头检测"></a>3.请求头检测</h6>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1450,14 +1450,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
