@@ -28,7 +28,7 @@
 <meta property="og:description" content="AST基本命令pathpath为AST解析后的产物，在解析时，先将所有代码解析为一个大file,其中拥有path属性，若是针对一种表达式解析(例如VariableDeclarator赋值表达式)，那么path指代的就为赋值表达式所在的路径，其中又包含很多属性，主要的有：  type:表示表达式类型 node表示该节点、为一个对象、包含很多属性 parent:该路径的父路径,这里指代的是node类型">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-29T14:35:31.000Z">
-<meta property="article:modified_time" content="2022-01-02T09:38:02.403Z">
+<meta property="article:modified_time" content="2022-01-14T13:04:34.482Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-02 17:38:02" itemprop="dateModified" datetime="2022-01-02T17:38:02+08:00">2022-01-02</time>
+                <time title="Modified: 2022-01-14 21:04:34" itemprop="dateModified" datetime="2022-01-14T21:04:34+08:00">2022-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,6 +230,9 @@
 <ul>
 <li>scope:作用域</li>
 </ul>
+<blockquote>
+<p>path.toString()可以打印出当前代码位置.</p>
+</blockquote>
 <h5 id="node"><a href="#node" class="headerlink" title="node"></a>node</h5><p>node本质上是一个对象，内置属性如下(仍以VariableDeclarator为例)：</p>
 <ul>
 <li>type:表示表达式类型</li>
@@ -238,6 +241,9 @@
 <li>id:对应左半部分，也为节点类型</li>
 <li>init:对应右半部分，也为节点类型</li>
 </ul>
+<blockquote>
+<p>node可以采用generator(path.node).code的方式获取当前代码位置.</p>
+</blockquote>
 <h5 id="binding"><a href="#binding" class="headerlink" title="binding"></a>binding</h5><p>绑定，为scope中的属性，要使用path.scope.getBinding(name)得到，其中name为想要绑定对象昵称。</p>
 <p>block:指代整体path?</p>
 <p>referencePaths:绑定对象所在区域，例如：    </p>
@@ -343,14 +349,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>

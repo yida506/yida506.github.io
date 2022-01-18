@@ -20,22 +20,19 @@
     var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="验证码概述所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。 JY滑块流程分析页面初始化 首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后">
+  <meta name="description" content="迭代器首先，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jy滑块">
-<meta property="og:url" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/index.html">
+<meta property="og:title" content="基础知识">
+<meta property="og:url" content="http://yida506.github.io/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="spider">
-<meta property="og:description" content="验证码概述所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。 JY滑块流程分析页面初始化 首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后">
+<meta property="og:description" content="迭代器首先，">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png">
-<meta property="og:image" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109221913141.png">
-<meta property="article:published_time" content="2022-01-09T12:18:41.000Z">
-<meta property="article:modified_time" content="2022-01-09T14:48:37.715Z">
+<meta property="article:published_time" content="2022-01-16T13:01:42.000Z">
+<meta property="article:modified_time" content="2022-01-16T13:20:48.446Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png">
 
-<link rel="canonical" href="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/">
+<link rel="canonical" href="http://yida506.github.io/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
 
 <script id="page-configurations">
@@ -48,7 +45,7 @@
   };
 </script>
 
-  <title>jy滑块 | spider</title>
+  <title>基础知识 | spider</title>
   
 
 
@@ -168,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -181,7 +178,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          jy滑块
+          基础知识
         </h1>
 
         <div class="post-meta">
@@ -192,7 +189,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-01-09 20:18:41 / Modified: 22:48:37" itemprop="dateCreated datePublished" datetime="2022-01-09T20:18:41+08:00">2022-01-09</time>
+              <time title="Created: 2022-01-16 21:01:42 / Modified: 21:20:48" itemprop="dateCreated datePublished" datetime="2022-01-16T21:01:42+08:00">2022-01-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -200,7 +197,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">验证码专题</span></a>
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
                 </span>
             </span>
 
@@ -215,32 +212,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
-<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png" alt="image-20220109214733411"></p>
-<p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
-<p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
-<blockquote>
-<p>此处w值主要是通过三个流程：</p>
-<ol>
-<li>u值：生成随机数作为公钥，对其进行加密。</li>
-<li>l值：对一个初始对象以及公钥进行组合加密成一个数组</li>
-<li>h值：对l值进行一个处理。</li>
-<li>w=h+u;</li>
-</ol>
-</blockquote>
-<p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
-<h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
-<p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109221913141.png" alt="image-20220109221913141"></p>
-<p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
-<blockquote>
-<ol>
-<li>首先初始化一系列参数，包含对鼠标轨迹初始化的流程、空数组初始化、长字符串生成(包含时间戳)、随机生成的字符串、大对象(包含gt、challenge、aeskey、时间戳、s等).</li>
-<li>接下来对上述参数进行一系列处理，然后在初始化一个对象(对象中包含鼠标开始位置数据、鼠标结束数据、显卡类型等一系列参数)和一个包含时间戳的大字符串。</li>
-<li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
-</ol>
-</blockquote>
-<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
-<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5>
+        <h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>首先，</p>
+
     </div>
 
     
@@ -255,12 +228,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" rel="prev" title="事件监听">
-      <i class="fa fa-chevron-left"></i> 事件监听
+    <a href="/2022/01/09/jy%E6%BB%91%E5%9D%97/" rel="prev" title="jy滑块">
+      <i class="fa fa-chevron-left"></i> jy滑块
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="基础知识">
-      基础知识 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/01/18/python%E5%BC%80%E5%8F%91/" rel="next" title="python开发">
+      python开发 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -320,7 +293,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">验证码概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JY%E6%BB%91%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">JY滑块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">流程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.1.</span> <span class="nav-text">页面初始化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">提交过程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.3.</span> <span class="nav-text">滑动过程</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%A8%E8%BF%B9%E7%94%9F%E6%88%90"><span class="nav-number">2.2.</span> <span class="nav-text">轨迹生成</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">迭代器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
