@@ -22,20 +22,20 @@
 
   <meta name="description" content="验证码概述所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。 JY滑块流程分析页面初始化 首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jy滑块">
-<meta property="og:url" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/index.html">
+<meta property="og:title" content="验证码">
+<meta property="og:url" content="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/index.html">
 <meta property="og:site_name" content="spider">
 <meta property="og:description" content="验证码概述所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。 JY滑块流程分析页面初始化 首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png">
-<meta property="og:image" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109221913141.png">
+<meta property="og:image" content="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png">
+<meta property="og:image" content="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109221913141.png">
 <meta property="article:published_time" content="2022-01-09T12:18:41.000Z">
-<meta property="article:modified_time" content="2022-01-09T14:48:37.715Z">
+<meta property="article:modified_time" content="2022-01-21T16:11:54.725Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png">
+<meta name="twitter:image" content="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png">
 
-<link rel="canonical" href="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/">
+<link rel="canonical" href="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>jy滑块 | spider</title>
+  <title>验证码 | spider</title>
   
 
 
@@ -168,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -181,7 +181,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          jy滑块
+          验证码
         </h1>
 
         <div class="post-meta">
@@ -190,10 +190,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-09 20:18:41 / Modified: 22:48:37" itemprop="dateCreated datePublished" datetime="2022-01-09T20:18:41+08:00">2022-01-09</time>
+              <time title="Created: 2022-01-09 20:18:41" itemprop="dateCreated datePublished" datetime="2022-01-09T20:18:41+08:00">2022-01-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-22 00:11:54" itemprop="dateModified" datetime="2022-01-22T00:11:54+08:00">2022-01-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -216,7 +222,7 @@
 
       
         <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
-<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png" alt="image-20220109214733411"></p>
+<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png" alt="image-20220109214733411"></p>
 <p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
 <p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
 <blockquote>
@@ -230,7 +236,7 @@
 </blockquote>
 <p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
 <h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
-<p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109221913141.png" alt="image-20220109221913141"></p>
+<p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109221913141.png" alt="image-20220109221913141"></p>
 <p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
 <blockquote>
 <ol>
@@ -239,8 +245,11 @@
 <li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
 </ol>
 </blockquote>
-<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
-<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5>
+<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>​    </p>
+<p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
+<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5><h4 id="顶象滑块"><a href="#顶象滑块" class="headerlink" title="顶象滑块"></a>顶象滑块</h4><p><a target="_blank" rel="noopener" href="https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg">https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg</a></p>
+<h4 id="数美滑块"><a href="#数美滑块" class="headerlink" title="数美滑块"></a>数美滑块</h4><p><a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/web-login/captcha?redirectPath=http://www.xiaohongshu.com/discovery/item/605eb4920000000021036ab5">滑块验证 (xiaohongshu.com)</a></p>
+
     </div>
 
     
@@ -320,7 +329,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">验证码概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JY%E6%BB%91%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">JY滑块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">流程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.1.</span> <span class="nav-text">页面初始化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">提交过程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.3.</span> <span class="nav-text">滑动过程</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%A8%E8%BF%B9%E7%94%9F%E6%88%90"><span class="nav-number">2.2.</span> <span class="nav-text">轨迹生成</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">验证码概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JY%E6%BB%91%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">JY滑块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">流程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.1.</span> <span class="nav-text">页面初始化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">提交过程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.3.</span> <span class="nav-text">滑动过程</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%A8%E8%BF%B9%E7%94%9F%E6%88%90"><span class="nav-number">2.2.</span> <span class="nav-text">轨迹生成</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B6%E8%B1%A1%E6%BB%91%E5%9D%97"><span class="nav-number">3.</span> <span class="nav-text">顶象滑块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BE%8E%E6%BB%91%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">数美滑块</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -334,7 +343,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -160,6 +160,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/22/sm%E6%BB%91%E5%9D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" class="post-title-link" itemprop="url">sm滑块</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-22 00:12:58 / Modified: 00:41:32" itemprop="dateCreated datePublished" datetime="2022-01-22T00:12:58+08:00">2022-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">验证码专题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="sm滑块"><a href="#sm滑块" class="headerlink" title="sm滑块"></a>sm滑块</h4><h5 id="受害对象网址-滑块验证-xiaohongshu-com"><a href="#受害对象网址-滑块验证-xiaohongshu-com" class="headerlink" title="受害对象网址:    滑块验证 (xiaohongshu.com)"></a>受害对象网址:    <a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/web-login/captcha?redirectPath=http://www.xiaohongshu.com/discovery/item/605eb4920000000021036ab5">滑块验证 (xiaohongshu.com)</a></h5><h6 id="STEP1-网站请求分析"><a href="#STEP1-网站请求分析" class="headerlink" title="STEP1 网站请求分析:"></a>STEP1 网站请求分析:</h6><p><img src="/2022/01/22/sm%E6%BB%91%E5%9D%97/image-20220122001607774.png" alt="image-20220122001607774"></p>
+<p>加载内容如下:</p>
+<ol>
+<li>加载HTML，加载一部分js、css</li>
+<li>发送第一个web?callback请求</li>
+<li>发送conf?callback请求</li>
+<li>在加载一部分js</li>
+<li>发送register请求</li>
+</ol>
+<blockquote>
+<p>这里发送register请求后就拿到了滑块背景以及滑块、同时观察，貌似只有个携带时间戳的参数，以及organization，</p>
+<p>经测试，register请求可以直接请求，但是每次请求返回的结果都不一样，猜测应该是在哪个位置设置了cookie用于会话保持。</p>
+</blockquote>
+<h6 id="STEP2-滑块分析"><a href="#STEP2-滑块分析" class="headerlink" title="STEP2 滑块分析"></a>STEP2 滑块分析</h6><p><img src="/2022/01/22/sm%E6%BB%91%E5%9D%97/image-20220122002747400.png" alt="image-20220122002747400"></p>
+<p>滑动滑块后，又出现了4个请求。</p>
+<p>发现，captcha这个请求实际上是验证滑块的请求，后面的web等其实又属于初始化页面的部分，可以不看，那么重点其实就应该放在fverify和captcha这两个上面，从verify的字面意思，可以猜测，应该对什么东西进行了一个验证。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">fvarify:</span><br><span class="line">params = &#123;</span><br><span class="line">    <span class="attr">&quot;xy&quot;</span>: <span class="string">&quot;ul0oAv1ZYwo=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;protocol&quot;</span>: <span class="string">&quot;147&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dy&quot;</span>: <span class="string">&quot;pliUZW6qOpQ=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;callback&quot;</span>: <span class="string">&quot;sm_1642782456803&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;xp&quot;</span>: <span class="string">&quot;AQSNGqey9JA=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;oe&quot;</span>: <span class="string">&quot;4eIG9gpg/oI=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;organization&quot;</span>: <span class="string">&quot;eR46sBuqF0fdw7KWFLYa&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;act.os&quot;</span>: <span class="string">&quot;web_pc&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;rid&quot;</span>: <span class="string">&quot;202201220027285ec04c2e0c31fae461&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dl&quot;</span>: <span class="string">&quot;m/t4pIhyGHQ=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;gi&quot;</span>: <span class="string">&quot;uFbn5Z4ymF4=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;nm&quot;</span>: <span class="string">&quot;2Llzh5Trqka8Ed4F/Zp6Hyz2XjsAhhPZC8o8KI33UXfYUm35N5x9GD/KWMGfwnGHhn8k7ulgT/z6HPAyJhq2N+8l+PqQc2dktk1cY8ApcT8=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;ux&quot;</span>: <span class="string">&quot;15PasxRW77o=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;lx&quot;</span>: <span class="string">&quot;y2aMBiuI98I=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;sdkver&quot;</span>: <span class="string">&quot;1.1.3&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;ostype&quot;</span>: <span class="string">&quot;web&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;aw&quot;</span>: <span class="string">&quot;UXcTRrZ9Oss=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;rversion&quot;</span>: <span class="string">&quot;1.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;vk&quot;</span>: <span class="string">&quot;oi7kWzhqhiU=&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">captcha:</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;rid&quot;</span>: <span class="string">&quot;202201220027285ec04c2e0c31fae461&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;callFrom&quot;</span>: <span class="string">&quot;web&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;deviceId&quot;</span>: <span class="string">&quot;WHJMrwNw1k/F+fa3+moWhiK6lJoJYFrJ6ifX/lQsPmgvJ6QjOe4rs+7XHM4VRJcKmEfdXxXsqbT/0GqhyKwVZ/lpOxOTsKvv5dCW1tldyDzmQI99+chXEijqdwSoU42ZrYp5HxsF710xV3HH8Acmv+6oCxDpIEpp7eu8bpbMPuOTJc3aMEBGDbEK9t5cuHz5hAtXdTAv3R5tGq71EWVPRZTiM5iSMAfwcGPxnOFmLGi/EFDOknjTuRb5/+8bL4ysOF10/rPYNoNw=1487582755342&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看到rid为一个共同包含的参数，前面这串数字很明显是发送请求的时间，后面的一串字符应该是与加解密有关。</p>
+<p>deviceid应该是与轨迹啥的有关，接下来就需要进堆栈分析逻辑，明显的魔改后的ob混淆。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/18/python%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -320,7 +407,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/jy%E6%BB%91%E5%9D%97/">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -334,7 +421,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/09/jy%E6%BB%91%E5%9D%97/" class="post-title-link" itemprop="url">jy滑块</a>
+            <a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" class="post-title-link" itemprop="url">验证码</a>
         </h2>
 
         <div class="post-meta">
@@ -343,10 +430,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-09 20:18:41 / Modified: 22:48:37" itemprop="dateCreated datePublished" datetime="2022-01-09T20:18:41+08:00">2022-01-09</time>
+              <time title="Created: 2022-01-09 20:18:41" itemprop="dateCreated datePublished" datetime="2022-01-09T20:18:41+08:00">2022-01-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-22 00:11:54" itemprop="dateModified" datetime="2022-01-22T00:11:54+08:00">2022-01-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -369,7 +462,7 @@
 
       
           <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
-<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109214733411.png" alt="image-20220109214733411"></p>
+<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png" alt="image-20220109214733411"></p>
 <p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
 <p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
 <blockquote>
@@ -383,7 +476,7 @@
 </blockquote>
 <p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
 <h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
-<p><img src="/2022/01/09/jy%E6%BB%91%E5%9D%97/image-20220109221913141.png" alt="image-20220109221913141"></p>
+<p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109221913141.png" alt="image-20220109221913141"></p>
 <p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
 <blockquote>
 <ol>
@@ -392,8 +485,11 @@
 <li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
 </ol>
 </blockquote>
-<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
-<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5>
+<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>​    </p>
+<p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
+<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5><h4 id="顶象滑块"><a href="#顶象滑块" class="headerlink" title="顶象滑块"></a>顶象滑块</h4><p><a target="_blank" rel="noopener" href="https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg">https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg</a></p>
+<h4 id="数美滑块"><a href="#数美滑块" class="headerlink" title="数美滑块"></a>数美滑块</h4><p><a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/web-login/captcha?redirectPath=http://www.xiaohongshu.com/discovery/item/605eb4920000000021036ab5">滑块验证 (xiaohongshu.com)</a></p>
+
       
     </div>
 
@@ -860,7 +956,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/26/%E9%AA%8C%E8%AF%81/">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/26/jy%E6%BB%91%E5%9D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -874,7 +970,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/12/26/%E9%AA%8C%E8%AF%81/" class="post-title-link" itemprop="url">验证</a>
+            <a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" class="post-title-link" itemprop="url">jy滑块</a>
         </h2>
 
         <div class="post-meta">
@@ -891,7 +987,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-09 22:02:27" itemprop="dateModified" datetime="2022-01-09T22:02:27+08:00">2022-01-09</time>
+                <time title="Modified: 2022-01-22 00:10:43" itemprop="dateModified" datetime="2022-01-22T00:10:43+08:00">2022-01-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1053,124 +1149,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">补环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-12-18 19:49:26" itemprop="dateCreated datePublished" datetime="2021-12-18T19:49:26+08:00">2021-12-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-02 23:21:10" itemprop="dateModified" datetime="2022-01-02T23:21:10+08:00">2022-01-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">JS逆向</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="补环境介绍"><a href="#补环境介绍" class="headerlink" title="补环境介绍"></a>补环境介绍</h3><p>对于存在js加密的网站，我们往往通过分析网站js，了解到其加密js的逻辑，然后通过本地运行的方式，获取加密后的参数，达到获取Js的目的。</p>
-<p>对于加密代码量较少，亦或者是扣取复杂度较低的代码，我们可以通过扣代码，缺什么补什么，进而在本地扣取一个完整的加密算法，最终在本地运行。但是，对于加密量大，同时运行流程错纵复杂的代码，扣取其加密流程的复杂度呈几何倍的增长，因此，我们希望通过直接运行整个js代码，进而达到获取其结果的目的。</p>
-<p>试想，为什么我们在浏览器中运行js可以直接成功，但是在本地运行就不行了呢？</p>
-<p>首先，本地运行的时候，我们大部分是采用的node直接运行的，node可以看作是浏览器引擎的一个子集，只包含其中的一部分内容，因此，对于加密算法破解，就抽象到找寻函数入口，比较环境差异。</p>
-<p>如何找寻函数入口在此不做赘述，而比较环境差异主要是为了知晓其缺什么浏览器环境，进而我们在本地对其进行补充，以达到本地成功运行js的目的。</p>
-<h3 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h3><p>之前已经提到，node可以看作浏览器的子集，那么最直白的环境检测就是调用node中没有的对象，进而导致在本地运行抛出错误，但是现实往往不会这么美好，有些环境检测隐含在很深的地方，而且采取的隐式调用的方法，即使不存在该对象运行流程也不会出错。因此，这里将环境检测主要分为两类：</p>
-<ol>
-<li>显式检测</li>
-<li>隐式检测</li>
-</ol>
-<h4 id="显式检测"><a href="#显式检测" class="headerlink" title="显式检测"></a>显式检测</h4><p><strong>定义：</strong>以A[‘B’]、A.function(val),这种方式调用，同时,A、B、function都可能为检测的对象。</p>
-<p>以下面这段js为例:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _N = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="string">&#x27;location.href=location.pathname+location.search.replace(/[\?|&amp;]captcha-challenge/,\&#x27;\&#x27;)&#x27;</span>, <span class="number">1500</span>);</span><br><span class="line">    <span class="built_in">document</span>.cookie = <span class="string">&#x27;__jsl_clearance=1640094880.604|0|&#x27;</span> + (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> _t = [<span class="function"><span class="keyword">function</span> (<span class="params">_N</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> _N</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">_t</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> _t</span><br><span class="line">            &#125;, (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> _N = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">                _N.innerHTML = <span class="string">&#x27;&lt;a href=\&#x27;/\&#x27;&gt;_1H&lt;/a&gt;&#x27;</span>;</span><br><span class="line">                _N = _N.firstChild.href;</span><br><span class="line">                <span class="keyword">var</span> _t = _N.match(<span class="regexp">/https?:\/\//</span>)[<span class="number">0</span>];</span><br><span class="line">                _N = _N.substr(_t.length).toLowerCase();</span><br><span class="line">                <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">_t</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> _1H = <span class="number">0</span>; _1H &lt; _t.length; _1H++) &#123;</span><br><span class="line">                        _t[_1H] = _N.charAt(_t[_1H])</span><br><span class="line">                    &#125;;</span><br><span class="line">                    <span class="keyword">return</span> _t.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)(), <span class="function"><span class="keyword">function</span> (<span class="params">_N</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> _t = <span class="number">0</span>; _t &lt; _N.length; _t++) &#123;</span><br><span class="line">                    _N[_t] = <span class="built_in">parseInt</span>(_N[_t]).toString(<span class="number">36</span>)</span><br><span class="line">                &#125;;</span><br><span class="line">                <span class="keyword">return</span> _N.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            &#125;],</span><br><span class="line">            _N = [<span class="string">&#x27;clD&#x27;</span>, [(-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;) + (-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;)], <span class="string">&#x27;V&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + [-~-~&#123;&#125;]], <span class="string">&#x27;fq&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + [-~[] - ~[] - ~!<span class="regexp">/!/</span> + (-~[] - ~[]) * [-~[] - ~[]]], (-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>]), (-~[] + [] + [[]][<span class="number">0</span>]) + [(+!![[][[]]][<span class="number">1</span>])]], <span class="string">&#x27;LBWywKW&#x27;</span>, [(<span class="number">2</span> - ~[-~-~&#123;&#125;] + [] + [[]][<span class="number">0</span>])], <span class="string">&#x27;%2FZyf&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>])], <span class="string">&#x27;6&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>])], <span class="string">&#x27;_b938d514e58d7772015c7ad84677513a&#x27;</span>, (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>]), <span class="string">&#x27;D&#x27;</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> _1H = <span class="number">0</span>; _1H &lt; _N.length; _1H++) &#123;</span><br><span class="line">            _N[_1H] = _t[[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>][_1H]](_N[_1H])</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> _N.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    &#125;)() + <span class="string">&#x27;;Expires=Tue, 12-Dec-30 09:50:26 GMT;Path=/;&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">if</span> ((<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> !!<span class="built_in">window</span>.addEventListener;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)()) &#123;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, _N, <span class="literal">false</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.attachEvent(<span class="string">&#x27;onreadystatechange&#x27;</span>, _N)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述代码中，我们可以看到形如document、window这些对象，在node中是不包含这种对象的，因此我们需要构造一个和浏览器一样的对象出来。</p>
-<p>很明显，这里的Window指代全局对象，document指代的是网页源码，DOM对象在node中无法完全模拟，因此我们换一种思路，只需要补到其不报错不就行了嘛？</p>
-<h5 id="STEP1-整体代码分析"><a href="#STEP1-整体代码分析" class="headerlink" title="STEP1 整体代码分析:"></a>STEP1 整体代码分析:</h5><p>先看第一个位置，setTimeout创建了一个定时器，我们在这里直接置空即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>由于在node中的全局为global,那么我们需要对其进行一个赋值操作，把window构建出来。</p>
-<p>同时由于后面还调用了document,我们先创建一个空对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span> = <span class="built_in">global</span>;</span><br><span class="line"><span class="built_in">document</span> = &#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<h5 id="STEP2-环境搭建"><a href="#STEP2-环境搭建" class="headerlink" title="STEP2 环境搭建:"></a>STEP2 环境搭建:</h5><p>对于document.createElement(‘div’)，createElement(‘div’)明显是一个方法，在网页端返回了一个dom对象，同时我们发现其后续创建了innerHTML属性,然后通过firstChild.href重新赋值。这样一来，我们在网页中运行_N.firstChild.href,发现，打印的结果为’<a target="_blank" rel="noopener" href="https://www.python-spider.com/&#39;,%E5%90%8E%E7%BB%AD%E8%BF%98%E8%B7%9F%E4%B8%8A%E4%BA%86%E5%AF%B9%E5%85%B6%E7%9A%84%E6%93%8D%E4%BD%9C%E3%80%82%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AA%E9%9C%80%E8%A6%81%E6%8A%8Ahref%E8%A1%A5%E5%87%BA%E6%9D%A5%EF%BC%8C%E5%90%8C%E6%97%B6%E8%AE%A9innerHTML%E5%B1%9E%E6%80%A7%E5%AD%98%E5%9C%A8%E5%8D%B3%E5%8F%AF%E3%80%82">https://www.python-spider.com/&#39;,后续还跟上了对其的操作。也就是说，我们只需要把href补出来，同时让innerHTML属性存在即可。</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _N = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">_N.innerHTML = <span class="string">&#x27;&lt;a href=\&#x27;/\&#x27;&gt;_1H&lt;/a&gt;&#x27;</span>;</span><br><span class="line">_N = _N.firstChild.href;</span><br><span class="line"><span class="keyword">var</span> _t = _N.match(<span class="regexp">/https?:\/\//</span>)[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.createElement = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">innerHTML</span>:<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">firstChild</span>:&#123;</span><br><span class="line">            <span class="attr">href</span>:<span class="string">&#x27;https://www.python-spider.com/&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在末尾我们还看到了形如addEventListener的这种调用，对于这种方法，我们不知道其返回了什么，那么我们就需要去<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%87%8C%E6%9F%A5%E6%89%BE%E3%80%82">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript官方文档里查找。</a></p>
-<p>最后补出来如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">document</span>.addEventListener = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;<span class="keyword">return</span> b()&#125;;</span><br><span class="line"><span class="built_in">document</span>.attachEvent = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="隐式检测"><a href="#隐式检测" class="headerlink" title="隐式检测"></a>隐式检测</h4><p>以显示检测的补环境来看，在代码结构清晰的情况下，我们可以很轻易的找到补环境入口，但是假使代码流程复杂，同时调用方法不是以上述形式调用，那么单纯的看代码几乎找不到补环境入口。</p>
-<p>先看如下例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//type1</span></span><br><span class="line"><span class="built_in">window</span>[<span class="string">&#x27;hr&#x27;</span>+<span class="string">&#x27;ef&#x27;</span>];</span><br><span class="line"><span class="comment">//type2</span></span><br><span class="line">S = [<span class="built_in">window</span>,<span class="string">&#x27;hr&#x27;</span>,<span class="string">&#x27;ef&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> A = S[<span class="number">0</span>][S[<span class="number">1</span>]+S[<span class="number">2</span>]];</span><br></pre></td></tr></table></figure>
-
-<p>第一种为稍微明显的调用，但是假如被ASCII码混淆了呢，假如被Ob混淆了呢，当然，针对这种情况，我们可以直接放到node中运行，让其报错后在比对即可。但是，假如我们这里采用第二种方法检测环境，这样，即使在node中运行也不会报错，返回的是undefined，那么这样在运行的流程中就发生了变化，进而导致最终的结果与我们想要的所差甚远。</p>
-<p>我们想要知道到底缺少什么环境，可以通过插桩(logpoint)的方式去寻找。</p>
-<h4 id="奇yin巧计"><a href="#奇yin巧计" class="headerlink" title="奇yin巧计"></a>奇yin巧计</h4><p>补环境可以通过半置空函数，判断其操作。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nullfunction = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="built_in">arguments</span>)&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>代理环境proxy.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="keyword">new</span> <span class="built_in">Proxy</span>(test,&#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">target, key</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;获取了&#x27;</span>+key+<span class="string">&#x27;属性&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> target[key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>本质上是通过截取window.a，这种操作，把a打印到控制台，然后判断到底做了什么。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1240,7 +1218,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
