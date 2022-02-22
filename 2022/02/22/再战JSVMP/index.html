@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="代码还原接着上一篇。 环境加载在上一篇，我们将加载函数抠出来了后，就可以直接保存在内存中，然后通过直接在内存里面计算拿到结果在还原，这里还原方法类似解Ob混淆的还原，通过遍历所有的CallExpression节点，找到解密函数实参，然后传参，最后将结果还原即可。 123456789const InFuncReplace &#x3D; &amp;#123;    CallExpression(path)&amp;#123;">
+  <meta name="description" content="前言由于之前对VMP的理解较浅，在对JS有了深入的理解后，这里进一步重新对VMP进行分析。 代码分析这里仍用头条的作为分析对象。 首先在开头打上debugger，定义了一个大的函数，接着，向里面传入两个参数，一个是非常长的字符串，另一个是一个数组。 接着跟进去。 函数a，b，c，d，n貌似没啥卵用。 接着进入一个for循环，其中应该是生成了什么东西，观察一下发现其中包含ParseInt、以及fro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ti还原2">
-<meta property="og:url" content="http://yida506.github.io/2022/02/20/ti%E8%BF%98%E5%8E%9F2/index.html">
+<meta property="og:title" content="再战JSVMP">
+<meta property="og:url" content="http://yida506.github.io/2022/02/22/%E5%86%8D%E6%88%98JSVMP/index.html">
 <meta property="og:site_name" content="spider">
-<meta property="og:description" content="代码还原接着上一篇。 环境加载在上一篇，我们将加载函数抠出来了后，就可以直接保存在内存中，然后通过直接在内存里面计算拿到结果在还原，这里还原方法类似解Ob混淆的还原，通过遍历所有的CallExpression节点，找到解密函数实参，然后传参，最后将结果还原即可。 123456789const InFuncReplace &#x3D; &amp;#123;    CallExpression(path)&amp;#123;">
+<meta property="og:description" content="前言由于之前对VMP的理解较浅，在对JS有了深入的理解后，这里进一步重新对VMP进行分析。 代码分析这里仍用头条的作为分析对象。 首先在开头打上debugger，定义了一个大的函数，接着，向里面传入两个参数，一个是非常长的字符串，另一个是一个数组。 接着跟进去。 函数a，b，c，d，n貌似没啥卵用。 接着进入一个for循环，其中应该是生成了什么东西，观察一下发现其中包含ParseInt、以及fro">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-20T15:26:10.000Z">
-<meta property="article:modified_time" content="2022-02-22T14:52:47.864Z">
+<meta property="article:published_time" content="2022-02-22T14:58:35.000Z">
+<meta property="article:modified_time" content="2022-02-22T15:45:44.069Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yida506.github.io/2022/02/20/ti%E8%BF%98%E5%8E%9F2/">
+<link rel="canonical" href="http://yida506.github.io/2022/02/22/%E5%86%8D%E6%88%98JSVMP/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>ti还原2 | spider</title>
+  <title>再战JSVMP | spider</title>
   
 
 
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/20/ti%E8%BF%98%E5%8E%9F2/">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/22/%E5%86%8D%E6%88%98JSVMP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,7 +178,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ti还原2
+          再战JSVMP
         </h1>
 
         <div class="post-meta">
@@ -187,23 +187,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2022-02-20 23:26:10" itemprop="dateCreated datePublished" datetime="2022-02-20T23:26:10+08:00">2022-02-20</time>
+              <time title="Created: 2022-02-22 22:58:35 / Modified: 23:45:44" itemprop="dateCreated datePublished" datetime="2022-02-22T22:58:35+08:00">2022-02-22</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-22 22:52:47" itemprop="dateModified" datetime="2022-02-22T22:52:47+08:00">2022-02-22</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ast/" itemprop="url" rel="index"><span itemprop="name">ast</span></a>
+                  <a href="/categories/JSvmp/" itemprop="url" rel="index"><span itemprop="name">JSvmp</span></a>
                 </span>
             </span>
 
@@ -218,16 +212,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="代码还原"><a href="#代码还原" class="headerlink" title="代码还原"></a>代码还原</h4><p>接着上一篇。</p>
-<h5 id="环境加载"><a href="#环境加载" class="headerlink" title="环境加载"></a>环境加载</h5><p>在上一篇，我们将加载函数抠出来了后，就可以直接保存在内存中，然后通过直接在内存里面计算拿到结果在还原，这里还原方法类似解Ob混淆的还原，通过遍历所有的CallExpression节点，找到解密函数实参，然后传参，最后将结果还原即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> InFuncReplace = &#123;</span><br><span class="line">    <span class="function"><span class="title">CallExpression</span>(<span class="params">path</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;callee,<span class="built_in">arguments</span>&#125; = path.node;</span><br><span class="line">        <span class="keyword">if</span>(!types.isMemberExpression(callee)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">let</span> func_name = callee.object.name;</span><br><span class="line">        <span class="keyword">if</span>(func_name !== <span class="string">&#x27;ff&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">        path.replaceWith(types.valueToNode(<span class="built_in">eval</span>(path.toString())));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="补环境"><a href="#补环境" class="headerlink" title="补环境"></a>补环境</h4><p>现在基本的混淆已经解的差不多了，开始补环境。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">null_function = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(val);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">location = &#123;</span><br><span class="line">  <span class="string">&quot;href&quot;</span>: <span class="string">&quot;https://ntp.msn.cn/edge/ntp?locale=en-US&amp;title=New%20tab&amp;dsp=1&amp;sp=%E5%BF%85%E5%BA%94&amp;prerender=1&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">document</span> = &#123;&#125;;</span><br><span class="line"><span class="built_in">document</span>.location = &#123;&#125;;</span><br><span class="line"><span class="built_in">document</span>.location.protocol = <span class="string">&quot;https:&quot;</span>;</span><br><span class="line"><span class="built_in">document</span>.currentScript = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (val === <span class="string">&quot;script&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> [&#123;</span><br><span class="line">      <span class="attr">src</span>: <span class="string">&quot;/_sec/cp_challenge/sec-cpt-3-6.js&quot;</span></span><br><span class="line">    &#125;, <span class="string">&quot;&quot;</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span> = <span class="built_in">global</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>暂时运行不了，推测有加盐的地方。</p>
-</blockquote>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>由于之前对VMP的理解较浅，在对JS有了深入的理解后，这里进一步重新对VMP进行分析。</p>
+<h4 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h4><p>这里仍用头条的作为分析对象。</p>
+<p>首先在开头打上debugger，定义了一个大的函数，接着，向里面传入两个参数，一个是非常长的字符串，另一个是一个数组。</p>
+<p>接着跟进去。</p>
+<p>函数a，b，c，d，n貌似没啥卵用。</p>
+<p>接着进入一个for循环，其中应该是生成了什么东西，观察一下发现其中包含ParseInt、以及fromCharCode这两个东西。</p>
+<ul>
+<li>ParseInt是将字符串转为整数</li>
+<li>fromCharCode是将UTF-16编码转化为字符串</li>
+</ul>
 
     </div>
 
@@ -243,13 +237,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" rel="prev" title="ti还原1">
-      <i class="fa fa-chevron-left"></i> ti还原1
+    <a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" rel="prev" title="服务器部署随笔">
+      <i class="fa fa-chevron-left"></i> 服务器部署随笔
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/02/21/git%E6%93%8D%E4%BD%9C/" rel="next" title="git操作">
-      git操作 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -308,7 +299,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%BF%98%E5%8E%9F"><span class="nav-number">1.</span> <span class="nav-text">代码还原</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text">环境加载</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">补环境</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">代码分析</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

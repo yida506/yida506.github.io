@@ -160,6 +160,190 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" class="post-title-link" itemprop="url">事件监听</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-03 14:12:05 / Modified: 15:28:28" itemprop="dateCreated datePublished" datetime="2022-01-03T14:12:05+08:00">2022-01-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">JS逆向</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><p>在突破滑块的过程中，我们希望可以知道鼠标的位置的参数，以达到知晓是对什么参数进行的加密。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;geetest_slider_button&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">div.addEventListener(<span class="string">&#x27;pointermove&#x27;</span>,<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(event.clientX,event.clientX,<span class="built_in">Date</span>.now())&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上述直接对整个document添加了事件，这里获得的貌似是整个页面的坐标。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/01/ast%E6%80%9D%E6%83%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" class="post-title-link" itemprop="url">ast思想</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-01 22:43:33" itemprop="dateCreated datePublished" datetime="2022-01-01T22:43:33+08:00">2022-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-10 20:55:01" itemprop="dateModified" datetime="2022-02-10T20:55:01+08:00">2022-02-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ast/" itemprop="url" rel="index"><span itemprop="name">ast</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="AST思考"><a href="#AST思考" class="headerlink" title="AST思考"></a>AST思考</h4><p>本篇重在介绍关于ast还原代码的一些逻辑。</p>
+<p>首先，我们知道，以目前常见的混淆来讲，大部分其实是通过不断地调用一个类似生成函数的地方，来调用。</p>
+<p>我们在分析时，往往想看到其直接调用的位置，那么，我们就需要将所谓的生成入口写入内存中，然后直接调用进而达到直接将调用的结果展示出来。</p>
+<p>通常，普通的混淆生成入口有如下四种：</p>
+<ul>
+<li>数组型</li>
+<li>函数形</li>
+<li>对象型</li>
+<li>组合型</li>
+</ul>
+<h5 id="数组型"><a href="#数组型" class="headerlink" title="数组型"></a>数组型</h5><p>所谓数组型，就是类似以数组的形式，通过数组下标访问。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrlist = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = arrlist[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>对于该种情况，我们抽象为如下四步：</p>
+<ul>
+<li>确定要遍历的对象，这里是VariableDeclarator。</li>
+<li>接下来是判断init部分的类型，因为可能还有许多声明其他变量的部分，我们希望的是只遍历右边是数组类型的。</li>
+<li>然后是将其写入内存，直接采用eval的方式(最好将其写入全局变量中)。</li>
+<li>最后是访问数组的作用域，找到其引用，然后直接替换节点即可。</li>
+</ul>
+<h5 id="函数形"><a href="#函数形" class="headerlink" title="函数形"></a>函数形</h5><p>所谓函数形，即声明的类型是函数，通过函数访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类型1</span></span><br><span class="line"><span class="keyword">var</span> add1 = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//类型2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add2</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> c = add1(<span class="number">1</span>,<span class="number">2</span>) + add2(<span class="number">3</span>,<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>该类情况与数组大致相同，只不过在遍历时候还需考虑第二种情况：</p>
+<ul>
+<li>确定要遍历的对象，这里是FunctionExpression，针对情况1，可以直接通过path.parent.id.name获取函数昵称，针对情况2，可以通过path.node.id.name获取函数昵称。</li>
+<li>接下来是对函数体结构的判断，必须要有该函数的引用，其次，该函数可以通过传入的值，直接计算出结果。</li>
+<li>然后是将其写入内存，直接采用eval的方式(最好将其写入全局变量中)。</li>
+<li>最后是访问函数的作用域，找到其引用，然后直接替换节点即可。</li>
+</ul>
+<h5 id="对象型"><a href="#对象型" class="headerlink" title="对象型"></a>对象型</h5><p>所谓对象型，就是声明了一个大对象，通过调用的方式访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	<span class="string">&#x27;a&#x27;</span>:<span class="number">123</span>,</span><br><span class="line">	<span class="string">&#x27;b&#x27;</span>:<span class="number">456</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> c = obj[<span class="string">&#x27;a&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>这个的本质与数组可以说是一模一样，在此不做赘述。</p>
+<h5 id="组合型"><a href="#组合型" class="headerlink" title="组合型"></a>组合型</h5><p>所谓的组合型，就是通过对象、数组、函数的组合方式，使得其变得复杂化，进而加大一键脱混淆的难度，进而使得我们需要针对型的修改插件，才能使得混淆得以脱掉。</p>
+<blockquote>
+<p>补充：其实上述也可以通过访问调用然后遍历其作用域，进而找到其声明部分替换，但是假如引用作用域中包含了对原对象的修改，那么在遍历时，可能会造成一定的难度。</p>
+</blockquote>
+<p>目前来讲个人的解混淆思路倾向于写入式：</p>
+<p>针对不同的情况，若是一个对象、函数、变量，经常被调用，那么我会将其写入内存，然后直接通过访问内存中的属性来修改节点。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/01/app%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1297,14 +1481,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
