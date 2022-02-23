@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -367,10 +377,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-01 21:47:13 / Modified: 22:43:07" itemprop="dateCreated datePublished" datetime="2022-01-01T21:47:13+08:00">2022-01-01</time>
+              <time title="Created: 2022-01-01 21:47:13" itemprop="dateCreated datePublished" datetime="2022-01-01T21:47:13+08:00">2022-01-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-23 19:40:50" itemprop="dateModified" datetime="2022-02-23T19:40:50+08:00">2022-02-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -392,7 +408,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="签名校验"><a href="#签名校验" class="headerlink" title="签名校验"></a>签名校验</h4><p>所谓签名校验指的是对与一个app，我们在对其原生文件进行一个魔改操作后，重新安装，导致原生文件发生了改变，在实际使用时，app会对本地文件进行一个校验，会检测文件是否被修改，若被修改，则不允许运行。</p>
+          <h4 id="Android基础"><a href="#Android基础" class="headerlink" title="Android基础"></a>Android基础</h4><p>反编译工具:JADX</p>
+<p>IDE:android studio(最新版)</p>
+<h4 id="签名校验"><a href="#签名校验" class="headerlink" title="签名校验"></a>签名校验</h4><p>所谓签名校验指的是对与一个app，我们在对其原生文件进行一个魔改操作后，重新安装，导致原生文件发生了改变，在实际使用时，app会对本地文件进行一个校验，会检测文件是否被修改，若被修改，则不允许运行。</p>
 <p>我们要做的就是Hook其校验过程，达到，无论我们怎么改，他都不报错的目的，和js本地获取参数有异曲同工之妙。</p>
 <p>目前来讲签名校验可以隐藏在java、so各层中。</p>
 <h5 id="反射调用"><a href="#反射调用" class="headerlink" title="反射调用"></a>反射调用</h5><p>一种调用形式，本质上和Js中a.b转化为a[‘b’]的形式类似，可在其中加入混淆。</p>

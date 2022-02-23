@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -183,10 +193,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-02-22 22:58:35 / Modified: 23:45:44" itemprop="dateCreated datePublished" datetime="2022-02-22T22:58:35+08:00">2022-02-22</time>
+              <time title="Created: 2022-02-22 22:58:35" itemprop="dateCreated datePublished" datetime="2022-02-22T22:58:35+08:00">2022-02-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-23 21:31:23" itemprop="dateModified" datetime="2022-02-23T21:31:23+08:00">2022-02-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -213,11 +229,16 @@
 <p>首先在开头打上debugger，定义了一个大的函数，接着，向里面传入两个参数，一个是非常长的字符串，另一个是一个数组。</p>
 <p>接着跟进去。</p>
 <p>函数a，b，c，d，n貌似没啥卵用。</p>
-<p>接着进入一个for循环，其中应该是生成了什么东西，观察一下发现其中包含ParseInt、以及fromCharCode这两个东西。</p>
+<p>接着进入一个for循环，初始化了几个函数，在ForStatement中发现包含ParseInt、以及fromCharCode这两个东西。</p>
 <ul>
 <li>ParseInt是将字符串转为整数</li>
 <li>fromCharCode是将UTF-16编码转化为字符串</li>
 </ul>
+<p>一直到159行，其实都在对这个参数进行遍历，生成了什么东西，其中，值得注意的是生成了一个大对象，其中包含了两个大数组。</p>
+<p>在控制台，将该方法数组中的内容用fromCharCode打印出来，发现，其都被转化为了符号和字母。</p>
+<p>接下来又定义了三个函数，接着是以调用K函数实现的初始化流程。</p>
+<p>追进去看K函数，发现也是反反复复在进行for循环的操作，接着通过return了一个三目表达式进入G函数。</p>
+<p>也就是说，在前面还没进行什么复杂的操作</p>
 
       
     </div>
@@ -417,7 +438,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-22 22:52:47" itemprop="dateModified" datetime="2022-02-22T22:52:47+08:00">2022-02-22</time>
+                <time title="Modified: 2022-02-23 21:34:39" itemprop="dateModified" datetime="2022-02-23T21:34:39+08:00">2022-02-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -895,10 +916,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-16 21:01:42 / Modified: 21:20:48" itemprop="dateCreated datePublished" datetime="2022-01-16T21:01:42+08:00">2022-01-16</time>
+              <time title="Created: 2022-01-16 21:01:42" itemprop="dateCreated datePublished" datetime="2022-01-16T21:01:42+08:00">2022-01-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-23 20:35:06" itemprop="dateModified" datetime="2022-02-23T20:35:06+08:00">2022-02-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -920,8 +947,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>首先，</p>
-
+          <h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4>
       
     </div>
 

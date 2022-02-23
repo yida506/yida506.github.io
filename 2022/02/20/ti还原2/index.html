@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -28,7 +38,7 @@
 <meta property="og:description" content="代码还原接着上一篇。 环境加载在上一篇，我们将加载函数抠出来了后，就可以直接保存在内存中，然后通过直接在内存里面计算拿到结果在还原，这里还原方法类似解Ob混淆的还原，通过遍历所有的CallExpression节点，找到解密函数实参，然后传参，最后将结果还原即可。 123456789const InFuncReplace &#x3D; &amp;#123;    CallExpression(path)&amp;#123;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-20T15:26:10.000Z">
-<meta property="article:modified_time" content="2022-02-22T14:52:47.864Z">
+<meta property="article:modified_time" content="2022-02-23T13:34:39.136Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 
@@ -195,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-22 22:52:47" itemprop="dateModified" datetime="2022-02-22T22:52:47+08:00">2022-02-22</time>
+                <time title="Modified: 2022-02-23 21:34:39" itemprop="dateModified" datetime="2022-02-23T21:34:39+08:00">2022-02-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
