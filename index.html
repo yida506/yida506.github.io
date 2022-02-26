@@ -160,6 +160,258 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/26/TF-IDF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/26/TF-IDF/" class="post-title-link" itemprop="url">TF-IDF</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-02-26 20:06:25" itemprop="dateCreated datePublished" datetime="2022-02-26T20:06:25+08:00">2022-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-02-27 00:04:59" itemprop="dateModified" datetime="2022-02-27T00:04:59+08:00">2022-02-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介:"></a>算法简介:</h4><h5 id="TF"><a href="#TF" class="headerlink" title="TF:"></a>TF:</h5><p> TF算法，全称Term frequency，翻译过来就是词频，顾名思义，就是词的频率：<br>$$<br>某词语的词频 = \frac{该词语在一篇文章所出现的次数}{该篇文章包含的词语数}<br>$$<br>通常来讲，我们认为一个词出现的次数越多，那么该词语就越重要，但是，由于语言的特性，文章中包含许许多多停用词，虚词等无实际意义的词语，那么我们在对中文文本进行处理的时候，首先要对其进行一个预处理操作，去掉文章中的停用词等，以消除无实际意义的词产生的影响。</p>
+<p>但是，由于一词多意及同义词的现象，单纯的词频统计往往在计算关键词的时候，出现一定的偏差，导致所得结果与实际情况差别较大。</p>
+<blockquote>
+<p>词频指代的是一篇文章</p>
+</blockquote>
+<h5 id="IDF"><a href="#IDF" class="headerlink" title="IDF:"></a>IDF:</h5><p>IDF算法，全称Inverse Document Frequency，意译过来就是逆文档频率。</p>
+<p><strong>核心思想:</strong></p>
+<p>一个词语在文档中出现的次数越少，那么逆文档频率越大，即区分类别的能力越强，可以认为是关键词。</p>
+<p><strong>逆文档解释(个人理解)：</strong></p>
+<p>​        记总共有m个文档，有n个文档中包含了某一个词语，那么对于该词语的文档出现概率为：<br>$$<br>某词语的文档频率 = \frac{出现该词语的n篇文档}{m篇文档}<br>$$<br>假设一个词只在100篇文档中出现，但是由于文档数量过大(例如10000)，那么该词语的文档频率就会非常的小(1%)，和0基本上没任何区别，也就是说，这个词和没出现的词没明显的差异，并不能做到对文档有很好的区分作用。</p>
+<p>在此基础上，若我们取文档频率的倒数(这里称为逆频率)，那么上述提到的值就为100，这样一来，就可以很好的消除未出现词的影响，以及对关键词有一个很好的区分作用。</p>
+<p>但是，这样一来还是有问题，直接取倒数的话，得到的数据过于离散，在上述例子中，逆频率最少(词只出现一次为10000)与最多(词篇篇都出现1)的量级就会过大，在数学上，常用对数的方法，以消除量级过大的影响。</p>
+<p>因此最终逆文档的公式：<br>$$<br>某词语逆文档频率 = \frac{m篇文档}{出现该词语的文档数+1}<br>$$</p>
+<blockquote>
+<p>补充:这里+1的主要目的是为了消除未出现的词的影响(使逆文档频率无穷大).</p>
+</blockquote>
+<h5 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h5><p>词频-逆文档频率，本质上就是TF和IDF的乘积，TF的本质是要获取当前文章的高频词语，而IDF是计算该词语在文档集合中的重要程度，对于一个词，只在一篇文章中出现多次，那么该词就会有很高的TF以及IDF，那么我们就认为这个词就是关键词.</p>
+<blockquote>
+<p>TF-IDF本质上是综合了TF和IDF的特性，对关键词加以区分的算法.</p>
+</blockquote>
+<h4 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h4><p>这里采用Python的Sklearn包为例(取自网上Demo).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入特征提取包,第一个用于计数,第二个用于计算词频</span></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfTransformer</span><br><span class="line"> </span><br><span class="line">x_train = [<span class="string">&#x27;TF-IDF 主要 思想 是&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;算法 一个 重要 特点 可以 脱离 语料库 背景&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;如果 一个 网页 被 很多 其他 网页 链接 说明 网页 重要&#x27;</span>]</span><br><span class="line">x_test=[<span class="string">&#x27;原始 文本 进行 标记&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;主要 思想&#x27;</span>]</span><br><span class="line"> </span><br><span class="line"><span class="comment">#该类会将文本中的词语转换为词频矩阵，矩阵元素a[i][j] 表示j词在i类文本下的词频</span></span><br><span class="line">vectorizer = CountVectorizer(max_features=<span class="number">10</span>)</span><br><span class="line"><span class="comment">#该类会统计每个词语的tf-idf权值</span></span><br><span class="line">tf_idf_transformer = TfidfTransformer()</span><br><span class="line"><span class="comment">#将文本转为词频矩阵并计算tf-idf</span></span><br><span class="line">tf_idf = tf_idf_transformer.fit_transform(vectorizer.fit_transform(x_train))</span><br><span class="line"><span class="comment">#将tf-idf矩阵抽取出来，元素a[i][j]表示j词在i类文本中的tf-idf权重</span></span><br><span class="line">x_train_weight = tf_idf.toarray()</span><br><span class="line"> </span><br><span class="line"><span class="comment">#对测试集进行tf-idf权重计算</span></span><br><span class="line">tf_idf = tf_idf_transformer.transform(vectorizer.transform(x_test))</span><br><span class="line">x_test_weight = tf_idf.toarray()  <span class="comment"># 测试集TF-IDF权重矩阵</span></span><br><span class="line"><span class="comment"># 获取关键词集</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_keywords</span>(<span class="params">matrixArray, keywordsArray</span>):</span></span><br><span class="line">    <span class="keyword">return</span> [keywordsArray[index] <span class="keyword">for</span> index <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(matrixArray)) <span class="keyword">if</span> matrixArray[index]&gt;<span class="number">0</span>] </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;输出x_train文本向量：&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(x_train_weight)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;输出x_test文本向量：&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(x_test_weight)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(x_test_weight)):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;测试集第<span class="subst">&#123;i&#125;</span>个文本的关键词是&#x27;</span>,get_keywords(x_test_weight[i], vectorizer.get_feature_names_out()))</span><br></pre></td></tr></table></figure>
+
+<p>这里x_train代表我们采用了三个文本，x_test用于测试.</p>
+<ol>
+<li>首先我们载入包和训练集和测试集</li>
+<li>接着采用计数类,将词语转化为词频矩阵.然后初始化一个用于计算tf-idf的类</li>
+<li>将训练集导入其中进行训练.最后输出测试集中的关键词.</li>
+</ol>
+<p><img src="/2022/02/26/TF-IDF/image-20220226224241971.png" alt="image-20220226224241971"></p>
+<h4 id="项目实战"><a href="#项目实战" class="headerlink" title="项目实战"></a>项目实战</h4><h5 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景:"></a>项目背景:</h5><p>采集<a target="_blank" rel="noopener" href="http://www.safehoo.com/Case/Case/Collapse%E7%BD%91%E7%AB%99%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%94%B6%E9%9B%86%E6%AF%8F%E6%AE%B5%E4%BA%8B%E6%95%85%E7%9A%84%E6%A0%87%E9%A2%98%EF%BC%8C%E4%BA%8B%E6%95%85%E6%A6%82%E5%86%B5%EF%BC%8C%E4%BA%8B%E6%95%85%E5%8E%9F%E5%9B%A0%EF%BC%8C%E9%87%87%E5%8F%96TFIDF%E7%AE%97%E6%B3%95%E8%AE%A1%E7%AE%97%E5%87%BA%E5%85%B3%E9%94%AE%E8%AF%8D">http://www.safehoo.com/Case/Case/Collapse网站的数据，收集每段事故的标题，事故概况，事故原因，采取TFIDF算法计算出关键词</a>.</p>
+<h5 id="数据采集"><a href="#数据采集" class="headerlink" title="数据采集"></a>数据采集</h5><h6 id="网址分析"><a href="#网址分析" class="headerlink" title="网址分析:"></a>网址分析:</h6><p>首先进入网址发现总共包含668条数据要采集，每页包含30条数据，通过翻页发现，该网站是由页码来控制网站展示的内容,在这里<a target="_blank" rel="noopener" href="http://www.safehoo.com/Case/Case/Collapse/List_23.shtml">坍塌事故-案例分析-安全管理网 (safehoo.com)</a>表示的是携带最新数据的页码,其网址中包含的页码为23,进一步分析,发现其尾页的页码为1.同时,页面是通过a标签的href链接进行跳转到事故的详情页的,在详情页中数据都是保存在类名为c_content_text的div标签中.针对如上网站,设计如下爬取思路:</p>
+<ol>
+<li>对携带页面的页面进行请求,解析网页,获取指向详情页的链接,将其保存在EXCEL中</li>
+<li>对第一步爬取的详情页链接发起请求,对网页进行解析,将解析的结果以EXCEL保存.</li>
+</ol>
+<h6 id="爬虫程序撰写"><a href="#爬虫程序撰写" class="headerlink" title="爬虫程序撰写"></a>爬虫程序撰写</h6><p>这里使用Python撰写爬虫.</p>
+<p>模块介绍:requests+re+etree+pandas+tqdm</p>
+<ul>
+<li><strong>requests:</strong> 爬虫模块,主要用于向网站发起请求,获取网址的HTML文本</li>
+<li>**re:**正则表达式模块,用于文本进行处理等操作</li>
+<li>**etree:**将HTML文本转化为解析树的形式,以用于对网页的解析</li>
+<li>**pandas:**数据处理模块,可将数据存入EXCEL</li>
+<li><strong>tqdm</strong>:进度条</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 详情页爬取</span></span><br><span class="line"><span class="comment"># requests 爬取网页</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 解析网页 </span></span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="comment"># 正则表达式</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 将dataframe(数据框) 导出成excel</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment"># 将代码执行过程以进度条展示</span></span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line">tempdict = &#123;</span><br><span class="line"><span class="comment">#     存储的标题</span></span><br><span class="line">    <span class="string">&#x27;title&#x27;</span>: [],</span><br><span class="line"><span class="comment">#     没用</span></span><br><span class="line">    <span class="string">&#x27;dtype&#x27;</span>: [],</span><br><span class="line"><span class="comment">#     目标网址链接</span></span><br><span class="line">    <span class="string">&#x27;urlhref&#x27;</span>: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.56&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#对网址发起请求</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">23</span>)):</span><br><span class="line">    baseurl = <span class="string">&#x27;http://www.safehoo.com&#x27;</span></span><br><span class="line">    url = baseurl + <span class="string">f&#x27;/Case/Case/Collapse/List_<span class="subst">&#123;i&#125;</span>.shtml&#x27;</span></span><br><span class="line">    <span class="comment">#网址先包含了对浏览器的检测,要加入headers</span></span><br><span class="line">    res = requests.get(url, headers=headers)</span><br><span class="line">    <span class="comment">#转化格式,防止乱码出现</span></span><br><span class="line">    res.encoding = <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    html = etree.HTML(res.text)</span><br><span class="line">    a = html.xpath(<span class="string">&#x27;//div[@class=&quot;childclass_content&quot;]/li&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">        <span class="comment"># 标题,进行异常检测</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            tempdict[<span class="string">&#x27;title&#x27;</span>].append(i.xpath(<span class="string">&#x27;./a/text()&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            tempdict[<span class="string">&#x27;title&#x27;</span>].append(i.xpath(<span class="string">&#x27;./a/font/text()&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">        <span class="comment"># 类型</span></span><br><span class="line">        tempdict[<span class="string">&#x27;dtype&#x27;</span>].append(re.sub(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;&#x27;</span>,re.sub(<span class="string">&#x27;[A-Za-z0-9\!\%\[\]\,\。]&#x27;</span>,<span class="string">&#x27;&#x27;</span>,i.xpath(<span class="string">&#x27;./text()&#x27;</span>)[<span class="number">0</span>])))</span><br><span class="line">        <span class="comment"># 地址</span></span><br><span class="line">        tempdict[<span class="string">&#x27;urlhref&#x27;</span>].append(baseurl+i.xpath(<span class="string">&#x27;./a/@href&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">        </span><br><span class="line"><span class="comment">#将数据转化为数据框格式</span></span><br><span class="line">df = pd.DataFrame(tempdict)</span><br><span class="line"><span class="comment">#将数据保存到excel里面</span></span><br><span class="line">df.to_excel(<span class="string">&#x27;output.xlsx&#x27;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 内容爬取</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">df = pd.read_excel(<span class="string">&#x27;output.xlsx&#x27;</span>)</span><br><span class="line">url = df[<span class="string">&#x27;urlhref&#x27;</span>]</span><br><span class="line">df[<span class="string">&#x27;result&#x27;</span>] = <span class="literal">None</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.56&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="built_in">len</span>(url))):</span><br><span class="line">    res = requests.get(url[i], headers=headers)</span><br><span class="line">    res.encoding = <span class="string">&#x27;utf-8&#x27;</span></span><br><span class="line">    html = etree.HTML(res.text)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        item = html.xpath(<span class="string">&#x27;//*[@id=&quot;prt2&quot;]/div&#x27;</span>)[<span class="number">0</span>].xpath(<span class="string">&#x27;string(.)&#x27;</span>)</span><br><span class="line">        result = re.sub(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;&#x27;</span>, re.sub(<span class="string">&#x27;\r\n &#x27;</span>, <span class="string">&#x27;&#x27;</span>, item))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        result = <span class="literal">None</span></span><br><span class="line">    df[<span class="string">&#x27;result&#x27;</span>][i] = result</span><br><span class="line"></span><br><span class="line">df.to_excel(<span class="string">&#x27;result.xlsx&#x27;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p>总共获取了648条数据.</p>
+<h6 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h6><p>到这里,我们获得了 如图所示数据,但是其中仍然包含大量的HTML文本,同时暂时还没将原因区分</p>
+<p><img src="/2022/02/26/TF-IDF/image-20220226231431029.png" alt="image-20220226231431029"></p>
+<p> 出来,因此,接下来需要采取正则的操作将文本规范化,同时将事故原因抽取出来.由于该网站的数据是以文档加pdf的形式展示的,因此在第一步先对pdf形式的文本进行一个去除.</p>
+<p>直接采用pandas中notnull()的方法.去除后还剩下617条文本.</p>
+<p>根据网站结构,我们可以知道,这里面的包含了很多结构化的信息,同时也包含了对原因的展示,在这里定义了一个函数,对网站的空字符,换行符以及Unicode编码进行了一个去除,接着针对标题所带的索引进行分块,然后依次遍历检索,若其中包含原因,那么该快就是对于该事故的原因解释.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">split_function</span>(<span class="params">text</span>):</span></span><br><span class="line">    type_list = [<span class="string">&quot;一&quot;</span>, <span class="string">&quot;二&quot;</span>, <span class="string">&quot;三&quot;</span>, <span class="string">&quot;四&quot;</span>, <span class="string">&quot;五&quot;</span>, <span class="string">&quot;六&quot;</span>, <span class="string">&quot;七&quot;</span>, <span class="string">&quot;八&quot;</span>, <span class="string">&quot;九&quot;</span>, <span class="string">&quot;十&quot;</span>]</span><br><span class="line">    result = <span class="string">&quot;&quot;</span></span><br><span class="line">    text = text.replace(<span class="string">&#x27;\r&#x27;</span>,<span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;\t&#x27;</span>,<span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;\u3000&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(type_list)):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            temptext = re.findall(<span class="string">f&quot;<span class="subst">&#123;type_list[i]&#125;</span>、(.*?)<span class="subst">&#123;type_list[i+<span class="number">1</span>]&#125;</span>、&quot;</span>, text)[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;概况&quot;</span> <span class="keyword">in</span> temptext <span class="keyword">or</span> <span class="string">&quot;结果&quot;</span> <span class="keyword">in</span> temptext:</span><br><span class="line">                result = result + <span class="string">&quot;事故概况:&quot;</span> + temptext.split(<span class="string">&#x27;。&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;原因&quot;</span> <span class="keyword">in</span> temptext:</span><br><span class="line">                result = result + <span class="string">&quot;事故原因&quot;</span> + temptext</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;概况&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> result:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = <span class="string">&quot;事故概况：&quot;</span> + text.split(<span class="string">&quot;。&quot;</span>)[<span class="number">0</span>] + result</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;原因&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> result:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = result + <span class="string">&quot;事故原因&quot;</span> + <span class="string">&#x27;&#x27;</span>.join(text.split(<span class="string">&quot;。&quot;</span>)[<span class="number">1</span>:])</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_reason</span>(<span class="params">text</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span>(text[<span class="number">1</span>]==<span class="string">&#x27;&#x27;</span>):</span><br><span class="line">            <span class="keyword">return</span> text[<span class="number">2</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> text[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span>    </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/02/26/TF-IDF/image-20220226233355724.png" alt="image-20220226233355724"></p>
+<p>这里已经成功的将原因抽取出来了.</p>
+<p>接着对筛取的结果进行进一步处理,最后将其转化为EXCEL存储.</p>
+<h6 id="分词与词典构建"><a href="#分词与词典构建" class="headerlink" title="分词与词典构建"></a>分词与词典构建</h6><p>由于中文在处理时,首先第一步是要对其进行分词操作,同时由于新词的出现,因此需要用到行业相关的专用词典.</p>
+<p>由于python在分词时需要用到txt格式的文件作为分词,目录,所以这里需要先将.scel格式的文件转化为txt格式的文件</p>
+<p>.scel格式采用Unicode编码了汉字、拼音.</p>
+<p>这里直接采取别人的解析程序:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment"># 拼音表偏移</span></span><br><span class="line">startPy = <span class="number">0x1540</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 汉语词组表偏移</span></span><br><span class="line">startChinese = <span class="number">0x2628</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 全局拼音表</span></span><br><span class="line">GPy_Table = &#123;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 解析结果</span></span><br><span class="line"><span class="comment"># 元组(词频,拼音,中文词组)的列表</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 原始字节码转为字符串</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">byte2str</span>(<span class="params">data</span>):</span></span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">while</span> pos &lt; <span class="built_in">len</span>(data):</span><br><span class="line">        c = <span class="built_in">chr</span>(struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> c != <span class="built_in">chr</span>(<span class="number">0</span>):</span><br><span class="line">            <span class="built_in">str</span> += c</span><br><span class="line">        pos += <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 获取拼音表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPyTable</span>(<span class="params">data</span>):</span></span><br><span class="line">    data = data[<span class="number">4</span>:]</span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> pos &lt; <span class="built_in">len</span>(data):</span><br><span class="line">        index = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos],data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">        pos += <span class="number">2</span></span><br><span class="line">        lenPy = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">        pos += <span class="number">2</span></span><br><span class="line">        py = byte2str(data[pos:pos + lenPy]) </span><br><span class="line">        GPy_Table[index] = py</span><br><span class="line">        pos += lenPy</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 获取一个词组的拼音</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getWordPy</span>(<span class="params">data</span>):</span></span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    ret = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">while</span> pos &lt; <span class="built_in">len</span>(data):</span><br><span class="line">        index = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">        ret += GPy_Table[index]</span><br><span class="line">        pos += <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 读取中文表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getChinese</span>(<span class="params">data</span>):</span></span><br><span class="line">    GTable = []</span><br><span class="line">    pos = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> pos &lt; <span class="built_in">len</span>(data):</span><br><span class="line">        <span class="comment"># 同音词数量</span></span><br><span class="line">        same = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># 拼音索引表长度</span></span><br><span class="line">        pos += <span class="number">2</span></span><br><span class="line">        py_table_len = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># 拼音索引表</span></span><br><span class="line">        pos += <span class="number">2</span></span><br><span class="line">        py = getWordPy(data[pos: pos + py_table_len])</span><br><span class="line">        <span class="comment"># 中文词组</span></span><br><span class="line">        pos += py_table_len</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(same):</span><br><span class="line">            <span class="comment"># 中文词组长度</span></span><br><span class="line">            c_len = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># 中文词组</span></span><br><span class="line">            pos += <span class="number">2</span></span><br><span class="line">            word = byte2str(data[pos: pos + c_len])</span><br><span class="line">            <span class="comment"># 扩展数据长度</span></span><br><span class="line">            pos += c_len</span><br><span class="line">            ext_len = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># 词频</span></span><br><span class="line">            pos += <span class="number">2</span></span><br><span class="line">            count = struct.unpack(<span class="string">&#x27;H&#x27;</span>, <span class="built_in">bytes</span>([data[pos], data[pos + <span class="number">1</span>]]))[<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># 保存</span></span><br><span class="line">            GTable.append((count, py, word))</span><br><span class="line">            <span class="comment"># 到下个词的偏移位置</span></span><br><span class="line">            pos += ext_len</span><br><span class="line">    <span class="keyword">return</span> GTable</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scel2txt</span>(<span class="params">file_name</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;-&#x27;</span> * <span class="number">60</span>)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_name, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.read()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;词库名：&quot;</span>, byte2str(data[<span class="number">0x130</span>:<span class="number">0x338</span>])) <span class="comment"># .encode(&#x27;GB18030&#x27;)</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;词库类型：&quot;</span>, byte2str(data[<span class="number">0x338</span>:<span class="number">0x540</span>]))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;描述信息：&quot;</span>, byte2str(data[<span class="number">0x540</span>:<span class="number">0xd40</span>]))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;词库示例：&quot;</span>, byte2str(data[<span class="number">0xd40</span>:startPy]))</span><br><span class="line">    getPyTable(data[startPy:startChinese])</span><br><span class="line">    getChinese(data[startChinese:])</span><br><span class="line">    <span class="keyword">return</span> getChinese(data[startChinese:])</span><br><span class="line"></span><br><span class="line"><span class="comment"># scel所在文件夹路径</span></span><br><span class="line">in_path = <span class="string">&#x27;./专业词词库&#x27;</span></span><br><span class="line"><span class="comment"># 输出词典所在文件夹路径</span></span><br><span class="line">out_path = <span class="string">&#x27;./词库&#x27;</span></span><br><span class="line">fin = [fname <span class="keyword">for</span> fname <span class="keyword">in</span> os.listdir(in_path) <span class="keyword">if</span> fname[-<span class="number">5</span>:] == <span class="string">&quot;.scel&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> fin:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> scel2txt(os.path.join(in_path, f)):</span><br><span class="line">            file_path=(os.path.join(out_path, <span class="built_in">str</span>(f).split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>] + <span class="string">&#x27;.txt&#x27;</span>))</span><br><span class="line">            <span class="comment"># 保存结果</span></span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(file_path,<span class="string">&#x27;a+&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)<span class="keyword">as</span> file:</span><br><span class="line">                file.write(word[<span class="number">2</span>] + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        os.remove(os.path.join(in_path, f))</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(e)</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>接着在对上述生成的txt文本进行一个合并操作,最终生成了一个自定义词典.</p>
+<p>然后采用jieba分词,将其转化为词的形式.</p>
+<h6 id="数据集处理"><a href="#数据集处理" class="headerlink" title="数据集处理"></a>数据集处理</h6><p>采取上述爬取的数据集和人工收集到的第二份数据集进行合并,由于分析对象选取的是2007年以后,所以针对其进行了进一步的筛选操作.还剩余425条数据.</p>
+<h6 id="模型导入"><a href="#模型导入" class="headerlink" title="模型导入"></a>模型导入</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#TfidfVectorizer为上述CountVectorizer,TfidfTransformer的集合</span></span><br><span class="line">vector = TfidfVectorizer(stop_words=stopWords_list, max_features=<span class="number">50</span>)</span><br><span class="line">tf_idf = vector.fit_transform(corpus)</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/25/js%E5%8A%A0%E5%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" class="post-title-link" itemprop="url">js加密</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-02-25 22:25:27 / Modified: 23:36:46" itemprop="dateCreated datePublished" datetime="2022-02-25T22:25:27+08:00">2022-02-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">加密算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="编码混淆"><a href="#编码混淆" class="headerlink" title="编码混淆"></a>编码混淆</h4><h5 id="base系列"><a href="#base系列" class="headerlink" title="base系列"></a>base系列</h5><h6 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h6><p>以目前来看，最为常见的是base64，结尾一般来讲都有一到2个等号，明文过短的时候就没有。</p>
+<p>js端(base64)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//明文:123</span></span><br><span class="line">btoa(<span class="string">&#x27;123&#x27;</span>);</span><br><span class="line"><span class="comment">//密文:&#x27;MTIz&#x27;</span></span><br><span class="line"><span class="comment">//解密</span></span><br><span class="line">atob(<span class="string">&#x27;MTIz&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>python端:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">test_str = <span class="string">&#x27;123&#x27;</span></span><br><span class="line">encode_str = base64.encodebytes(<span class="string">b&#x27;123&#x27;</span>)</span><br><span class="line"><span class="comment">#编码</span></span><br><span class="line"><span class="built_in">print</span>(encode_str.decode())</span><br><span class="line"><span class="comment">#解码</span></span><br><span class="line">decode_str = base64.decodebytes(encode_str)</span><br><span class="line"><span class="built_in">print</span>(decode_str.decode())</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里要输入加密字符串的二进制码，然后其输出的结果也是一个二进制码，要对其进行一个decode()操作。</p>
+</blockquote>
+<h6 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h6><p>以 <code>\u</code>、<code>&amp;#</code> 或 <code>&amp;#x</code> 开头，后面是数字加字母组合。</p>
+<p><img src="/2022/02/25/js%E5%8A%A0%E5%AF%86/image-20220225225020052.png" alt="image-20220225225020052"></p>
+<h5 id="算法加密"><a href="#算法加密" class="headerlink" title="算法加密"></a>算法加密</h5><h6 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h6><p>本质上是一种信息摘要算法，对应关系为n对1，也就是不同的数有相同的加密结果，但是一个数只会有唯一的加密值。密文一般是16或32位。</p>
+<p>md5加密特征：</p>
+<ol>
+<li>0123456789ABCDEF、0123456789abcdef的出现</li>
+<li>1732584193、-271733879、-1732584194、271733878的出现</li>
+</ol>
+<blockquote>
+<p>至于为什么会有上述特征，后面在研究。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">m = hashlib.md5(<span class="string">b&#x27;123&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment">#202cb962ac59075b964b07152d234b70</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="SHA系列"><a href="#SHA系列" class="headerlink" title="SHA系列"></a>SHA系列</h6><p>比md5长一些。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">m = hashlib.sha1(<span class="string">b&#x27;123&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment">#40bd001563085fc35165329ea1ff5c5ecbdbbeef</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="HMAC系列"><a href="#HMAC系列" class="headerlink" title="HMAC系列"></a>HMAC系列</h6><p>据说是在md5、sha系列的基础上引入秘钥。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"></span><br><span class="line">m = hmac.new(<span class="string">b&#x27;key&#x27;</span>, <span class="string">b&#x27;123&#x27;</span>, digestmod=<span class="string">&#x27;MD5&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment">#52851cb05258c8d98da1672d95729e53</span></span><br><span class="line"></span><br><span class="line">n= hmac.new(<span class="string">b&#x27;key&#x27;</span>, <span class="string">b&#x27;123&#x27;</span>, digestmod=<span class="string">&#x27;SHA1&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="comment">#d4a5b6721d75a5ac15ec698818c77fe1f6e40187</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h6><p>非对称加密，使用公钥加密，然后用私钥解密，私钥加密的，可以用公钥解密。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rsa</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rsaEncrypt</span>(<span class="params">text</span>):</span></span><br><span class="line">    <span class="comment"># 生成512位公钥、私钥</span></span><br><span class="line">    (pubkey, privkey) = rsa.newkeys(<span class="number">512</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;公钥<span class="subst">&#123;pubkey&#125;</span>,私钥<span class="subst">&#123;privkey&#125;</span>&#x27;</span>)</span><br><span class="line">    crypto = rsa.encrypt(text.encode(<span class="string">&#x27;utf-8&#x27;</span>), pubkey)</span><br><span class="line">    <span class="keyword">return</span> (crypto, privkey)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rsaDecrypt</span>(<span class="params">text, key</span>):</span></span><br><span class="line">    <span class="keyword">return</span> rsa.decrypt(text,key).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">text,pk = rsaEncrypt(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;密文&#x27;</span>,text,pk)</span><br><span class="line">content=  rsaDecrypt(text, pk)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;明文&#x27;</span>, content)</span><br></pre></td></tr></table></figure>
+
+<p>在js中，有一个明显的特征就是设置公钥。</p>
+<h6 id="DES加密"><a href="#DES加密" class="headerlink" title="DES加密"></a>DES加密</h6>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/22/%E5%86%8D%E6%88%98JSVMP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -279,7 +531,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-22 22:57:37" itemprop="dateModified" datetime="2022-02-22T22:57:37+08:00">2022-02-22</time>
+                <time title="Modified: 2022-02-27 01:03:54" itemprop="dateModified" datetime="2022-02-27T01:03:54+08:00">2022-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -305,7 +557,8 @@
           <h4 id="feaplat服务器部署"><a href="#feaplat服务器部署" class="headerlink" title="feaplat服务器部署"></a>feaplat服务器部署</h4><h5 id="服务器选择选用centos7-6"><a href="#服务器选择选用centos7-6" class="headerlink" title="服务器选择选用centos7.6"></a>服务器选择选用centos7.6</h5><p>账号:root</p>
 <p>密码:大小写混合</p>
 <p>直接使用FinalShell链接，其中IP地址对应公网IP，端口对应22(默认)，采用上述账号密码进行账号密码登录。</p>
-<p>直接跟feapder文档走一遍即可。</p>
+<h4 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h4><p>又名容器.可以让部署的方式变得更加简单</p>
+<h5 id="docker-pull-："><a href="#docker-pull-：" class="headerlink" title="docker pull ："></a>docker pull ：</h5><p>后面跟具体的包名，类似python之类的</p>
 
       
     </div>
@@ -879,184 +1132,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">基础知识</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-16 21:01:42" itemprop="dateCreated datePublished" datetime="2022-01-16T21:01:42+08:00">2022-01-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-23 20:35:06" itemprop="dateModified" datetime="2022-02-23T20:35:06+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" class="post-title-link" itemprop="url">验证码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-09 20:18:41" itemprop="dateCreated datePublished" datetime="2022-01-09T20:18:41+08:00">2022-01-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-22 00:11:54" itemprop="dateModified" datetime="2022-01-22T00:11:54+08:00">2022-01-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">验证码专题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
-<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png" alt="image-20220109214733411"></p>
-<p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
-<p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
-<blockquote>
-<p>此处w值主要是通过三个流程：</p>
-<ol>
-<li>u值：生成随机数作为公钥，对其进行加密。</li>
-<li>l值：对一个初始对象以及公钥进行组合加密成一个数组</li>
-<li>h值：对l值进行一个处理。</li>
-<li>w=h+u;</li>
-</ol>
-</blockquote>
-<p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
-<h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
-<p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109221913141.png" alt="image-20220109221913141"></p>
-<p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
-<blockquote>
-<ol>
-<li>首先初始化一系列参数，包含对鼠标轨迹初始化的流程、空数组初始化、长字符串生成(包含时间戳)、随机生成的字符串、大对象(包含gt、challenge、aeskey、时间戳、s等).</li>
-<li>接下来对上述参数进行一系列处理，然后在初始化一个对象(对象中包含鼠标开始位置数据、鼠标结束数据、显卡类型等一系列参数)和一个包含时间戳的大字符串。</li>
-<li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
-</ol>
-</blockquote>
-<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>​    </p>
-<p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
-<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5><h4 id="顶象滑块"><a href="#顶象滑块" class="headerlink" title="顶象滑块"></a>顶象滑块</h4><p><a target="_blank" rel="noopener" href="https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg">https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg</a></p>
-<h4 id="数美滑块"><a href="#数美滑块" class="headerlink" title="数美滑块"></a>数美滑块</h4><p><a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/web-login/captcha?redirectPath=http://www.xiaohongshu.com/discovery/item/605eb4920000000021036ab5">滑块验证 (xiaohongshu.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1122,14 +1201,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
