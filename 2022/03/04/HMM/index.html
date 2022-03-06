@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="MMmarkov model：马尔可夫模型，指的是在给定当前知识的情况下，过去对于预测未来是无关的，诶个状态的转移，只依赖之前的n个状态，被称为是一个n阶模型。  转移矩阵：指的是从一个状态转移到另一个状态的概率，整体上为一个n*n的矩阵 HMM用来描述 含有隐含未知参数的马尔可夫过程。对于投色子来讲，假如有三种色子，分别包含6 8 10个面，那么每个色子表现出1的概率是不同的，同时，我们还知道色">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HMM">
+<meta property="og:url" content="http://yida506.github.io/2022/03/04/HMM/index.html">
+<meta property="og:site_name" content="spider">
+<meta property="og:description" content="MMmarkov model：马尔可夫模型，指的是在给定当前知识的情况下，过去对于预测未来是无关的，诶个状态的转移，只依赖之前的n个状态，被称为是一个n阶模型。  转移矩阵：指的是从一个状态转移到另一个状态的概率，整体上为一个n*n的矩阵 HMM用来描述 含有隐含未知参数的马尔可夫过程。对于投色子来讲，假如有三种色子，分别包含6 8 10个面，那么每个色子表现出1的概率是不同的，同时，我们还知道色">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yida506.github.io/2022/03/04/HMM/image-20220305130113281.png">
+<meta property="og:image" content="http://yida506.github.io/2022/03/04/HMM/image-20220305170041105.png">
+<meta property="article:published_time" content="2022-03-04T12:50:02.000Z">
+<meta property="article:modified_time" content="2022-03-05T16:10:10.898Z">
+<meta property="article:author" content="Lan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yida506.github.io/2022/03/04/HMM/image-20220305130113281.png">
+
+<link rel="canonical" href="http://yida506.github.io/2022/03/04/HMM/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>HMM | spider</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">spider</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/04/HMM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HMM
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-04 20:50:02" itemprop="dateCreated datePublished" datetime="2022-03-04T20:50:02+08:00">2022-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-06 00:10:10" itemprop="dateModified" datetime="2022-03-06T00:10:10+08:00">2022-03-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="MM"><a href="#MM" class="headerlink" title="MM"></a>MM</h4><h6 id="markov-model："><a href="#markov-model：" class="headerlink" title="markov model："></a>markov model：</h6><p>马尔可夫模型，指的是在给定当前知识的情况下，过去对于预测未来是无关的，诶个状态的转移，只依赖之前的n个状态，被称为是一个n阶模型。</p>
+<p><img src="/2022/03/04/HMM/image-20220305130113281.png" alt="image-20220305130113281"></p>
+<h6 id="转移矩阵："><a href="#转移矩阵：" class="headerlink" title="转移矩阵："></a>转移矩阵：</h6><p>指的是从一个状态转移到另一个状态的概率，整体上为一个n*n的矩阵</p>
+<h4 id="HMM"><a href="#HMM" class="headerlink" title="HMM"></a>HMM</h4><p>用来描述 含有隐含未知参数的马尔可夫过程。对于投色子来讲，假如有三种色子，分别包含6 8 10个面，那么每个色子表现出1的概率是不同的，同时，我们还知道色子丢出来的结果到底是几，那么我们就可以用这个结果去反推出对应的值是由哪个色子投出来的。</p>
+<h6 id="HIDDEN-STATE"><a href="#HIDDEN-STATE" class="headerlink" title="HIDDEN STATE:"></a>HIDDEN STATE:</h6><p>隐藏状态集合</p>
+<h6 id="Observations-state"><a href="#Observations-state" class="headerlink" title="Observations state:"></a>Observations state:</h6><p>观测状态集合</p>
+<h6 id="Start-Probability"><a href="#Start-Probability" class="headerlink" title="Start Probability:"></a>Start Probability:</h6><p>隐藏状态初始化的概率值</p>
+<h6 id="Hidden-Transition-Probability"><a href="#Hidden-Transition-Probability" class="headerlink" title="Hidden Transition_Probability:"></a>Hidden Transition_Probability:</h6><p>隐藏状态概率转移矩阵</p>
+<h6 id="Hidden-to-Observations-Probability"><a href="#Hidden-to-Observations-Probability" class="headerlink" title="Hidden to Observations Probability:"></a>Hidden to Observations Probability:</h6><p>隐藏状态到观测状态概率集合</p>
+<h5 id="Viterb算法"><a href="#Viterb算法" class="headerlink" title="Viterb算法"></a>Viterb算法</h5><p>本质上是动态规划，假设初始状态有n种，观测序列的长度为m，那么总共的路径数就为m的n次方，要想从中找到最优路径往往是不显示的，但是，对于一段长度为x路径来说，要是该路径是最优的，那么其长度为x-1的子路径也一定是最优的，那么问题就变为了，根据每一条路径，在其基础上，找到其距下个节点的最优路径即可，这样问题就缩小为了m*n个，极大降低了复杂度。</p>
+<h6 id="DEMO-以一个看病为例"><a href="#DEMO-以一个看病为例" class="headerlink" title="DEMO(以一个看病为例)"></a>DEMO(以一个看病为例)</h6><p>首先定义了隐藏状态：健康、生病</p>
+<p>观测序列：正常，冷，发烧(这里指代我们看到的情况)</p>
+<p>初始概率：健康：0.6 生病：0.4</p>
+<p>隐藏状态概率转移矩阵:健康到健康0.7 健康到生病0.3 生病到健康0.4 生病到生病0.6’</p>
+<p>隐藏状态到观测状态概率集合:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Healthy&quot;</span>: &#123;<span class="attr">&quot;normal&quot;</span>: <span class="number">0.5</span>, <span class="attr">&quot;cold&quot;</span>: <span class="number">0.4</span>, <span class="attr">&quot;dizzy&quot;</span>: <span class="number">0.1</span>&#125;,</span><br><span class="line"> <span class="string">&quot;Fever&quot;</span>: &#123;<span class="attr">&quot;normal&quot;</span>: <span class="number">0.1</span>, <span class="attr">&quot;cold&quot;</span>: <span class="number">0.3</span>, <span class="attr">&quot;dizzy&quot;</span>: <span class="number">0.6</span>&#125;,</span><br></pre></td></tr></table></figure>
+<p>我们要根据观测序列推断出其真实情况，在这里每一条路径都是由上一时刻的状态X隐藏状态转移概率矩阵X隐藏状态到观测状态概率集合(这里要针对每一个隐藏状态，因为需要对这个隐藏状态进行解码).</p>
+<p><img src="/2022/03/04/HMM/image-20220305170041105.png" alt="image-20220305170041105"></p>
+<p>python 实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">Hidden_states = (<span class="string">&quot;Healthy&quot;</span>, <span class="string">&quot;Fever&quot;</span>)  <span class="comment"># 隐状态集合</span></span><br><span class="line"></span><br><span class="line">Observations_states = (<span class="string">&quot;normal&quot;</span>, <span class="string">&quot;cold&quot;</span>, <span class="string">&quot;dizzy&quot;</span>)  <span class="comment"># 观测状态集合</span></span><br><span class="line"></span><br><span class="line">Start_probability = &#123;</span><br><span class="line">    <span class="string">&quot;Healthy&quot;</span>: <span class="number">0.6</span>,</span><br><span class="line">    <span class="string">&quot;Fever&quot;</span>: <span class="number">0.4</span>,</span><br><span class="line">&#125;  <span class="comment"># 表示病人第一次到访时医生认为其所处的HMM状态，他唯一知道的是病人倾向于是健康的（可以理解为这是基于一个对大众身体信息的了解得出的初始状态）</span></span><br><span class="line"></span><br><span class="line">Hidden_transition_probability = &#123;  <span class="comment"># 隐马尔可夫链中身体状态的状态转移概率，我们能够看到，当天健康的人，第二天有30%的概率会发烧</span></span><br><span class="line">    <span class="string">&quot;Healthy&quot;</span>: &#123;<span class="string">&quot;Healthy&quot;</span>: <span class="number">0.7</span>, <span class="string">&quot;Fever&quot;</span>: <span class="number">0.3</span>&#125;,</span><br><span class="line">    <span class="string">&quot;Fever&quot;</span>: &#123;<span class="string">&quot;Healthy&quot;</span>: <span class="number">0.4</span>, <span class="string">&quot;Fever&quot;</span>: <span class="number">0.6</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Hidden_observations_probability = (</span><br><span class="line">    &#123;  <span class="comment"># 原来叫emission_probability。这里表示病人每天的感觉的可能性。即，如果他是一个健康人，有50%的可能会感觉正常，40%觉得冷，10%觉得头晕</span></span><br><span class="line">        <span class="string">&quot;Healthy&quot;</span>: &#123;<span class="string">&quot;normal&quot;</span>: <span class="number">0.5</span>, <span class="string">&quot;cold&quot;</span>: <span class="number">0.4</span>, <span class="string">&quot;dizzy&quot;</span>: <span class="number">0.1</span>&#125;,</span><br><span class="line">        <span class="string">&quot;Fever&quot;</span>: &#123;<span class="string">&quot;normal&quot;</span>: <span class="number">0.1</span>, <span class="string">&quot;cold&quot;</span>: <span class="number">0.3</span>, <span class="string">&quot;dizzy&quot;</span>: <span class="number">0.6</span>&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">viterbi</span>(<span class="params">obs, states, start_p, trans_p, h2o_p</span>):</span> <span class="comment"># Viterbi算法</span></span><br><span class="line">    V = [&#123;&#125;]</span><br><span class="line">    path = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize base cases (t == 0)</span></span><br><span class="line">    <span class="comment"># </span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> states:</span><br><span class="line">        V[<span class="number">0</span>][y] = start_p[y] * h2o_p[y][obs[<span class="number">0</span>]] </span><br><span class="line">        <span class="comment"># 初始状态，由start的概率，对应乘上发射概率，即由隐状态到观测状态的可能性</span></span><br><span class="line">        path[y] = [y] <span class="comment"># 记录下相应的路径</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Run Viterbi for t &gt; 0，每天都要更新计算一遍</span></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(obs)):</span><br><span class="line">        V.append(&#123;&#125;)</span><br><span class="line">        newpath = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> states:</span><br><span class="line">            <span class="comment"># 对于每个状态，计算其由前一天的各个状态，到达今天的y的概率大小，与y0自身相比较，取最大值</span></span><br><span class="line">            <span class="comment"># 前一天到达今天的每个状态对应的路径大小都计算了，取最大值。作为V[t][y]的值，并更新路径</span></span><br><span class="line">            <span class="comment"># print(&#x27;V[t-1]:&#x27;,V[t-1],&#x27;trans_p:&#x27;,trans_p,&#x27;h2o_p[y]:&#x27;,h2o_p[y],[V[t-1][y0] * trans_p[y0][y] * h2o_p[y][obs[t]] for y0 in states])</span></span><br><span class="line">            (prob, state) = <span class="built_in">max</span>([(V[t-<span class="number">1</span>][y0] * trans_p[y0][y] * h2o_p[y][obs[t]], y0) <span class="keyword">for</span> y0 <span class="keyword">in</span> states])</span><br><span class="line">            <span class="built_in">print</span>(V[t],y)</span><br><span class="line">            V[t][y] = prob</span><br><span class="line">            newpath[y] = path[state] + [y]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Don&#x27;t need to remember the old paths</span></span><br><span class="line">        path = newpath</span><br><span class="line">        <span class="comment"># print(path)</span></span><br><span class="line">    <span class="comment"># print_dptable(V)</span></span><br><span class="line">    <span class="comment"># 最后一天</span></span><br><span class="line">    (prob, state) = <span class="built_in">max</span>([(V[<span class="built_in">len</span>(obs) - <span class="number">1</span>][y], y) <span class="keyword">for</span> y <span class="keyword">in</span> states])</span><br><span class="line">    <span class="keyword">return</span> (prob, path[state])</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example</span>():</span></span><br><span class="line">    <span class="keyword">return</span> viterbi(Observations_states,</span><br><span class="line">                   Hidden_states,</span><br><span class="line">                   Start_probability,</span><br><span class="line">                   Hidden_transition_probability,</span><br><span class="line">                   Hidden_observations_probability)</span><br><span class="line"><span class="built_in">print</span>(example())    </span><br></pre></td></tr></table></figure>
+<h5 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h5><p>已知：</p>
+<ul>
+<li>观测序列(指历年主题比重)</li>
+<li>状态转移矩阵:共现词矩阵(需要进行一个归一化)</li>
+</ul>
+<p>目的:使用Baum-Welch算法，根据12-21年的比重，预测22-25年的比重</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" rel="prev" title="关联挖掘">
+      <i class="fa fa-chevron-left"></i> 关联挖掘
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/06/redis/" rel="next" title="redis">
+      redis <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MM"><span class="nav-number">1.</span> <span class="nav-text">MM</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#markov-model%EF%BC%9A"><span class="nav-number">1.0.1.</span> <span class="nav-text">markov model：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BD%AC%E7%A7%BB%E7%9F%A9%E9%98%B5%EF%BC%9A"><span class="nav-number">1.0.2.</span> <span class="nav-text">转移矩阵：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HMM"><span class="nav-number">2.</span> <span class="nav-text">HMM</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#HIDDEN-STATE"><span class="nav-number">2.0.1.</span> <span class="nav-text">HIDDEN STATE:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Observations-state"><span class="nav-number">2.0.2.</span> <span class="nav-text">Observations state:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Start-Probability"><span class="nav-number">2.0.3.</span> <span class="nav-text">Start Probability:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Hidden-Transition-Probability"><span class="nav-number">2.0.4.</span> <span class="nav-text">Hidden Transition_Probability:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Hidden-to-Observations-Probability"><span class="nav-number">2.0.5.</span> <span class="nav-text">Hidden to Observations Probability:</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Viterb%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">Viterb算法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#DEMO-%E4%BB%A5%E4%B8%80%E4%B8%AA%E7%9C%8B%E7%97%85%E4%B8%BA%E4%BE%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">DEMO(以一个看病为例)</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%A1%88%E4%BE%8B"><span class="nav-number">2.2.</span> <span class="nav-text">实际案例</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
