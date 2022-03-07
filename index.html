@@ -160,6 +160,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/07/rs4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/07/rs4/" class="post-title-link" itemprop="url">rs4</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-07 22:55:40 / Modified: 23:35:23" itemprop="dateCreated datePublished" datetime="2022-03-07T22:55:40+08:00">2022-03-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">JS逆向</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="RS4"><a href="#RS4" class="headerlink" title="RS4"></a>RS4</h4><p>进入其代码中，可以发现，充斥着大量的IF-ELSE流，干扰分析，让人头痛。</p>
+<p><img src="/2022/03/07/rs4/image-20220307225925441.png" alt="image-20220307225925441"></p>
+<p>通过观察发现，这里面虽然充斥大量的IF-ELSE流，但是跟进去就会发现，它每一个区域块都对应了其IF提到的值-1，最后的那个_$yZ(767,3)其实对应的是255这个值的流程。</p>
+<p><img src="/2022/03/07/rs4/image-20220307230312062.png" alt="image-20220307230312062"></p>
+<p>用Babel解析IFstatement，会得到三部分：</p>
+<ul>
+<li>test: 上述 _$pp &lt; 255的验证部分</li>
+<li>consequent: BlockStatement 对应 后面的{}区域</li>
+<li>alternate:else后跟的{}区域</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/06/%E7%9F%A5%E4%B9%8Evmp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -998,89 +1075,6 @@ support = P(AUB)</script><p>置信度：包含A的数据集中包含B的百分�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/20/ti%E8%BF%98%E5%8E%9F2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" class="post-title-link" itemprop="url">ti还原2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-20 23:26:10" itemprop="dateCreated datePublished" datetime="2022-02-20T23:26:10+08:00">2022-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-23 21:36:01" itemprop="dateModified" datetime="2022-02-23T21:36:01+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ast/" itemprop="url" rel="index"><span itemprop="name">ast</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="代码还原"><a href="#代码还原" class="headerlink" title="代码还原"></a>代码还原</h4><p>接着上一篇。</p>
-<h5 id="环境加载"><a href="#环境加载" class="headerlink" title="环境加载"></a>环境加载</h5><p>在上一篇，我们将加载函数抠出来了后，就可以直接保存在内存中，然后通过直接在内存里面计算拿到结果在还原，这里还原方法类似解Ob混淆的还原，通过遍历所有的CallExpression节点，找到解密函数实参，然后传参，最后将结果还原即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> InFuncReplace = &#123;</span><br><span class="line">    <span class="function"><span class="title">CallExpression</span>(<span class="params">path</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;callee,<span class="built_in">arguments</span>&#125; = path.node;</span><br><span class="line">        <span class="keyword">if</span>(!types.isMemberExpression(callee)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">let</span> func_name = callee.object.name;</span><br><span class="line">        <span class="keyword">if</span>(func_name !== <span class="string">&#x27;ff&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">        path.replaceWith(types.valueToNode(<span class="built_in">eval</span>(path.toString())));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="补环境"><a href="#补环境" class="headerlink" title="补环境"></a>补环境</h4><p>现在基本的混淆已经解的差不多了，开始补环境。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">null_function = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(val);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">location = &#123;</span><br><span class="line">  <span class="string">&quot;href&quot;</span>: <span class="string">&quot;https://ntp.msn.cn/edge/ntp?locale=en-US&amp;title=New%20tab&amp;dsp=1&amp;sp=%E5%BF%85%E5%BA%94&amp;prerender=1&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">document</span> = &#123;&#125;;</span><br><span class="line"><span class="built_in">document</span>.location = &#123;&#125;;</span><br><span class="line"><span class="built_in">document</span>.location.protocol = <span class="string">&quot;https:&quot;</span>;</span><br><span class="line"><span class="built_in">document</span>.currentScript = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName = <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (val === <span class="string">&quot;script&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> [&#123;</span><br><span class="line">      <span class="attr">src</span>: <span class="string">&quot;/_sec/cp_challenge/sec-cpt-3-6.js&quot;</span></span><br><span class="line">    &#125;, <span class="string">&quot;&quot;</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span> = <span class="built_in">global</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>暂时运行不了，推测有加盐的地方。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1150,7 +1144,7 @@ support = P(AUB)</script><p>置信度：包含A的数据集中包含B的百分�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
