@@ -160,6 +160,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" class="post-title-link" itemprop="url">ast_tools解读</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-11 19:33:40 / Modified: 22:08:05" itemprop="dateCreated datePublished" datetime="2022-03-11T19:33:40+08:00">2022-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ast/" itemprop="url" rel="index"><span itemprop="name">ast</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> ast_tools源码解读</p>
+<h4 id="IfWithExpressFix"><a href="#IfWithExpressFix" class="headerlink" title="IfWithExpressFix"></a>IfWithExpressFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311193502748.png" alt="image-20220311193502748"></p>
+<p>主要是给不包含block的if表达式添加上，让其统一化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a=<span class="number">1</span>) <span class="keyword">var</span> b=<span class="number">3</span>;</span><br><span class="line">-----------------</span><br><span class="line"><span class="keyword">if</span>(a=<span class="number">1</span>)&#123;<span class="keyword">var</span> b=<span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ForWithExpressFix-amp-ForWithForFix"><a href="#ForWithExpressFix-amp-ForWithForFix" class="headerlink" title="ForWithExpressFix &amp; ForWithForFix"></a>ForWithExpressFix &amp; ForWithForFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311193754270.png" alt="image-20220311193754270"></p>
+<p>都是给For循环规范化。</p>
+<h4 id="ReturnSeqFix"><a href="#ReturnSeqFix" class="headerlink" title="ReturnSeqFix"></a>ReturnSeqFix</h4><p>将return中包含逗号表达式的还原</p>
+<p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311194547853.png" alt="image-20220311194547853"></p>
+<p>第一部分用于将所有的逗号表达式添加到数组中，第二步主要是将逗号表达式前n-1项加到return前面，然后将return节点只包含逗号表达式的最后一项。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> c=a+<span class="number">1</span>,b&#125;</span><br><span class="line">--------------------------</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;c=a+<span class="number">1</span>;<span class="keyword">return</span> ab&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="VariableDeclaratorFix"><a href="#VariableDeclaratorFix" class="headerlink" title="VariableDeclaratorFix"></a>VariableDeclaratorFix</h4><p>声明表达式及赋值表达式还原。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a,b,c;</span><br><span class="line">m=<span class="number">2</span>,d=<span class="number">3</span>,n=<span class="number">4</span>;</span><br><span class="line">-----------</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="keyword">var</span> b;</span><br><span class="line"><span class="keyword">var</span> c;</span><br><span class="line">m=<span class="number">2</span>;</span><br><span class="line">d=<span class="number">3</span>;</span><br><span class="line">n=<span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="ConditionalFix"><a href="#ConditionalFix" class="headerlink" title="ConditionalFix"></a>ConditionalFix</h4><p>三目表达式转化为if-else的形式。</p>
+<p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200057628.png" alt="image-20220311200057628"></p>
+<h4 id="SequenceExpressionFix"><a href="#SequenceExpressionFix" class="headerlink" title="SequenceExpressionFix"></a>SequenceExpressionFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200313589.png" alt="image-20220311200313589"></p>
+<p>本质上还是逗号表达式的还原。</p>
+<h4 id="AssignmentWithConditionalFix"><a href="#AssignmentWithConditionalFix" class="headerlink" title="AssignmentWithConditionalFix"></a>AssignmentWithConditionalFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200459670.png" alt="image-20220311200459670"></p>
+<p>还是对三目表达的还原，这里限制了其consequent和alternate部分都为数字。</p>
+<h4 id="LogicalExpressionFix"><a href="#LogicalExpressionFix" class="headerlink" title="LogicalExpressionFix"></a>LogicalExpressionFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200832831.png" alt="image-20220311200832831"></p>
+<p>将逻辑表达式转化为条件表达式。</p>
+<h4 id="UnaryFunctionFix"><a href="#UnaryFunctionFix" class="headerlink" title="UnaryFunctionFix"></a>UnaryFunctionFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311201334471.png" alt="image-20220311201334471"></p>
+<p>把自执行函数的壳去掉。</p>
+<h4 id="ControlFlowFix"><a href="#ControlFlowFix" class="headerlink" title="ControlFlowFix"></a>ControlFlowFix</h4><p>控制流平坦化。</p>
+<ul>
+<li><p>进入大FOR循环，获取第一个初始化Ci的表达式，然后根据一个三目获取变量的名称(其余的条件貌似不是针对大控制流的)。</p>
+</li>
+<li><p>定义了两个数组，分别用于存取大控制流的变量</p>
+</li>
+</ul>
+<p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311203909800.png" alt="image-20220311203909800"></p>
+<ul>
+<li><p>生成了一个函数，给定一个初始的li然后会返回一个字典包含这五个参数。</p>
+</li>
+<li><p>进入控制流，然后生产了一个用于判断是否结束的函数。</p>
+</li>
+<li><p>获取主流程switch节点</p>
+</li>
+<li>初始化了get_control_struct函数，steps_hash_list，bodys，get_next_control_param函数，</li>
+<li>定义了一个get_node函数(控制流的另一种形式，初始li参数)</li>
+</ul>
+<blockquote>
+<p>控制流的另一种形式：将上述控制流转化为一个类似字典的东西，键指代控制流指向，值包含其内容为node类型。</p>
+</blockquote>
+<h5 id="get-code函数"><a href="#get-code函数" class="headerlink" title="get_code函数"></a>get_code函数</h5><p>控制流的整体流程</p>
+<p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311210310953.png" alt="image-20220311210310953"></p>
+<p>这里获取所有初始参数的值</p>
+<p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311210631798.png" alt="image-20220311210631798"></p>
+<p>这一步应该是不断计算，获取最下层节点即Ai节点的值。</p>
+<p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311211105814.png" alt="image-20220311211105814"></p>
+<p>在这里，由于包含IF的模块，所以还要对其进行一个判断，get_next_control_param用于获取其类型是否包含这种IF。</p>
+<p>向栈中添加这两个节点值。</p>
+<p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311211853434.png" alt="image-20220311211853434"></p>
+<p>然后根据这个11490在进行一个这个流程，在进入while流程中，基本上就将控制流还原了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ba = <span class="built_in">window</span>;</span><br><span class="line">Nt = r;</span><br><span class="line">ur = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">Jo = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">ei = O;</span><br><span class="line"><span class="keyword">if</span> (Nt) &#123;</span><br><span class="line">。。。。</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">。。。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>整体思想，获取初始参数的值，计算出中间参数的值，找到最底层的节点，获取当前节点的表达式，然后获取下一步初始参数的值(要对for循环中的条件进行一个判断)，反复调用并合并节点，最后将整个大FOR循环脱掉。</p>
+</blockquote>
+<h4 id="ConstantFix"><a href="#ConstantFix" class="headerlink" title="ConstantFix"></a>ConstantFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311220545744.png" alt="image-20220311220445933"></p>
+<p>字符串的还原。</p>
+<h4 id="DecryptVariableFix"><a href="#DecryptVariableFix" class="headerlink" title="DecryptVariableFix"></a>DecryptVariableFix</h4><p>将w.pop()的形式，还原为字符串。</p>
+<h4 id="ReserveStrFix"><a href="#ReserveStrFix" class="headerlink" title="ReserveStrFix"></a>ReserveStrFix</h4><p><img src="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311215701659.png" alt="image-20220311215701659"></p>
+<p>这玩意的还原。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/07/rs4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -191,7 +320,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-08 22:33:20" itemprop="dateModified" datetime="2022-03-08T22:33:20+08:00">2022-03-08</time>
+                <time title="Modified: 2022-03-11 00:15:55" itemprop="dateModified" datetime="2022-03-11T00:15:55+08:00">2022-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1024,78 +1153,6 @@ support = P(AUB)</script><p>置信度：包含A的数据集中包含B的百分�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/21/git%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/21/git%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">git操作</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-02-21 00:42:41 / Modified: 00:44:34" itemprop="dateCreated datePublished" datetime="2022-02-21T00:42:41+08:00">2022-02-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>git add [.代表(添加全部代码),也可指定单独文件目录]</li>
-<li>git commit-m  “提交” 设置提交名称</li>
-<li>git push -u origin master 提交到github</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1165,7 +1222,7 @@ support = P(AUB)</script><p>置信度：包含A的数据集中包含B的百分�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

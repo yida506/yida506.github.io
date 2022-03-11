@@ -160,6 +160,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/21/git%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/21/git%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">git操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-02-21 00:42:41 / Modified: 00:44:34" itemprop="dateCreated datePublished" datetime="2022-02-21T00:42:41+08:00">2022-02-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>git add [.代表(添加全部代码),也可指定单独文件目录]</li>
+<li>git commit-m  “提交” 设置提交名称</li>
+<li>git push -u origin master 提交到github</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/20/ti%E8%BF%98%E5%8E%9F2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -418,7 +490,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-04 23:39:59" itemprop="dateModified" datetime="2022-03-04T23:39:59+08:00">2022-03-04</time>
+                <time title="Modified: 2022-03-11 22:46:26" itemprop="dateModified" datetime="2022-03-11T22:46:26+08:00">2022-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -531,7 +603,14 @@
 <h3 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h3><p>可采用download_midware，将headers及其他，以字典的形式下发</p>
 <ul>
 <li>resoponse.open()可以看打开的网站是否和浏览器。</li>
-<li>Requests.feapder(render=True)，表示打开渲染模式，parse_name跟爬虫文件名(用于消费任务) 该爬虫需要继承baseparser，</li>
+<li><p>Requests.feapder(render=True)，表示打开渲染模式，parse_name跟爬虫文件名(用于消费任务) 该爬虫需要继承baseparser，</p>
+</li>
+<li><p>Requests.feapder(params_name=”消费者的类名”),生产者里面是不需要指定</p>
+</li>
+<li><p>在爬虫集成的时候都使用baseparser</p>
+<p>Spider(redis_key,delete_key=True)</p>
+<p>delete_key 可以用于重新生成redis_key</p>
+</li>
 </ul>
 
       
@@ -1085,85 +1164,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/01/app%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">app基础</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-01-01 21:47:13" itemprop="dateCreated datePublished" datetime="2022-01-01T21:47:13+08:00">2022-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-23 19:40:50" itemprop="dateModified" datetime="2022-02-23T19:40:50+08:00">2022-02-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/app%E9%80%86%E5%90%91/" itemprop="url" rel="index"><span itemprop="name">app逆向</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Android基础"><a href="#Android基础" class="headerlink" title="Android基础"></a>Android基础</h4><p>反编译工具:JADX</p>
-<p>IDE:android studio(最新版)</p>
-<h4 id="签名校验"><a href="#签名校验" class="headerlink" title="签名校验"></a>签名校验</h4><p>所谓签名校验指的是对与一个app，我们在对其原生文件进行一个魔改操作后，重新安装，导致原生文件发生了改变，在实际使用时，app会对本地文件进行一个校验，会检测文件是否被修改，若被修改，则不允许运行。</p>
-<p>我们要做的就是Hook其校验过程，达到，无论我们怎么改，他都不报错的目的，和js本地获取参数有异曲同工之妙。</p>
-<p>目前来讲签名校验可以隐藏在java、so各层中。</p>
-<h5 id="反射调用"><a href="#反射调用" class="headerlink" title="反射调用"></a>反射调用</h5><p>一种调用形式，本质上和Js中a.b转化为a[‘b’]的形式类似，可在其中加入混淆。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1233,7 +1233,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

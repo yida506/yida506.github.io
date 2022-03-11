@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yida506.github.io/2022/02/02/Framework/image-20220303211908320.png">
 <meta property="article:published_time" content="2022-02-02T15:19:36.000Z">
-<meta property="article:modified_time" content="2022-03-04T15:39:59.348Z">
+<meta property="article:modified_time" content="2022-03-11T14:46:26.113Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yida506.github.io/2022/02/02/Framework/image-20220303211908320.png">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-04 23:39:59" itemprop="dateModified" datetime="2022-03-04T23:39:59+08:00">2022-03-04</time>
+                <time title="Modified: 2022-03-11 22:46:26" itemprop="dateModified" datetime="2022-03-11T22:46:26+08:00">2022-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,7 +310,14 @@
 <h3 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h3><p>可采用download_midware，将headers及其他，以字典的形式下发</p>
 <ul>
 <li>resoponse.open()可以看打开的网站是否和浏览器。</li>
-<li>Requests.feapder(render=True)，表示打开渲染模式，parse_name跟爬虫文件名(用于消费任务) 该爬虫需要继承baseparser，</li>
+<li><p>Requests.feapder(render=True)，表示打开渲染模式，parse_name跟爬虫文件名(用于消费任务) 该爬虫需要继承baseparser，</p>
+</li>
+<li><p>Requests.feapder(params_name=”消费者的类名”),生产者里面是不需要指定</p>
+</li>
+<li><p>在爬虫集成的时候都使用baseparser</p>
+<p>Spider(redis_key,delete_key=True)</p>
+<p>delete_key 可以用于重新生成redis_key</p>
+</li>
 </ul>
 
     </div>
@@ -406,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
