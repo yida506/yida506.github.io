@@ -160,6 +160,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/13/ali/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/13/ali/" class="post-title-link" itemprop="url">ali</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-13 20:53:32 / Modified: 23:58:57" itemprop="dateCreated datePublished" datetime="2022-03-13T20:53:32+08:00">2022-03-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ast/" itemprop="url" rel="index"><span itemprop="name">ast</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h6 id="三重控制流平坦化"><a href="#三重控制流平坦化" class="headerlink" title="三重控制流平坦化"></a>三重控制流平坦化</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">n</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> e = <span class="number">1</span>; <span class="keyword">void</span> <span class="number">0</span> !== e;) &#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">7</span> &amp; e;</span><br><span class="line">    <span class="keyword">var</span> r = e &gt;&gt; <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">var</span> s = <span class="number">7</span> &amp; r;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (a) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">switch</span> (s) &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            i += <span class="string">&quot;a&quot;</span>;</span><br><span class="line">            e = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> (i) &#123;</span><br><span class="line">              e = <span class="number">0</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              e = <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            i += <span class="string">&quot;hB&quot;</span>;</span><br><span class="line">            e = <span class="number">8</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">var</span> c = <span class="string">&quot;egdirbsj&quot;</span>;</span><br><span class="line">        <span class="keyword">var</span> b = c.split(<span class="string">&quot;&quot;</span>).reverse().join(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> k = j[b];</span><br><span class="line">        <span class="keyword">var</span> o = !k;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (o) &#123;</span><br><span class="line">          e = <span class="number">3</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          e = <span class="number">5</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        i += <span class="string">&quot;ck&quot;</span>;</span><br><span class="line">        d(<span class="number">15</span>, <span class="number">0</span>, k, i, t);</span><br><span class="line">        <span class="keyword">return</span> !<span class="number">0</span>;</span><br><span class="line">        ;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        <span class="keyword">var</span> t = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">var</span> a = e[<span class="number">0</span>];</span><br><span class="line">          <span class="keyword">var</span> r = <span class="string">&quot;\u03a2\u03c3\u03b7\u03de\u03a8\u03cd\u03f7&quot;</span>;</span><br><span class="line">          <span class="keyword">var</span> s = <span class="string">&quot;&quot;</span>;</span><br><span class="line">          <span class="keyword">var</span> c = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> b = <span class="number">0</span>; b &lt; r.length; b++) &#123;</span><br><span class="line">            b || (c = <span class="number">972</span>);</span><br><span class="line">            <span class="keyword">var</span> k = r.charCodeAt(b);</span><br><span class="line">            <span class="keyword">var</span> o = k ^ c;</span><br><span class="line">            c = k;</span><br><span class="line">            s += <span class="built_in">String</span>.fromCharCode(o);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">var</span> t = a === s;</span><br><span class="line">          t &amp;&amp; d(<span class="number">0</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> i = <span class="string">&quot;pus&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i) &#123;</span><br><span class="line">          e = <span class="number">16</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          e = <span class="number">8</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">var</span> n = <span class="string">&quot;def&quot;</span>;</span><br><span class="line">        n += <span class="string">&quot;ault&quot;</span>;</span><br><span class="line">        k = k[n];</span><br><span class="line">        <span class="keyword">var</span> h = !k;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (h) &#123;</span><br><span class="line">          e = <span class="number">6</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          e = <span class="number">4</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述为其模型的典型特征。</p>
+<p>通过分析，我们可以发现，其中for循环中的test语句，为判断这个循环是否停止的条件，我们知道要使得for循环停止，可以添加break语句或者通过外嵌函数的方法，直接return出来，在这里我们可以看到，采用的是第二种方法，也就是说，在还原碰到return语句的时候，作为结束条件停止即可。</p>
+<p><strong>大变量:指代这里的e</strong> </p>
+<p><strong>初始化参数:指代这里的a、r、s</strong></p>
+<ol>
+<li><p>获取条件test表达式，获取初始化参数的值。</p>
+</li>
+<li><p>访问到最底部的节点，然后通过遍历的方式，获取其赋值语句，这里又分为两种情况：a.在当前层数可以找到最顶部参数的赋值语句的地方 b.在当前层数只能找到其上一节点的参数的赋值地方(应对多重switch嵌套)。</p>
+<blockquote>
+<p>思路，从初始for循环出发，初始化变量的值，然后根据SwitchStatement获取到当前变量及其对应的值，然后进入到case节点的位置，这里需要进行一个判断，判断其下一层是否还是SwitchStatemen类型，如果不是，那么就进行节点的合并，在这里面一定会包含一个关于初始值变化的位置，因此需要在这些Expressionstatement中找到其赋值表达式(Assignmentexpression)，然后在进行一次计算，但是在这种情况下，难免会碰到更深层的SwitchStatement，当游走到最深处的时候，需要判断，其是走向该Switch节点下的其他部分，还是赋值了大变量走入其他分支，最后根据return或者是结束语句判断是是否该for循环结束。</p>
+</blockquote>
+<p><strong>核心思路：将初始化和判断语句写入一个函数，这样可以做到一次获取全部初始变量的值，将所有的Switch节点均写为一个类似字典的形式，方便进入对应的节点。</strong> </p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> traverse_ifState = &#123;</span><br><span class="line">    <span class="function"><span class="title">ForStatement</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">        fix(path)</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取非swithch表达式的节点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_other_expression</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temparr = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> arr)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!types.isSwitchStatement(i))&#123;</span><br><span class="line">            temparr.push(i);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> temparr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_switch_expression</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> arr)&#123;</span><br><span class="line">        <span class="keyword">if</span>(types.isSwitchStatement(i))&#123;</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_switch_obj</span>(<span class="params">SwitchNode</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> CaseNode = SwitchNode.cases;</span><br><span class="line">    <span class="keyword">let</span> current_obj = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> CaseNode)&#123;</span><br><span class="line">        <span class="comment">//如果节点里为SwitchStatement</span></span><br><span class="line">        <span class="keyword">if</span>(get_switch_expression(i.consequent))&#123;</span><br><span class="line">            current_obj[i.test.value] = get_switch_obj(get_switch_expression(i.consequent));</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            current_obj[i.test.value] = i.consequent;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> current_obj;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">return_obj_create</span>(<span class="params">init_expression, init_params_body</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temparr = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> exp <span class="keyword">of</span> init_params_body)&#123;</span><br><span class="line">        temparr.push(types.objectProperty(types.stringLiteral(exp.declarations[<span class="number">0</span>].id.name), exp.declarations[<span class="number">0</span>].id));</span><br><span class="line">    &#125;;</span><br><span class="line">    temparr.push(types.objectProperty(types.stringLiteral(init_expression.declarations[<span class="number">0</span>].id.name), init_expression.declarations[<span class="number">0</span>].id));</span><br><span class="line">    <span class="keyword">let</span> now_obj = types.objectExpression(temparr);</span><br><span class="line">    <span class="keyword">return</span> now_obj;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//用于节点游走,为一个递归函数(大变量初始值,对应的SwitchStatement)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_node_expression</span>(<span class="params">base_var_name,value, SwitchNode,init_data,init_var_identify,SwitchObj,out_arr</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(!init_var_identify(value)) <span class="keyword">return</span>;</span><br><span class="line">     <span class="keyword">let</span> init_value = init_data(value);</span><br><span class="line">     <span class="built_in">console</span>.log(init_value);</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;当前Case&#x27;</span>,init_value[SwitchNode.discriminant.name]);</span><br><span class="line">     <span class="built_in">console</span>.log(SwitchObj[init_value[SwitchNode.discriminant.name]]);</span><br><span class="line">     <span class="keyword">let</span> now_arr = SwitchObj[init_value[SwitchNode.discriminant.name]];</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> now_arr)&#123;</span><br><span class="line">         <span class="keyword">if</span>(types.isIfStatement(i))&#123;</span><br><span class="line">             <span class="keyword">let</span> consequentExpression = i.consequent.body[<span class="number">0</span>].expression;</span><br><span class="line">             <span class="keyword">let</span> alternateExpression = i.alternate.body[<span class="number">0</span>].expression;</span><br><span class="line">             <span class="keyword">if</span>(types.isAssignmentExpression(consequentExpression) &amp;&amp; consequentExpression.left.name ==base_var_name)&#123;</span><br><span class="line">                 get_node_expression(base_var_name,consequentExpression.right.value,SwitchNode,init_data,init_var_identify,SwitchObj);</span><br><span class="line">             &#125;;</span><br><span class="line">             <span class="keyword">if</span>(types.isAssignmentExpression(alternateExpression) &amp;&amp; alternateExpression.left.name ==base_var_name)&#123;</span><br><span class="line">                 get_node_expression(base_var_name,alternateExpression.right.value,SwitchNode,init_data,init_var_identify,SwitchObj);</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">             <span class="keyword">if</span>(out_arr) out_arr.push(i);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;;</span><br><span class="line">     <span class="comment">// return now_arr</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fix</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;init,test,update,body&#125; = path.node;</span><br><span class="line">    <span class="keyword">if</span>(update) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">let</span> init_params_body = get_other_expression(body.body);</span><br><span class="line">    <span class="keyword">let</span> return_obj_statement = return_obj_create(init, init_params_body);</span><br><span class="line">    init_params_body.push(types.returnStatement(return_obj_statement));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将初始化的值eval进内存.后续可以直接调用</span></span><br><span class="line">    <span class="built_in">eval</span>(generator(types.functionDeclaration(types.identifier(<span class="string">&#x27;init_var_identify&#x27;</span>),</span><br><span class="line">        [init.declarations[<span class="number">0</span>].id],</span><br><span class="line">        types.blockStatement([types.returnStatement(test)])</span><br><span class="line">        )).code);</span><br><span class="line">    <span class="built_in">eval</span>(generator(types.functionDeclaration(types.identifier(<span class="string">&#x27;init_data&#x27;</span>),</span><br><span class="line">        [init.declarations[<span class="number">0</span>].id],</span><br><span class="line">        types.blockStatement(init_params_body)</span><br><span class="line">        )).code);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> SwitchNode = get_switch_expression(body.body);</span><br><span class="line">    <span class="keyword">let</span> SwitchObj = get_switch_obj(SwitchNode);</span><br><span class="line">    <span class="keyword">let</span> out_arr = [];</span><br><span class="line">    get_node_expression(init.declarations[<span class="number">0</span>].id.name,init.declarations[<span class="number">0</span>].init.value,SwitchNode,init_data,init_var_identify,SwitchObj,out_arr);</span><br><span class="line">    <span class="comment">// console.log(out_arr);</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>待解决的问题:在递归到第三层控制流的时候有点问题，未将节点提取出来</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -320,7 +404,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-11 00:15:55" itemprop="dateModified" datetime="2022-03-11T00:15:55+08:00">2022-03-11</time>
+                <time title="Modified: 2022-03-13 20:54:07" itemprop="dateModified" datetime="2022-03-13T20:54:07+08:00">2022-03-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -368,6 +452,7 @@
 <p><img src="/2022/03/07/rs4/image-20220308220816827.png" alt="image-20220308220816827"></p>
 <p>跟下去会进入一段页面自带的js，跳过去发现scj还是没有生成，但是却多了一些字符和函数啥的，同时上一步提到的aebi已经生成了。    </p>
 <p><img src="/2022/03/07/rs4/image-20220308221247264.png" alt="image-20220308221247264"></p>
+<p>也就是说，在这一步，应该会生成许多东西，接下来，将这个js扣下来对其进行还原。</p>
 
       
     </div>
@@ -1047,112 +1132,6 @@ support = P(AUB)</script><p>置信度：包含A的数据集中包含B的百分�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" class="post-title-link" itemprop="url">服务器部署随笔</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-02-21 21:05:26" itemprop="dateCreated datePublished" datetime="2022-02-21T21:05:26+08:00">2022-02-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-28 19:18:51" itemprop="dateModified" datetime="2022-02-28T19:18:51+08:00">2022-02-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">部署篇</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="feaplat服务器部署"><a href="#feaplat服务器部署" class="headerlink" title="feaplat服务器部署"></a>feaplat服务器部署</h4><h5 id="服务器选择选用centos7-6"><a href="#服务器选择选用centos7-6" class="headerlink" title="服务器选择选用centos7.6"></a>服务器选择选用centos7.6</h5><p>账号:root</p>
-<p>密码:大小写混合</p>
-<p>直接使用FinalShell链接，其中IP地址对应公网IP，端口对应22(默认)，采用上述账号密码进行账号密码登录。</p>
-<h4 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h4><p><strong>介绍:</strong> 本质上是通过打包的方式，将环境啥的都集中到一个地方，避免配置的复杂度，做到随用随取，同时里面相当于包含独立的linux主机类似bin啥的目录</p>
-<h6 id="docker-pull："><a href="#docker-pull：" class="headerlink" title="docker pull："></a>docker pull：</h6><p>下载网上的镜像，一般选用公用镜像，私有的建立仓库啥的</p>
-<h6 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run:"></a>docker run:</h6><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-d</td>
-<td style="text-align:center">表示启动在后台</td>
-</tr>
-<tr>
-<td style="text-align:center">-p</td>
-<td style="text-align:center">8888:8888表示端口</td>
-</tr>
-<tr>
-<td style="text-align:center">-e</td>
-<td style="text-align:center">环境(对于jupyter镜像来说，加入JUPYTER_ENABLE_LAB=yes代表使用lab而不是notebook)</td>
-</tr>
-<tr>
-<td style="text-align:center">-v</td>
-<td style="text-align:center">给容器挂载存储卷，挂载到容器的某个目录(/主机目录 : /容器目录)</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1222,7 +1201,7 @@ support = P(AUB)</script><p>置信度：包含A的数据集中包含B的百分�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
