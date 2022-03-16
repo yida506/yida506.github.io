@@ -188,13 +188,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span></span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>NaN:aN</span>
+              <span>1 mins.</span>
             </span>
 
         </div>
@@ -218,7 +218,6 @@
 </ul>
 <h5 id="数组型"><a href="#数组型" class="headerlink" title="数组型"></a>数组型</h5><p>所谓数组型，就是类似以数组的形式，通过数组下标访问。例如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrlist = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = arrlist[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
-
 <p>对于该种情况，我们抽象为如下四步：</p>
 <ul>
 <li>确定要遍历的对象，这里是VariableDeclarator。</li>
@@ -228,7 +227,6 @@
 </ul>
 <h5 id="函数形"><a href="#函数形" class="headerlink" title="函数形"></a>函数形</h5><p>所谓函数形，即声明的类型是函数，通过函数访问。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类型1</span></span><br><span class="line"><span class="keyword">var</span> add1 = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//类型2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add2</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> c = add1(<span class="number">1</span>,<span class="number">2</span>) + add2(<span class="number">3</span>,<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
-
 <p>该类情况与数组大致相同，只不过在遍历时候还需考虑第二种情况：</p>
 <ul>
 <li>确定要遍历的对象，这里是FunctionExpression，针对情况1，可以直接通过path.parent.id.name获取函数昵称，针对情况2，可以通过path.node.id.name获取函数昵称。</li>
@@ -238,7 +236,6 @@
 </ul>
 <h5 id="对象型"><a href="#对象型" class="headerlink" title="对象型"></a>对象型</h5><p>所谓对象型，就是声明了一个大对象，通过调用的方式访问。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	<span class="string">&#x27;a&#x27;</span>:<span class="number">123</span>,</span><br><span class="line">	<span class="string">&#x27;b&#x27;</span>:<span class="number">456</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> c = obj[<span class="string">&#x27;a&#x27;</span>];</span><br></pre></td></tr></table></figure>
-
 <p>这个的本质与数组可以说是一模一样，在此不做赘述。</p>
 <h5 id="组合型"><a href="#组合型" class="headerlink" title="组合型"></a>组合型</h5><p>所谓的组合型，就是通过对象、数组、函数的组合方式，使得其变得复杂化，进而加大一键脱混淆的难度，进而使得我们需要针对型的修改插件，才能使得混淆得以脱掉。</p>
 <blockquote>
@@ -340,7 +337,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -383,12 +380,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">NaNm</span>
+    <span title="Symbols count total">140k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">NaN:aN</span>
+    <span title="Reading time total">2:07</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>

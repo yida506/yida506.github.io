@@ -188,13 +188,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span></span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>NaN:aN</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -208,13 +208,11 @@
       
         <h3 id="基础知识篇"><a href="#基础知识篇" class="headerlink" title="基础知识篇"></a>基础知识篇</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h5 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h5><p>线程为程序的最小执行单位，在python中用Thread库来控制线程。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过类携带target参数,直接生成线程类,同时,current_thread().name可以返回当前类的名称,线程的实例化可以通过调用is_alive()来判断线程是否存在。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        <span class="built_in">print</span>(threading.current_thread().name,i)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test2</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>,<span class="number">10</span>):</span><br><span class="line">        <span class="built_in">print</span>(threading.current_thread().name,i)</span><br><span class="line">        time.sleep(<span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">thread1 = threading.Thread(target=test1, daemon=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># thread2 = threading.Thread(target=test2)</span></span><br><span class="line"><span class="comment"># thread2.start()</span></span><br><span class="line">thread1.start()</span><br><span class="line"><span class="comment">#join用于对当前线程阻塞</span></span><br><span class="line">thread1.join(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    <span class="built_in">print</span>(threading.current_thread().name+<span class="string">&#x27; main &#x27;</span>, i, thread1.is_alive())</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>daemon设置为True,可以在主线程结束时，结束当前线程。</p>
 </blockquote>
 <p>对线程类继承</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewThread</span>(<span class="params">threading.Thread</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(name=name)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">            <span class="built_in">print</span>(threading.current_thread().name)</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">thread = NewThread()</span><br><span class="line">thread.start()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <h4 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h4><p>要想批量创建线程，同时给与每个线程分配任务，就需要线程池。</p>
 <p>主要功能：</p>
 <ol>
@@ -223,7 +221,6 @@
 </ol>
 <p>要满足创造线程的数量恒定，以及线程结束后的复用，那么就需要用到队列。</p>
 <h5 id="quene"><a href="#quene" class="headerlink" title="quene"></a>quene</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mythread</span>(<span class="params">threading.Thread</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, que</span>):</span></span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.queue = que</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> self.queue.empty():  <span class="comment"># 判断放到get前面，这样可以，否则队列最后一个取完后就空了，直接break，走不到print</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;队列的长度&#x27;</span>, self.queue.qsize())</span><br><span class="line">            item = self.queue.get()</span><br><span class="line">            <span class="built_in">print</span>(item, <span class="string">&#x27;!&#x27;</span>, threading.current_thread().name)</span><br><span class="line">            <span class="comment"># 队列包含内置运行状态 unfinished_tasks表示剩余任务队列的状态，假如队列中没有任务则停止</span></span><br><span class="line">            self.queue.task_done()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 貌似会先吧join前的任务全放入队列</span></span><br><span class="line">que = Queue()</span><br><span class="line"><span class="comment"># 创建线程队列，这里创建了2个线程</span></span><br><span class="line">tasks = [Mythread(que) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)]</span><br><span class="line"><span class="comment">#指定任务队列,用于生产任务,这里生产了5个任务</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    que.put(x)  <span class="comment"># 快速生产</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> tasks:</span><br><span class="line">    x.start() <span class="comment"># 把同一个队列传入2个线程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    que.put(i)</span><br><span class="line"></span><br><span class="line">que.join()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;success&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
 <p>上述已经展示了任务队列以及多线程的简单使用。</p>
 
     </div>
@@ -244,8 +241,8 @@
       <i class="fa fa-chevron-left"></i> 基础知识
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" rel="next" title="sm滑块">
-      sm滑块 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/02/02/Framework/" rel="next" title="Framework">
+      Framework <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -319,7 +316,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -362,12 +359,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">NaNm</span>
+    <span title="Symbols count total">140k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">NaN:aN</span>
+    <span title="Reading time total">2:07</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
