@@ -35,10 +35,8 @@
 <meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220317222822658.png">
 <meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220317211912799.png">
 <meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220317212010367.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220319004901189.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220319005026671.png">
 <meta property="article:published_time" content="2022-03-13T12:53:32.000Z">
-<meta property="article:modified_time" content="2022-03-18T17:20:10.982Z">
+<meta property="article:modified_time" content="2022-03-20T03:34:12.213Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yida506.github.io/2022/03/13/ali/image-20220314224908224.png">
@@ -199,13 +197,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>12k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>11 mins.</span>
+              <span>10 mins.</span>
             </span>
 
         </div>
@@ -270,12 +268,6 @@
 <p>的形式，后面跟的是b=2的分支。</p>
 <h6 id="STEP-思路"><a href="#STEP-思路" class="headerlink" title="STEP 思路"></a>STEP 思路</h6><p>插件思路，首先进入IF流，判断如果TEST节点的类型为BinaryExpression，而且右侧参数包含length部分，那么就是一个循环流，依旧采用递归算法，若是游走到更新节点，个人认为，这里要传入一个参数，作为开始for循环的参数，如果在碰到一样的参数，那么流程停止。    </p>
 <p><strong>暗坑：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">页面初始化，进入 la <span class="number">2464</span>流程</span><br><span class="line">&#123; <span class="attr">za</span>: <span class="number">0</span>, <span class="attr">Ba</span>: <span class="number">77</span>, <span class="attr">Ua</span>: <span class="number">13</span>, <span class="string">&#x27;$a&#x27;</span>: <span class="number">2</span>, <span class="attr">qa</span>: <span class="number">2</span>, <span class="attr">La</span>: <span class="number">2464</span> &#125; </span><br><span class="line"> Ma = <span class="built_in">window</span>;</span><br><span class="line">  ya = p;</span><br><span class="line">  Aa = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">  sa = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">  da = <span class="number">0</span>;</span><br><span class="line">  La = <span class="number">12768</span>;</span><br><span class="line">  然后进入 <span class="number">12768</span>流程</span><br><span class="line"> </span><br><span class="line">  ua = e;</span><br><span class="line">  na = !ua;</span><br><span class="line">  </span><br><span class="line">  这里要进入两个分支，由于na对应的参数为函数携带的，即<span class="built_in">eval</span>其相关的内容无法得到具体的值，所以</span><br><span class="line">  会两个分支都进入</span><br><span class="line">  <span class="keyword">if</span> (na) &#123;</span><br><span class="line">    La = <span class="number">17889</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    La = <span class="number">17858</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="number">1</span>、进入<span class="number">17889</span>分支</span><br><span class="line">  sa = !<span class="number">1</span>;</span><br><span class="line">  da = <span class="number">1</span>;</span><br><span class="line">  La = <span class="number">17858</span>;</span><br><span class="line">  然后进入<span class="number">17858</span>分支</span><br><span class="line">  <span class="keyword">if</span> (da) &#123;</span><br><span class="line">    La = <span class="number">14465</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    La = <span class="number">15365</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  这里da的值为<span class="number">1</span>,进入<span class="number">14465</span>分支</span><br><span class="line">  da = sa;</span><br><span class="line">  sa = da;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (sa) &#123;</span><br><span class="line">    La = <span class="number">3365</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    La = <span class="number">11650</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  这里的sa的真值为!<span class="number">1</span>;即走入<span class="literal">false</span>流程</span><br><span class="line">  但是 如果只选取该值进行<span class="built_in">eval</span>，那么只会走入<span class="number">3365</span>分支，</span><br><span class="line">  同时观察这里发现，在正常的流程情况下，<span class="keyword">if</span>流程前面的Expression表达式往往就是这个<span class="keyword">if</span>表达式</span><br><span class="line">  test节点的值，那么我们需要根据传入stack的最底部，依次向上溯源，然后找到其实际参数的值。</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/03/13/ali/image-20220319004901189.png" alt="image-20220319004901189"></p>
-<p>控制流里面在搞这鬼东西。</p>
-<p><img src="/2022/03/13/ali/image-20220319005026671.png" alt="image-20220319005026671"></p>
-<p>这里又有根据初值判断的地方    </p>
-<p><strong>致命问题：还原for循环后，进入else节点生成了死循环</strong></p>
 
     </div>
 
@@ -294,7 +286,10 @@
     <a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" rel="prev" title="ast_tools解读">
       <i class="fa fa-chevron-left"></i> ast_tools解读
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/20/jsrpc/" rel="next" title="jsrpc">
+      jsrpc <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -367,14 +362,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -410,12 +405,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">143k</span>
+    <span title="Symbols count total">150k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:10</span>
+    <span title="Reading time total">2:16</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
