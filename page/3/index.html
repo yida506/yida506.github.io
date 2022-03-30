@@ -160,6 +160,70 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" class="post-title-link" itemprop="url">事件监听</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>285</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><p>在突破滑块的过程中，我们希望可以知道鼠标的位置的参数，以达到知晓是对什么参数进行的加密。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;geetest_slider_button&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">div.addEventListener(<span class="string">&#x27;pointermove&#x27;</span>,<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(event.clientX,event.clientX,<span class="built_in">Date</span>.now())&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述直接对整个document添加了事件，这里获得的貌似是整个页面的坐标。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/01/ast%E6%80%9D%E6%83%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1148,7 +1212,7 @@
 <p>总结：对于字体加密类型，首先就是需要将其字体文件下下来，然后根据其中的内容，以及网页返回的内容判断其属于静态还是动态，针对静态的，若混销量不大，可考虑手动建立字典的方式还原，若为动态的，就需要对其字体文件进行分析，然后构建自动化还原表，以达到还原的目的。</p>
 <p>雪碧图加密：</p>
 <p>雪碧图加密是以图的形式对文件进行上传，然后再根据顺序调用的原理，将其渲染到页面上，以达到降低开销的目的。</p>
-<h6 id="HOOK"><a href="#HOOK" class="headerlink" title="HOOK"></a>HOOK</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">doucument.cookie_bk = doucument.cookie;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">document</span>,<span class="string">&#x27;cookie&#x27;</span>,&#123;</span><br><span class="line">    <span class="attr">get</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">debugger</span>;</span><br><span class="line">    	<span class="keyword">return</span> <span class="built_in">document</span>.cookie_bk</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="HOOK"><a href="#HOOK" class="headerlink" title="HOOK"></a>HOOK</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie_bk = <span class="built_in">document</span>.cookie;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">document</span>,<span class="string">&#x27;cookie&#x27;</span>,&#123;</span><br><span class="line">    <span class="attr">get</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">debugger</span>;</span><br><span class="line">    	<span class="keyword">return</span> <span class="built_in">document</span>.cookie_bk</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1233,7 +1297,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1276,12 +1340,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">150k</span>
+    <span title="Symbols count total">158k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:16</span>
+    <span title="Reading time total">2:24</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>

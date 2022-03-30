@@ -35,8 +35,9 @@
 <meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220317222822658.png">
 <meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220317211912799.png">
 <meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220317212010367.png">
+<meta property="og:image" content="http://yida506.github.io/2022/03/13/ali/image-20220329225917160.png">
 <meta property="article:published_time" content="2022-03-13T12:53:32.000Z">
-<meta property="article:modified_time" content="2022-03-20T03:34:12.213Z">
+<meta property="article:modified_time" content="2022-03-30T14:48:44.777Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yida506.github.io/2022/03/13/ali/image-20220314224908224.png">
@@ -197,13 +198,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>11k</span>
+              <span>12k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>10 mins.</span>
+              <span>11 mins.</span>
             </span>
 
         </div>
@@ -266,8 +267,16 @@
 <p>​     E++;</p>
 <p>}</p>
 <p>的形式，后面跟的是b=2的分支。</p>
-<h6 id="STEP-思路"><a href="#STEP-思路" class="headerlink" title="STEP 思路"></a>STEP 思路</h6><p>插件思路，首先进入IF流，判断如果TEST节点的类型为BinaryExpression，而且右侧参数包含length部分，那么就是一个循环流，依旧采用递归算法，若是游走到更新节点，个人认为，这里要传入一个参数，作为开始for循环的参数，如果在碰到一样的参数，那么流程停止。    </p>
-<p><strong>暗坑：</strong></p>
+<h5 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h5><p><img src="/2022/03/13/ali/image-20220329225917160.png" alt="image-20220329225917160"></p>
+<p>也就是说，在if的判断表达式为二元表达式，类似a&lt;b这种形式的时候，都是生成的for循环，这样假如采取栈的形式当下一次的初值和开始的初值相等，那么就可以退出，但是，这是对于单情况而言，假如其中嵌套if表达式，那么还需对其进行一个判断。</p>
+<p>思路：</p>
+<ol>
+<li>if表达式的判断部分为二元表达式，进入for循环，此处对应的是该流程的外部参数，记录if表达式中左节点的参数名(该处一般为接下来进行更新操作的地方)。</li>
+<li>进行接下来的流程操作，假如直接是与for循环开始节点一样的值，那么直接返回，但是，假如是经过一个if表达式，其中，if表达式的判断部分为一开始的左节点参数，一般，这个参数初始值为0，即，随着for循环的运行，这个值会进入不同的流程，那么这部分的If表达式的节点都需要保留，那么，就只有在else节点结束后，才算退出for循环。</li>
+</ol>
+<p>if表达式逻辑值对比:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> ue 为<span class="keyword">for</span>循环生成的值</span><br><span class="line"> <span class="number">4581</span>流程</span><br><span class="line">ga = na === ue;  <span class="literal">true</span> </span><br><span class="line">  na = !ga;<span class="literal">false</span> </span><br><span class="line">  </span><br><span class="line">  <span class="number">6595</span>流程</span><br><span class="line">  na = ga === ue; <span class="literal">true</span> </span><br><span class="line">  ga = !na;<span class="literal">false</span> </span><br><span class="line">  </span><br><span class="line">  <span class="number">2.</span>根处为调用表达式</span><br><span class="line">   ga = ua[na];</span><br><span class="line">  na = !ga;<span class="literal">false</span> </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  ua = ga;表示存在，对应<span class="literal">true</span> </span><br><span class="line">  <span class="number">14465</span></span><br><span class="line">  da = sa;</span><br><span class="line">  sa = da;<span class="literal">true</span> </span><br><span class="line">  </span><br><span class="line">    da = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">  ua = ya;</span><br><span class="line">  na = e;</span><br><span class="line">  ga = na;</span><br><span class="line">  ue = !na; <span class="literal">false</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">//这里Ie是生成的值，</span></span><br><span class="line">  ue = na === Ie;<span class="literal">false</span> </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  na = ga === ue,</span><br><span class="line">  ga = !na, <span class="literal">false</span> </span><br></pre></td></tr></table></figure>
+<p>貌似有点规律</p>
 
     </div>
 
@@ -348,7 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%89%E9%87%8D%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">三重控制流平坦化</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A2%B3%E7%90%86"><span class="nav-number"></span> <span class="nav-text">流程梳理</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#STEP1-%E8%BF%90%E8%A1%8C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">STEP1 运行步骤</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#STEP-%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">STEP 思路</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%89%E9%87%8D%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">三重控制流平坦化</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E6%A2%B3%E7%90%86"><span class="nav-number"></span> <span class="nav-text">流程梳理</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#STEP1-%E8%BF%90%E8%A1%8C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">STEP1 运行步骤</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9A%BE%E7%82%B9"><span class="nav-number"></span> <span class="nav-text">难点</span></a></div>
       </div>
       <!--/noindex-->
 
@@ -362,7 +371,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -405,12 +414,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">150k</span>
+    <span title="Symbols count total">158k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:16</span>
+    <span title="Reading time total">2:24</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
