@@ -160,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/23/Android%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -174,7 +174,69 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">静态分析</a>
+            <a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Android基础</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>63</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="APP介绍"><a href="#APP介绍" class="headerlink" title="APP介绍"></a>APP介绍</h3><p>直接照着<a target="_blank" rel="noopener" href="https://developer.android.com/training/basics/firstapp">https://developer.android.com/training/basics/firstapp</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/21/Frida/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/21/Frida/" class="post-title-link" itemprop="url">Frida</a>
         </h2>
 
         <div class="post-meta">
@@ -202,6 +264,82 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h4 id="Frida基础"><a href="#Frida基础" class="headerlink" title="Frida基础"></a>Frida基础</h4><h5 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">su </span><br><span class="line">cd /data/local/tmp/</span><br><span class="line">./对应frida-serve的名字+&amp;</span><br></pre></td></tr></table></figure>
+<h5 id="HOOK"><a href="#HOOK" class="headerlink" title="HOOK"></a>HOOK</h5><h6 id="python"><a href="#python" class="headerlink" title="python"></a>python</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">@author: lan</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@contact: </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Created on: 2022/4/20 19:54</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span>(<span class="params">message, data</span>):</span></span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">test_signature = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">	js代码</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动方式1 attachH后跟进程名</span></span><br><span class="line">process = frida.get_usb_device(-<span class="number">1</span>).attach(<span class="string">&#x27;com.chaozhuo.texteditor&#x27;</span>)</span><br><span class="line">script = process.create_script(test_signature)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>本质上写Js代码即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process = frida.get_usb_device().enumerate_processes()</span><br><span class="line"><span class="comment">#可以查看当前运行的进程名</span></span><br><span class="line"><span class="built_in">print</span>(process)</span><br></pre></td></tr></table></figure>
+<p>也可以直接adb查看进程，这里条件可以任意，为com.xxx皆可，目的是缩小范围. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell &quot;ps | grep 条件&quot;</span><br></pre></td></tr></table></figure>
+<h6 id="重载的代码hook"><a href="#重载的代码hook" class="headerlink" title="重载的代码hook"></a>重载的代码hook</h6><p><img src="/2022/04/21/Frida/image-20220423112839478.png" alt="image-20220423112839478"></p>
+<p>以该处为例，该类中有两个a方法，我们只想hook上面一个，直接写就会报错。</p>
+<p><img src="/2022/04/21/Frida/image-20220423113034693.png" alt="image-20220423113034693"></p>
+<p>这样，我们只需要等他报错后，修改代码即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加上.overload(&#x27;a.u$a&#x27;)</span></span><br><span class="line">Signature.a.overload(<span class="string">&#x27;a.u$a&#x27;</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;enter a&#x27;</span>);    </span><br><span class="line">            <span class="built_in">console</span>.log(val);</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.a(val);</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
+<h6 id="js"><a href="#js" class="headerlink" title="js"></a>js</h6><p>也可以考虑直接编写js脚本进行frida.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 打印出当前手机上的进程</span><br><span class="line">frida -ps -U</span><br><span class="line">//后面的是进程名，只需要在jsl</span><br><span class="line">frida -U -l test.js com.example.simpleencryption</span><br></pre></td></tr></table></figure>
+<p>后续思路，直接找出python算法还原，对比，重写为python算法。</p>
+<p>静态方法可以直接调用。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">静态分析</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
           <h4 id="jadx使用"><a href="#jadx使用" class="headerlink" title="jadx使用"></a>jadx使用</h4><p>直接用jadx打开apk。</p>
 <h4 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h4><h5 id="1-代码搜索"><a href="#1-代码搜索" class="headerlink" title="1.代码搜索"></a>1.代码搜索</h5><p><img src="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419214843370.png" alt="image-20220419214843370"></p>
 <p>activity里面包含主要代码。其中在main之前的为主界面代码，这里只有mainActivity.</p>
@@ -210,11 +348,12 @@
 <h4 id="Frida"><a href="#Frida" class="headerlink" title="Frida"></a>Frida</h4><h5 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h5><p>连接到手机后，进入安装frida-serve的位置</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">su </span><br><span class="line">cd /data/local/tmp/</span><br></pre></td></tr></table></figure>
 <p>ps -A | grep com</p>
-<p>com指代的是过滤条件，改指令可以展示当前进程名，也对应下图xml中的package名。</p>
+<p>com指代的是过滤条件，该指令可以展示当前进程名，也对应下图xml中的package名。</p>
 <p><img src="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419221411727.png" alt="image-20220419221411727"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment">#模板</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span>(<span class="params">message, data</span>):</span></span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里写要hook代码</span></span><br><span class="line">test_t=<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Java.perform(</span></span><br><span class="line"><span class="string">    function()&#123;</span></span><br><span class="line"><span class="string">        var MainActivity = Java.use(&#x27;com.example.seccon2015.rock_paper_scissors.MainActivity&#x27;)</span></span><br><span class="line"><span class="string">        MainActivity.onClick.implementation = function(val)&#123;</span></span><br><span class="line"><span class="string">            console.log(&#x27;mmmm:&#x27;+this.m.value);</span></span><br><span class="line"><span class="string">            console.log(this.n.value);</span></span><br><span class="line"><span class="string">            </span></span><br><span class="line"><span class="string">            this.onClick(val);</span></span><br><span class="line"><span class="string">        &#125;;</span></span><br><span class="line"><span class="string">        #下面是匿名类的hook方法,这里要把他自带的.改为$</span></span><br><span class="line"><span class="string">         var test = Java.use(&#x27;com.example.seccon2015.rock_paper_scissors.MainActivity$1&#x27;)</span></span><br><span class="line"><span class="string">        test.run.implementation = function()&#123;</span></span><br><span class="line"><span class="string">            console.log(&#x27;this is test&#x27;);</span></span><br><span class="line"><span class="string">            this.run();</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment">#模板</span></span><br><span class="line"><span class="comment">#启动方式1 attachH后跟进程名</span></span><br><span class="line">process = frida.get_usb_device(-<span class="number">1</span>).attach(<span class="string">&#x27;com.example.seccon2015.rock_paper_scissors&#x27;</span>)</span><br><span class="line">script = process.create_script(test_t)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
 <p>匿名类可以通过smali代码判断。</p>
 <p>在匿名函数访问外部类：<br>this.this$0.value.xxx.value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#打印调用堆栈</span><br><span class="line">function printstack()&#123;</span><br><span class="line">    console.log(Java.use(&quot;android.util.Log&quot;).getStackTraceString(Java.use(&quot;java.lang.Exception&quot;).$new()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -870,154 +1009,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/06/redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/06/redis/" class="post-title-link" itemprop="url">redis</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/03/04/HMM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/04/HMM/" class="post-title-link" itemprop="url">HMM</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>3.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="MM"><a href="#MM" class="headerlink" title="MM"></a>MM</h4><h6 id="markov-model："><a href="#markov-model：" class="headerlink" title="markov model："></a>markov model：</h6><p>马尔可夫模型，指的是在给定当前知识的情况下，过去对于预测未来是无关的，诶个状态的转移，只依赖之前的n个状态，被称为是一个n阶模型。</p>
-<p><img src="/2022/03/04/HMM/image-20220305130113281.png" alt="image-20220305130113281"></p>
-<h6 id="转移矩阵："><a href="#转移矩阵：" class="headerlink" title="转移矩阵："></a>转移矩阵：</h6><p>指的是从一个状态转移到另一个状态的概率，整体上为一个n*n的矩阵</p>
-<h4 id="HMM"><a href="#HMM" class="headerlink" title="HMM"></a>HMM</h4><p>用来描述 含有隐含未知参数的马尔可夫过程。对于投色子来讲，假如有三种色子，分别包含6 8 10个面，那么每个色子表现出1的概率是不同的，同时，我们还知道色子丢出来的结果到底是几，那么我们就可以用这个结果去反推出对应的值是由哪个色子投出来的。</p>
-<h6 id="HIDDEN-STATE"><a href="#HIDDEN-STATE" class="headerlink" title="HIDDEN STATE:"></a>HIDDEN STATE:</h6><p>隐藏状态集合</p>
-<h6 id="Observations-state"><a href="#Observations-state" class="headerlink" title="Observations state:"></a>Observations state:</h6><p>观测状态集合</p>
-<h6 id="Start-Probability"><a href="#Start-Probability" class="headerlink" title="Start Probability:"></a>Start Probability:</h6><p>隐藏状态初始化的概率值</p>
-<h6 id="Hidden-Transition-Probability"><a href="#Hidden-Transition-Probability" class="headerlink" title="Hidden Transition_Probability:"></a>Hidden Transition_Probability:</h6><p>隐藏状态概率转移矩阵</p>
-<h6 id="Hidden-to-Observations-Probability"><a href="#Hidden-to-Observations-Probability" class="headerlink" title="Hidden to Observations Probability:"></a>Hidden to Observations Probability:</h6><p>隐藏状态到观测状态概率集合</p>
-<h5 id="Viterb算法"><a href="#Viterb算法" class="headerlink" title="Viterb算法"></a>Viterb算法</h5><p>本质上是动态规划，假设初始状态有n种，观测序列的长度为m，那么总共的路径数就为m的n次方，要想从中找到最优路径往往是不显示的，但是，对于一段长度为x路径来说，要是该路径是最优的，那么其长度为x-1的子路径也一定是最优的，那么问题就变为了，根据每一条路径，在其基础上，找到其距下个节点的最优路径即可，这样问题就缩小为了m*n个，极大降低了复杂度。</p>
-<h6 id="DEMO-以一个看病为例"><a href="#DEMO-以一个看病为例" class="headerlink" title="DEMO(以一个看病为例)"></a>DEMO(以一个看病为例)</h6><p>首先定义了隐藏状态：健康、生病</p>
-<p>观测序列：正常，冷，发烧(这里指代我们看到的情况)</p>
-<p>初始概率：健康：0.6 生病：0.4</p>
-<p>隐藏状态概率转移矩阵:健康到健康0.7 健康到生病0.3 生病到健康0.4 生病到生病0.6’</p>
-<p>隐藏状态到观测状态概率集合:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Healthy&quot;</span>: &#123;<span class="attr">&quot;normal&quot;</span>: <span class="number">0.5</span>, <span class="attr">&quot;cold&quot;</span>: <span class="number">0.4</span>, <span class="attr">&quot;dizzy&quot;</span>: <span class="number">0.1</span>&#125;,</span><br><span class="line"> <span class="string">&quot;Fever&quot;</span>: &#123;<span class="attr">&quot;normal&quot;</span>: <span class="number">0.1</span>, <span class="attr">&quot;cold&quot;</span>: <span class="number">0.3</span>, <span class="attr">&quot;dizzy&quot;</span>: <span class="number">0.6</span>&#125;,</span><br></pre></td></tr></table></figure>
-<p>我们要根据观测序列推断出其真实情况，在这里每一条路径都是由上一时刻的状态X隐藏状态转移概率矩阵X隐藏状态到观测状态概率集合(这里要针对每一个隐藏状态，因为需要对这个隐藏状态进行解码).</p>
-<p><img src="/2022/03/04/HMM/image-20220305170041105.png" alt="image-20220305170041105"></p>
-<p>python 实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">Hidden_states = (<span class="string">&quot;Healthy&quot;</span>, <span class="string">&quot;Fever&quot;</span>)  <span class="comment"># 隐状态集合</span></span><br><span class="line"></span><br><span class="line">Observations_states = (<span class="string">&quot;normal&quot;</span>, <span class="string">&quot;cold&quot;</span>, <span class="string">&quot;dizzy&quot;</span>)  <span class="comment"># 观测状态集合</span></span><br><span class="line"></span><br><span class="line">Start_probability = &#123;</span><br><span class="line">    <span class="string">&quot;Healthy&quot;</span>: <span class="number">0.6</span>,</span><br><span class="line">    <span class="string">&quot;Fever&quot;</span>: <span class="number">0.4</span>,</span><br><span class="line">&#125;  <span class="comment"># 表示病人第一次到访时医生认为其所处的HMM状态，他唯一知道的是病人倾向于是健康的（可以理解为这是基于一个对大众身体信息的了解得出的初始状态）</span></span><br><span class="line"><span class="number">2</span>*<span class="number">2</span></span><br><span class="line">Hidden_transition_probability = &#123;  <span class="comment"># 隐马尔可夫链中身体状态的状态转移概率，我们能够看到，当天健康的人，第二天有30%的概率会发烧</span></span><br><span class="line">    <span class="string">&quot;Healthy&quot;</span>: &#123;<span class="string">&quot;Healthy&quot;</span>: <span class="number">0.7</span>, <span class="string">&quot;Fever&quot;</span>: <span class="number">0.3</span>&#125;,</span><br><span class="line">    <span class="string">&quot;Fever&quot;</span>: &#123;<span class="string">&quot;Healthy&quot;</span>: <span class="number">0.4</span>, <span class="string">&quot;Fever&quot;</span>: <span class="number">0.6</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">3</span></span><br><span class="line">Hidden_observations_probability = (</span><br><span class="line">    &#123;  <span class="comment"># 原来叫emission_probability。这里表示病人每天的感觉的可能性。即，如果他是一个健康人，有50%的可能会感觉正常，40%觉得冷，10%觉得头晕</span></span><br><span class="line">        <span class="string">&quot;Healthy&quot;</span>: &#123;<span class="string">&quot;normal&quot;</span>: <span class="number">0.5</span>, <span class="string">&quot;cold&quot;</span>: <span class="number">0.4</span>, <span class="string">&quot;dizzy&quot;</span>: <span class="number">0.1</span>&#125;,</span><br><span class="line">        <span class="string">&quot;Fever&quot;</span>: &#123;<span class="string">&quot;normal&quot;</span>: <span class="number">0.1</span>, <span class="string">&quot;cold&quot;</span>: <span class="number">0.3</span>, <span class="string">&quot;dizzy&quot;</span>: <span class="number">0.6</span>&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">viterbi</span>(<span class="params">obs, states, start_p, trans_p, h2o_p</span>):</span> <span class="comment"># Viterbi算法</span></span><br><span class="line">    V = [&#123;&#125;]</span><br><span class="line">    path = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize base cases (t == 0)</span></span><br><span class="line">    <span class="comment"># </span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> states:</span><br><span class="line">        V[<span class="number">0</span>][y] = start_p[y] * h2o_p[y][obs[<span class="number">0</span>]] </span><br><span class="line">        <span class="comment"># 初始状态，由start的概率，对应乘上发射概率，即由隐状态到观测状态的可能性</span></span><br><span class="line">        path[y] = [y] <span class="comment"># 记录下相应的路径</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Run Viterbi for t &gt; 0，每天都要更新计算一遍</span></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(obs)):</span><br><span class="line">        V.append(&#123;&#125;)</span><br><span class="line">        newpath = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> states:</span><br><span class="line">            <span class="comment"># 对于每个状态，计算其由前一天的各个状态，到达今天的y的概率大小，与y0自身相比较，取最大值</span></span><br><span class="line">            <span class="comment"># 前一天到达今天的每个状态对应的路径大小都计算了，取最大值。作为V[t][y]的值，并更新路径</span></span><br><span class="line">            <span class="comment"># print(&#x27;V[t-1]:&#x27;,V[t-1],&#x27;trans_p:&#x27;,trans_p,&#x27;h2o_p[y]:&#x27;,h2o_p[y],[V[t-1][y0] * trans_p[y0][y] * h2o_p[y][obs[t]] for y0 in states])</span></span><br><span class="line">            (prob, state) = <span class="built_in">max</span>([(V[t-<span class="number">1</span>][y0] * trans_p[y0][y] * h2o_p[y][obs[t]], y0) <span class="keyword">for</span> y0 <span class="keyword">in</span> states])</span><br><span class="line">            <span class="built_in">print</span>(V[t],y)</span><br><span class="line">            V[t][y] = prob</span><br><span class="line">            newpath[y] = path[state] + [y]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Don&#x27;t need to remember the old paths</span></span><br><span class="line">        path = newpath</span><br><span class="line">        <span class="comment"># print(path)</span></span><br><span class="line">    <span class="comment"># print_dptable(V)</span></span><br><span class="line">    <span class="comment"># 最后一天</span></span><br><span class="line">    (prob, state) = <span class="built_in">max</span>([(V[<span class="built_in">len</span>(obs) - <span class="number">1</span>][y], y) <span class="keyword">for</span> y <span class="keyword">in</span> states])</span><br><span class="line">    <span class="keyword">return</span> (prob, path[state])</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example</span>():</span></span><br><span class="line">    <span class="keyword">return</span> viterbi(Observations_states,</span><br><span class="line">                   Hidden_states,</span><br><span class="line">                   Start_probability,</span><br><span class="line">                   Hidden_transition_probability,</span><br><span class="line">                   Hidden_observations_probability)</span><br><span class="line"><span class="built_in">print</span>(example())    </span><br></pre></td></tr></table></figure>
-<h5 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h5><p>已知：</p>
-<ul>
-<li>观测序列(指历年主题比重)</li>
-<li>状态转移矩阵:共现词矩阵(需要进行一个归一化)</li>
-</ul>
-<p>目的:使用Baum-Welch算法，根据12-21年的比重，预测22-25年的比重</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1087,14 +1078,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -1130,12 +1121,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">158k</span>
+    <span title="Symbols count total">160k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:24</span>
+    <span title="Reading time total">2:25</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>

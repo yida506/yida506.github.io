@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Android基础反编译工具:JADX IDE:android studio(最新版) 启动界面貌似会有代码判断，从xml的MAIN往上找 APP安装直接abd install (-r)…apk  -r表示强制安装  签名校验所谓签名校验指的是对与一个app，我们在对其原生文件进行一个魔改操作后，重新安装，导致原生文件发生了改变，在实际使用时，app会对本地文件进行一个校验，会检测文件是否被修改，">
+  <meta name="description" content="Android基础反编译工具:JADX IDE:android studio(最新版) 启动界面貌似会有代码判断，从xml的MAIN往上找 APP安装直接abd install (-r)…apk  -r表示强制安装  签名校验签名关键字 context.getPackageManager().getPackageInfo(context.getPackageName(), 64).signatur">
 <meta property="og:type" content="article">
 <meta property="og:title" content="app基础">
 <meta property="og:url" content="http://yida506.github.io/2022/01/01/app%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="spider">
-<meta property="og:description" content="Android基础反编译工具:JADX IDE:android studio(最新版) 启动界面貌似会有代码判断，从xml的MAIN往上找 APP安装直接abd install (-r)…apk  -r表示强制安装  签名校验所谓签名校验指的是对与一个app，我们在对其原生文件进行一个魔改操作后，重新安装，导致原生文件发生了改变，在实际使用时，app会对本地文件进行一个校验，会检测文件是否被修改，">
+<meta property="og:description" content="Android基础反编译工具:JADX IDE:android studio(最新版) 启动界面貌似会有代码判断，从xml的MAIN往上找 APP安装直接abd install (-r)…apk  -r表示强制安装  签名校验签名关键字 context.getPackageManager().getPackageInfo(context.getPackageName(), 64).signatur">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yida506.github.io/2022/01/01/app%E5%9F%BA%E7%A1%80/image-20220420203519311.png">
 <meta property="article:published_time" content="2022-01-01T13:47:13.000Z">
-<meta property="article:modified_time" content="2022-04-19T13:40:26.389Z">
+<meta property="article:modified_time" content="2022-04-20T12:52:41.735Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yida506.github.io/2022/01/01/app%E5%9F%BA%E7%A1%80/image-20220420203519311.png">
 
 <link rel="canonical" href="http://yida506.github.io/2022/01/01/app%E5%9F%BA%E7%A1%80/">
 
@@ -188,7 +190,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>325</span>
+              <span>463</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -213,8 +215,11 @@
 <blockquote>
 <p>-r表示强制安装</p>
 </blockquote>
-<h4 id="签名校验"><a href="#签名校验" class="headerlink" title="签名校验"></a>签名校验</h4><p>所谓签名校验指的是对与一个app，我们在对其原生文件进行一个魔改操作后，重新安装，导致原生文件发生了改变，在实际使用时，app会对本地文件进行一个校验，会检测文件是否被修改，若被修改，则不允许运行。</p>
+<h4 id="签名校验"><a href="#签名校验" class="headerlink" title="签名校验"></a>签名校验</h4><p>签名关键字 context.getPackageManager().getPackageInfo(context.getPackageName(), 64).signatures[0].hashCode()</p>
+<p>所谓签名校验指的是对与一个app，我们在对其原生文件进行一个魔改操作后，重新安装，导致原生文件发生了改变，在实际使用时，app会对本地文件进行一个校验，会检测文件是否被修改，若被修改，则不允许运行。</p>
 <p>我们要做的就是Hook其校验过程，达到，无论我们怎么改，他都不报错的目的，和js本地获取参数有异曲同工之妙。</p>
+<p>通过Android Killer反编译为smail，然后找到签名校验的位置。</p>
+<p><img src="/2022/01/01/app%E5%9F%BA%E7%A1%80/image-20220420203519311.png" alt="image-20220420203519311"></p>
 <p>目前来讲签名校验可以隐藏在java、so各层中。</p>
 <h5 id="反射调用"><a href="#反射调用" class="headerlink" title="反射调用"></a>反射调用</h5><p>一种调用形式，本质上和Js中a.b转化为a[‘b’]的形式类似，可在其中加入混淆。</p>
 
@@ -311,14 +316,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -354,12 +359,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">158k</span>
+    <span title="Symbols count total">160k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:24</span>
+    <span title="Reading time total">2:25</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
