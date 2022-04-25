@@ -184,7 +184,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>63</span>
+              <span>779</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -202,7 +202,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="APP介绍"><a href="#APP介绍" class="headerlink" title="APP介绍"></a>APP介绍</h3><p>直接照着<a target="_blank" rel="noopener" href="https://developer.android.com/training/basics/firstapp">https://developer.android.com/training/basics/firstapp</a></p>
+          <h3 id="APP介绍"><a href="#APP介绍" class="headerlink" title="APP介绍"></a>APP介绍</h3><h5 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h5><p>直接在android中创建一个hello world项目。</p>
+<p><img src="/2022/04/23/Android%E5%9F%BA%E7%A1%80/image-20220425230616509.png" alt="image-20220425230616509"></p>
+<p>可以看到包含很多内容，这里的java 里面有一个应用名称目录，其中包含了MainActivity,</p>
+<p>Android项目的资源会被存储在res文件夹中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myapplication;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在MainActivity中，基础了一个基础的Activity类，然后又重写了这个onCreate方法，最后设置了layout.activity_main为View.</p>
+<p><img src="/2022/04/23/Android%E5%9F%BA%E7%A1%80/image-20220425232435459.png" alt="image-20220425232435459"></p>
+<p>这里编写了hello world 然后渲染到了app主界面上.</p>
+<h6 id="Android组成部分"><a href="#Android组成部分" class="headerlink" title="Android组成部分"></a>Android组成部分</h6><ul>
+<li>Activity 表示层 展示UI，响应用户动作</li>
+<li>Service 更新数据源和Activity</li>
+<li>Content Provider 数据储存器</li>
+<li>Intent 消息传递框架</li>
+<li>Broadcast Receiver Intet监听器</li>
+<li>Widget 可视化组件</li>
+<li>Notification 向用户发起信号</li>
+</ul>
+<blockquote>
+<p>Manifest存储在最底层，定义应用程序的组件和需求的结构和元数据。</p>
+</blockquote>
+<h5 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h5><p>该类为所有用户界面的基础。</p>
+<p>每一个Activity都表示一个屏幕，类似web中的html</p>
 
       
     </div>
@@ -1121,12 +1142,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">160k</span>
+    <span title="Symbols count total">161k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:25</span>
+    <span title="Reading time total">2:26</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
