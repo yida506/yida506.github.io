@@ -184,7 +184,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>779</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -210,6 +210,11 @@
 <p>在MainActivity中，基础了一个基础的Activity类，然后又重写了这个onCreate方法，最后设置了layout.activity_main为View.</p>
 <p><img src="/2022/04/23/Android%E5%9F%BA%E7%A1%80/image-20220425232435459.png" alt="image-20220425232435459"></p>
 <p>这里编写了hello world 然后渲染到了app主界面上.</p>
+<h6 id="点击事件添加"><a href="#点击事件添加" class="headerlink" title="点击事件添加"></a>点击事件添加</h6><p>直接修改TextView为Button,然后添加id属性(“@+id/check”)即可。</p>
+<p>然后在MainActivity中添加如下代码，绑定button按钮并添加事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Button bt_check = findViewById(R.id.check);</span><br><span class="line">        bt_check.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                Log.i(<span class="string">&quot;rousue&quot;</span>, <span class="string">&quot;hello world from button&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="/2022/04/23/Android%E5%9F%BA%E7%A1%80/image-20220426231939847.png" alt="image-20220426231939847"></p>
+<p>这样一来每次点击在后台返回了日志。</p>
 <h6 id="Android组成部分"><a href="#Android组成部分" class="headerlink" title="Android组成部分"></a>Android组成部分</h6><ul>
 <li>Activity 表示层 展示UI，响应用户动作</li>
 <li>Service 更新数据源和Activity</li>
@@ -297,7 +302,7 @@
 <p>这样，我们只需要等他报错后，修改代码即可。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加上.overload(&#x27;a.u$a&#x27;)</span></span><br><span class="line">Signature.a.overload(<span class="string">&#x27;a.u$a&#x27;</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;enter a&#x27;</span>);    </span><br><span class="line">            <span class="built_in">console</span>.log(val);</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.a(val);</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
 <h6 id="js"><a href="#js" class="headerlink" title="js"></a>js</h6><p>也可以考虑直接编写js脚本进行frida.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 打印出当前手机上的进程</span><br><span class="line">frida -ps -U</span><br><span class="line">//后面的是进程名，只需要在jsl</span><br><span class="line">frida -U -l test.js com.example.simpleencryption</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 打印出当前手机上的进程</span><br><span class="line">frida-ps -Ua</span><br><span class="line">//后面的是进程名，只需要在jsl</span><br><span class="line">frida -U -l test.js com.example.simpleencryption</span><br></pre></td></tr></table></figure>
 <p>后续思路，直接找出python算法还原，对比，重写为python算法。</p>
 <p>静态方法可以直接调用。</p>
 
@@ -1099,7 +1104,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1142,12 +1147,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">161k</span>
+    <span title="Symbols count total">162k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:26</span>
+    <span title="Reading time total">2:28</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
