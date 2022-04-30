@@ -20,26 +20,23 @@
     var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="RS4进入其代码中，可以发现，充斥着大量的IF-ELSE流，干扰分析，让人头痛。  通过观察发现，这里面虽然充斥大量的IF-ELSE流，但是跟进去就会发现，它每一个区域块都对应了其IF提到的值-1，最后的那个_$yZ(767,3)其实对应的是255这个值的流程。  用Babel解析IFstatement，会得到三部分：  test: 上述 _$pp &lt; 255的验证部分 consequent">
+  <meta name="description" content="RS4代码分析首先进入网站，打上script断点，发现定义了scj，和一个长数组，直接扣下来。  接下来，会进入一个html中，包含Js，将其扣下来。 HTML页面代码还原if控制流还原 首先观察控制流生成的地方发现，这里的包含逗号表达式，先对其进行还原。 在还原了逗号表达式后，进一步对if控制流里面的语句进行分析。  很明显的发现，这里的流程每一个都是携带了一个-1的规律，例如 _$ra +&#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rs4">
 <meta property="og:url" content="http://yida506.github.io/2022/03/07/rs4/index.html">
 <meta property="og:site_name" content="spider">
-<meta property="og:description" content="RS4进入其代码中，可以发现，充斥着大量的IF-ELSE流，干扰分析，让人头痛。  通过观察发现，这里面虽然充斥大量的IF-ELSE流，但是跟进去就会发现，它每一个区域块都对应了其IF提到的值-1，最后的那个_$yZ(767,3)其实对应的是255这个值的流程。  用Babel解析IFstatement，会得到三部分：  test: 上述 _$pp &lt; 255的验证部分 consequent">
+<meta property="og:description" content="RS4代码分析首先进入网站，打上script断点，发现定义了scj，和一个长数组，直接扣下来。  接下来，会进入一个html中，包含Js，将其扣下来。 HTML页面代码还原if控制流还原 首先观察控制流生成的地方发现，这里的包含逗号表达式，先对其进行还原。 在还原了逗号表达式后，进一步对if控制流里面的语句进行分析。  很明显的发现，这里的流程每一个都是携带了一个-1的规律，例如 _$ra +&#x3D;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220307225925441.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220307230312062.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220308202132866.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220308202141280.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220308202244145.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220308205506033.png">
 <meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220308220816827.png">
-<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220308221247264.png">
+<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220430095349094.png">
+<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220430214116798.png">
+<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220430214355695.png">
+<meta property="og:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220430220130910.png">
 <meta property="article:published_time" content="2022-03-07T14:55:40.000Z">
-<meta property="article:modified_time" content="2022-03-13T12:54:07.157Z">
+<meta property="article:modified_time" content="2022-04-30T14:20:31.929Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220307225925441.png">
+<meta name="twitter:image" content="http://yida506.github.io/2022/03/07/rs4/image-20220308220816827.png">
 
 <link rel="canonical" href="http://yida506.github.io/2022/03/07/rs4/">
 
@@ -197,13 +194,13 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>2.7k</span>
+              <span>729</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span>2 mins.</span>
+              <span>1 mins.</span>
             </span>
 
         </div>
@@ -215,32 +212,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="RS4"><a href="#RS4" class="headerlink" title="RS4"></a>RS4</h4><p>进入其代码中，可以发现，充斥着大量的IF-ELSE流，干扰分析，让人头痛。</p>
-<p><img src="/2022/03/07/rs4/image-20220307225925441.png" alt="image-20220307225925441"></p>
-<p>通过观察发现，这里面虽然充斥大量的IF-ELSE流，但是跟进去就会发现，它每一个区域块都对应了其IF提到的值-1，最后的那个_$yZ(767,3)其实对应的是255这个值的流程。</p>
-<p><img src="/2022/03/07/rs4/image-20220307230312062.png" alt="image-20220307230312062"></p>
-<p>用Babel解析IFstatement，会得到三部分：</p>
-<ul>
-<li>test: 上述 _$pp &lt; 255的验证部分</li>
-<li>consequent: BlockStatement 对应 后面的{}区域</li>
-<li>alternate:else后跟的{}区域</li>
-</ul>
-<p>编写如下插件，将其转化为Switch-case的形式。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getIfnode</span>(<span class="params">testNode,consequentNode, alternateNode</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> currentvalue = testNode.right.value;</span><br><span class="line">    <span class="keyword">if</span>(types.isIfStatement(consequentNode.body[<span class="number">0</span>]) &amp;&amp; types.isBinaryExpression(consequentNode.body[<span class="number">0</span>].test))&#123;</span><br><span class="line">        getIfnode(consequentNode.body[<span class="number">0</span>].test,consequentNode.body[<span class="number">0</span>].consequent, consequentNode.body[<span class="number">0</span>].alternate);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span>(types.isBlockStatement(alternateNode) &amp;&amp; types.isIfStatement(alternateNode.body[<span class="number">0</span>]) &amp;&amp; types.isBinaryExpression(alternateNode.body[<span class="number">0</span>].test))&#123;</span><br><span class="line">        getIfnode(alternateNode.body[<span class="number">0</span>].test,alternateNode.body[<span class="number">0</span>].consequent, alternateNode.body[<span class="number">0</span>].alternate);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span>(types.isIfStatement(alternateNode))&#123;</span><br><span class="line">        getIfnode(alternateNode.test,alternateNode.consequent, alternateNode.alternate);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span>(!types.isIfStatement(consequentNode.body[<span class="number">0</span>]))&#123;</span><br><span class="line">        fullNode[currentvalue-<span class="number">1</span>] = consequentNode.body[<span class="number">0</span>];</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span>(types.isBlockStatement(alternateNode) &amp;&amp; !types.isIfStatement(alternateNode.body[<span class="number">0</span>]))&#123;</span><br><span class="line">        fullNode[currentvalue] = alternateNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> all_func_list = [<span class="string">&#x27;_$pp&#x27;</span>, <span class="string">&#x27;_$XF&#x27;</span>, <span class="string">&#x27;_$by&#x27;</span>, <span class="string">&#x27;_$Wi&#x27;</span>]</span><br><span class="line"><span class="keyword">var</span> fullNode = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> If2Switch = &#123;</span><br><span class="line">    <span class="function"><span class="title">IfStatement</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;test, consequent, alternate&#125; = path.node;</span><br><span class="line">        <span class="keyword">if</span> (!types.isBinaryExpression(test) || !types.isIdentifier(test.left) || test.operator !== <span class="string">&#x27;&lt;&#x27;</span> || !types.isNumericLiteral(test.right)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">let</span> Ifun_name = test.left.name;</span><br><span class="line">        <span class="keyword">if</span>(all_func_list.indexOf(Ifun_name) == -<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        getIfnode(test, consequent, alternate);</span><br><span class="line">        <span class="keyword">let</span> swichcasearr = [];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> fullNode)&#123;</span><br><span class="line">            <span class="keyword">if</span>(fullNode[i] !== <span class="literal">undefined</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(types.isBlockStatement(fullNode[i]))&#123;</span><br><span class="line">                     swichcasearr.push(types.switchCase(types.valueToNode(i), fullNode[i].body));</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    swichcasearr.push(types.switchCase(types.valueToNode(i), [fullNode[i]]));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                swichcasearr.push(types.switchCase(types.valueToNode(i), []));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        path.replaceWith(types.switchStatement(types.identifier(Ifun_name), swichcasearr));</span><br><span class="line">        fullNode = &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>通过进一步观察，发现代码中_$lE反复出现，且其调用为字面量，</p>
-<p><img src="/2022/03/07/rs4/image-20220308202132866.png" alt="image-20220308202132866"></p>
-<p><img src="/2022/03/07/rs4/image-20220308202141280.png" alt="image-20220308202141280"></p>
-<p>因此，该参数可以作为一个还原参数，接下来就是去寻找这个参数在哪生成，</p>
-<p><img src="/2022/03/07/rs4/image-20220308202244145.png" alt="image-20220308202244145"></p>
-<p>除了初始化部分，该参数只在这里出现，我们发现在上述数组初始化的时候，初始化了_$Ei，然后$Ei又在下面进行了修改啥的，先把这部分抠出来作为环境。</p>
-<p>然后把这个数组以及另一个解密函数对其还原，发现基本上能看了，但是在这串代码中，</p>
-<p><img src="/2022/03/07/rs4/image-20220308205506033.png" alt="image-20220308205506033"></p>
-<p>红框标注的代码应该是之前生成的，所以，要针对其进行还原的话，还得把这里给东西抠出来。</p>
-<h5 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h5><p>首先重新进入网站，打上script断点，发现定义了scj，和一个长数组</p>
+        <h4 id="RS4"><a href="#RS4" class="headerlink" title="RS4"></a>RS4</h4><h5 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h5><p>首先进入网站，打上script断点，发现定义了scj，和一个长数组，直接扣下来。</p>
 <p><img src="/2022/03/07/rs4/image-20220308220816827.png" alt="image-20220308220816827"></p>
-<p>跟下去会进入一段页面自带的js，跳过去发现scj还是没有生成，但是却多了一些字符和函数啥的，同时上一步提到的aebi已经生成了。    </p>
-<p><img src="/2022/03/07/rs4/image-20220308221247264.png" alt="image-20220308221247264"></p>
-<p>也就是说，在这一步，应该会生成许多东西，接下来，将这个js扣下来对其进行还原。</p>
+<p>接下来，会进入一个html中，包含Js，将其扣下来。</p>
+<h5 id="HTML页面代码还原"><a href="#HTML页面代码还原" class="headerlink" title="HTML页面代码还原"></a>HTML页面代码还原</h5><h6 id="if控制流还原"><a href="#if控制流还原" class="headerlink" title="if控制流还原"></a>if控制流还原</h6><p><img src="/2022/03/07/rs4/image-20220430095349094.png" alt="image-20220430095349094"></p>
+<p>首先观察控制流生成的地方发现，这里的包含逗号表达式，先对其进行还原。</p>
+<p>在还原了逗号表达式后，进一步对if控制流里面的语句进行分析。</p>
+<p><img src="/2022/03/07/rs4/image-20220430214116798.png" alt="image-20220430214116798"></p>
+<p>很明显的发现，这里的流程每一个都是携带了一个-1的规律，例如 _$ra += 6;这一个分支其控制流参数为0，</p>
+<p>然后else对应的节点的值为3。</p>
+<p><img src="/2022/03/07/rs4/image-20220430214355695.png" alt="image-20220430214355695"></p>
+<p>同时观察babel中的解析结果，针对这个 $kr&lt;1的if表达式，其alternate对应的部分是黄线标出来的部分，同时，跟下去看，每一个if节点都为consequent，其else if的节点部分对应的是alternate。</p>
+<p>因此，要想取得全部的节点，只需要依次向下递归，比如：</p>
+<p>从根节点出发，游走到 判断表达为&lt;1的部分，获取其body(其对应的流程值为1，也就是test节点的值-1)，然后在从其else部分开始游走走。。。最后游走到else节点部分，此处的值就是对饮的test节点的值3.</p>
+<p>按照上述思路，可以将步骤拆解为如下个步骤：</p>
+<ol>
+<li>获取test节点的值。</li>
+<li>对consequent，alternate部分进行判断，凭此来决定是否往下继续游走。</li>
+<li>将其对应的节点值以及节点内容存入对象。</li>
+<li>将其转化为Switch-Case的形式</li>
+</ol>
+<h6 id="Swich-case节点合并"><a href="#Swich-case节点合并" class="headerlink" title="Swich_case节点合并"></a>Swich_case节点合并</h6><p>在上一步将代码改写的清晰可见了之后，接下来，发现，代码中存在了嵌套的函数，同时，该函数内包含了嵌套的控制流，不断进行套娃。</p>
+<p><img src="/2022/03/07/rs4/image-20220430220130910.png" alt="image-20220430220130910"></p>
+<p>接下来，就对这个控制流的初始参数进行分析，我们发现，这个参数实际上就是对应的函数参进来的参数，也就是说，根据不同的控制流，会走到不同的分支中。</p>
 
     </div>
 
@@ -321,7 +315,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RS4"><span class="nav-number">1.</span> <span class="nav-text">RS4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">代码分析</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RS4"><span class="nav-number">1.</span> <span class="nav-text">RS4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML%E9%A1%B5%E9%9D%A2%E4%BB%A3%E7%A0%81%E8%BF%98%E5%8E%9F"><span class="nav-number">1.2.</span> <span class="nav-text">HTML页面代码还原</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#if%E6%8E%A7%E5%88%B6%E6%B5%81%E8%BF%98%E5%8E%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">if控制流还原</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Swich-case%E8%8A%82%E7%82%B9%E5%90%88%E5%B9%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">Swich_case节点合并</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,12 +372,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">163k</span>
+    <span title="Symbols count total">161k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:28</span>
+    <span title="Reading time total">2:26</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
