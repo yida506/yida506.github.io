@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://yida506.github.io/2022/04/03/app%E5%85%A5%E9%97%A8/image-20220417135832286.png">
 <meta property="og:image" content="http://yida506.github.io/2022/04/03/app%E5%85%A5%E9%97%A8/image-20220417144216066.png">
 <meta property="article:published_time" content="2022-04-03T13:43:10.000Z">
-<meta property="article:modified_time" content="2022-04-28T15:51:27.917Z">
+<meta property="article:modified_time" content="2022-05-03T02:33:29.981Z">
 <meta property="article:author" content="Lan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yida506.github.io/2022/04/03/app%E5%85%A5%E9%97%A8/image-20220417122821654.png">
@@ -192,7 +192,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>770</span>
+              <span>862</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -236,6 +236,11 @@
 <p>然后安装frida-tools 版本要对应</p>
 <p>接着暗转frida-server push到手机上</p>
 <h4 id="JADX"><a href="#JADX" class="headerlink" title="JADX"></a>JADX</h4><p>命令行运行 java -jar jadx-gui-1.3.4.jar (在jadx的lib中)</p>
+<h4 id="Andriod库"><a href="#Andriod库" class="headerlink" title="Andriod库"></a>Andriod库</h4><h6 id="okhttp3"><a href="#okhttp3" class="headerlink" title="okhttp3:"></a>okhttp3:</h6><p>网络请求相关(类似requests)</p>
+<h6 id="retrofit"><a href="#retrofit" class="headerlink" title="retrofit:"></a>retrofit:</h6><p>网络请求相关</p>
+<h6 id="rxjava"><a href="#rxjava" class="headerlink" title="rxjava:"></a>rxjava:</h6><p>与retrofit结合使用</p>
+<h6 id="gson"><a href="#gson" class="headerlink" title="gson:"></a>gson:</h6><p>序列化</p>
+<h5 id="Android开发"><a href="#Android开发" class="headerlink" title="Android开发"></a>Android开发</h5><p>layout</p>
 
     </div>
 
@@ -316,7 +321,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%B7%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">刷机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ROOT"><span class="nav-number">2.</span> <span class="nav-text">ROOT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Frida%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">Frida安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JADX"><span class="nav-number">4.</span> <span class="nav-text">JADX</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%B7%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">刷机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ROOT"><span class="nav-number">2.</span> <span class="nav-text">ROOT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Frida%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">Frida安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JADX"><span class="nav-number">4.</span> <span class="nav-text">JADX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Andriod%E5%BA%93"><span class="nav-number">5.</span> <span class="nav-text">Andriod库</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#okhttp3"><span class="nav-number">5.0.1.</span> <span class="nav-text">okhttp3:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#retrofit"><span class="nav-number">5.0.2.</span> <span class="nav-text">retrofit:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#rxjava"><span class="nav-number">5.0.3.</span> <span class="nav-text">rxjava:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#gson"><span class="nav-number">5.0.4.</span> <span class="nav-text">gson:</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Android%E5%BC%80%E5%8F%91"><span class="nav-number">5.1.</span> <span class="nav-text">Android开发</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -330,14 +335,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -373,12 +378,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">161k</span>
+    <span title="Symbols count total">164k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:26</span>
+    <span title="Reading time total">2:29</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="知乎vmp大致流程首先会初始化参数，由于函数只传入e进来(为一个大字符串)，所以t、n会根据条件赋予初值0、和一个空数组，接着会进入this.D这个方法中，主要是讲这个初始大字符串传入，然后，对其进行一系列的分割，计算的操作，生成两个大数组，分别绑定在this.G和this.b上，这对应的是初始化的流程。  接着就是进入for循环内部，可以清晰的看到有三个明显的位置，其中r&#x3D;this.G[this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ast解vmp">
+<meta property="og:url" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/index.html">
+<meta property="og:site_name" content="spider">
+<meta property="og:description" content="知乎vmp大致流程首先会初始化参数，由于函数只传入e进来(为一个大字符串)，所以t、n会根据条件赋予初值0、和一个空数组，接着会进入this.D这个方法中，主要是讲这个初始大字符串传入，然后，对其进行一系列的分割，计算的操作，生成两个大数组，分别绑定在this.G和this.b上，这对应的是初始化的流程。  接着就是进入for循环内部，可以清晰的看到有三个明显的位置，其中r&#x3D;this.G[this">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505210459984.png">
+<meta property="og:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505211331204.png">
+<meta property="og:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505211820473.png">
+<meta property="og:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505212416451.png">
+<meta property="og:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505212535506.png">
+<meta property="og:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505214343034.png">
+<meta property="og:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505215521026.png">
+<meta property="article:published_time" content="2022-05-05T11:16:46.000Z">
+<meta property="article:modified_time" content="2022-05-05T15:26:23.335Z">
+<meta property="article:author" content="Lan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/image-20220505210459984.png">
+
+<link rel="canonical" href="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ast解vmp | spider</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">spider</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ast解vmp
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="知乎vmp"><a href="#知乎vmp" class="headerlink" title="知乎vmp"></a>知乎vmp</h4><h5 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h5><p>首先会初始化参数，由于函数只传入e进来(为一个大字符串)，所以t、n会根据条件赋予初值0、和一个空数组，接着会进入this.D这个方法中，主要是讲这个初始大字符串传入，然后，对其进行一系列的分割，计算的操作，生成两个大数组，分别绑定在this.G和this.b上，这对应的是初始化的流程。</p>
+<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505210459984.png" alt="image-20220505210459984"></p>
+<p>接着就是进入for循环内部，可以清晰的看到有三个明显的位置，其中r=this.G[this.C++]，是做了一个从数组中取数的操作，接着这个if判断用于限定终止条件，很明显，这个r在每一步for循环中都会+1,直到数组值越界结束(对应的这个396个流程的this.G的数组的长度)，接着会将r这个值，传入this.e这个方法中。</p>
+<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505211331204.png" alt="image-20220505211331204"></p>
+<p>跟进去，发现，这里有个移位操作，然后会生成一个值，然后这个值会影响走入不同的分支</p>
+<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505211820473.png" alt="image-20220505211820473"></p>
+<p>this.J为一个具有16个键值的对象，这里的键为14对应的值为u，然后就进入了u函数中</p>
+<blockquote>
+<p>也就是说，大数组中的每一个值，都会有唯一的一个函数与其绑定，同时其绑定由其值经过一个移位运算得到，暂时将这些函数统称为选择函数(会计算一些初始值)。</p>
+</blockquote>
+<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505212416451.png" alt="image-20220505212416451"></p>
+<p>接下来会生成一个this.h，目前这个是干什么的，还不得而知。</p>
+<p>最后就进入了一个这样的函数中，可以看到，</p>
+<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505212535506.png" alt="image-20220505212535506"></p>
+<p>此时的e指代的是一个对象，然后t治理指代刚刚生成的u{h:7},然后给与n赋予了一个[0]数组。</p>
+<p>然后将e.k中的值push到n中，接着，将e.r[3] 赋予一个刚生成的函数，这时候，this.r中的数组就从一个[0,0,0,0] 变成了 [0,0,0,function];</p>
+<p>接着继续跟，我们绕过选择函数后，发现，进入了一个switchcase控制流，在这里，我们发现</p>
+<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505214343034.png" alt="image-20220505214343034"></p>
+<p>每一个this.t的值，会决定接下来的流程，也就是说，this.t会进行一个操作，选择进行什么运算。</p>
+<p>这一步实际上是将刚刚生成的哪个函数push到数组中，</p>
+<p>第三步是将小数组中的乱码做一个解密的操作，然后也push到e.f中。</p>
+<p>第四步是将e.f中的数取出来，然后push了个空对象进去，</p>
+<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505215521026.png" alt="image-20220505215521026"></p>
+<p>第五步，又是解密操作，这一步生成了一个 _ encrypt字符，然后将对象中添加一个键值对，键为_encrypt，值为一开始的那个函数，这样就生成了第一个__g.encrypt 的函数，接着在跟进去就发现，索引值是从7开始的了。</p>
+<p>也就是说前六步的流程就是给与__g这个对象，赋值了一个函数，然后，当我们在传入参数的时候，就会又进入其逻辑，至此，我们已经知道了他的具体操作，但是我们要如何对其进行还原呢？</p>
+<p>在对ali等控制流进行还原的时候，我们都是通过从起始流程出发，不断的对其进行节点合并等操作，但是那局限于代码已知的情况，但是这里，进行的操作往往都是虚拟化的(完全是通过对数组的处理进行的操作)。</p>
+<p>同时，通过对上述的观察，我们发现本质上都是在通过其余的指令对那个4位的数组进行操作，假使我们能根据他的流程，找到对应的索引数，也就是要操作的变量，然后在将其代码进行生成，那么就同样可以达到代码顺序执行的操作。</p>
+<h5 id="还原思路"><a href="#还原思路" class="headerlink" title="还原思路"></a>还原思路</h5><p>要对上述进行一个还原，首先要做的，就是构建修饰代码，因为，我们在其中，发现有值生成的部分，有字符串解密的过程，我们希望生成的代码，尽可能简洁，不被任何干扰项影响。</p>
+<p>在javascript中，运行一串js代码，会执行词法分析-&gt;句法分析-&gt;解析成ast语法树-&gt;解释器解析这四个步骤(个人理解)，vm防护的本质就是，将代码逻辑隐藏到数组中，通过对数组不断处理，来达到生成加密参数的流程，这样一来，极大的增加了调试成本，如果只把加密逻辑使用vmp实现，那么对web端的影响微乎其微。</p>
+<p>个人认为，将其实际的代码还原出具有实际逻辑的办法，只有针对其流程中的每一个case进行分析，然后看透其本质，最终通过ast，生成代码。</p>
+<blockquote>
+<p>与还原switch-case类似，但是唯一不同在于，要人工分析每一个步骤，然后生成最简代码。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/03/Ratel/" rel="prev" title="Ratel">
+      <i class="fa fa-chevron-left"></i> Ratel
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E4%B9%8Evmp"><span class="nav-number">1.</span> <span class="nav-text">知乎vmp</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">大致流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%98%E5%8E%9F%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">还原思路</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lan</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">164k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:29</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
