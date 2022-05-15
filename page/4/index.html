@@ -160,6 +160,159 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" class="post-title-link" itemprop="url">验证码</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>982</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
+<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png" alt="image-20220109214733411"></p>
+<p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
+<p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
+<blockquote>
+<p>此处w值主要是通过三个流程：</p>
+<ol>
+<li>u值：生成随机数作为公钥，对其进行加密。</li>
+<li>l值：对一个初始对象以及公钥进行组合加密成一个数组</li>
+<li>h值：对l值进行一个处理。</li>
+<li>w=h+u;</li>
+</ol>
+</blockquote>
+<p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
+<h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
+<p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109221913141.png" alt="image-20220109221913141"></p>
+<p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
+<blockquote>
+<ol>
+<li>首先初始化一系列参数，包含对鼠标轨迹初始化的流程、空数组初始化、长字符串生成(包含时间戳)、随机生成的字符串、大对象(包含gt、challenge、aeskey、时间戳、s等).</li>
+<li>接下来对上述参数进行一系列处理，然后在初始化一个对象(对象中包含鼠标开始位置数据、鼠标结束数据、显卡类型等一系列参数)和一个包含时间戳的大字符串。</li>
+<li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
+</ol>
+</blockquote>
+<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>​    </p>
+<p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
+<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5><h4 id="顶象滑块"><a href="#顶象滑块" class="headerlink" title="顶象滑块"></a>顶象滑块</h4><p><a target="_blank" rel="noopener" href="https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg">https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg</a></p>
+<h4 id="数美滑块"><a href="#数美滑块" class="headerlink" title="数美滑块"></a>数美滑块</h4><p><a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/web-login/captcha?redirectPath=http%3A%2F%2Fwww.xiaohongshu.com%2Fdiscovery%2Fitem%2F605eb4920000000021036ab5">滑块验证 (xiaohongshu.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" class="post-title-link" itemprop="url">事件监听</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>285</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><p>在突破滑块的过程中，我们希望可以知道鼠标的位置的参数，以达到知晓是对什么参数进行的加密。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;geetest_slider_button&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">div.addEventListener(<span class="string">&#x27;pointermove&#x27;</span>,<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(event.clientX,event.clientX,<span class="built_in">Date</span>.now())&#125;)</span><br></pre></td></tr></table></figure>
+<p>上述直接对整个document添加了事件，这里获得的貌似是整个页面的坐标。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/01/ast%E6%80%9D%E6%83%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -282,7 +435,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>418</span>
+              <span>434</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -300,7 +453,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="Android基础"><a href="#Android基础" class="headerlink" title="Android基础"></a>Android基础</h4><p>反编译工具:JADX</p>
+          <h4 id="Android基础"><a href="#Android基础" class="headerlink" title="Android基础"></a>Android基础</h4><p>反编译工具:JADX （1.2.0  用高版本的有BUG）</p>
 <p>IDE:android studio(最新版)</p>
 <p>启动界面貌似会有代码判断，从xml的MAIN往上找</p>
 <h4 id="APP安装"><a href="#APP安装" class="headerlink" title="APP安装"></a>APP安装</h4><p>直接abd install (-r)…apk</p>
@@ -1086,95 +1239,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/11/14/js%E9%80%86%E5%90%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/14/js%E9%80%86%E5%90%91/" class="post-title-link" itemprop="url">js逆向</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-XHR请求"><a href="#1-XHR请求" class="headerlink" title="1.XHR请求"></a>1.XHR请求</h4><p>在理解逆向时，首先要明白数据是如何产生的，现在大部分数据都采用异步加载的方式，也有少量数据直接写在网页上，直接在网页上的静态数据在此不做阐述。</p>
-<p>以目前的情况来看，我们想要获得的数据主要都是异步产生的，异步与同步的差别主要在于，同步需要执行完所有的过程数据才显示，异步就是可以中途显示数据，要使中途显示数据有很多种方法，例如和函数绑定，这样就可以实现翻页，页面的数据改变。</p>
-<p>在类似翻页过程中，我们实际上是用鼠标点击了页面页码、下一页等操作，该位置通常绑定了click事件，这样我们在点击时，就会运行click函数， 然后向服务器传递了请求，服务器给我们返回了对应的数据。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">startID=&gt;start: 点击事件(携带参数)</span><br><span class="line">operation1=&gt;operation: 回调函数</span><br><span class="line">operation2=&gt;operation: 调用ajax</span><br><span class="line">operation3=&gt;operation: 返回数据</span><br><span class="line">endID=&gt;end: 浏览器渲染数据</span><br><span class="line"></span><br><span class="line">startID-&gt;operation1-&gt;operation2-&gt;operation3-&gt;endID</span><br></pre></td></tr></table></figure>
-<p>从实际来看，我们从点击翻页到页面数据渲染只发生了取值，发送，返回，渲染四大步骤。</p>
-<h5 id="2-反爬"><a href="#2-反爬" class="headerlink" title="2.反爬"></a>2.反爬</h5><p>而所谓的反爬，就是在上述XHR请求的各个流程中添加措施，从而达到反爬虫的作用。</p>
-<p>而反爬可以具体分为如下几种：</p>
-<ul>
-<li>参数加密</li>
-</ul>
-<h6 id="1-参数加密"><a href="#1-参数加密" class="headerlink" title="1.参数加密"></a>1.参数加密</h6><p>我们知道，在与服务器交互的过程中，交互的过程实际上就是参数传递的过程，比如，我们可以把一开始携带的页码，在上传到服务器前，对其进行加密，同时在服务端根据其上传的参数进行校验，这样就达到了参数加密的效果。</p>
-<h6 id="2-字体加密"><a href="#2-字体加密" class="headerlink" title="2.字体加密"></a>2.字体加密</h6><p>  CSS加密：所谓css加密就是给与一个字体字典，然后在浏览器渲染数据之前，用给定的字典对于返回的数据包解码，这样即可以保证用户看得到实际的数据，爬虫获取的数据是为解码的。而CSS加密按照其类别又可以分为静态CSS加密、动态CSS加密。</p>
-<p>静态CSS加密:对于静态CSS加密，往往可以忽略加载的字体文件，因为它里面的内容是一一对应的，我们可以手动构建字典，然后达到还原的目的。</p>
-<p>动态CSS加密:对于动态CSS加密，我们发现每次加载的字体文件都不一样，但是返回的参数却是一样的，那么我们就需要进入到字体文件里面进行分析。</p>
-<p>font文件解析：</p>
-<ul>
-<li><GlyphOrder>  待解析的序号和unicode编码</GlyphOrder></li>
-<li><TTGLyph> unicode编码解析后的图片 </TTGLyph></li>
-<li><cmap> unicode编码和ASCII码的映射表</cmap></li>
-</ul>
-<p>总结：对于字体加密类型，首先就是需要将其字体文件下下来，然后根据其中的内容，以及网页返回的内容判断其属于静态还是动态，针对静态的，若混销量不大，可考虑手动建立字典的方式还原，若为动态的，就需要对其字体文件进行分析，然后构建自动化还原表，以达到还原的目的。</p>
-<p>雪碧图加密：</p>
-<p>雪碧图加密是以图的形式对文件进行上传，然后再根据顺序调用的原理，将其渲染到页面上，以达到降低开销的目的。</p>
-<h6 id="HOOK"><a href="#HOOK" class="headerlink" title="HOOK"></a>HOOK</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie_bk = <span class="built_in">document</span>.cookie;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">document</span>,<span class="string">&#x27;cookie&#x27;</span>,&#123;</span><br><span class="line">    <span class="attr">get</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">debugger</span>;</span><br><span class="line">    	<span class="keyword">return</span> <span class="built_in">document</span>.cookie_bk</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1240,14 +1308,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -1283,12 +1351,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">164k</span>
+    <span title="Symbols count total">168k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:29</span>
+    <span title="Reading time total">2:32</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>

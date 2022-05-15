@@ -160,6 +160,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/25/js%E5%8A%A0%E5%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" class="post-title-link" itemprop="url">js加密</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="编码混淆"><a href="#编码混淆" class="headerlink" title="编码混淆"></a>编码混淆</h4><h5 id="base系列"><a href="#base系列" class="headerlink" title="base系列"></a>base系列</h5><h6 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h6><p>以目前来看，最为常见的是base64，结尾一般来讲都有一到2个等号，明文过短的时候就没有。</p>
+<p>js端(base64)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//明文:123</span></span><br><span class="line">btoa(<span class="string">&#x27;123&#x27;</span>);</span><br><span class="line"><span class="comment">//密文:&#x27;MTIz&#x27;</span></span><br><span class="line"><span class="comment">//解密</span></span><br><span class="line">atob(<span class="string">&#x27;MTIz&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>python端:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">test_str = <span class="string">&#x27;123&#x27;</span></span><br><span class="line">encode_str = base64.encodebytes(<span class="string">b&#x27;123&#x27;</span>)</span><br><span class="line"><span class="comment">#编码</span></span><br><span class="line"><span class="built_in">print</span>(encode_str.decode())</span><br><span class="line"><span class="comment">#解码</span></span><br><span class="line">decode_str = base64.decodebytes(encode_str)</span><br><span class="line"><span class="built_in">print</span>(decode_str.decode())</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里要输入加密字符串的二进制码，然后其输出的结果也是一个二进制码，要对其进行一个decode()操作。</p>
+</blockquote>
+<h6 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h6><p>以 <code>\u</code>、<code>&amp;#</code> 或 <code>&amp;#x</code> 开头，后面是数字加字母组合。</p>
+<p><img src="/2022/02/25/js%E5%8A%A0%E5%AF%86/image-20220225225020052.png" alt="image-20220225225020052"></p>
+<h5 id="算法加密"><a href="#算法加密" class="headerlink" title="算法加密"></a>算法加密</h5><h6 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h6><p>本质上是一种信息摘要算法，对应关系为n对1，也就是不同的数有相同的加密结果，但是一个数只会有唯一的加密值。密文一般是16或32位。</p>
+<p>md5加密特征：</p>
+<ol>
+<li>0123456789ABCDEF、0123456789abcdef的出现</li>
+<li>1732584193、-271733879、-1732584194、271733878的出现</li>
+</ol>
+<blockquote>
+<p>至于为什么会有上述特征，后面在研究。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">m = hashlib.md5(<span class="string">b&#x27;123&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment">#202cb962ac59075b964b07152d234b70</span></span><br></pre></td></tr></table></figure>
+<h6 id="SHA系列"><a href="#SHA系列" class="headerlink" title="SHA系列"></a>SHA系列</h6><p>比md5长一些。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">m = hashlib.sha1(<span class="string">b&#x27;123&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment">#40bd001563085fc35165329ea1ff5c5ecbdbbeef</span></span><br></pre></td></tr></table></figure>
+<h6 id="HMAC系列"><a href="#HMAC系列" class="headerlink" title="HMAC系列"></a>HMAC系列</h6><p>据说是在md5、sha系列的基础上引入秘钥。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hmac</span><br><span class="line"></span><br><span class="line">m = hmac.new(<span class="string">b&#x27;key&#x27;</span>, <span class="string">b&#x27;123&#x27;</span>, digestmod=<span class="string">&#x27;MD5&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment">#52851cb05258c8d98da1672d95729e53</span></span><br><span class="line"></span><br><span class="line">n= hmac.new(<span class="string">b&#x27;key&#x27;</span>, <span class="string">b&#x27;123&#x27;</span>, digestmod=<span class="string">&#x27;SHA1&#x27;</span>).hexdigest()</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="comment">#d4a5b6721d75a5ac15ec698818c77fe1f6e40187</span></span><br></pre></td></tr></table></figure>
+<h6 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h6><p>非对称加密，使用公钥加密，然后用私钥解密，私钥加密的，可以用公钥解密。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rsa</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rsaEncrypt</span>(<span class="params">text</span>):</span></span><br><span class="line">    <span class="comment"># 生成512位公钥、私钥</span></span><br><span class="line">    (pubkey, privkey) = rsa.newkeys(<span class="number">512</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;公钥<span class="subst">&#123;pubkey&#125;</span>,私钥<span class="subst">&#123;privkey&#125;</span>&#x27;</span>)</span><br><span class="line">    crypto = rsa.encrypt(text.encode(<span class="string">&#x27;utf-8&#x27;</span>), pubkey)</span><br><span class="line">    <span class="keyword">return</span> (crypto, privkey)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rsaDecrypt</span>(<span class="params">text, key</span>):</span></span><br><span class="line">    <span class="keyword">return</span> rsa.decrypt(text,key).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">text,pk = rsaEncrypt(<span class="string">&#x27;123&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;密文&#x27;</span>,text,pk)</span><br><span class="line">content=  rsaDecrypt(text, pk)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;明文&#x27;</span>, content)</span><br></pre></td></tr></table></figure>
+<p>在js中，有一个明显的特征就是设置公钥。</p>
+<h6 id="DES加密"><a href="#DES加密" class="headerlink" title="DES加密"></a>DES加密</h6>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/22/%E5%86%8D%E6%88%98JSVMP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/22/%E5%86%8D%E6%88%98JSVMP/" class="post-title-link" itemprop="url">再战JSVMP</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>469</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>由于之前对VMP的理解较浅，在对JS有了深入的理解后，这里进一步重新对VMP进行分析。</p>
+<h4 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h4><p>这里仍用头条的作为分析对象。</p>
+<p>首先在开头打上debugger，定义了一个大的函数，接着，向里面传入两个参数，一个是非常长的字符串，另一个是一个数组。</p>
+<p>接着跟进去。</p>
+<p>函数a，b，c，d，n貌似没啥卵用。</p>
+<p>接着进入一个for循环，初始化了几个函数，在ForStatement中发现包含ParseInt、以及fromCharCode这两个东西。</p>
+<ul>
+<li>ParseInt是将字符串转为整数</li>
+<li>fromCharCode是将UTF-16编码转化为字符串</li>
+</ul>
+<p>一直到159行，其实都在对这个参数进行遍历，生成了什么东西，其中，值得注意的是生成了一个大对象，其中包含了两个大数组。</p>
+<p>在控制台，将该方法数组中的内容用fromCharCode打印出来，发现，其都被转化为了符号和字母。</p>
+<p>接下来又定义了三个函数，接着是以调用K函数实现的初始化流程。</p>
+<p>追进去看K函数，发现也是反反复复在进行for循环的操作，接着通过return了一个三目表达式进入G函数。</p>
+<p>也就是说，在前面还没进行什么复杂的操作。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -883,163 +1047,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" class="post-title-link" itemprop="url">验证码</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>982</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
-<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png" alt="image-20220109214733411"></p>
-<p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
-<p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
-<blockquote>
-<p>此处w值主要是通过三个流程：</p>
-<ol>
-<li>u值：生成随机数作为公钥，对其进行加密。</li>
-<li>l值：对一个初始对象以及公钥进行组合加密成一个数组</li>
-<li>h值：对l值进行一个处理。</li>
-<li>w=h+u;</li>
-</ol>
-</blockquote>
-<p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
-<h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
-<p><img src="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109221913141.png" alt="image-20220109221913141"></p>
-<p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
-<blockquote>
-<ol>
-<li>首先初始化一系列参数，包含对鼠标轨迹初始化的流程、空数组初始化、长字符串生成(包含时间戳)、随机生成的字符串、大对象(包含gt、challenge、aeskey、时间戳、s等).</li>
-<li>接下来对上述参数进行一系列处理，然后在初始化一个对象(对象中包含鼠标开始位置数据、鼠标结束数据、显卡类型等一系列参数)和一个包含时间戳的大字符串。</li>
-<li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
-</ol>
-</blockquote>
-<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>​    </p>
-<p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
-<h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5><h4 id="顶象滑块"><a href="#顶象滑块" class="headerlink" title="顶象滑块"></a>顶象滑块</h4><p><a target="_blank" rel="noopener" href="https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg">https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg</a></p>
-<h4 id="数美滑块"><a href="#数美滑块" class="headerlink" title="数美滑块"></a>数美滑块</h4><p><a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/web-login/captcha?redirectPath=http%3A%2F%2Fwww.xiaohongshu.com%2Fdiscovery%2Fitem%2F605eb4920000000021036ab5">滑块验证 (xiaohongshu.com)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" class="post-title-link" itemprop="url">事件监听</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>285</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><p>在突破滑块的过程中，我们希望可以知道鼠标的位置的参数，以达到知晓是对什么参数进行的加密。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementsByClassName(<span class="string">&quot;geetest_slider_button&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">div.addEventListener(<span class="string">&#x27;pointermove&#x27;</span>,<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(event.clientX,event.clientX,<span class="built_in">Date</span>.now())&#125;)</span><br></pre></td></tr></table></figure>
-<p>上述直接对整个document添加了事件，这里获得的貌似是整个页面的坐标。 </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1105,14 +1116,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -1148,12 +1159,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">164k</span>
+    <span title="Symbols count total">168k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:29</span>
+    <span title="Reading time total">2:32</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
