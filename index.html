@@ -160,6 +160,138 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/22/vue%E5%88%9D%E6%8E%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">vue初探</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/21/%E6%8A%96%E5%BA%97vmp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spider">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" class="post-title-link" itemprop="url">抖店vmp</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="VMP介绍"><a href="#VMP介绍" class="headerlink" title="VMP介绍"></a>VMP介绍</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;索引j&quot;</span>, j,<span class="string">&quot;索引O&quot;</span>, O, <span class="string">&quot; 值：&quot;</span>, <span class="built_in">JSON</span>.stringify(S, <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>) </span>&#123;<span class="keyword">if</span> (value == <span class="built_in">window</span>) &#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125; <span class="keyword">return</span> value&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="jsvmp"><a href="#jsvmp" class="headerlink" title="jsvmp"></a>jsvmp</h1><h3 id="签名分析"><a href="#签名分析" class="headerlink" title="签名分析"></a>签名分析</h3><p>签名参数：<br>_02B4Z6wo00101loNtfAAAIDDhHvtVmvJQOZaCbFAAPQYwzYkMBmMy0OIRqJQNqhou0eH.DJLTigPioA7TAwBj3B7N1HhHxmv5dJlR1wA5ViS1rIJXRF.2jx88ty4qN9zJEh5kPLfJLRpsdxx14<br>根据插桩日志,可以将上述分为8部分<br>sign1:loNtf<br>sign2:AAAID<br>sign3:DhHvtV<br>sign4:mvJQO<br>sign5:ZaCbF<br>sign6:AAPQY<br>sign7: wzYk<br>sign8: MBmMy0OIRqJQNqhou0eH.DJLTigPioA7TAwBj3B7N1HhHxmv5dJlR1wA5ViS1rIJXRF.2jx88ty4qN9zJEh5kPLfJLRpsdxx<br>最后在对整体的拼接计算一个尾缀</p>
+<h5 id="字符索引修改"><a href="#字符索引修改" class="headerlink" title="字符索引修改"></a>字符索引修改</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move_char_calc</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">0</span> &lt;= num &amp;&amp; num &lt; <span class="number">26</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num + <span class="number">65</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">26</span> &lt;= num &amp;&amp; num &lt; <span class="number">52</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num + <span class="number">71</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num == <span class="number">62</span> || num == <span class="number">63</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num - <span class="number">17</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num - <span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据插桩日志的分析,发现在每一个签名计算的过程中,在最后都会进行一个计算,这个值主要是用于修改字符的索引,将不存在的剔除出去</p>
+<h5 id="魔改sdbm"><a href="#魔改sdbm" class="headerlink" title="魔改sdbm"></a>魔改sdbm</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++)&#123;</span><br><span class="line">        hash = ((hash * <span class="number">65599</span>) &gt;&gt;&gt; <span class="number">0</span>) + strurl.charCodeAt(hash % strurl.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash2</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;strurl.length; i++)&#123;</span><br><span class="line">        hash = (hash ^ strurl.charCodeAt(i)) * <span class="number">65599</span> &gt;&gt;&gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash3</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;strurl.length; i++)&#123;</span><br><span class="line">        hash = (hash * <span class="number">65599</span> + strurl.charCodeAt(i)) &gt;&gt;&gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这里包含了三种sdbm算法的魔改,主要用于计算不同的hash值用于后续计算</p>
+<h5 id="sign1"><a href="#sign1" class="headerlink" title="sign1"></a>sign1</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.offset1 = [<span class="number">24</span>, <span class="number">18</span>, <span class="number">12</span>, <span class="number">6</span>, <span class="number">0</span>];</span><br><span class="line"><span class="function"><span class="title">get_signature1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> now_str = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> index <span class="keyword">in</span> <span class="built_in">this</span>.offset1)&#123;</span><br><span class="line">            <span class="keyword">let</span> charnum = <span class="built_in">this</span>.nownumble &gt;&gt; <span class="number">2</span> &gt;&gt; <span class="built_in">this</span>.offset1[index] &amp; <span class="number">63</span>;</span><br><span class="line">            now_str += <span class="built_in">String</span>.fromCharCode(move_char_calc(charnum));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;sign1:&#x27;</span>+now_str);</span><br><span class="line">        <span class="keyword">return</span> now_str;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<p>这里的this.nownumble是由长数字计算出来,长数字是由浏览器reference,时间戳,canves指纹计算得到<br>其他sign大同小异</p>
+<h5 id="sign4"><a href="#sign4" class="headerlink" title="sign4"></a>sign4</h5><p>sign4,sign5,sign6都还使用了别的参数进行计算.<br>sign4的参数包含url修改后的参数拼接计算以及浏览器user-agent的sdbm计算</p>
+<h5 id="sign8"><a href="#sign8" class="headerlink" title="sign8"></a>sign8</h5><p>sign8的计算主要涉及到一个18数组的初始化,以及八次变化,同时包含了cookie中的sec_id</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/15/java%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -321,7 +453,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>11</span>
+              <span>37</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -339,7 +471,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="抓包介绍"><a href="#抓包介绍" class="headerlink" title="抓包介绍"></a>抓包介绍</h4><p>安装Mt管理器</p>
+          <h4 id="抓包介绍"><a href="#抓包介绍" class="headerlink" title="抓包介绍"></a>抓包介绍</h4><p>本质上抓包就是中间人攻击，让流量先流经代理服务器然后在转发给本机。</p>
 
       
     </div>
@@ -434,6 +566,7 @@
 <blockquote>
 <p>与还原switch-case类似，但是唯一不同在于，要人工分析每一个步骤，然后生成最简代码。</p>
 </blockquote>
+<p><strong>还原就是闲的蛋疼</strong></p>
 
       
     </div>
@@ -477,7 +610,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>725</span>
+              <span>671</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -496,15 +629,13 @@
 
       
           <h4 id="Ratel介绍"><a href="#Ratel介绍" class="headerlink" title="Ratel介绍"></a>Ratel介绍</h4><p>直接adb install 安装。</p>
-<h6 id="签名生成："><a href="#签名生成：" class="headerlink" title="签名生成："></a>签名生成：</h6><p>keytool -genkeypair -alias key0 -keyalg RSA -validity 400 -keystore demo.jks</p>
-<blockquote>
-<p>需要进入app目录下运行，keytool为java中的包，需要配置环境变量</p>
-</blockquote>
 <h6 id="app感染："><a href="#app感染：" class="headerlink" title="app感染："></a>app感染：</h6><p>使用ratel.bat + app包名 生成被感染的app</p>
 <h6 id="Ratel插件开发"><a href="#Ratel插件开发" class="headerlink" title="Ratel插件开发"></a>Ratel插件开发</h6><p>模板地址  <a target="_blank" rel="noopener" href="https://github.com/virjarRatel/ratel-module-template.git">https://github.com/virjarRatel/ratel-module-template.git</a></p>
 <p>直接使用模板创建</p>
 <p>template.bat -a package<name> -m dir<name></name></name></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(<span class="keyword">final</span> RC_LoadPackage.LoadPackageParam lpparam)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    </span><br><span class="line">    Log.d(tag, <span class="string">&quot;hook begin&quot;</span>);</span><br><span class="line">    Log.d(tag, <span class="string">&quot;current pacakage name : &quot;</span> + lpparam.packageName);</span><br><span class="line">    </span><br><span class="line">   <span class="comment">//lpparam.packageName 可以输出包名,如果要针包hook,就需要z</span></span><br><span class="line">   <span class="keyword">if</span>(lpparam.packageName.equals(<span class="string">&quot;com.example.myapplication&quot;</span>)) &#123;</span><br><span class="line">        Log.d(tag, <span class="string">&quot;current is in app package&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">    addFloatingButtonForActivity(lpparam);</span><br><span class="line">    Log.d(tag, <span class="string">&quot;hook end&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h6><p>安全公司提供的加固方案，加壳后的app会隐藏源码。  </p>
+<p>本质上是等待java虚拟机加载，然后dump出dex文件</p>
 
       
     </div>
@@ -609,7 +740,7 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span>1.3k</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -658,8 +789,9 @@
 <h6 id="retrofit"><a href="#retrofit" class="headerlink" title="retrofit:"></a>retrofit:</h6><p>网络请求相关</p>
 <h6 id="rxjava"><a href="#rxjava" class="headerlink" title="rxjava:"></a>rxjava:</h6><p>与retrofit结合使用</p>
 <h6 id="gson"><a href="#gson" class="headerlink" title="gson:"></a>gson:</h6><p>序列化</p>
-<h5 id="Android开发"><a href="#Android开发" class="headerlink" title="Android开发"></a>Android开发</h5><p>layout:类似html静态界面，在里面写布局之类的东西，然后在java中写类似js的逻辑</p>
-<p>http请求需要新开线程，不能在主线程中。</p>
+<h3 id="Android开发"><a href="#Android开发" class="headerlink" title="Android开发"></a>Android开发</h3><h4 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h4><h6 id="intent"><a href="#intent" class="headerlink" title="intent"></a>intent</h6><p>主要用于组件之间的传输，类似从一个activity到另一个activity。</p>
+<p>要实现这种传输，需要实例化intent对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">btn.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                setTitle(<span class="string">&quot;被点击了&quot;</span>);</span><br><span class="line">                Log.i(TAG, <span class="string">&quot;onClick: &quot;</span>);</span><br><span class="line">                <span class="comment">//实例化intentd</span></span><br><span class="line">                Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">                startActivity(intent);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -753,182 +885,6 @@
 <blockquote>
 <p>如果要hook构造方法 需要使用$init</p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">静态分析</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="jadx使用"><a href="#jadx使用" class="headerlink" title="jadx使用"></a>jadx使用</h4><p>直接用jadx打开apk。</p>
-<h4 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h4><h5 id="1-代码搜索"><a href="#1-代码搜索" class="headerlink" title="1.代码搜索"></a>1.代码搜索</h5><p><img src="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419214843370.png" alt="image-20220419214843370"></p>
-<p>activity里面包含主要代码。其中在main之前的为主界面代码，这里只有mainActivity.</p>
-<p><img src="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419215044951.png" alt="image-20220419215044951"></p>
-<p>onCreate、onClick为事件。</p>
-<h4 id="Frida"><a href="#Frida" class="headerlink" title="Frida"></a>Frida</h4><h5 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h5><p>连接到手机后，进入安装frida-serve的位置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">su </span><br><span class="line">cd /data/local/tmp/</span><br></pre></td></tr></table></figure>
-<p>ps -A | grep com</p>
-<p>com指代的是过滤条件，该指令可以展示当前进程名，也对应下图xml中的package名。</p>
-<p><img src="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419221411727.png" alt="image-20220419221411727"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment">#模板</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span>(<span class="params">message, data</span>):</span></span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里写要hook代码</span></span><br><span class="line">test_t=<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Java.perform(</span></span><br><span class="line"><span class="string">    function()&#123;</span></span><br><span class="line"><span class="string">        var MainActivity = Java.use(&#x27;com.example.seccon2015.rock_paper_scissors.MainActivity&#x27;)</span></span><br><span class="line"><span class="string">        MainActivity.onClick.implementation = function(val)&#123;</span></span><br><span class="line"><span class="string">            console.log(&#x27;mmmm:&#x27;+this.m.value);</span></span><br><span class="line"><span class="string">            console.log(this.n.value);</span></span><br><span class="line"><span class="string">            </span></span><br><span class="line"><span class="string">            this.onClick(val);</span></span><br><span class="line"><span class="string">        &#125;;</span></span><br><span class="line"><span class="string">        #下面是匿名类的hook方法,这里要把他自带的.改为$</span></span><br><span class="line"><span class="string">         var test = Java.use(&#x27;com.example.seccon2015.rock_paper_scissors.MainActivity$1&#x27;)</span></span><br><span class="line"><span class="string">        test.run.implementation = function()&#123;</span></span><br><span class="line"><span class="string">            console.log(&#x27;this is test&#x27;);</span></span><br><span class="line"><span class="string">            this.run();</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment">#模板</span></span><br><span class="line"><span class="comment">#启动方式1 attachH后跟进程名</span></span><br><span class="line">process = frida.get_usb_device(-<span class="number">1</span>).attach(<span class="string">&#x27;com.example.seccon2015.rock_paper_scissors&#x27;</span>)</span><br><span class="line">script = process.create_script(test_t)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
-<p>匿名类可以通过smali代码判断。</p>
-<p>在匿名函数访问外部类：<br>this.this$0.value.xxx.value</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#打印调用堆栈</span><br><span class="line">function printstack()&#123;</span><br><span class="line">    console.log(Java.use(&quot;android.util.Log&quot;).getStackTraceString(Java.use(&quot;java.lang.Exception&quot;).$new()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/03/app%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">app入门</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h4><p>手机选择 nexus 5</p>
-<h6 id="刷机包下载-不同手机有不同的镜像-："><a href="#刷机包下载-不同手机有不同的镜像-：" class="headerlink" title="刷机包下载(不同手机有不同的镜像)："></a>刷机包下载(不同手机有不同的镜像)：</h6><p><a target="_blank" rel="noopener" href="https://developers.google.com/android/images#bullhead">https://developers.google.com/android/images#bullhead</a></p>
-<p>选择版本 OPM1.171019.011, Dec 2017</p>
-<p><a target="_blank" rel="noopener" href="https://source.android.com/setup/start/build-numbers#source-code-tags-and-builds">https://source.android.com/setup/start/build-numbers#source-code-tags-and-builds</a></p>
-<blockquote>
-<p>pixel 8.0.0貌似会使得后面用frida有小问题</p>
-</blockquote>
-<h6 id="电脑驱动更新"><a href="#电脑驱动更新" class="headerlink" title="电脑驱动更新"></a>电脑驱动更新</h6><p><strong>win10需要更新google usb driver </strong></p>
-<blockquote>
-<p><img src="/2022/04/03/app%E5%85%A5%E9%97%A8/image-20220417122821654.png" alt="image-20220417122821654"></p>
-</blockquote>
-<p>然后到bootloader界面直接运行</p>
-<p><img src="/2022/04/03/app%E5%85%A5%E9%97%A8/image-20220417135832286.png" alt="image-20220417135832286"></p>
-<p>即可</p>
-<p>时间同步</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings put global captive_portal_http_url https://www.google.cn/generate_204</span><br><span class="line"></span><br><span class="line">adb shell settings put global captive_portal_https_url https://www.google.cn/generate_204</span><br><span class="line"></span><br><span class="line">adb shell settings put global global ntp_server 1.hk.pool.ntp.org</span><br><span class="line"></span><br><span class="line"> adb shell reboot</span><br></pre></td></tr></table></figure>
-<h4 id="ROOT"><a href="#ROOT" class="headerlink" title="ROOT"></a>ROOT</h4><p>去下一个TWRP镜像，</p>
-<p>然后用fastboot falsh  recovery twrp镜像推送镜像 ，然后从bootloaders界面进去recovery分区，安装twrp</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk/releases/tag/v20.4">https://github.com/topjohnwu/Magisk/releases/tag/v20.4</a></p>
-<blockquote>
-<p>nexus5和pixel2 xl 的方式不同，pixel2不自带recovery分区，需要先刷临时分区。</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 刷入临时镜像</span><br><span class="line">fastboot flash boot twrp-3.6.0_9-0-taimen.img</span><br><span class="line">//重启后进入twrp</span><br><span class="line">fastboot reboot</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">adb push twrp-installer-3.6.0_9-0-taimen.zip /sdcard/</span><br><span class="line">adb push Magisk-v20.4.zip /sdcard/</span><br></pre></td></tr></table></figure>
-<p>下载magisk包</p>
-<p>然后通过adb push Magisk-v20.4.zip /sdcard/ 推送到手机上</p>
-<p>这里sdcard指代的是默认目录。</p>
-<p>然后通过twrp的install找到传输过来的zip进行安装。</p>
-<blockquote>
-<p>对于pxel 需要安装完永久的twrp后，点击上面的按钮在安装magisk</p>
-</blockquote>
-<p><img src="/2022/04/03/app%E5%85%A5%E9%97%A8/image-20220417144216066.png" alt="image-20220417144216066"></p>
-<p>adb shell 连接手机, su是进入root权限.</p>
-<blockquote>
-<p>pixel2 分区在输入magisk时貌似有兼容错误，</p>
-<p>adb sideload Magisk-v20.0.zip。</p>
-</blockquote>
-<h4 id="Frida安装"><a href="#Frida安装" class="headerlink" title="Frida安装"></a>Frida安装</h4><h5 id="frida-serve安装"><a href="#frida-serve安装" class="headerlink" title="frida-serve安装"></a>frida-serve安装</h5><p>下载对应版本的frida-serve(14.1.3)</p>
-<h5 id="电脑端"><a href="#电脑端" class="headerlink" title="电脑端"></a>电脑端</h5><p>直接pip安装 有点慢 会卡在setup处</p>
-<p>然后安装frida-tools 版本要对应</p>
-<p>接着暗转frida-server push到手机上</p>
 
       
     </div>
@@ -1056,12 +1012,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">168k</span>
+    <span title="Symbols count total">169k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:32</span>
+    <span title="Reading time total">2:34</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
