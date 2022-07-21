@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>菜b的爬虫记录 • Posts by &#34;框架&#34; category</title>
+        <link>http://yida506.github.io</link>
+        <description></description>
+        <language>en</language>
+        <pubDate>Wed, 02 Feb 2022 23:19:36 +0800</pubDate>
+        <lastBuildDate>Wed, 02 Feb 2022 23:19:36 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">http://yida506.github.io/2022/02/02/Framework/</guid>
+            <title>Framework</title>
+            <link>http://yida506.github.io/2022/02/02/Framework/</link>
+            <pubDate>Wed, 02 Feb 2022 23:19:36 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;源码解读&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#源码解读&#34;&gt;#&lt;/a&gt; 源码解读&lt;/h3&gt;
+&lt;h4 id=&#34;buffer组件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#buffer组件&#34;&gt;#&lt;/a&gt; BUFFER 组件:&lt;/h4&gt;
+&lt;h5 id=&#34;request_buffer&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#request_buffer&#34;&gt;#&lt;/a&gt; REQUEST_BUFFER:&lt;/h5&gt;
+&lt;p&gt;定义了 requests 队列和删除队列，用于添加任务 URL 和删除 URL.&lt;/p&gt;
+&lt;h5 id=&#34;item_buffer&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#item_buffer&#34;&gt;#&lt;/a&gt; ITEM_BUFFER:&lt;/h5&gt;
+&lt;p&gt;将数据添加到数据库中，内置去重等方法。&lt;/p&gt;
+&lt;h4 id=&#34;core组件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#core组件&#34;&gt;#&lt;/a&gt; Core 组件&lt;/h4&gt;
+&lt;h5 id=&#34;baseparser&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#baseparser&#34;&gt;#&lt;/a&gt; BaseParser：&lt;/h5&gt;
+&lt;p&gt;作为父类，后续继承其中的方法。&lt;/p&gt;
+&lt;h5 id=&#34;collector&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#collector&#34;&gt;#&lt;/a&gt; Collector:&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;功能介绍：主要是获取任务，以及分配任务，将 request 和 request 对象存入一个队列中&lt;/strong&gt;&lt;/p&gt;
+&lt;h6 id=&#34;__-init-__部分&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#__-init-__部分&#34;&gt;#&lt;/a&gt; __ init __部分：&lt;/h6&gt;
+&lt;p&gt;传入：redis_key&lt;/p&gt;
+&lt;p&gt;继承：多线程 threading.Thread 类&lt;/p&gt;
+&lt;p&gt;定义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;_thread_stop： boolean&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;_todo_request：定义一个空队列&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;_tab_requests：将 redis_key 传入 requests 表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;_tab_spider_status：将 redis_key 传入爬取状态表&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img data-src=&#34;Framework/image-20220303211908320.png&#34; alt=&#34;image-20220303211908320&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;_spider_mark：获取本地 ip + 时间，应该是导出日志使用&lt;/li&gt;
+&lt;li&gt;_interval ：从任务队列中获取任务到内存队列的间隔&lt;/li&gt;
+&lt;li&gt;_request_count: 每次获取的任务数&lt;/li&gt;
+&lt;li&gt;_is_collector_task:boolean 判断任务是否被收集&lt;/li&gt;
+&lt;li&gt;_first_get_task：boolean 第一次获取任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;run&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#run&#34;&gt;#&lt;/a&gt; run:&lt;/h6&gt;
+&lt;p&gt;使用 while 循环 (使用 thread_stop 判断)，保证爬虫持续运行。&lt;/p&gt;
+&lt;p&gt;运行 report_node_heartbeat ()--&amp;gt;input_data ()，出现异常就打印日志.&lt;/p&gt;
+&lt;h6 id=&#34;stop&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#stop&#34;&gt;#&lt;/a&gt; stop:&lt;/h6&gt;
+&lt;p&gt;用于将 run 中的 while 循环终止，结束线程&lt;/p&gt;
+&lt;h6 id=&#34;__input_data&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#__input_data&#34;&gt;#&lt;/a&gt; __input_data:&lt;/h6&gt;
+&lt;ol&gt;
+&lt;li&gt;获取当前时间&lt;/li&gt;
+&lt;li&gt;如果任务队列中的任务数量大于任务队列容量，则不向其中添加任务，并返回。&lt;/li&gt;
+&lt;li&gt;获取当前任务队列中的任务数量&lt;/li&gt;
+&lt;li&gt;获取一定优先级的任务数量 redis 中的方法 (不懂)&lt;/li&gt;
+&lt;li&gt;首次任去任务重置 (不懂)&lt;/li&gt;
+&lt;li&gt;获取任务&lt;/li&gt;
+&lt;li&gt;put_requests 下发任务&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不懂 redis 的原理和心跳等&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&#34;__report_node_heartbead&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#__report_node_heartbead&#34;&gt;#&lt;/a&gt; __report_node_heartbead：&lt;/h6&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis 相关操作，不懂&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&#34;__delete_dead_node&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#__delete_dead_node&#34;&gt;#&lt;/a&gt; __delete_dead_node:&lt;/h6&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis 相关操作，不懂&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&#34;__put_requests&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#__put_requests&#34;&gt;#&lt;/a&gt; __put_requests:&lt;/h6&gt;
+&lt;p&gt;将任务下发到 request_dict 汇总以获取 request 和 request 对象。&lt;/p&gt;
+&lt;p&gt;将获取的字典传入队列。&lt;/p&gt;
+&lt;h5 id=&#34;handle_failed_requests&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#handle_failed_requests&#34;&gt;#&lt;/a&gt; HANDLE_FAILED_REQUESTS:&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;主要功能:&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;redis 相关&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;parser_control&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#parser_control&#34;&gt;#&lt;/a&gt; PARSER_CONTROL:&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;主要功能：任务数量统计&lt;/strong&gt;&lt;/p&gt;
+&lt;h6 id=&#34;init&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#init&#34;&gt;#&lt;/a&gt; init:&lt;/h6&gt;
+&lt;p&gt;传入：collector,redis_key,request_buffer,item_buffer&lt;/p&gt;
+&lt;p&gt;继承：多线程 threading.Thread 类&lt;/p&gt;
+&lt;p&gt;定义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;_parses：空列表&lt;/li&gt;
+&lt;li&gt;_collector: 传入&lt;/li&gt;
+&lt;li&gt;_redis_key: 传入&lt;/li&gt;
+&lt;li&gt;_requeset_buffer: 传入&lt;/li&gt;
+&lt;li&gt;_thread_stop:boolean&lt;/li&gt;
+&lt;li&gt;_wait_task_time: 0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;run-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#run-2&#34;&gt;#&lt;/a&gt; run:&lt;/h6&gt;
+&lt;p&gt;从 collector 中获取任务列表，如果不存在，就等待 1s，同时将 is_show_tip 赋值为 true，用于后续判断。&lt;/p&gt;
+&lt;p&gt;将任务列表传入 deal_requests 中。&lt;/p&gt;
+&lt;h6 id=&#34;deal_requests&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#deal_requests&#34;&gt;#&lt;/a&gt; deal_requests：&lt;/h6&gt;
+&lt;p&gt;获取 request 对象和 request_redis&lt;/p&gt;
+&lt;p&gt;解析_parsers 列表，解析中间件，获取 response 结果，对结果进行判断，通过 item_buffer 入口，失败任务检测&lt;/p&gt;
+&lt;h5 id=&#34;scheduler&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#scheduler&#34;&gt;#&lt;/a&gt; SCHEDULER：&lt;/h5&gt;
+&lt;p&gt;参数:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;redis_key: 爬虫 request 及 item 存放 redis 中的文件夹&lt;/li&gt;
+&lt;li&gt;thread_count: 线程数，默认为配置文件中的线程数&lt;/li&gt;
+&lt;li&gt;begin_callback: 爬虫开始回调函数&lt;/li&gt;
+&lt;li&gt;end_callback: 爬虫结束回调函数&lt;/li&gt;
+&lt;li&gt;delete_keys: 爬虫启动时删除的 key，类型：元组 /bool/string。 支持正则&lt;/li&gt;
+&lt;li&gt;keep_alive: 爬虫是否常驻，默认否&lt;/li&gt;
+&lt;li&gt;auto_start_requests: 爬虫是否自动添加任务&lt;/li&gt;
+&lt;li&gt;batch_interval: 抓取时间间隔 默认为 0 天为单位 多次启动时，只有当前时间与第一次抓取结束的时间间隔大于指定的时间间隔时，爬虫才启动&lt;/li&gt;
+&lt;li&gt;wait_lock: 下发任务时否等待锁，若不等待锁，可能会存在多进程同时在下发一样的任务，因此分布式环境下请将该值设置 True&lt;/li&gt;
+&lt;li&gt;task_table: 任务表， 批次爬虫传递&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;init-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#init-2&#34;&gt;#&lt;/a&gt; init:&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;request_buffer: 初始化 RequestBuffer (redis_key) 类&lt;/li&gt;
+&lt;li&gt;item_buffer: 初始化 itembuffer (redis_key,task_table)&lt;/li&gt;
+&lt;li&gt;_collector: 初始化 Coollector (redis)&lt;/li&gt;
+&lt;li&gt;_parsers: 空列表&lt;/li&gt;
+&lt;li&gt;_parser_controls: 空列表&lt;/li&gt;
+&lt;li&gt;_parser_control_obj:PaserControl&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用教程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用教程&#34;&gt;#&lt;/a&gt; 使用教程&lt;/h3&gt;
+&lt;p&gt;可采用 download_midware，将 headers 及其他，以字典的形式下发&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;resoponse.open () 可以看打开的网站是否和浏览器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Requests.feapder (render=True)，表示打开渲染模式，parse_name 跟爬虫文件名 (用于消费任务) 该爬虫需要继承 baseparser，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Requests.feapder (params_name=&amp;quot;消费者的类名&amp;quot;), 生产者里面是不需要指定&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在爬虫集成的时候都使用 baseparser&lt;/p&gt;
+&lt;p&gt;Spider(redis_key,delete_key=True)&lt;/p&gt;
+&lt;p&gt;delete_key 可以用于重新生成 redis_key&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

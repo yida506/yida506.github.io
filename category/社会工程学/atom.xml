@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://yida506.github.io</id>
+    <title>菜b的爬虫记录 • Posts by &#34;社会工程学&#34; category</title>
+    <link href="http://yida506.github.io" />
+    <updated>2022-07-03T12:05:39.000Z</updated>
+    <entry>
+        <id>http://yida506.github.io/2022/07/03/socialengineer/</id>
+        <title>socialengineer</title>
+        <link rel="alternate" href="http://yida506.github.io/2022/07/03/socialengineer/"/>
+        <content type="html">&lt;h3 id=&#34;介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#介绍&#34;&gt;#&lt;/a&gt; 介绍&lt;/h3&gt;
+&lt;p&gt;影响信息安全的因素分为两部分，人为因素，以及技术因素，技术因素由于不断的进行迭代，现存的漏洞往往难以发现，但是人的因素往往处于短板，以攻击者的角度来讲，能拿到结果的方法才是好方法，因此，只要存在短板，信息安全必然存在泄露的可能。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一方面，只有专注于技术的人才会有网络安全的意识，这类人在公司中往往只是一少部分，同时对于任意的公司来说，往往离不开协同分工，同时由于 &amp;quot;组件化&amp;quot; 的工作，导致，大部分人只关注自己事情，对其他人所作的了解甚少，这样就存在了信息差。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;思路&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#思路&#34;&gt;#&lt;/a&gt; 思路&lt;/h3&gt;
+&lt;p&gt;对于社工攻击大致分为如下几个阶段：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立信任感&lt;/li&gt;
+&lt;li&gt;询问 (判断人的预警线，进而判断接下来的动作)&lt;/li&gt;
+&lt;li&gt;采用虚假问题隐藏自己的意图&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <updated>2022-07-03T12:05:39.000Z</updated>
+    </entry>
+</feed>

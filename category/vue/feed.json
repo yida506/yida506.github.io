@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "菜b的爬虫记录 • All posts by \"vue\" category",
+    "description": "",
+    "home_page_url": "http://yida506.github.io",
+    "items": [
+        {
+            "id": "http://yida506.github.io/2022/05/22/vue%E5%88%9D%E6%8E%A2/",
+            "url": "http://yida506.github.io/2022/05/22/vue%E5%88%9D%E6%8E%A2/",
+            "title": "vue初探",
+            "date_published": "2022-05-22T09:16:53.000Z",
+            "content_html": "<h5 id=\"项目模板\"><a class=\"anchor\" href=\"#项目模板\">#</a> 项目模板</h5>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">git</span> clone https://github.com/ElementUI/element-starter.git</pre></td></tr></table></figure><ul>\n<li>yarn 安装依赖</li>\n<li>npm run dev 打开服务</li>\n</ul>\n<h5 id=\"使用教程\"><a class=\"anchor\" href=\"#使用教程\">#</a> 使用教程</h5>\n<p>直接在 app.vue 中编写</p>\n<p>原理应该是相当于，在 html 中 new 一个 vue 对象，给定一个 id, 然后针对这个 id 绑定不同的脚本</p>\n<p>vue 中分为几个部分</p>\n<pre><code class=\"language-vue\">    &lt;template&gt; 部分用于添加模板之类的(需要在声明了id的里面创建)\n    &lt;script&gt; 中添加js,这里export defaul 用于导出方法,使得&lt;template&gt;中可以调用。\n    &lt;style&gt; 控制布局\n</code></pre>\n<h5 id=\"vue对象\"><a class=\"anchor\" href=\"#vue对象\">#</a> vue 对象</h5>\n<figure class=\"highlight javascript\"><figcaption data-lang=\"javascript\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token keyword\">new</span> <span class=\"token class-name\">Vue</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">&#123;</span></pre></td></tr><tr><td data-num=\"2\"></td><td><pre>  el<span class=\"token operator\">:</span> <span class=\"token string\">\"#test\"</span><span class=\"token punctuation\">,</span></pre></td></tr><tr><td data-num=\"3\"></td><td><pre>  <span class=\"token function-variable function\">render</span><span class=\"token operator\">:</span> <span class=\"token parameter\">h</span> <span class=\"token operator\">=></span> <span class=\"token function\">h</span><span class=\"token punctuation\">(</span>test<span class=\"token punctuation\">)</span></pre></td></tr><tr><td data-num=\"4\"></td><td><pre><span class=\"token punctuation\">&#125;</span><span class=\"token punctuation\">)</span></pre></td></tr></table></figure><p>需要针对每一个 vue 实例添加绑定的对象</p>\n<ul>\n<li>el 指代的是绑定的对象 这里 #test 表示 id 为 test</li>\n<li>render 表示指向的位置，这里指代的是导入的 test.vue 的对象，同时这里的 h 其实是 createElement 的缩写</li>\n<li></li>\n</ul>\n<h5 id=\"style语法介绍\"><a class=\"anchor\" href=\"#style语法介绍\">#</a> style 语法介绍</h5>\n<p>与 css 类似</p>\n<pre><code class=\"language-vue\">&lt;style&gt;\n    #app &#123;\n      font-family: Helvetica, sans-serif;\n      text-align: center;\n    &#125;\n&lt;/style&gt;\n</code></pre>\n",
+            "tags": []
+        }
+    ]
+}

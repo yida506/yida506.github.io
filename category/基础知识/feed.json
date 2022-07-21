@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "菜b的爬虫记录 • All posts by \"基础知识\" category",
+    "description": "",
+    "home_page_url": "http://yida506.github.io",
+    "items": [
+        {
+            "id": "http://yida506.github.io/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/",
+            "url": "http://yida506.github.io/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/",
+            "title": "基础知识",
+            "date_published": "2022-01-16T13:01:42.000Z",
+            "content_html": "<h4 id=\"迭代器\"><a class=\"anchor\" href=\"#迭代器\">#</a> 迭代器</h4>\n",
+            "tags": []
+        }
+    ]
+}

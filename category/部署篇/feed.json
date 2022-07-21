@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "菜b的爬虫记录 • All posts by \"部署篇\" category",
+    "description": "",
+    "home_page_url": "http://yida506.github.io",
+    "items": [
+        {
+            "id": "http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/",
+            "url": "http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/",
+            "title": "服务器部署随笔",
+            "date_published": "2022-02-21T13:05:26.000Z",
+            "content_html": "<h4 id=\"feaplat服务器部署\"><a class=\"anchor\" href=\"#feaplat服务器部署\">#</a> feaplat 服务器部署</h4>\n<h5 id=\"服务器选择选用centos76\"><a class=\"anchor\" href=\"#服务器选择选用centos76\">#</a> 服务器选择选用 centos7.6</h5>\n<p>账号:root</p>\n<p>密码：大小写混合</p>\n<p>直接使用 FinalShell 链接，其中 IP 地址对应公网 IP，端口对应 22 (默认)，采用上述账号密码进行账号密码登录。</p>\n<h4 id=\"docker\"><a class=\"anchor\" href=\"#docker\">#</a> Docker</h4>\n<p><strong>介绍:</strong> 本质上是通过打包的方式，将环境啥的都集中到一个地方，避免配置的复杂度，做到随用随取，同时里面相当于包含独立的 linux 主机类似 bin 啥的目录</p>\n<h6 id=\"docker-pull\"><a class=\"anchor\" href=\"#docker-pull\">#</a> docker pull：</h6>\n<p>下载网上的镜像，一般选用公用镜像，私有的建立仓库啥的</p>\n<h6 id=\"docker-run\"><a class=\"anchor\" href=\"#docker-run\">#</a> docker run:</h6>\n<table>\n<thead>\n<tr>\n<th style=\"text-align:center\">参数</th>\n<th style=\"text-align:center\">解释</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:center\">-d</td>\n<td style=\"text-align:center\">表示启动在后台</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">-p</td>\n<td style=\"text-align:center\">8888:8888 表示端口</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">-e</td>\n<td style=\"text-align:center\">环境 (对于 jupyter 镜像来说，加入 JUPYTER_ENABLE_LAB=yes 代表使用 lab 而不是 notebook)</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">-v</td>\n<td style=\"text-align:center\">给容器挂载存储卷，挂载到容器的某个目录 (/ 主机目录 : / 容器目录)</td>\n</tr>\n</tbody>\n</table>\n<p>内网穿透：<br>\n<span class=\"exturl\" data-url=\"aHR0cHM6Ly9vcGVuLmRpbmd0YWxrLmNvbS9kb2N1bWVudC9yZXNvdXJjZWRvd25sb2FkL2h0dHAtaW50cmFuZXQtcGVuZXRyYXRpb24=\">https://open.dingtalk.com/document/resourcedownload/http-intranet-penetration</span></p>\n",
+            "tags": []
+        }
+    ]
+}

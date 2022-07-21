@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "菜b的爬虫记录 • All posts by \"git\" category",
+    "description": "",
+    "home_page_url": "http://yida506.github.io",
+    "items": [
+        {
+            "id": "http://yida506.github.io/2022/02/21/git%E6%93%8D%E4%BD%9C/",
+            "url": "http://yida506.github.io/2022/02/21/git%E6%93%8D%E4%BD%9C/",
+            "title": "git操作",
+            "date_published": "2022-02-20T16:42:41.000Z",
+            "content_html": "<ol>\n<li>git add [. 代表 (添加全部代码), 也可指定单独文件目录]</li>\n<li>git commit-m  &quot;提交&quot; 设置提交名称</li>\n<li>git remote   (关联项目)</li>\n<li>git push -u origin master 提交到 github</li>\n</ol>\n",
+            "tags": []
+        }
+    ]
+}

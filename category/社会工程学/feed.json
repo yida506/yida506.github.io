@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "菜b的爬虫记录 • All posts by \"社会工程学\" category",
+    "description": "",
+    "home_page_url": "http://yida506.github.io",
+    "items": [
+        {
+            "id": "http://yida506.github.io/2022/07/03/socialengineer/",
+            "url": "http://yida506.github.io/2022/07/03/socialengineer/",
+            "title": "socialengineer",
+            "date_published": "2022-07-03T12:05:39.000Z",
+            "content_html": "<h3 id=\"介绍\"><a class=\"anchor\" href=\"#介绍\">#</a> 介绍</h3>\n<p>影响信息安全的因素分为两部分，人为因素，以及技术因素，技术因素由于不断的进行迭代，现存的漏洞往往难以发现，但是人的因素往往处于短板，以攻击者的角度来讲，能拿到结果的方法才是好方法，因此，只要存在短板，信息安全必然存在泄露的可能。</p>\n<blockquote>\n<p>一方面，只有专注于技术的人才会有网络安全的意识，这类人在公司中往往只是一少部分，同时对于任意的公司来说，往往离不开协同分工，同时由于 &quot;组件化&quot; 的工作，导致，大部分人只关注自己事情，对其他人所作的了解甚少，这样就存在了信息差。</p>\n</blockquote>\n<h3 id=\"思路\"><a class=\"anchor\" href=\"#思路\">#</a> 思路</h3>\n<p>对于社工攻击大致分为如下几个阶段：</p>\n<ul>\n<li>建立信任感</li>\n<li>询问 (判断人的预警线，进而判断接下来的动作)</li>\n<li>采用虚假问题隐藏自己的意图</li>\n</ul>\n",
+            "tags": []
+        }
+    ]
+}
