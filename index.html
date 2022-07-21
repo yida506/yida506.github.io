@@ -1,1079 +1,734 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="alternate" type="application/rss+xml" title="菜b的爬虫记录" href="http://yida506.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="菜b的爬虫记录" href="http://yida506.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="菜b的爬虫记录" href="http://yida506.github.io/feed.json" />
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="spider">
-<meta property="og:url" content="http://yida506.github.io/index.html">
-<meta property="og:site_name" content="spider">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="Lan">
-<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
 
 <link rel="canonical" href="http://yida506.github.io/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'en'
-  };
-</script>
 
-  <title>spider</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
+  <title>Yume Shoka = 菜b的爬虫记录</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">spider</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+            <a href="/" class="logo" rel="start"><p class="artboard">Yume Shoka</p>
+              <h1 itemprop="name headline" class="title">菜b的爬虫记录</h1>
+            </a>
+          
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
     </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
 </nav>
 
-
-
-
-</div>
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicliierfjj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeu7txpzj20zk0m81kx.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclx29mstj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitht3xtj20zk0m8k5v.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipey0a334j20zk0m8qpt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipew8gmvyj20zk0m87wh.jpg"></li>
+        </ul>
+      </div>
     </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="index wrap">
+    <h2 class="divider">Post List</h2>
+    <div class="segments posts">
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/07/03/socialengineer/" itemprop="url" title="socialengineer"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1gicm0fdw5cj20zk0m8hdt.jpg"></a>
   </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/22/vue%E5%88%9D%E6%8E%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-07-03 20:05:39">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
     </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-07-03T20:05:39+08:00">2022-07-03</time>
+  </span>
+</div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
+    <h3><a href="/2022/07/03/socialengineer/" itemprop="url" title="socialengineer">socialengineer</a></h3>
+    <div class="excerpt">
+        介绍影响信息安全的因素分为两部分，人为因素，以及技术因素，技术因素由于不断的进行迭代，现存的漏洞往往难以发现，但是人的因素往往处于短板，以攻击者的角度来讲，能拿到结果的方法才是好方法，因此，只要存在短板，信息安全必然存在泄露的可能。
+
+一方面，只有专注于技术的人才会有网络安全的意识，这类人在公司中往往只是一少部分，同时对于任意的公司来说，往往离不开协同分工，同时由于”组件化”的工作，导致，大部分人只关注自己事情，对其他人所作的了解甚少，这样就存在了信息差。
+
+思路对于社工攻击大致分为如下几个阶段：
+
+建立信任感
+询问(判断人的预警线，进而判断接下来的动作)
+采用虚假问题隐藏自己的意图
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/" itemprop="url" title="社会工程学"><i class="ic i-flag"></i>社会工程学</a>
+      </span>
+    </div>
+    <a href="/2022/07/03/socialengineer/" itemprop="url" title="socialengineer" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" itemprop="url" title="数据挖掘介绍"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1giclh3brzpj20zk0m8ann.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-06-01 20:34:27">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
     </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" class="post-title-link" itemprop="url">vue初探</a>
-        </h2>
+    <time itemprop="dateCreated datePublished" datetime="2022-06-01T20:34:27+08:00">2022-06-01</time>
+  </span>
+</div>
 
-        <div class="post-meta">
+    <h3><a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" itemprop="url" title="数据挖掘介绍">数据挖掘介绍</a></h3>
+    <div class="excerpt">
+        概述
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" title="机器学习"><i class="ic i-flag"></i>机器学习</a>
+      </span>
+    </div>
+    <a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" itemprop="url" title="数据挖掘介绍" class="btn">more...</a>
+  </div>
+</article>
 
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" itemprop="url" title="vue初探"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></a>
+  </div>
+  <div class="info">
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+<div class="meta">
+  <span class="item" title="Created: 2022-05-22 17:16:53">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-22T17:16:53+08:00">2022-05-22</time>
+  </span>
+</div>
 
-      
-          
-      
+    <h3><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" itemprop="url" title="vue初探">vue初探</a></h3>
+    <div class="excerpt">
+        项目模板git clone https://github.com/ElementUI/element-starter.git
+
+yarn 安装依赖
+npm run dev 打开服务
+
+使用教程直接在app.vue中编写
+原理应该是相当于,在html中new一个vue对象,给定一个id,然后针对这个id绑定不同的脚本
+vue中分为几个部分
+&amp;lt;template&amp;gt; 部分用于添加模板之类的(需要在声明了id的里面创建)
+&amp;lt;script&amp;gt; 中添加js,这里export defaul...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/vue/" itemprop="url" title="vue"><i class="ic i-flag"></i>vue</a>
+      </span>
+    </div>
+    <a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" itemprop="url" title="vue初探" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" itemprop="url" title="抖店vmp"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1giclfdu6exj20zk0m87hw.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-05-21 19:08:25">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-21T19:08:25+08:00">2022-05-21</time>
+  </span>
+</div>
+
+    <h3><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" itemprop="url" title="抖店vmp">抖店vmp</a></h3>
+    <div class="excerpt">
+        VMP介绍&amp;quot;索引j&amp;quot;, j,&amp;quot;索引O&amp;quot;, O, &amp;quot; 值：&amp;quot;, JSON.stringify(S, function(key, value) &amp;#123;if (value == window) &amp;#123;return undefined&amp;#125; return...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/jsvmp/" itemprop="url" title="jsvmp"><i class="ic i-flag"></i>jsvmp</a>
+      </span>
+    </div>
+    <a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" itemprop="url" title="抖店vmp" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" itemprop="url" title="java基础"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1giciuv0socj20zk0m8qes.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-05-15 11:27:07">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-15T11:27:07+08:00">2022-05-15</time>
+  </span>
+</div>
+
+    <h3><a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" itemprop="url" title="java基础">java基础</a></h3>
+    <div class="excerpt">
+        反射Java反射是在运行状态中，对于任意类，都能拿到这个类的所有属性和方法。
+XposedAPI构造方法HOOK//用于hook构造方法
+RposedHelpers.findAndHookConstructor(
+String classname, //类名 一般为xxxx.&amp;lt;classname&amp;gt;的形式
+classLoader classloader, //加载类的 不用管 默认就行
+Object..., //传递的参数
+parameterTypesAndCallback // 回调方法...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/Java/" itemprop="url" title="Java"><i class="ic i-flag"></i>Java</a>
+      </span>
+    </div>
+    <a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" itemprop="url" title="java基础" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/14/unidbg/" itemprop="url" title="unidbg"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1gicit31ffoj20zk0m8naf.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-05-14 19:34:31">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-14T19:34:31+08:00">2022-05-14</time>
+  </span>
+</div>
+
+    <h3><a href="/2022/05/14/unidbg/" itemprop="url" title="unidbg">unidbg</a></h3>
+    <div class="excerpt">
+        前提纪要在app加密中，加密逻辑不单单出现在java方法中，也有可能出现在native方法中，wiki中介绍，java native interface是能将java代码运行在jvm同时可以让其他语言类似C,C++本机调用的方法。
+同时，在java代码中会以如下方式出现：
+// 加载库
+static &amp;#123;
+System.loadLibrary(o00OO.OooO00o.OooO00o(-592843821021945178L));
+&amp;#125;
+
+// 加载Native方法
+public native String sign(String...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/app%E9%80%86%E5%90%91/" itemprop="url" title="app逆向"><i class="ic i-flag"></i>app逆向</a>
+      </span>
+    </div>
+    <a href="/2022/05/14/unidbg/" itemprop="url" title="unidbg" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" itemprop="url" title="抓包专题"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1giciryrr3rj20zk0m8nhk.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-05-09 22:55:19">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-09T22:55:19+08:00">2022-05-09</time>
+  </span>
+</div>
+
+    <h3><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" itemprop="url" title="抓包专题">抓包专题</a></h3>
+    <div class="excerpt">
+        抓包介绍本质上抓包就是中间人攻击，让流量先流经代理服务器然后在转发给本机。
+在职
+
+花费时间：10分钟
+
+感受：整体流程比较清晰,特征工程的注释很详细,直接运行很流畅
+
+缺点: 在做特征工程前,缺乏对整体数据的描述(没解释特征筛选相关的内容)，建议增加可视化的特征展示，以及筛选特征的思路。
+模型训练较单一，缺乏调参的细节以及训练结果的可视化展示，建议增加模型多样性及可视化展示，方便用户对比模型。
+3.2中xunfei_demo中的lightgbm的模型解释只包含一项(理论要素过多，比较适合有基础的)，容易劝退初学者，建议对于模型提供多个链接，让用户自行x
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/app%E5%9F%BA%E7%A1%80/" itemprop="url" title="app基础"><i class="ic i-flag"></i>app基础</a>
+      </span>
+    </div>
+    <a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" itemprop="url" title="抓包专题" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/05/ast%E8%A7%A3vmp/" itemprop="url" title="ast解vmp"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1gipeudstjqj20zk0m8k3r.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-05-05 19:16:46">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-05T19:16:46+08:00">2022-05-05</time>
+  </span>
+</div>
+
+    <h3><a href="/2022/05/05/ast%E8%A7%A3vmp/" itemprop="url" title="ast解vmp">ast解vmp</a></h3>
+    <div class="excerpt">
+        知乎vmp大致流程首先会初始化参数，由于函数只传入e进来(为一个大字符串)，所以t、n会根据条件赋予初值0、和一个空数组，接着会进入this.D这个方法中，主要是讲这个初始大字符串传入，然后，对其进行一系列的分割，计算的操作，生成两个大数组，分别绑定在this.G和this.b上，这对应的是初始化的流程。
+
+接着就是进入for循环内部，可以清晰的看到有三个明显的位置，其中r=this.G[this.C++]，是做了一个从数组中取数的操作，接着这个if判断用于限定终止条件，很明显，这个r在每一步for循环中都会+1,直到数组值越界结束(对应的这个396个流程的this.G的数组的长度)，接着会将...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/ast%E5%BA%94%E7%94%A8/" itemprop="url" title="ast应用"><i class="ic i-flag"></i>ast应用</a>
+      </span>
+    </div>
+    <a href="/2022/05/05/ast%E8%A7%A3vmp/" itemprop="url" title="ast解vmp" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/03/Ratel/" itemprop="url" title="Ratel"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1gipey0a334j20zk0m8qpt.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-05-03 14:09:45">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-03T14:09:45+08:00">2022-05-03</time>
+  </span>
+</div>
+
+    <h3><a href="/2022/05/03/Ratel/" itemprop="url" title="Ratel">Ratel</a></h3>
+    <div class="excerpt">
+        Ratel介绍直接adb install 安装。
+app感染：使用ratel.bat + app包名 生成被感染的app
+Ratel插件开发模板地址 https://github.com/virjarRatel/ratel-module-template.git
+直接使用模板创建
+template.bat -a package -m dir
+@Override
+public void handleLoadPackage(final RC_LoadPackage.LoadPackageParam lpparam) throws Throwable &amp;#123;
+
+Log.d(tag,...
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/app%E9%80%86%E5%90%91/" itemprop="url" title="app逆向"><i class="ic i-flag"></i>app逆向</a>
+      </span>
+    </div>
+    <a href="/2022/05/03/Ratel/" itemprop="url" title="Ratel" class="btn">more...</a>
+  </div>
+</article>
+
+        
+<article class="item">
+  <div class="cover">
+    <a href="/2022/05/03/go/" itemprop="url" title="go"><img data-src="https://tva3.sinaimg.cn/mw690/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></a>
+  </div>
+  <div class="info">
+    
+<div class="meta">
+  <span class="item" title="Created: 2022-05-03 12:52:07">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-03T12:52:07+08:00">2022-05-03</time>
+  </span>
+</div>
+
+    <h3><a href="/2022/05/03/go/" itemprop="url" title="go">go</a></h3>
+    <div class="excerpt">
+        go基础
+    </div>
+    <div class="meta footer">
+      <span>
+        <a href="/categories/go/" itemprop="url" title="go"><i class="ic i-flag"></i>go</a>
+      </span>
+    </div>
+    <a href="/2022/05/03/go/" itemprop="url" title="go" class="btn">more...</a>
+  </div>
+</article>
+
     </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/21/%E6%8A%96%E5%BA%97vmp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" class="post-title-link" itemprop="url">抖店vmp</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="VMP介绍"><a href="#VMP介绍" class="headerlink" title="VMP介绍"></a>VMP介绍</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;索引j&quot;</span>, j,<span class="string">&quot;索引O&quot;</span>, O, <span class="string">&quot; 值：&quot;</span>, <span class="built_in">JSON</span>.stringify(S, <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>) </span>&#123;<span class="keyword">if</span> (value == <span class="built_in">window</span>) &#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125; <span class="keyword">return</span> value&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="jsvmp"><a href="#jsvmp" class="headerlink" title="jsvmp"></a>jsvmp</h1><h3 id="签名分析"><a href="#签名分析" class="headerlink" title="签名分析"></a>签名分析</h3><p>签名参数：<br>_02B4Z6wo00101loNtfAAAIDDhHvtVmvJQOZaCbFAAPQYwzYkMBmMy0OIRqJQNqhou0eH.DJLTigPioA7TAwBj3B7N1HhHxmv5dJlR1wA5ViS1rIJXRF.2jx88ty4qN9zJEh5kPLfJLRpsdxx14<br>根据插桩日志,可以将上述分为8部分<br>sign1:loNtf<br>sign2:AAAID<br>sign3:DhHvtV<br>sign4:mvJQO<br>sign5:ZaCbF<br>sign6:AAPQY<br>sign7: wzYk<br>sign8: MBmMy0OIRqJQNqhou0eH.DJLTigPioA7TAwBj3B7N1HhHxmv5dJlR1wA5ViS1rIJXRF.2jx88ty4qN9zJEh5kPLfJLRpsdxx<br>最后在对整体的拼接计算一个尾缀</p>
-<h5 id="字符索引修改"><a href="#字符索引修改" class="headerlink" title="字符索引修改"></a>字符索引修改</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move_char_calc</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">0</span> &lt;= num &amp;&amp; num &lt; <span class="number">26</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num + <span class="number">65</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">26</span> &lt;= num &amp;&amp; num &lt; <span class="number">52</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num + <span class="number">71</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num == <span class="number">62</span> || num == <span class="number">63</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num - <span class="number">17</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num - <span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>根据插桩日志的分析,发现在每一个签名计算的过程中,在最后都会进行一个计算,这个值主要是用于修改字符的索引,将不存在的剔除出去</p>
-<h5 id="魔改sdbm"><a href="#魔改sdbm" class="headerlink" title="魔改sdbm"></a>魔改sdbm</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++)&#123;</span><br><span class="line">        hash = ((hash * <span class="number">65599</span>) &gt;&gt;&gt; <span class="number">0</span>) + strurl.charCodeAt(hash % strurl.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash2</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;strurl.length; i++)&#123;</span><br><span class="line">        hash = (hash ^ strurl.charCodeAt(i)) * <span class="number">65599</span> &gt;&gt;&gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash3</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;strurl.length; i++)&#123;</span><br><span class="line">        hash = (hash * <span class="number">65599</span> + strurl.charCodeAt(i)) &gt;&gt;&gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这里包含了三种sdbm算法的魔改,主要用于计算不同的hash值用于后续计算</p>
-<h5 id="sign1"><a href="#sign1" class="headerlink" title="sign1"></a>sign1</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.offset1 = [<span class="number">24</span>, <span class="number">18</span>, <span class="number">12</span>, <span class="number">6</span>, <span class="number">0</span>];</span><br><span class="line"><span class="function"><span class="title">get_signature1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> now_str = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> index <span class="keyword">in</span> <span class="built_in">this</span>.offset1)&#123;</span><br><span class="line">            <span class="keyword">let</span> charnum = <span class="built_in">this</span>.nownumble &gt;&gt; <span class="number">2</span> &gt;&gt; <span class="built_in">this</span>.offset1[index] &amp; <span class="number">63</span>;</span><br><span class="line">            now_str += <span class="built_in">String</span>.fromCharCode(move_char_calc(charnum));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;sign1:&#x27;</span>+now_str);</span><br><span class="line">        <span class="keyword">return</span> now_str;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-<p>这里的this.nownumble是由长数字计算出来,长数字是由浏览器reference,时间戳,canves指纹计算得到<br>其他sign大同小异</p>
-<h5 id="sign4"><a href="#sign4" class="headerlink" title="sign4"></a>sign4</h5><p>sign4,sign5,sign6都还使用了别的参数进行计算.<br>sign4的参数包含url修改后的参数拼接计算以及浏览器user-agent的sdbm计算</p>
-<h5 id="sign8"><a href="#sign8" class="headerlink" title="sign8"></a>sign8</h5><p>sign8的计算主要涉及到一个18数组的初始化,以及八次变化,同时包含了cookie中的sec_id</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/15/java%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">java基础</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>886</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><p>Java反射是在运行状态中，对于任意类，都能拿到这个类的所有属性和方法。</p>
-<h4 id="XposedAPI"><a href="#XposedAPI" class="headerlink" title="XposedAPI"></a>XposedAPI</h4><h5 id="构造方法HOOK"><a href="#构造方法HOOK" class="headerlink" title="构造方法HOOK"></a>构造方法HOOK</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用于hook构造方法</span></span><br><span class="line">RposedHelpers.findAndHookConstructor(</span><br><span class="line">	String classname, <span class="comment">//类名 一般为xxxx.&lt;classname&gt;的形式</span></span><br><span class="line">	classLoader classloader, <span class="comment">//加载类的 不用管 默认就行</span></span><br><span class="line">	Object..., <span class="comment">//传递的参数</span></span><br><span class="line">	parameterTypesAndCallback <span class="comment">// 回调方法 分为hook前和hook后</span></span><br><span class="line">	</span><br><span class="line">)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>若是直接传类，那么就不需要传入classloader</p>
-</blockquote>
-<h5 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h5><p>callcack主要包含两种，一种是HOOK方法使用前，一种是HOOK方法使用后，可以在里面干任何相干的事(修改参数、返回参数etc..)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> RC_MethodHook()&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">beforeHookedMethod</span><span class="params">(MethodHookParam param)</span> <span class="keyword">throws</span> Throwable 						</span>&#123;</span><br><span class="line">                           <span class="keyword">super</span>.beforeHookedMethod(param);</span><br><span class="line">                           Log.d(tag, <span class="string">&quot;进入内部&quot;</span>);</span><br><span class="line">                       &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这里的param指代的就是传递进来的参数列表，如果要打印参数，那就需要先构建一个对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object[] objects = param.args;</span><br><span class="line"></span><br><span class="line">params.setResult(); <span class="comment">//z</span></span><br><span class="line">params.getResult(); <span class="comment">// 获取返回值</span></span><br></pre></td></tr></table></figure>
-<h5 id="方法HOOK"><a href="#方法HOOK" class="headerlink" title="方法HOOK"></a>方法HOOK</h5> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RposedHelpers.findAndHookMethod(</span><br><span class="line">	String classname, //类名 一般为xxxx.&lt;classname&gt;的形式</span><br><span class="line">classLoader classloader, //加载类的 不用管 默认就行</span><br><span class="line">String methodName, //方法名</span><br><span class="line">Object..., //传递的参数</span><br><span class="line">parameterTypesAndCallback // 回调方法 分为hook前和hook后</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/14/unidbg/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/14/unidbg/" class="post-title-link" itemprop="url">unidbg</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>406</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="前提纪要"><a href="#前提纪要" class="headerlink" title="前提纪要"></a>前提纪要</h4><p>在app加密中，加密逻辑不单单出现在java方法中，也有可能出现在native方法中，wiki中介绍，java native interface是能将java代码运行在jvm同时可以让其他语言类似C,C++本机调用的方法。</p>
-<p>同时，在java代码中会以如下方式出现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载库</span></span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">   System.loadLibrary(o00OO.OooO00o.OooO00o(-<span class="number">592843821021945178L</span>));</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 加载Native方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">sign</span><span class="params">(String str)</span></span>;</span><br></pre></td></tr></table></figure>
-<h4 id="Unidbg介绍"><a href="#Unidbg介绍" class="headerlink" title="Unidbg介绍"></a>Unidbg介绍</h4><p>unidbg是一个基于 unicorn 的逆向工具，可以直接调用Android和iOS中的 <code>so</code> 文件。项目的GitHub地址为<a target="_blank" rel="noopener" href="https://github.com/zhkl0228/unidbg。">https://github.com/zhkl0228/unidbg。</a></p>
-<p> 本质上是java可以调用c中的方法，那么只要模拟其方法即可。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" class="post-title-link" itemprop="url">抓包专题</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>37</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="抓包介绍"><a href="#抓包介绍" class="headerlink" title="抓包介绍"></a>抓包介绍</h4><p>本质上抓包就是中间人攻击，让流量先流经代理服务器然后在转发给本机。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/05/ast%E8%A7%A3vmp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/05/ast%E8%A7%A3vmp/" class="post-title-link" itemprop="url">ast解vmp</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="知乎vmp"><a href="#知乎vmp" class="headerlink" title="知乎vmp"></a>知乎vmp</h4><h5 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h5><p>首先会初始化参数，由于函数只传入e进来(为一个大字符串)，所以t、n会根据条件赋予初值0、和一个空数组，接着会进入this.D这个方法中，主要是讲这个初始大字符串传入，然后，对其进行一系列的分割，计算的操作，生成两个大数组，分别绑定在this.G和this.b上，这对应的是初始化的流程。</p>
-<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505210459984.png" alt="image-20220505210459984"></p>
-<p>接着就是进入for循环内部，可以清晰的看到有三个明显的位置，其中r=this.G[this.C++]，是做了一个从数组中取数的操作，接着这个if判断用于限定终止条件，很明显，这个r在每一步for循环中都会+1,直到数组值越界结束(对应的这个396个流程的this.G的数组的长度)，接着会将r这个值，传入this.e这个方法中。</p>
-<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505211331204.png" alt="image-20220505211331204"></p>
-<p>跟进去，发现，这里有个移位操作，然后会生成一个值，然后这个值会影响走入不同的分支</p>
-<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505211820473.png" alt="image-20220505211820473"></p>
-<p>this.J为一个具有16个键值的对象，这里的键为14对应的值为u，然后就进入了u函数中</p>
-<blockquote>
-<p>也就是说，大数组中的每一个值，都会有唯一的一个函数与其绑定，同时其绑定由其值经过一个移位运算得到，暂时将这些函数统称为选择函数(会计算一些初始值)。</p>
-</blockquote>
-<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505212416451.png" alt="image-20220505212416451"></p>
-<p>接下来会生成一个this.h，目前这个是干什么的，还不得而知。</p>
-<p>最后就进入了一个这样的函数中，可以看到，</p>
-<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505212535506.png" alt="image-20220505212535506"></p>
-<p>此时的e指代的是一个对象，然后t治理指代刚刚生成的u{h:7},然后给与n赋予了一个[0]数组。</p>
-<p>然后将e.k中的值push到n中，接着，将e.r[3] 赋予一个刚生成的函数，这时候，this.r中的数组就从一个[0,0,0,0] 变成了 [0,0,0,function];</p>
-<p>接着继续跟，我们绕过选择函数后，发现，进入了一个switchcase控制流，在这里，我们发现</p>
-<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505214343034.png" alt="image-20220505214343034"></p>
-<p>每一个this.t的值，会决定接下来的流程，也就是说，this.t会进行一个操作，选择进行什么运算。</p>
-<p>这一步实际上是将刚刚生成的哪个函数push到数组中，</p>
-<p>第三步是将小数组中的乱码做一个解密的操作，然后也push到e.f中。</p>
-<p>第四步是将e.f中的数取出来，然后push了个空对象进去，</p>
-<p><img src="/2022/05/05/ast%E8%A7%A3vmp/image-20220505215521026.png" alt="image-20220505215521026"></p>
-<p>第五步，又是解密操作，这一步生成了一个 _ encrypt字符，然后将对象中添加一个键值对，键为_encrypt，值为一开始的那个函数，这样就生成了第一个__g.encrypt 的函数，接着在跟进去就发现，索引值是从7开始的了。</p>
-<p>也就是说前六步的流程就是给与__g这个对象，赋值了一个函数，然后，当我们在传入参数的时候，就会又进入其逻辑，至此，我们已经知道了他的具体操作，但是我们要如何对其进行还原呢？</p>
-<p>在对ali等控制流进行还原的时候，我们都是通过从起始流程出发，不断的对其进行节点合并等操作，但是那局限于代码已知的情况，但是这里，进行的操作往往都是虚拟化的(完全是通过对数组的处理进行的操作)。</p>
-<p>同时，通过对上述的观察，我们发现本质上都是在通过其余的指令对那个4位的数组进行操作，假使我们能根据他的流程，找到对应的索引数，也就是要操作的变量，然后在将其代码进行生成，那么就同样可以达到代码顺序执行的操作。</p>
-<h5 id="还原思路"><a href="#还原思路" class="headerlink" title="还原思路"></a>还原思路</h5><p>要对上述进行一个还原，首先要做的，就是构建修饰代码，因为，我们在其中，发现有值生成的部分，有字符串解密的过程，我们希望生成的代码，尽可能简洁，不被任何干扰项影响。</p>
-<p>在javascript中，运行一串js代码，会执行词法分析-&gt;句法分析-&gt;解析成ast语法树-&gt;解释器解析这四个步骤(个人理解)，vm防护的本质就是，将代码逻辑隐藏到数组中，通过对数组不断处理，来达到生成加密参数的流程，这样一来，极大的增加了调试成本，如果只把加密逻辑使用vmp实现，那么对web端的影响微乎其微。</p>
-<p>个人认为，将其实际的代码还原出具有实际逻辑的办法，只有针对其流程中的每一个case进行分析，然后看透其本质，最终通过ast，生成代码。</p>
-<blockquote>
-<p>与还原switch-case类似，但是唯一不同在于，要人工分析每一个步骤，然后生成最简代码。</p>
-</blockquote>
-<p><strong>还原就是闲的蛋疼</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/03/Ratel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/03/Ratel/" class="post-title-link" itemprop="url">Ratel</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>671</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Ratel介绍"><a href="#Ratel介绍" class="headerlink" title="Ratel介绍"></a>Ratel介绍</h4><p>直接adb install 安装。</p>
-<h6 id="app感染："><a href="#app感染：" class="headerlink" title="app感染："></a>app感染：</h6><p>使用ratel.bat + app包名 生成被感染的app</p>
-<h6 id="Ratel插件开发"><a href="#Ratel插件开发" class="headerlink" title="Ratel插件开发"></a>Ratel插件开发</h6><p>模板地址  <a target="_blank" rel="noopener" href="https://github.com/virjarRatel/ratel-module-template.git">https://github.com/virjarRatel/ratel-module-template.git</a></p>
-<p>直接使用模板创建</p>
-<p>template.bat -a package<name> -m dir<name></name></name></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(<span class="keyword">final</span> RC_LoadPackage.LoadPackageParam lpparam)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    </span><br><span class="line">    Log.d(tag, <span class="string">&quot;hook begin&quot;</span>);</span><br><span class="line">    Log.d(tag, <span class="string">&quot;current pacakage name : &quot;</span> + lpparam.packageName);</span><br><span class="line">    </span><br><span class="line">   <span class="comment">//lpparam.packageName 可以输出包名,如果要针包hook,就需要z</span></span><br><span class="line">   <span class="keyword">if</span>(lpparam.packageName.equals(<span class="string">&quot;com.example.myapplication&quot;</span>)) &#123;</span><br><span class="line">        Log.d(tag, <span class="string">&quot;current is in app package&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">    addFloatingButtonForActivity(lpparam);</span><br><span class="line">    Log.d(tag, <span class="string">&quot;hook end&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="脱壳"><a href="#脱壳" class="headerlink" title="脱壳"></a>脱壳</h6><p>安全公司提供的加固方案，加壳后的app会隐藏源码。  </p>
-<p>本质上是等待java虚拟机加载，然后dump出dex文件</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/03/go/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/03/go/" class="post-title-link" itemprop="url">go</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>4</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="go基础"><a href="#go基础" class="headerlink" title="go基础"></a>go基础</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/23/Android%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">Android基础</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="APP介绍"><a href="#APP介绍" class="headerlink" title="APP介绍"></a>APP介绍</h3><h5 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h5><p>直接在android中创建一个hello world项目。</p>
-<p><img src="/2022/04/23/Android%E5%9F%BA%E7%A1%80/image-20220425230616509.png" alt="image-20220425230616509"></p>
-<p>可以看到包含很多内容，这里的java 里面有一个应用名称目录，其中包含了MainActivity,</p>
-<p>Android项目的资源会被存储在res文件夹中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.myapplication;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在MainActivity中，基础了一个基础的Activity类，然后又重写了这个onCreate方法，最后设置了layout.activity_main为View.</p>
-<p><img src="/2022/04/23/Android%E5%9F%BA%E7%A1%80/image-20220425232435459.png" alt="image-20220425232435459"></p>
-<p>这里编写了hello world 然后渲染到了app主界面上.</p>
-<h6 id="点击事件添加"><a href="#点击事件添加" class="headerlink" title="点击事件添加"></a>点击事件添加</h6><p>直接修改TextView为Button,然后添加id属性(“@+id/check”)即可。</p>
-<p>然后在MainActivity中添加如下代码，绑定button按钮并添加事件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Button bt_check = findViewById(R.id.check);</span><br><span class="line">        bt_check.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                Log.i(<span class="string">&quot;rousue&quot;</span>, <span class="string">&quot;hello world from button&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
-<p><img src="/2022/04/23/Android%E5%9F%BA%E7%A1%80/image-20220426231939847.png" alt="image-20220426231939847"></p>
-<p>这样一来每次点击在后台返回了日志。</p>
-<h6 id="Android组成部分"><a href="#Android组成部分" class="headerlink" title="Android组成部分"></a>Android组成部分</h6><ul>
-<li>Activity 表示层 展示UI，响应用户动作</li>
-<li>Service 更新数据源和Activity</li>
-<li>Content Provider 数据储存器</li>
-<li>Intent 消息传递框架</li>
-<li>Broadcast Receiver Intet监听器</li>
-<li>Widget 可视化组件</li>
-<li>Notification 向用户发起信号</li>
-</ul>
-<blockquote>
-<p>Manifest存储在最底层，定义应用程序的组件和需求的结构和元数据。</p>
-</blockquote>
-<h5 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h5><p>该类为所有用户界面的基础。</p>
-<p>每一个Activity都表示一个屏幕，类似web中的html</p>
-<h4 id="Andriod库"><a href="#Andriod库" class="headerlink" title="Andriod库"></a>Andriod库</h4><h6 id="okhttp3"><a href="#okhttp3" class="headerlink" title="okhttp3:"></a>okhttp3:</h6><p>网络请求相关(类似requests)</p>
-<h6 id="retrofit"><a href="#retrofit" class="headerlink" title="retrofit:"></a>retrofit:</h6><p>网络请求相关</p>
-<h6 id="rxjava"><a href="#rxjava" class="headerlink" title="rxjava:"></a>rxjava:</h6><p>与retrofit结合使用</p>
-<h6 id="gson"><a href="#gson" class="headerlink" title="gson:"></a>gson:</h6><p>序列化</p>
-<h3 id="Android开发"><a href="#Android开发" class="headerlink" title="Android开发"></a>Android开发</h3><h4 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h4><h6 id="intent"><a href="#intent" class="headerlink" title="intent"></a>intent</h6><p>主要用于组件之间的传输，类似从一个activity到另一个activity。</p>
-<p>要实现这种传输，需要实例化intent对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">btn.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                setTitle(<span class="string">&quot;被点击了&quot;</span>);</span><br><span class="line">                Log.i(TAG, <span class="string">&quot;onClick: &quot;</span>);</span><br><span class="line">                <span class="comment">//实例化intentd</span></span><br><span class="line">                Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">                startActivity(intent);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/04/21/Frida/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/21/Frida/" class="post-title-link" itemprop="url">Frida</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>3.9k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>4 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Frida基础"><a href="#Frida基础" class="headerlink" title="Frida基础"></a>Frida基础</h4><h5 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> adb shell</span><br><span class="line"> su </span><br><span class="line"> cd /data/local/tmp/</span><br><span class="line"> chmod 777 对应frida-serve的名字</span><br><span class="line"> ./对应frida-serve的名字+&amp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//cmd 端口转发</span><br><span class="line">adb forward tcp:27043 tcp:27043</span><br><span class="line">adb forward tcp:27042 tcp:27042</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="HOOK"><a href="#HOOK" class="headerlink" title="HOOK"></a>HOOK</h5><h6 id="python"><a href="#python" class="headerlink" title="python"></a>python</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">@author: lan</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@contact: </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Created on: 2022/4/20 19:54</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span>(<span class="params">message, data</span>):</span></span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">test_signature = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">	js代码</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动方式1 attachH后跟进程名</span></span><br><span class="line">process = frida.get_usb_device(-<span class="number">1</span>).attach(<span class="string">&#x27;com.chaozhuo.texteditor&#x27;</span>)</span><br><span class="line">script = process.create_script(test_signature)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>本质上写Js代码即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process = frida.get_usb_device().enumerate_processes()</span><br><span class="line"><span class="comment">#可以查看当前运行的进程名</span></span><br><span class="line"><span class="built_in">print</span>(process)</span><br></pre></td></tr></table></figure>
-<p>也可以直接adb查看进程，这里条件可以任意，为com.xxx皆可，目的是缩小范围. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell &quot;ps | grep 条件&quot;</span><br></pre></td></tr></table></figure>
-<h6 id="重载的代码hook"><a href="#重载的代码hook" class="headerlink" title="重载的代码hook"></a>重载的代码hook</h6><p><img src="/2022/04/21/Frida/image-20220423112839478.png" alt="image-20220423112839478"></p>
-<p>以该处为例，该类中有两个a方法，我们只想hook上面一个，直接写就会报错。</p>
-<p><img src="/2022/04/21/Frida/image-20220423113034693.png" alt="image-20220423113034693"></p>
-<p>这样，我们只需要等他报错后，修改代码即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加上.overload(&#x27;a.u$a&#x27;)</span></span><br><span class="line">Signature.a.overload(<span class="string">&#x27;a.u$a&#x27;</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;enter a&#x27;</span>);    </span><br><span class="line">            <span class="built_in">console</span>.log(val);</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.a(val);</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
-<p>以上是对于调用的函数进行hook，得到的，还有一种情况，就是方法没有被调用，我们想查看他的方法，拿到其结果，那么我们可以采用Java.choose(类名+回调)。</p>
-<h6 id="js"><a href="#js" class="headerlink" title="js"></a>js</h6><p>也可以考虑直接编写js脚本进行frida.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 打印出当前手机上的进程</span><br><span class="line">frida-ps -Ua</span><br><span class="line">//后面的是进程名，只需要在jsl</span><br><span class="line">frida -U -l test.js com.example.simpleencryption</span><br></pre></td></tr></table></figure>
-<h5 id="root检测"><a href="#root检测" class="headerlink" title="root检测"></a>root检测</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showStacks</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(Java.use(<span class="string">&quot;android.util.Log&quot;</span>).getStackTraceString(Java.use(<span class="string">&quot;java.lang.Exception&quot;</span>).$new()));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hook</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> commonPaths = [</span><br><span class="line">            <span class="string">&quot;/data/local/bin/su&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/data/local/su&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/data/local/xbin/su&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/dev/com.koushikdutta.superuser.daemon/&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/sbin/su&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/app/Superuser.apk&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/bin/failsafe/su&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/bin/su&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/etc/init.d/99SuperSUDaemon&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/sd/xbin/su&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/xbin/busybox&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/xbin/daemonsu&quot;</span>,</span><br><span class="line">            <span class="string">&quot;/system/xbin/su&quot;</span>,</span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> JavaString = Java.use(<span class="string">&quot;java.lang.String&quot;</span>);</span><br><span class="line">        JavaString.contains.implementation = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (name !== <span class="string">&quot;test-keys&quot;</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> ret = <span class="built_in">this</span>.contains(name);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&quot;JavaString&quot;</span>,name,ret);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">var</span> ret = <span class="built_in">this</span>.contains(name);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ret</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> JavaRuntime = Java.use(<span class="string">&quot;java.lang.Runtime&quot;</span>);</span><br><span class="line">        <span class="keyword">var</span> iOException = Java.use(<span class="string">&quot;java.io.IOException&quot;</span>);</span><br><span class="line">        JavaRuntime.exec.overload(<span class="string">&quot;java.lang.String&quot;</span>).implementation = <span class="function"><span class="keyword">function</span> (<span class="params">command</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (command.endsWith(<span class="string">&quot;su&quot;</span>)) &#123;</span><br><span class="line">                ret = <span class="built_in">this</span>.exec(command);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&quot;JavaRuntime&quot;</span> ,command,ret);</span><br><span class="line">                <span class="keyword">throw</span> iOException.$new(<span class="string">&quot;Hacker&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">var</span> ret = <span class="built_in">this</span>.exec(command);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&quot;JavaRuntime2&quot;</span> ,command,ret)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> JavaFile = Java.use(<span class="string">&quot;java.io.File&quot;</span>);</span><br><span class="line">        JavaFile.exists.implementation = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">const</span> filename = <span class="built_in">this</span>.getAbsolutePath();</span><br><span class="line">            <span class="keyword">if</span> (commonPaths.indexOf(filename) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> ret = <span class="built_in">this</span>.exists();</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&quot;JavaFile&quot;</span>,filename,ret);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">var</span> ret = <span class="built_in">this</span>.exists();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(hook, <span class="number">0</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h4 id="Objection"><a href="#Objection" class="headerlink" title="Objection"></a>Objection</h4><p>Objection本质上是frida的一种工具实现，可以通过命令行输出，实现frida交互过程，达到类调用，hook的目的。</p>
-<h6 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h6><p>由于frida版本是14.1.3，直接pip install objection即可</p>
-<h6 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 注入代码</span><br><span class="line">objection -g 进程名 explore  --startup-command &quot;android root disable&quot; &lt;在启动前注入命令&gt;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>寻找包名 frida-ps -U | grep 参数</li>
-<li>Objection注入</li>
-<li>android hooking search classes[类名]</li>
-<li>android hooking search methods <key>[关键词] (从所有内存中加载)</key></li>
-<li>android hooking list class methods 包名+类名 (列出所有的方法)</li>
-<li>android hooking list 组件</li>
-<li>android hooking watch class_method <methodName>(hook指定方法) —dump-args —dump-backtrace —dump-return </methodName></li>
-<li>jobs list (查看作业，显示hook的函数的信息)</li>
-<li>job kill <id> 删除作业</id></li>
-</ol>
-<blockquote>
-<p>如果要hook构造方法 需要使用$init</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
+  </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <div class="inner">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="ic i-angle-right" aria-label="Next page"></i></a>
+    </div>
   </nav>
 
 
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 
         </div>
+        <div id="sidebar">
           
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Mr2"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Mr2</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">41</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">20</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+</div>
+
+<ul class="menu">
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>Tags</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Lan</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-  </nav>
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/page/2/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
 </div>
 
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
+        </div>
+        <div class="dimmer"></div>
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Lan</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="Symbols count total">169k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">2:34</span>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/vue/" title="In vue">vue</a>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+
+    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/git/" title="In git">git</a>
+</div>
+
+    <span><a href="/2022/02/21/git%E6%93%8D%E4%BD%9C/" title="git操作">git操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" title="反调试">反调试</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
+</div>
+
+    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
+</div>
+
+    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2022</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr2 @ Yume Shoka</span>
   </div>
-
-        
-
-
-
-
-
-
-
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
 
       </div>
     </footer>
   </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
 
-<script src="/js/utils.js"></script>
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/app.js?v=0.2.5"></script>
 
 
 
-  
-
-  
-
-  
 
 </body>
 </html>

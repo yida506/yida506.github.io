@@ -1,212 +1,157 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="alternate" type="application/rss+xml" title="菜b的爬虫记录" href="http://yida506.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="菜b的爬虫记录" href="http://yida506.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="菜b的爬虫记录" href="http://yida506.github.io/feed.json" />
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-  <meta name="description" content="AST基本命令pathpath为AST解析后的产物，在解析时，先将所有代码解析为一个大file,其中拥有path属性，若是针对一种表达式解析(例如VariableDeclarator赋值表达式)，那么path指代的就为赋值表达式所在的路径，其中又包含很多属性，主要的有：  type:表示表达式类型 node表示该节点、为一个对象、包含很多属性 parent:该路径的父路径,这里指代的是node类型">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ast进阶">
-<meta property="og:url" content="http://yida506.github.io/2021/12/29/ast%E8%BF%9B%E9%98%B6/index.html">
-<meta property="og:site_name" content="spider">
-<meta property="og:description" content="AST基本命令pathpath为AST解析后的产物，在解析时，先将所有代码解析为一个大file,其中拥有path属性，若是针对一种表达式解析(例如VariableDeclarator赋值表达式)，那么path指代的就为赋值表达式所在的路径，其中又包含很多属性，主要的有：  type:表示表达式类型 node表示该节点、为一个对象、包含很多属性 parent:该路径的父路径,这里指代的是node类型">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-12-29T14:35:31.000Z">
-<meta property="article:modified_time" content="2022-02-10T12:55:14.526Z">
-<meta property="article:author" content="Lan">
-<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
 
 <link rel="canonical" href="http://yida506.github.io/2021/12/29/ast%E8%BF%9B%E9%98%B6/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>ast进阶 | spider</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
+  <title>
+ast进阶 - ast |
+Yume Shoka = 菜b的爬虫记录</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">spider</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">ast进阶
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2021-12-29 22:35:31">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2021-12-29T22:35:31+08:00">2021-12-29</time>
+  </span>
 </div>
 
 
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-
-
-
-</div>
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclize41wj20zk0m87gk.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipew28b65j20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljgocqbj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciub8ja1j20zk0m81ky.jpg"></li>
+        </ul>
+      </div>
     </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
           
-
-          <div class="content post posts-expand">
-            
-
+  <div class="article wrap">
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/29/ast%E8%BF%9B%E9%98%B6/">
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/ast/" itemprop="item" rel="index" title="In ast"><span itemprop="name">ast</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/29/ast%E8%BF%9B%E9%98%B6/">
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          ast进阶
-        </h1>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Mr2">
+    <meta itemprop="description" content=", ">
+  </span>
 
-        <div class="post-meta">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="菜b的爬虫记录">
+  </span>
 
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>5.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>5 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
+  <div class="body md" itemprop="articleBody">
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
-      
-        <h4 id="AST基本命令"><a href="#AST基本命令" class="headerlink" title="AST基本命令"></a>AST基本命令</h4><h5 id="path"><a href="#path" class="headerlink" title="path"></a>path</h5><p>path为AST解析后的产物，在解析时，先将所有代码解析为一个大file,其中拥有path属性，若是针对一种表达式解析(例如VariableDeclarator赋值表达式)，那么path指代的就为赋值表达式所在的路径，其中又包含很多属性，主要的有：</p>
+    <h4 id="AST基本命令"><a href="#AST基本命令" class="headerlink" title="AST基本命令"></a>AST基本命令</h4><h5 id="path"><a href="#path" class="headerlink" title="path"></a>path</h5><p>path为AST解析后的产物，在解析时，先将所有代码解析为一个大file,其中拥有path属性，若是针对一种表达式解析(例如VariableDeclarator赋值表达式)，那么path指代的就为赋值表达式所在的路径，其中又包含很多属性，主要的有：</p>
 <ul>
 <li>type:表示表达式类型</li>
 <li>node表示该节点、为一个对象、包含很多属性</li>
@@ -236,221 +181,546 @@
 <p>block:指代整体path?</p>
 <p>binding.constant：Boolean(表示是否被修改过值),constantViolations表示修改值的位置。</p>
 <p>referencePaths:绑定对象所在区域，例如：    </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = a + <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">var a = 1;
+var b = a + 1;
+</code></pre>
 <p>在对第一个表达式遍历的时候，a对应的referencePaths为var b = a+ 1其中的a，即我们可以通过该方式替换节点的值，达到批量修改的目的。</p>
-<h5 id="浅层检查"><a href="#浅层检查" class="headerlink" title="浅层检查"></a>浅层检查</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t.isIdentifier(path.node.left, &#123; <span class="attr">name</span>: <span class="string">&quot;n&quot;</span> &#125;)</span><br><span class="line">等价于</span><br><span class="line">path.node.left != <span class="literal">null</span> &amp;&amp;</span><br><span class="line">    path.node.left.type === <span class="string">&quot;Identifier&quot;</span> &amp;&amp;</span><br><span class="line">    path.node.left.name === <span class="string">&quot;n&quot;</span></span><br></pre></td></tr></table></figure>
+<h5 id="浅层检查"><a href="#浅层检查" class="headerlink" title="浅层检查"></a>浅层检查</h5><pre><code class="lang-javascript">t.isIdentifier(path.node.left, &#123; name: &quot;n&quot; &#125;)
+等价于
+path.node.left != null &amp;&amp;
+    path.node.left.type === &quot;Identifier&quot; &amp;&amp;
+    path.node.left.name === &quot;n&quot;
+</code></pre>
 <h5 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h5><p>使用path.get(‘target’)，可以获得对应的path路径，相比于直接获取node节点，在确定作用域的时候更有效，比如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="built_in">console</span>.log(a+b);&#125;());</span><br><span class="line"><span class="comment">//对于上述自执行函数,我们通过遍历CallExpression节点,然后通过path.scope.getBinding(&#x27;a&#x27;)的方法只能获取到undefined,这是由于,当前的path指代的是外部作用域,不能指向自执行函数内部,因此,想要获取到&#x27;a&#x27;的binding,就需要通过path.get(&#x27;callee&#x27;)的方法,获取内部函数的作用域,这样一来就可以通过遍历的方式j</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">(function(a,b)&#123;console.log(a+b);&#125;());
+//对于上述自执行函数,我们通过遍历CallExpression节点,然后通过path.scope.getBinding(&#39;a&#39;)的方法只能获取到undefined,这是由于,当前的path指代的是外部作用域,不能指向自执行函数内部,因此,想要获取到&#39;a&#39;的binding,就需要通过path.get(&#39;callee&#39;)的方法,获取内部函数的作用域,这样一来就可以通过遍历的方式j
+</code></pre>
 <h4 id="插件优化"><a href="#插件优化" class="headerlink" title="插件优化"></a>插件优化</h4><h5 id="变量替换"><a href="#变量替换" class="headerlink" title="变量替换"></a>变量替换</h5><p>目的：将赋值表达式值为字面量、数字的直接批量替换</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> visitor = &#123;</span><br><span class="line">    <span class="function"><span class="title">VariableDeclarator</span>(<span class="params">path</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;id,init&#125; = path.node;</span><br><span class="line">        <span class="comment">//获取对应变量的绑定</span></span><br><span class="line">        <span class="keyword">var</span> binding = path.scope.getBinding(id.name);</span><br><span class="line">        <span class="comment">//获取绑定作用域</span></span><br><span class="line">        referpaths = binding.referencePaths;</span><br><span class="line">        <span class="comment">//如果变量没引用,则返回</span></span><br><span class="line">        <span class="keyword">if</span>(referpaths.length === <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//保证变量的init部分值唯一，数字、字符类型直接替换,函数定义也可直接替换，前提是引用部分为单引用，若为函数调用，可考虑直接计算值。</span></span><br><span class="line">        <span class="comment">//遍历绑定作用域</span></span><br><span class="line">        <span class="keyword">for</span> (referpath <span class="keyword">of</span> referpaths)&#123;</span><br><span class="line">            <span class="comment">//节点值替换</span></span><br><span class="line">            referpath.replaceWith(path.node.init);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//节点删除</span></span><br><span class="line">        path.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h5 id="数组对象还原"><a href="#数组对象还原" class="headerlink" title="数组对象还原"></a>数组对象还原</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">var b = [&#x27;asdad&#x27;].concat(function()&#123;return arguments&#125;);</span></span><br><span class="line"><span class="comment">var c = b[1];</span></span><br><span class="line"><span class="comment">b.shift();</span></span><br><span class="line"><span class="comment">var d = b[0];</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过遍历声明节点，找到数组命名的位置，然后将其写入内存，接着在将</span></span><br><span class="line"><span class="keyword">const</span> visitor12 = &#123;</span><br><span class="line">    <span class="function"><span class="title">VariableDeclarator</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;id, init&#125; = path.node;</span><br><span class="line">        <span class="keyword">var</span> func_name = id.name;</span><br><span class="line">        <span class="keyword">var</span> binding = path.scope.getBinding(func_name);</span><br><span class="line">        <span class="keyword">var</span> referpaths = binding.referencePaths;</span><br><span class="line">        <span class="comment">//如果变量没引用,则返回</span></span><br><span class="line">        <span class="keyword">if</span> (referpaths.length === <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//保证变量的init部分值唯一，数字、字符类型直接替换,函数定义也可直接替换，前提是引用部分为单引用，若为函数调用，可考虑直接计算值。</span></span><br><span class="line">        <span class="comment">//单独针对这种情况,不考虑单纯的数组。</span></span><br><span class="line">        <span class="keyword">if</span> (types.isCallExpression(init) &amp;&amp; types.isArrayExpression(init.callee.object)) &#123;</span><br><span class="line">            <span class="comment">//将数组中的内容直接写入内存</span></span><br><span class="line">            <span class="keyword">if</span>(init.callee.property.name !== <span class="string">&#x27;concat&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">var</span> old_arr = init.callee.object.elements.concat(init.arguments[<span class="number">0</span>]);</span><br><span class="line">            <span class="built_in">global</span>[func_name] = old_arr;</span><br><span class="line">            <span class="comment">// 遍历作用域,获取修改值的地址</span></span><br><span class="line">            binding.scope.traverse(binding.scope.block, &#123;</span><br><span class="line">                <span class="function"><span class="title">MemberExpression</span>(<span class="params">_path</span>)</span> &#123;</span><br><span class="line">                    <span class="comment">//后面可能还要确保只修改一次的情况</span></span><br><span class="line">                    <span class="built_in">console</span>.log(_path.toString());</span><br><span class="line">                    <span class="keyword">if</span> (_path.node.property.value &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">let</span> index_value = _path.node.property.value;</span><br><span class="line">                        _path.replaceInline(<span class="built_in">eval</span>(func_name)[index_value]);</span><br><span class="line">                    &#125;;</span><br><span class="line">                    <span class="comment">//若包含shift操作</span></span><br><span class="line">                    <span class="keyword">if</span> (_path.node.property &amp;&amp; _path.node.property.name === <span class="string">&#x27;shift&#x27;</span>) &#123;</span><br><span class="line">                        <span class="built_in">global</span>[func_name].shift()</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            path.remove();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="自执行函数还原"><a href="#自执行函数还原" class="headerlink" title="自执行函数还原"></a>自执行函数还原</h5><h6 id="思路1-使用referencePath对其进行回填。"><a href="#思路1-使用referencePath对其进行回填。" class="headerlink" title="思路1:使用referencePath对其进行回填。"></a>思路1:使用referencePath对其进行回填。</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">(function (a,b)&#123;console.log(a+b)&#125;)(3,4)-------&gt;console.log(3+4)</span></span><br><span class="line"><span class="comment">自执行函数为CallExpression块,callee指向FunctionExpression,需要做的就是将block块中提取，然后将变量值回填，</span></span><br><span class="line"><span class="comment">简单来讲，假如这个值没有被修改啥的,直接遍历即可</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="built_in">arguments</span>;</span><br><span class="line">    <span class="keyword">if</span>(a!==<span class="number">3</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>;i++) &#123;</span><br><span class="line">        arr[i] += i;</span><br><span class="line">    &#125;;</span><br><span class="line">    a = a+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> c = a + b;</span><br><span class="line">&#125;)(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">-------------------------------------</span><br><span class="line"><span class="comment">//自执行函数回填</span></span><br><span class="line"><span class="keyword">const</span> self_func_replace = &#123;</span><br><span class="line">    <span class="function"><span class="title">CallExpression</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> callee = path.get(<span class="string">&#x27;callee&#x27;</span>);</span><br><span class="line">        <span class="keyword">const</span> &#123;<span class="built_in">arguments</span>&#125; = path.node;</span><br><span class="line">        <span class="keyword">if</span>(!types.isFunctionExpression(callee.node)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">var</span> &#123;params, body&#125; = callee.node;</span><br><span class="line">        <span class="comment">//遍历形参数组,进行回填</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="built_in">arguments</span>.length;i++)&#123;</span><br><span class="line">            binding = callee.scope.getBinding(params[i].name);</span><br><span class="line">            references = binding.referencePaths;</span><br><span class="line">            <span class="comment">//遍历当前形参的Binding节点,并替换。</span></span><br><span class="line">            <span class="built_in">console</span>.log(binding.constantViolations);</span><br><span class="line">            <span class="keyword">if</span>(!binding || !binding.constant)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">for</span>(reference <span class="keyword">of</span> references)&#123;</span><br><span class="line">                reference.replaceInline(types.valueToNode(<span class="built_in">arguments</span>[i].value));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;    </span><br><span class="line">----------------------------------</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> arr = <span class="built_in">arguments</span>;</span><br><span class="line">  <span class="keyword">if</span> (a !== <span class="number">3</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">    arr[i] += i;</span><br><span class="line">  &#125;</span><br><span class="line">  ;</span><br><span class="line">  a = a + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> c = a + <span class="number">4</span>;</span><br><span class="line">&#125;)(<span class="number">3</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">const visitor = &#123;
+    VariableDeclarator(path)&#123;
+        const &#123;id,init&#125; = path.node;
+        //获取对应变量的绑定
+        var binding = path.scope.getBinding(id.name);
+        //获取绑定作用域
+        referpaths = binding.referencePaths;
+        //如果变量没引用,则返回
+        if(referpaths.length === 0) return;
+        //保证变量的init部分值唯一，数字、字符类型直接替换,函数定义也可直接替换，前提是引用部分为单引用，若为函数调用，可考虑直接计算值。
+        //遍历绑定作用域
+        for (referpath of referpaths)&#123;
+            //节点值替换
+            referpath.replaceWith(path.node.init);
+        &#125;;
+        //节点删除
+        path.remove();
+    &#125;
+&#125;;
+</code></pre>
+<h5 id="数组对象还原"><a href="#数组对象还原" class="headerlink" title="数组对象还原"></a>数组对象还原</h5><pre><code class="lang-javascript">/* 
+var b = [&#39;asdad&#39;].concat(function()&#123;return arguments&#125;);
+var c = b[1];
+b.shift();
+var d = b[0];
+*/
+
+
+// 通过遍历声明节点，找到数组命名的位置，然后将其写入内存，接着在将
+const visitor12 = &#123;
+    VariableDeclarator(path) &#123;
+        const &#123;id, init&#125; = path.node;
+        var func_name = id.name;
+        var binding = path.scope.getBinding(func_name);
+        var referpaths = binding.referencePaths;
+        //如果变量没引用,则返回
+        if (referpaths.length === 0) return;
+        //保证变量的init部分值唯一，数字、字符类型直接替换,函数定义也可直接替换，前提是引用部分为单引用，若为函数调用，可考虑直接计算值。
+        //单独针对这种情况,不考虑单纯的数组。
+        if (types.isCallExpression(init) &amp;&amp; types.isArrayExpression(init.callee.object)) &#123;
+            //将数组中的内容直接写入内存
+            if(init.callee.property.name !== &#39;concat&#39;) return;
+            var old_arr = init.callee.object.elements.concat(init.arguments[0]);
+            global[func_name] = old_arr;
+            // 遍历作用域,获取修改值的地址
+            binding.scope.traverse(binding.scope.block, &#123;
+                MemberExpression(_path) &#123;
+                    //后面可能还要确保只修改一次的情况
+                    console.log(_path.toString());
+                    if (_path.node.property.value &gt;= 0) &#123;
+                        let index_value = _path.node.property.value;
+                        _path.replaceInline(eval(func_name)[index_value]);
+                    &#125;;
+                    //若包含shift操作
+                    if (_path.node.property &amp;&amp; _path.node.property.name === &#39;shift&#39;) &#123;
+                        global[func_name].shift()
+                    &#125;
+                &#125;
+            &#125;);
+            path.remove();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h5 id="自执行函数还原"><a href="#自执行函数还原" class="headerlink" title="自执行函数还原"></a>自执行函数还原</h5><h6 id="思路1-使用referencePath对其进行回填。"><a href="#思路1-使用referencePath对其进行回填。" class="headerlink" title="思路1:使用referencePath对其进行回填。"></a>思路1:使用referencePath对其进行回填。</h6><pre><code class="lang-javascript">/*
+(function (a,b)&#123;console.log(a+b)&#125;)(3,4)-------&gt;console.log(3+4)
+自执行函数为CallExpression块,callee指向FunctionExpression,需要做的就是将block块中提取，然后将变量值回填，
+简单来讲，假如这个值没有被修改啥的,直接遍历即可
+*/
+(function(a,b)&#123;
+    var arr = arguments;
+    if(a!==3) return;
+    for(var i=0;i&lt;2;i++) &#123;
+        arr[i] += i;
+    &#125;;
+    a = a+1;
+    var c = a + b;
+&#125;)(3,4);
+
+-------------------------------------
+//自执行函数回填
+const self_func_replace = &#123;
+    CallExpression(path) &#123;
+        let callee = path.get(&#39;callee&#39;);
+        const &#123;arguments&#125; = path.node;
+        if(!types.isFunctionExpression(callee.node)) return;
+        var &#123;params, body&#125; = callee.node;
+        //遍历形参数组,进行回填
+        for(var i=0;i&lt;arguments.length;i++)&#123;
+            binding = callee.scope.getBinding(params[i].name);
+            references = binding.referencePaths;
+            //遍历当前形参的Binding节点,并替换。
+            console.log(binding.constantViolations);
+            if(!binding || !binding.constant)&#123;
+                continue;
+            &#125;;
+            for(reference of references)&#123;
+                reference.replaceInline(types.valueToNode(arguments[i].value));
+            &#125;
+        &#125;;
+    &#125;
+&#125;;    
+----------------------------------
+(function (a, b) &#123;
+  var arr = arguments;
+  if (a !== 3) return;
+
+  for (var i = 0; i &lt; 2; i++) &#123;
+    arr[i] += i;
+  &#125;
+  ;
+  a = a + 1;
+  var c = a + 4;
+&#125;)(3, 4);
+</code></pre>
 <blockquote>
 <p>可以看到，由于a在作用域中的值被改变了,所以并没有进行回填。</p>
 <p>但是，从实际上来看，这两个值其实都被修改了，所以说，要想用referencePath来对其自执行函数进行回填有一定的局限性。</p>
 </blockquote>
 <p><strong>既然我们知道了，是通过一个for循环来对传入的arguments进行的处理，那么，我们只要把这个for循环的算法封装成一个函数，直接输出一个新的arguments数组，这样一来，后面替换的时候，就采用新的数组替换不就完了么。</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_arr_node</span>(<span class="params"><span class="built_in">arguments</span></span>)</span>&#123;</span><br><span class="line">    arr = [];</span><br><span class="line">    <span class="keyword">for</span>(i <span class="keyword">of</span> <span class="built_in">arguments</span>)&#123;</span><br><span class="line">        arr.push(i.value);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">//对字符的一个处理</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>;i++) &#123;</span><br><span class="line">        arr[i] += i;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//自执行函数回填</span></span><br><span class="line"><span class="keyword">const</span> self_func_replace = &#123;</span><br><span class="line">    <span class="function"><span class="title">CallExpression</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> callee = path.get(<span class="string">&#x27;callee&#x27;</span>);</span><br><span class="line">        <span class="keyword">const</span> &#123;<span class="built_in">arguments</span>&#125; = path.node;</span><br><span class="line">        <span class="keyword">var</span> new_arguments = get_arr_node(<span class="built_in">arguments</span>);</span><br><span class="line">        <span class="keyword">if</span>(!types.isFunctionExpression(callee.node)) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">var</span> &#123;params, body&#125; = callee.node;</span><br><span class="line">        <span class="comment">//遍历形参数组,进行回填</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="built_in">arguments</span>.length;i++)&#123;</span><br><span class="line">            binding = callee.scope.getBinding(params[i].name);</span><br><span class="line">            references = binding.referencePaths;</span><br><span class="line">            <span class="comment">//遍历当前形参的Binding节点,并替换。</span></span><br><span class="line">            <span class="keyword">if</span>(!binding || !binding.constant)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">for</span>(reference <span class="keyword">of</span> references)&#123;</span><br><span class="line">                reference.replaceInline(types.valueToNode(new_arguments[i]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--------------------------------------------</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (a !== <span class="number">3</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">arguments</span>[i] += i;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ;</span><br><span class="line">  a = a + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">var</span> c = a + <span class="number">5</span>;</span><br><span class="line">&#125;)(<span class="number">3</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">function get_arr_node(arguments)&#123;
+    arr = [];
+    for(i of arguments)&#123;
+        arr.push(i.value);
+    &#125;;
+    //对字符的一个处理
+    for(var i=0;i&lt;2;i++) &#123;
+        arr[i] += i;
+    &#125;;
+    return arr
+&#125;;
+
+//自执行函数回填
+const self_func_replace = &#123;
+    CallExpression(path) &#123;
+        let callee = path.get(&#39;callee&#39;);
+        const &#123;arguments&#125; = path.node;
+        var new_arguments = get_arr_node(arguments);
+        if(!types.isFunctionExpression(callee.node)) return;
+        var &#123;params, body&#125; = callee.node;
+        //遍历形参数组,进行回填
+        for(var i=0;i&lt;arguments.length;i++)&#123;
+            binding = callee.scope.getBinding(params[i].name);
+            references = binding.referencePaths;
+            //遍历当前形参的Binding节点,并替换。
+            if(!binding || !binding.constant)&#123;
+                continue;
+            &#125;;
+            for(reference of references)&#123;
+                reference.replaceInline(types.valueToNode(new_arguments[i]));
+            &#125;
+        &#125;;
+    &#125;
+&#125;;
+
+
+--------------------------------------------
+(function (a, b) &#123;
+  if (a !== 3) return;
+
+  for (var i = 0; i &lt; 2; i++) &#123;
+    arguments[i] += i;
+  &#125;
+
+  ;
+  a = a + 1;
+  var c = a + 5;
+&#125;)(3, 4);
+</code></pre>
 <p><strong>可以看到，这里已经成功的把b填进去，同时也为正确的数了，要做到完全还原，也只需要遍历a进行回填即可。</strong></p>
 
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2022-02-10 20:55:14" itemprop="dateModified" datetime="2022-02-10T20:55:14+08:00">2022-02-10</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Mr2 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Mr2 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Mr2 PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Mr2 <i class="ic i-at"><em>@</em></i>菜b的爬虫记录
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://yida506.github.io/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">http://yida506.github.io/2021/12/29/ast进阶/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipesx5fdwj20zk0m81kx.jpg" title="反调试">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> JS逆向</span>
+  <h3>反调试</h3>
+  </a>
+
     </div>
+    <div class="item right">
+      
 
-    
-    
-    
+  <a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclhtuo6nj20zk0m8ttm.jpg" title="app基础">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> app逆向</span>
+  <h3>app基础</h3>
+  </a>
 
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" rel="prev" title="反调试">
-      <i class="fa fa-chevron-left"></i> 反调试
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" rel="next" title="app基础">
-      app基础 <i class="fa fa-chevron-right"></i>
-    </a></div>
     </div>
-      </footer>
-    
-  </article>
+</div>
+
   
-  
-  
+  <div class="wrap" id="comments"></div>
 
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 
         </div>
+        <div id="sidebar">
           
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#AST%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">AST基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#path"><span class="toc-number">1.1.</span> <span class="toc-text">path</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#node"><span class="toc-number">1.2.</span> <span class="toc-text">node</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#binding"><span class="toc-number">1.3.</span> <span class="toc-text">binding</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%85%E5%B1%82%E6%A3%80%E6%9F%A5"><span class="toc-number">1.4.</span> <span class="toc-text">浅层检查</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#get%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">get方法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E4%BC%98%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">插件优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2"><span class="toc-number">2.1.</span> <span class="toc-text">变量替换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E8%BF%98%E5%8E%9F"><span class="toc-number">2.2.</span> <span class="toc-text">数组对象还原</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%87%AA%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%BF%98%E5%8E%9F"><span class="toc-number">2.3.</span> <span class="toc-text">自执行函数还原</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF1-%E4%BD%BF%E7%94%A8referencePath%E5%AF%B9%E5%85%B6%E8%BF%9B%E8%A1%8C%E5%9B%9E%E5%A1%AB%E3%80%82"><span class="toc-number">2.3.1.</span> <span class="toc-text">思路1:使用referencePath对其进行回填。</span></a></li></ol></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2021/11/28/ast/" rel="bookmark" title="AST语法树">AST语法树</a></li><li class="active"><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" rel="bookmark" title="ast进阶">ast进阶</a></li><li><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" rel="bookmark" title="ast思想">ast思想</a></li><li><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" rel="bookmark" title="ti还原1">ti还原1</a></li><li><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" rel="bookmark" title="ti还原2">ti还原2</a></li><li><a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" rel="bookmark" title="ast_tools解读">ast_tools解读</a></li><li><a href="/2022/03/13/ali/" rel="bookmark" title="ali">ali</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Mr2"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Mr2</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">41</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">20</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+</div>
+
+<ul class="menu">
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>Tags</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AST%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">AST基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#path"><span class="nav-number">1.1.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#node"><span class="nav-number">1.2.</span> <span class="nav-text">node</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#binding"><span class="nav-number">1.3.</span> <span class="nav-text">binding</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%85%E5%B1%82%E6%A3%80%E6%9F%A5"><span class="nav-number">1.4.</span> <span class="nav-text">浅层检查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">get方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">插件优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.1.</span> <span class="nav-text">变量替换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%E8%BF%98%E5%8E%9F"><span class="nav-number">2.2.</span> <span class="nav-text">数组对象还原</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%BF%98%E5%8E%9F"><span class="nav-number">2.3.</span> <span class="nav-text">自执行函数还原</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF1-%E4%BD%BF%E7%94%A8referencePath%E5%AF%B9%E5%85%B6%E8%BF%9B%E8%A1%8C%E5%9B%9E%E5%A1%AB%E3%80%82"><span class="nav-number">2.3.1.</span> <span class="nav-text">思路1:使用referencePath对其进行回填。</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Lan</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-  </nav>
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
 </div>
 
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
+        </div>
+        <div class="dimmer"></div>
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Lan</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="Symbols count total">169k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">2:34</span>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+
+    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
+</div>
+
+    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="In 加密算法">加密算法</a>
+</div>
+
+    <span><a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" title="js加密">js加密</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/05/14/unidbg/" title="unidbg">unidbg</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" title="ast_tools解读">ast_tools解读</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/vue/" title="In vue">vue</a>
+</div>
+
+    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" title="jy滑块">jy滑块</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2022</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr2 @ Yume Shoka</span>
   </div>
-
-        
-
-
-
-
-
-
-
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
 
       </div>
     </footer>
   </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2021/12/29/ast进阶/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
 
-<script src="/js/utils.js"></script>
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/app.js?v=0.2.5"></script>
 
 
 
-  
-
-  
-
-  
 
 </body>
 </html>

@@ -1,212 +1,157 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="alternate" type="application/rss+xml" title="菜b的爬虫记录" href="http://yida506.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="菜b的爬虫记录" href="http://yida506.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="菜b的爬虫记录" href="http://yida506.github.io/feed.json" />
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-  <meta name="description" content="补环境介绍对于存在js加密的网站，我们往往通过分析网站js，了解到其加密js的逻辑，然后通过本地运行的方式，获取加密后的参数，达到获取Js的目的。 对于加密代码量较少，亦或者是扣取复杂度较低的代码，我们可以通过扣代码，缺什么补什么，进而在本地扣取一个完整的加密算法，最终在本地运行。但是，对于加密量大，同时运行流程错纵复杂的代码，扣取其加密流程的复杂度呈几何倍的增长，因此，我们希望通过直接运行整个j">
-<meta property="og:type" content="article">
-<meta property="og:title" content="补环境">
-<meta property="og:url" content="http://yida506.github.io/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/index.html">
-<meta property="og:site_name" content="spider">
-<meta property="og:description" content="补环境介绍对于存在js加密的网站，我们往往通过分析网站js，了解到其加密js的逻辑，然后通过本地运行的方式，获取加密后的参数，达到获取Js的目的。 对于加密代码量较少，亦或者是扣取复杂度较低的代码，我们可以通过扣代码，缺什么补什么，进而在本地扣取一个完整的加密算法，最终在本地运行。但是，对于加密量大，同时运行流程错纵复杂的代码，扣取其加密流程的复杂度呈几何倍的增长，因此，我们希望通过直接运行整个j">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-12-18T11:49:26.000Z">
-<meta property="article:modified_time" content="2022-01-02T15:21:10.689Z">
-<meta property="article:author" content="Lan">
-<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
 
 <link rel="canonical" href="http://yida506.github.io/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>补环境 | spider</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
+  <title>
+补环境 - JS逆向 |
+Yume Shoka = 菜b的爬虫记录</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">spider</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">补环境
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2021-12-18 19:49:26">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2021-12-18T19:49:26+08:00">2021-12-18</time>
+  </span>
 </div>
 
 
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-
-
-
-</div>
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciukx8a7j20zk0m8aio.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclga70tsj20zk0m84mr.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclfw2t96j20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg"></li>
+        </ul>
+      </div>
     </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
           
-
-          <div class="content post posts-expand">
-            
-
+  <div class="article wrap">
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/">
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/JS%E9%80%86%E5%90%91/" itemprop="item" rel="index" title="In JS逆向"><span itemprop="name">JS逆向</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/">
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          补环境
-        </h1>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Mr2">
+    <meta itemprop="description" content=", ">
+  </span>
 
-        <div class="post-meta">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="菜b的爬虫记录">
+  </span>
 
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>4.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>4 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
+  <div class="body md" itemprop="articleBody">
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
-      
-        <h3 id="补环境介绍"><a href="#补环境介绍" class="headerlink" title="补环境介绍"></a>补环境介绍</h3><p>对于存在js加密的网站，我们往往通过分析网站js，了解到其加密js的逻辑，然后通过本地运行的方式，获取加密后的参数，达到获取Js的目的。</p>
+    <h3 id="补环境介绍"><a href="#补环境介绍" class="headerlink" title="补环境介绍"></a>补环境介绍</h3><p>对于存在js加密的网站，我们往往通过分析网站js，了解到其加密js的逻辑，然后通过本地运行的方式，获取加密后的参数，达到获取Js的目的。</p>
 <p>对于加密代码量较少，亦或者是扣取复杂度较低的代码，我们可以通过扣代码，缺什么补什么，进而在本地扣取一个完整的加密算法，最终在本地运行。但是，对于加密量大，同时运行流程错纵复杂的代码，扣取其加密流程的复杂度呈几何倍的增长，因此，我们希望通过直接运行整个js代码，进而达到获取其结果的目的。</p>
 <p>试想，为什么我们在浏览器中运行js可以直接成功，但是在本地运行就不行了呢？</p>
 <p>首先，本地运行的时候，我们大部分是采用的node直接运行的，node可以看作是浏览器引擎的一个子集，只包含其中的一部分内容，因此，对于加密算法破解，就抽象到找寻函数入口，比较环境差异。</p>
@@ -218,229 +163,457 @@
 </ol>
 <h4 id="显式检测"><a href="#显式检测" class="headerlink" title="显式检测"></a>显式检测</h4><p><strong>定义：</strong>以A[‘B’]、A.function(val),这种方式调用，同时,A、B、function都可能为检测的对象。</p>
 <p>以下面这段js为例:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _N = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="string">&#x27;location.href=location.pathname+location.search.replace(/[\?|&amp;]captcha-challenge/,\&#x27;\&#x27;)&#x27;</span>, <span class="number">1500</span>);</span><br><span class="line">    <span class="built_in">document</span>.cookie = <span class="string">&#x27;__jsl_clearance=1640094880.604|0|&#x27;</span> + (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> _t = [<span class="function"><span class="keyword">function</span> (<span class="params">_N</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> _N</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">_t</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> _t</span><br><span class="line">            &#125;, (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> _N = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">                _N.innerHTML = <span class="string">&#x27;&lt;a href=\&#x27;/\&#x27;&gt;_1H&lt;/a&gt;&#x27;</span>;</span><br><span class="line">                _N = _N.firstChild.href;</span><br><span class="line">                <span class="keyword">var</span> _t = _N.match(<span class="regexp">/https?:\/\//</span>)[<span class="number">0</span>];</span><br><span class="line">                _N = _N.substr(_t.length).toLowerCase();</span><br><span class="line">                <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">_t</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> _1H = <span class="number">0</span>; _1H &lt; _t.length; _1H++) &#123;</span><br><span class="line">                        _t[_1H] = _N.charAt(_t[_1H])</span><br><span class="line">                    &#125;;</span><br><span class="line">                    <span class="keyword">return</span> _t.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)(), <span class="function"><span class="keyword">function</span> (<span class="params">_N</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> _t = <span class="number">0</span>; _t &lt; _N.length; _t++) &#123;</span><br><span class="line">                    _N[_t] = <span class="built_in">parseInt</span>(_N[_t]).toString(<span class="number">36</span>)</span><br><span class="line">                &#125;;</span><br><span class="line">                <span class="keyword">return</span> _N.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            &#125;],</span><br><span class="line">            _N = [<span class="string">&#x27;clD&#x27;</span>, [(-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;) + (-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;)], <span class="string">&#x27;V&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + [-~-~&#123;&#125;]], <span class="string">&#x27;fq&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + [-~[] - ~[] - ~!<span class="regexp">/!/</span> + (-~[] - ~[]) * [-~[] - ~[]]], (-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>]), (-~[] + [] + [[]][<span class="number">0</span>]) + [(+!![[][[]]][<span class="number">1</span>])]], <span class="string">&#x27;LBWywKW&#x27;</span>, [(<span class="number">2</span> - ~[-~-~&#123;&#125;] + [] + [[]][<span class="number">0</span>])], <span class="string">&#x27;%2FZyf&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>])], <span class="string">&#x27;6&#x27;</span>, [(-~[] + [] + [[]][<span class="number">0</span>]) + (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>])], <span class="string">&#x27;_b938d514e58d7772015c7ad84677513a&#x27;</span>, (-~[-~-~&#123;&#125;] + [[]][<span class="number">0</span>]), <span class="string">&#x27;D&#x27;</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> _1H = <span class="number">0</span>; _1H &lt; _N.length; _1H++) &#123;</span><br><span class="line">            _N[_1H] = _t[[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>][_1H]](_N[_1H])</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> _N.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    &#125;)() + <span class="string">&#x27;;Expires=Tue, 12-Dec-30 09:50:26 GMT;Path=/;&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">if</span> ((<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> !!<span class="built_in">window</span>.addEventListener;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)()) &#123;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, _N, <span class="literal">false</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.attachEvent(<span class="string">&#x27;onreadystatechange&#x27;</span>, _N)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">var _N = function () &#123;
+    setTimeout(&#39;location.href=location.pathname+location.search.replace(/[\?|&amp;]captcha-challenge/,\&#39;\&#39;)&#39;, 1500);
+    document.cookie = &#39;__jsl_clearance=1640094880.604|0|&#39; + (function () &#123;
+        var _t = [function (_N) &#123;
+                return _N
+            &#125;, function (_t) &#123;
+                return _t
+            &#125;, (function () &#123;
+                var _N = document.createElement(&#39;div&#39;);
+                _N.innerHTML = &#39;&lt;a href=\&#39;/\&#39;&gt;_1H&lt;/a&gt;&#39;;
+                _N = _N.firstChild.href;
+                var _t = _N.match(/https?:\/\//)[0];
+                _N = _N.substr(_t.length).toLowerCase();
+                return function (_t) &#123;
+                    for (var _1H = 0; _1H &lt; _t.length; _1H++) &#123;
+                        _t[_1H] = _N.charAt(_t[_1H])
+                    &#125;;
+                    return _t.join(&#39;&#39;)
+                &#125;
+            &#125;)(), function (_N) &#123;
+                for (var _t = 0; _t &lt; _N.length; _t++) &#123;
+                    _N[_t] = parseInt(_N[_t]).toString(36)
+                &#125;;
+                return _N.join(&#39;&#39;)
+            &#125;],
+            _N = [&#39;clD&#39;, [(-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;) + (-~~~&#123;&#125; &lt;&lt; -~~~&#123;&#125;)], &#39;V&#39;, [(-~[] + [] + [[]][0]) + [-~-~&#123;&#125;]], &#39;fq&#39;, [(-~[] + [] + [[]][0]) + [-~[] - ~[] - ~!/!/ + (-~[] - ~[]) * [-~[] - ~[]]], (-~[] + [] + [[]][0]) + (-~[-~-~&#123;&#125;] + [[]][0]), (-~[] + [] + [[]][0]) + [(+!![[][[]]][1])]], &#39;LBWywKW&#39;, [(2 - ~[-~-~&#123;&#125;] + [] + [[]][0])], &#39;%2FZyf&#39;, [(-~[] + [] + [[]][0]) + (-~[-~-~&#123;&#125;] + [[]][0])], &#39;6&#39;, [(-~[] + [] + [[]][0]) + (-~[-~-~&#123;&#125;] + [[]][0])], &#39;_b938d514e58d7772015c7ad84677513a&#39;, (-~[-~-~&#123;&#125;] + [[]][0]), &#39;D&#39;];
+        for (var _1H = 0; _1H &lt; _N.length; _1H++) &#123;
+            _N[_1H] = _t[[1, 0, 1, 2, 1, 3, 1, 2, 1, 2, 1, 3, 1, 0, 1][_1H]](_N[_1H])
+        &#125;;
+        return _N.join(&#39;&#39;)
+    &#125;)() + &#39;;Expires=Tue, 12-Dec-30 09:50:26 GMT;Path=/;&#39;
+&#125;;
+if ((function () &#123;
+        try &#123;
+            return !!window.addEventListener;
+        &#125; catch (e) &#123;
+            return false;
+        &#125;
+    &#125;)()) &#123;
+    document.addEventListener(&#39;DOMContentLoaded&#39;, _N, false)
+&#125; else &#123;
+    document.attachEvent(&#39;onreadystatechange&#39;, _N)
+&#125;
+</code></pre>
 <p>在上述代码中，我们可以看到形如document、window这些对象，在node中是不包含这种对象的，因此我们需要构造一个和浏览器一样的对象出来。</p>
 <p>很明显，这里的Window指代全局对象，document指代的是网页源码，DOM对象在node中无法完全模拟，因此我们换一种思路，只需要补到其不报错不就行了嘛？</p>
 <h5 id="STEP1-整体代码分析"><a href="#STEP1-整体代码分析" class="headerlink" title="STEP1 整体代码分析:"></a>STEP1 整体代码分析:</h5><p>先看第一个位置，setTimeout创建了一个定时器，我们在这里直接置空即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">setTimeout = function()&#123;&#125;;
+</code></pre>
 <p>由于在node中的全局为global,那么我们需要对其进行一个赋值操作，把window构建出来。</p>
 <p>同时由于后面还调用了document,我们先创建一个空对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span> = <span class="built_in">global</span>;</span><br><span class="line"><span class="built_in">document</span> = &#123;&#125;;</span><br></pre></td></tr></table></figure>
-<h5 id="STEP2-环境搭建"><a href="#STEP2-环境搭建" class="headerlink" title="STEP2 环境搭建:"></a>STEP2 环境搭建:</h5><p>对于document.createElement(‘div’)，createElement(‘div’)明显是一个方法，在网页端返回了一个dom对象，同时我们发现其后续创建了innerHTML属性,然后通过firstChild.href重新赋值。这样一来，我们在网页中运行_N.firstChild.href,发现，打印的结果为’<a target="_blank" rel="noopener" href="https://www.python-spider.com/&#39;,后续还跟上了对其的操作。也就是说，我们只需要把href补出来，同时让innerHTML属性存在即可。">https://www.python-spider.com/&#39;,后续还跟上了对其的操作。也就是说，我们只需要把href补出来，同时让innerHTML属性存在即可。</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _N = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">_N.innerHTML = <span class="string">&#x27;&lt;a href=\&#x27;/\&#x27;&gt;_1H&lt;/a&gt;&#x27;</span>;</span><br><span class="line">_N = _N.firstChild.href;</span><br><span class="line"><span class="keyword">var</span> _t = _N.match(<span class="regexp">/https?:\/\//</span>)[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.createElement = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">innerHTML</span>:<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        <span class="attr">firstChild</span>:&#123;</span><br><span class="line">            <span class="attr">href</span>:<span class="string">&#x27;https://www.python-spider.com/&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在末尾我们还看到了形如addEventListener的这种调用，对于这种方法，我们不知道其返回了什么，那么我们就需要去<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript官方文档里查找。">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript官方文档里查找。</a></p>
+<pre><code class="lang-javascript">window = global;
+document = &#123;&#125;;
+</code></pre>
+<h5 id="STEP2-环境搭建"><a href="#STEP2-环境搭建" class="headerlink" title="STEP2 环境搭建:"></a>STEP2 环境搭建:</h5><p>对于document.createElement(‘div’)，createElement(‘div’)明显是一个方法，在网页端返回了一个dom对象，同时我们发现其后续创建了innerHTML属性,然后通过firstChild.href重新赋值。这样一来，我们在网页中运行_N.firstChild.href,发现，打印的结果为’<span class="exturl" data-url="aHR0cHM6Ly93d3cucHl0aG9uLXNwaWRlci5jb20vJiMzOTss5ZCO57ut6L+Y6Lef5LiK5LqG5a+55YW255qE5pON5L2c44CC5Lmf5bCx5piv6K+077yM5oiR5Lus5Y+q6ZyA6KaB5oqKaHJlZuihpeWHuuadpe+8jOWQjOaXtuiuqWlubmVySFRNTOWxnuaAp+WtmOWcqOWNs+WPr+OAgg==">https://www.python-spider.com/&#39;,后续还跟上了对其的操作。也就是说，我们只需要把href补出来，同时让innerHTML属性存在即可。</span></p>
+<pre><code class="lang-javascript">var _N = document.createElement(&#39;div&#39;)
+_N.innerHTML = &#39;&lt;a href=\&#39;/\&#39;&gt;_1H&lt;/a&gt;&#39;;
+_N = _N.firstChild.href;
+var _t = _N.match(/https?:\/\//)[0];
+</code></pre>
+<pre><code class="lang-javascript">document.createElement = function()&#123;
+    return &#123;
+        innerHTML:&#39;&#39;,
+        firstChild:&#123;
+            href:&#39;https://www.python-spider.com/&#39;,
+        &#125;
+    &#125;
+&#125;;
+</code></pre>
+<p>在末尾我们还看到了形如addEventListener的这种调用，对于这种方法，我们不知道其返回了什么，那么我们就需要去<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdOWumOaWueaWh+aho+mHjOafpeaJvuOAgg==">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript官方文档里查找。</span></p>
 <p>最后补出来如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">document</span>.addEventListener = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;<span class="keyword">return</span> b()&#125;;</span><br><span class="line"><span class="built_in">document</span>.attachEvent = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">window.addEventListener = function()&#123;&#125;;
+document.addEventListener = function(a,b,c)&#123;return b()&#125;;
+document.attachEvent = function(a,b)&#123;&#125;;
+</code></pre>
 <h4 id="隐式检测"><a href="#隐式检测" class="headerlink" title="隐式检测"></a>隐式检测</h4><p>以显示检测的补环境来看，在代码结构清晰的情况下，我们可以很轻易的找到补环境入口，但是假使代码流程复杂，同时调用方法不是以上述形式调用，那么单纯的看代码几乎找不到补环境入口。</p>
 <p>先看如下例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//type1</span></span><br><span class="line"><span class="built_in">window</span>[<span class="string">&#x27;hr&#x27;</span>+<span class="string">&#x27;ef&#x27;</span>];</span><br><span class="line"><span class="comment">//type2</span></span><br><span class="line">S = [<span class="built_in">window</span>,<span class="string">&#x27;hr&#x27;</span>,<span class="string">&#x27;ef&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> A = S[<span class="number">0</span>][S[<span class="number">1</span>]+S[<span class="number">2</span>]];</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">//type1
+window[&#39;hr&#39;+&#39;ef&#39;];
+//type2
+S = [window,&#39;hr&#39;,&#39;ef&#39;];
+var A = S[0][S[1]+S[2]];
+</code></pre>
 <p>第一种为稍微明显的调用，但是假如被ASCII码混淆了呢，假如被Ob混淆了呢，当然，针对这种情况，我们可以直接放到node中运行，让其报错后在比对即可。但是，假如我们这里采用第二种方法检测环境，这样，即使在node中运行也不会报错，返回的是undefined，那么这样在运行的流程中就发生了变化，进而导致最终的结果与我们想要的所差甚远。</p>
 <p>我们想要知道到底缺少什么环境，可以通过插桩(logpoint)的方式去寻找。</p>
 <h4 id="奇yin巧计"><a href="#奇yin巧计" class="headerlink" title="奇yin巧计"></a>奇yin巧计</h4><p>补环境可以通过半置空函数，判断其操作。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nullfunction = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="built_in">arguments</span>)&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">nullfunction = function()&#123;console.log(arguments)&#125;;
+</code></pre>
 <p>代理环境proxy.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="keyword">new</span> <span class="built_in">Proxy</span>(test,&#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">target, key</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;获取了&#x27;</span>+key+<span class="string">&#x27;属性&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> target[key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-javascript">test = new Proxy(test,&#123;
+    get(target, key) &#123;
+        console.log(&#39;获取了&#39;+key+&#39;属性&#39;);
+        return target[key];
+    &#125;
+&#125;);
+</code></pre>
 <p>本质上是通过截取window.a，这种操作，把a打印到控制台，然后判断到底做了什么。</p>
 
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2022-01-02 23:21:10" itemprop="dateModified" datetime="2022-01-02T23:21:10+08:00">2022-01-02</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Mr2 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Mr2 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Mr2 PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Mr2 <i class="ic i-at"><em>@</em></i>菜b的爬虫记录
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://yida506.github.io/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">http://yida506.github.io/2021/12/18/补环境/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2021/11/28/ast/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicm0fdw5cj20zk0m8hdt.jpg" title="AST语法树">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> ast</span>
+  <h3>AST语法树</h3>
+  </a>
+
     </div>
+    <div class="item right">
+      
 
-    
-    
-    
+  <a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipetlbztpj20zk0m84qp.jpg" title="jy滑块">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> 验证码专题</span>
+  <h3>jy滑块</h3>
+  </a>
 
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/12/13/jsvmp/" rel="prev" title="jsvmp">
-      <i class="fa fa-chevron-left"></i> jsvmp
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" rel="next" title="jy滑块">
-      jy滑块 <i class="fa fa-chevron-right"></i>
-    </a></div>
     </div>
-      </footer>
-    
-  </article>
+</div>
+
   
-  
-  
+  <div class="wrap" id="comments"></div>
 
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 
         </div>
+        <div id="sidebar">
           
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">补环境介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text">环境检测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E6%A3%80%E6%B5%8B"><span class="toc-number">2.1.</span> <span class="toc-text">显式检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#STEP1-%E6%95%B4%E4%BD%93%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">STEP1 整体代码分析:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#STEP2-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.1.2.</span> <span class="toc-text">STEP2 环境搭建:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E6%A3%80%E6%B5%8B"><span class="toc-number">2.2.</span> <span class="toc-text">隐式检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A5%87yin%E5%B7%A7%E8%AE%A1"><span class="toc-number">2.3.</span> <span class="toc-text">奇yin巧计</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2021/11/14/js%E9%80%86%E5%90%91/" rel="bookmark" title="js逆向">js逆向</a></li><li class="active"><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" rel="bookmark" title="补环境">补环境</a></li><li><a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" rel="bookmark" title="反调试">反调试</a></li><li><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" rel="bookmark" title="事件监听">事件监听</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Mr2"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Mr2</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">41</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">20</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+</div>
+
+<ul class="menu">
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>Tags</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">补环境介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B"><span class="nav-number">2.</span> <span class="nav-text">环境检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E5%BC%8F%E6%A3%80%E6%B5%8B"><span class="nav-number">2.1.</span> <span class="nav-text">显式检测</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP1-%E6%95%B4%E4%BD%93%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">2.1.1.</span> <span class="nav-text">STEP1 整体代码分析:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#STEP2-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.1.2.</span> <span class="nav-text">STEP2 环境搭建:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E6%A3%80%E6%B5%8B"><span class="nav-number">2.2.</span> <span class="nav-text">隐式检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A5%87yin%E5%B7%A7%E8%AE%A1"><span class="nav-number">2.3.</span> <span class="nav-text">奇yin巧计</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Lan</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-  </nav>
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2021/11/28/ast/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
 </div>
 
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
+        </div>
+        <div class="dimmer"></div>
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Lan</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="Symbols count total">169k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">2:34</span>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+
+    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+</div>
+
+    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
+</div>
+
+    <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="In 基础知识">基础知识</a>
+</div>
+
+    <span><a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="基础知识">基础知识</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2022/03/06/redis/" title="redis">redis</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/vue/" title="In vue">vue</a>
+</div>
+
+    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="In 加密算法">加密算法</a>
+</div>
+
+    <span><a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" title="js加密">js加密</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" title="反调试">反调试</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2022</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr2 @ Yume Shoka</span>
   </div>
-
-        
-
-
-
-
-
-
-
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
 
       </div>
     </footer>
   </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2021/12/18/补环境/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
 
-<script src="/js/utils.js"></script>
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/app.js?v=0.2.5"></script>
 
 
 
-  
-
-  
-
-  
 
 </body>
 </html>

@@ -1,420 +1,563 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="alternate" type="application/rss+xml" title="菜b的爬虫记录" href="http://yida506.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="菜b的爬虫记录" href="http://yida506.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="菜b的爬虫记录" href="http://yida506.github.io/feed.json" />
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yida506.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-  <meta name="description" content="VMP介绍12&quot;索引j&quot;, j,&quot;索引O&quot;, O, &quot; 值：&quot;, JSON.stringify(S, function(key, value) &amp;#123;if (value &#x3D;&#x3D; window) &amp;#123;return undefined&amp;#125; return value&amp;#125;) jsvmp签名分析签名参数：_02B4Z6w">
-<meta property="og:type" content="article">
-<meta property="og:title" content="抖店vmp">
-<meta property="og:url" content="http://yida506.github.io/2022/05/21/%E6%8A%96%E5%BA%97vmp/index.html">
-<meta property="og:site_name" content="spider">
-<meta property="og:description" content="VMP介绍12&quot;索引j&quot;, j,&quot;索引O&quot;, O, &quot; 值：&quot;, JSON.stringify(S, function(key, value) &amp;#123;if (value &#x3D;&#x3D; window) &amp;#123;return undefined&amp;#125; return value&amp;#125;) jsvmp签名分析签名参数：_02B4Z6w">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-21T11:08:25.000Z">
-<meta property="article:modified_time" content="2022-05-31T14:05:32.793Z">
-<meta property="article:author" content="Lan">
-<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
 
 <link rel="canonical" href="http://yida506.github.io/2022/05/21/%E6%8A%96%E5%BA%97vmp/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>抖店vmp | spider</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
+  <title>
+抖店vmp - jsvmp |
+Yume Shoka = 菜b的爬虫记录</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">spider</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">抖店vmp
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2022-05-21 19:08:25">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-05-21T19:08:25+08:00">2022-05-21</time>
+  </span>
 </div>
 
 
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-
-
-
-</div>
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeybxm1pj20zk0m8niv.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclfb3vzhj20zk0m8wny.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclh3brzpj20zk0m8ann.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitht3xtj20zk0m8k5v.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipexbei4hj20zk0m8npd.jpg"></li>
+        </ul>
+      </div>
     </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
           
-
-          <div class="content post posts-expand">
-            
-
+  <div class="article wrap">
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/21/%E6%8A%96%E5%BA%97vmp/">
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/jsvmp/" itemprop="item" rel="index" title="In jsvmp"><span itemprop="name">jsvmp</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lan">
-      <meta itemprop="description" content="">
-    </span>
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://yida506.github.io/2022/05/21/%E6%8A%96%E5%BA%97vmp/">
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spider">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          抖店vmp
-        </h1>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Mr2">
+    <meta itemprop="description" content=", ">
+  </span>
 
-        <div class="post-meta">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="菜b的爬虫记录">
+  </span>
 
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
+  <div class="body md" itemprop="articleBody">
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
-      
-        <h4 id="VMP介绍"><a href="#VMP介绍" class="headerlink" title="VMP介绍"></a>VMP介绍</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;索引j&quot;</span>, j,<span class="string">&quot;索引O&quot;</span>, O, <span class="string">&quot; 值：&quot;</span>, <span class="built_in">JSON</span>.stringify(S, <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>) </span>&#123;<span class="keyword">if</span> (value == <span class="built_in">window</span>) &#123;<span class="keyword">return</span> <span class="literal">undefined</span>&#125; <span class="keyword">return</span> value&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <h4 id="VMP介绍"><a href="#VMP介绍" class="headerlink" title="VMP介绍"></a>VMP介绍</h4><pre><code class="lang-javascript">&quot;索引j&quot;, j,&quot;索引O&quot;, O, &quot; 值：&quot;, JSON.stringify(S, function(key, value) &#123;if (value == window) &#123;return undefined&#125; return value&#125;)
+</code></pre>
 <h1 id="jsvmp"><a href="#jsvmp" class="headerlink" title="jsvmp"></a>jsvmp</h1><h3 id="签名分析"><a href="#签名分析" class="headerlink" title="签名分析"></a>签名分析</h3><p>签名参数：<br>_02B4Z6wo00101loNtfAAAIDDhHvtVmvJQOZaCbFAAPQYwzYkMBmMy0OIRqJQNqhou0eH.DJLTigPioA7TAwBj3B7N1HhHxmv5dJlR1wA5ViS1rIJXRF.2jx88ty4qN9zJEh5kPLfJLRpsdxx14<br>根据插桩日志,可以将上述分为8部分<br>sign1:loNtf<br>sign2:AAAID<br>sign3:DhHvtV<br>sign4:mvJQO<br>sign5:ZaCbF<br>sign6:AAPQY<br>sign7: wzYk<br>sign8: MBmMy0OIRqJQNqhou0eH.DJLTigPioA7TAwBj3B7N1HhHxmv5dJlR1wA5ViS1rIJXRF.2jx88ty4qN9zJEh5kPLfJLRpsdxx<br>最后在对整体的拼接计算一个尾缀</p>
-<h5 id="字符索引修改"><a href="#字符索引修改" class="headerlink" title="字符索引修改"></a>字符索引修改</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move_char_calc</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">0</span> &lt;= num &amp;&amp; num &lt; <span class="number">26</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num + <span class="number">65</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="number">26</span> &lt;= num &amp;&amp; num &lt; <span class="number">52</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num + <span class="number">71</span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num == <span class="number">62</span> || num == <span class="number">63</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num - <span class="number">17</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num - <span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="字符索引修改"><a href="#字符索引修改" class="headerlink" title="字符索引修改"></a>字符索引修改</h5><pre><code class="lang-javascript">function move_char_calc(num)&#123;
+    if(0 &lt;= num &amp;&amp; num &lt; 26)&#123;
+        return num + 65
+    &#125;else if(26 &lt;= num &amp;&amp; num &lt; 52)&#123;
+        return num + 71
+    &#125;else if(num == 62 || num == 63)&#123;
+        return num - 17
+    &#125;else&#123;
+        return num - 4
+    &#125;
+&#125;
+</code></pre>
 <p>根据插桩日志的分析,发现在每一个签名计算的过程中,在最后都会进行一个计算,这个值主要是用于修改字符的索引,将不存在的剔除出去</p>
-<h5 id="魔改sdbm"><a href="#魔改sdbm" class="headerlink" title="魔改sdbm"></a>魔改sdbm</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++)&#123;</span><br><span class="line">        hash = ((hash * <span class="number">65599</span>) &gt;&gt;&gt; <span class="number">0</span>) + strurl.charCodeAt(hash % strurl.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash2</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;strurl.length; i++)&#123;</span><br><span class="line">        hash = (hash ^ strurl.charCodeAt(i)) * <span class="number">65599</span> &gt;&gt;&gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sdbmhash3</span>(<span class="params">strurl, hash</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;strurl.length; i++)&#123;</span><br><span class="line">        hash = (hash * <span class="number">65599</span> + strurl.charCodeAt(i)) &gt;&gt;&gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hash;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="魔改sdbm"><a href="#魔改sdbm" class="headerlink" title="魔改sdbm"></a>魔改sdbm</h5><pre><code class="lang-javascript">function sdbmhash(strurl, hash) &#123;
+    for(let i=0; i&lt;32; i++)&#123;
+        hash = ((hash * 65599) &gt;&gt;&gt; 0) + strurl.charCodeAt(hash % strurl.length);
+    &#125;
+    return hash;
+&#125;;
+
+function sdbmhash2(strurl, hash) &#123;
+    for(let i=0; i&lt;strurl.length; i++)&#123;
+        hash = (hash ^ strurl.charCodeAt(i)) * 65599 &gt;&gt;&gt; 0;
+    &#125;
+    return hash;
+&#125;;
+
+function sdbmhash3(strurl, hash) &#123;
+    for(let i=0; i&lt;strurl.length; i++)&#123;
+        hash = (hash * 65599 + strurl.charCodeAt(i)) &gt;&gt;&gt; 0;
+    &#125;
+    return hash;
+&#125;;
+</code></pre>
 <p>这里包含了三种sdbm算法的魔改,主要用于计算不同的hash值用于后续计算</p>
-<h5 id="sign1"><a href="#sign1" class="headerlink" title="sign1"></a>sign1</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.offset1 = [<span class="number">24</span>, <span class="number">18</span>, <span class="number">12</span>, <span class="number">6</span>, <span class="number">0</span>];</span><br><span class="line"><span class="function"><span class="title">get_signature1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> now_str = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> index <span class="keyword">in</span> <span class="built_in">this</span>.offset1)&#123;</span><br><span class="line">            <span class="keyword">let</span> charnum = <span class="built_in">this</span>.nownumble &gt;&gt; <span class="number">2</span> &gt;&gt; <span class="built_in">this</span>.offset1[index] &amp; <span class="number">63</span>;</span><br><span class="line">            now_str += <span class="built_in">String</span>.fromCharCode(move_char_calc(charnum));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;sign1:&#x27;</span>+now_str);</span><br><span class="line">        <span class="keyword">return</span> now_str;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="sign1"><a href="#sign1" class="headerlink" title="sign1"></a>sign1</h5><pre><code class="lang-javascript">    this.offset1 = [24, 18, 12, 6, 0];
+    get_signature1()&#123;
+            let now_str = &#39;&#39;;
+            for(let index in this.offset1)&#123;
+                let charnum = this.nownumble &gt;&gt; 2 &gt;&gt; this.offset1[index] &amp; 63;
+                now_str += String.fromCharCode(move_char_calc(charnum));
+            &#125;
+            console.log(&#39;sign1:&#39;+now_str);
+            return now_str;
+        &#125;;
+</code></pre>
 <p>这里的this.nownumble是由长数字计算出来,长数字是由浏览器reference,时间戳,canves指纹计算得到<br>其他sign大同小异</p>
 <h5 id="sign4"><a href="#sign4" class="headerlink" title="sign4"></a>sign4</h5><p>sign4,sign5,sign6都还使用了别的参数进行计算.<br>sign4的参数包含url修改后的参数拼接计算以及浏览器user-agent的sdbm计算</p>
 <h5 id="sign8"><a href="#sign8" class="headerlink" title="sign8"></a>sign8</h5><p>sign8的计算主要涉及到一个18数组的初始化,以及八次变化,同时包含了cookie中的sec_id</p>
 
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2022-05-31 22:05:32" itemprop="dateModified" datetime="2022-05-31T22:05:32+08:00">2022-05-31</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Mr2 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Mr2 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Mr2 PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Mr2 <i class="ic i-at"><em>@</em></i>菜b的爬虫记录
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://yida506.github.io/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">http://yida506.github.io/2022/05/21/抖店vmp/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciukx8a7j20zk0m8aio.jpg" title="java基础">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Java</span>
+  <h3>java基础</h3>
+  </a>
+
     </div>
+    <div class="item right">
+      
 
-    
-    
-    
+  <a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciuv0socj20zk0m8qes.jpg" title="vue初探">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> vue</span>
+  <h3>vue初探</h3>
+  </a>
 
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" rel="prev" title="java基础">
-      <i class="fa fa-chevron-left"></i> java基础
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" rel="next" title="vue初探">
-      vue初探 <i class="fa fa-chevron-right"></i>
-    </a></div>
     </div>
-      </footer>
-    
-  </article>
+</div>
+
   
-  
-  
+  <div class="wrap" id="comments"></div>
 
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 
         </div>
+        <div id="sidebar">
           
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#VMP%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">VMP介绍</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#jsvmp"><span class="toc-number"></span> <span class="toc-text">jsvmp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%BE%E5%90%8D%E5%88%86%E6%9E%90"><span class="toc-number"></span> <span class="toc-text">签名分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E7%B4%A2%E5%BC%95%E4%BF%AE%E6%94%B9"><span class="toc-number">0.1.</span> <span class="toc-text">字符索引修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%AD%94%E6%94%B9sdbm"><span class="toc-number">0.2.</span> <span class="toc-text">魔改sdbm</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sign1"><span class="toc-number">0.3.</span> <span class="toc-text">sign1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sign4"><span class="toc-number">0.4.</span> <span class="toc-text">sign4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sign8"><span class="toc-number">0.5.</span> <span class="toc-text">sign8</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li class="active"><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" rel="bookmark" title="抖店vmp">抖店vmp</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Mr2"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Mr2</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">41</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">20</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+</div>
+
+<ul class="menu">
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>Tags</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
   </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#VMP%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">VMP介绍</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jsvmp"><span class="nav-number"></span> <span class="nav-text">jsvmp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%BE%E5%90%8D%E5%88%86%E6%9E%90"><span class="nav-number"></span> <span class="nav-text">签名分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%B4%A2%E5%BC%95%E4%BF%AE%E6%94%B9"><span class="nav-number">0.1.</span> <span class="nav-text">字符索引修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AD%94%E6%94%B9sdbm"><span class="nav-number">0.2.</span> <span class="nav-text">魔改sdbm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sign1"><span class="nav-number">0.3.</span> <span class="nav-text">sign1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sign4"><span class="nav-number">0.4.</span> <span class="nav-text">sign4</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sign8"><span class="nav-number">0.5.</span> <span class="nav-text">sign8</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Lan</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">18</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-  </nav>
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
 </div>
 
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
+        </div>
+        <div class="dimmer"></div>
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Lan</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="Symbols count total">169k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">2:34</span>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/vue/" title="In vue">vue</a>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+
+    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/go/" title="In go">go</a>
+</div>
+
+    <span><a href="/2022/05/03/go/" title="go">go</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+</div>
+
+    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
+</div>
+
+    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
+</div>
+
+    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2022</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mr2 @ Yume Shoka</span>
   </div>
-
-        
-
-
-
-
-
-
-
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
 
       </div>
     </footer>
   </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2022/05/21/抖店vmp/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
 
-<script src="/js/utils.js"></script>
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
 
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/app.js?v=0.2.5"></script>
 
 
 
-  
-
-  
-
-  
 
 </body>
 </html>
