@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclh3brzpj20zk0m8ann.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclj61ylzj20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeyvx1d4j20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipesng5oej20zk0m87d4.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicm0fdw5cj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipew28b65j20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipetfk5zwj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipey84bjtj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeuv80yoj20zk0m8kjl.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipewr8iypj20zk0m8b29.jpg"></li>
         </ul>
       </div>
     </header>
@@ -154,7 +154,7 @@ Yume Shoka = 菜b的爬虫记录</title>
     <h4 id="1-XHR请求"><a href="#1-XHR请求" class="headerlink" title="1.XHR请求"></a>1.XHR请求</h4><p>在理解逆向时，首先要明白数据是如何产生的，现在大部分数据都采用异步加载的方式，也有少量数据直接写在网页上，直接在网页上的静态数据在此不做阐述。</p>
 <p>以目前的情况来看，我们想要获得的数据主要都是异步产生的，异步与同步的差别主要在于，同步需要执行完所有的过程数据才显示，异步就是可以中途显示数据，要使中途显示数据有很多种方法，例如和函数绑定，这样就可以实现翻页，页面的数据改变。</p>
 <p>在类似翻页过程中，我们实际上是用鼠标点击了页面页码、下一页等操作，该位置通常绑定了click事件，这样我们在点击时，就会运行click函数， 然后向服务器传递了请求，服务器给我们返回了对应的数据。</p>
-<pre><code class="lang-flow">startID=&gt;start: 点击事件(携带参数)
+<pre><code class="flow">startID=&gt;start: 点击事件(携带参数)
 operation1=&gt;operation: 回调函数
 operation2=&gt;operation: 调用ajax
 operation3=&gt;operation: 返回数据
@@ -181,7 +181,7 @@ startID-&gt;operation1-&gt;operation2-&gt;operation3-&gt;endID
 <p>总结：对于字体加密类型，首先就是需要将其字体文件下下来，然后根据其中的内容，以及网页返回的内容判断其属于静态还是动态，针对静态的，若混销量不大，可考虑手动建立字典的方式还原，若为动态的，就需要对其字体文件进行分析，然后构建自动化还原表，以达到还原的目的。</p>
 <p>雪碧图加密：</p>
 <p>雪碧图加密是以图的形式对文件进行上传，然后再根据顺序调用的原理，将其渲染到页面上，以达到降低开销的目的。</p>
-<h6 id="HOOK"><a href="#HOOK" class="headerlink" title="HOOK"></a>HOOK</h6><pre><code class="lang-javascript">document.cookie_bk = document.cookie;
+<h6 id="HOOK"><a href="#HOOK" class="headerlink" title="HOOK"></a>HOOK</h6><pre><code class="javascript">document.cookie_bk = document.cookie;
 Object.defineProperty(document,&#39;cookie&#39;,&#123;
     get:function()&#123;
         debugger;
@@ -258,7 +258,7 @@ Object.defineProperty(document,&#39;cookie&#39;,&#123;
     <div class="item right">
       
 
-  <a href="/2021/11/28/ast/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicljgocqbj20zk0m8e81.jpg" title="AST语法树">
+  <a href="/2021/11/28/ast/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclize41wj20zk0m87gk.jpg" title="AST语法树">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> ast</span>
   <h3>AST语法树</h3>
@@ -380,46 +380,6 @@ Object.defineProperty(document,&#39;cookie&#39;,&#123;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2021/11/28/ast/" title="AST语法树">AST语法树</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="In 基础知识">基础知识</a>
-</div>
-
-    <span><a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="基础知识">基础知识</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/NLP/" title="In NLP">NLP</a>
 </div>
 
@@ -430,30 +390,10 @@ Object.defineProperty(document,&#39;cookie&#39;,&#123;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/Java/" title="In Java">Java</a>
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" title="java基础">java基础</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
-</div>
-
-    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="In 加密算法">加密算法</a>
-</div>
-
-    <span><a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" title="js加密">js加密</a></span>
+    <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
   </li>
 
       
@@ -463,16 +403,77 @@ Object.defineProperty(document,&#39;cookie&#39;,&#123;
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" title="ast_tools解读">ast_tools解读</a></span>
+    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
 </div>
 
-    <span><a href="/2022/03/06/redis/" title="redis">redis</a></span>
+    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+</div>
+
+    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+</div>
+
+    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/go/" title="In go">go</a>
+</div>
+
+    <span><a href="/2022/05/03/go/" title="go">go</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
   </li>
 
   </ul>

@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicivghyooj20zk0m8dir.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljgocqbj20zk0m8e81.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4baakhj20zk0m8h5q.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeybxm1pj20zk0m8niv.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclfdu6exj20zk0m87hw.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitzannuj20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclwuom7cj20zk0m8dvn.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexbei4hj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexj2jgzj20zk0m8b09.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipesrnqv3j20zk0m8ava.jpg"></li>
         </ul>
       </div>
     </header>
@@ -152,19 +152,19 @@ Yume Shoka = 菜b的爬虫记录</title>
     
 
     <h4 id="jadx使用"><a href="#jadx使用" class="headerlink" title="jadx使用"></a>jadx使用</h4><p>直接用jadx打开apk。</p>
-<h4 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h4><h5 id="1-代码搜索"><a href="#1-代码搜索" class="headerlink" title="1.代码搜索"></a>1.代码搜索</h5><p><img data-src="静态分析/image-20220419214843370.png" alt="image-20220419214843370"></p>
+<h4 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h4><h5 id="1-代码搜索"><a href="#1-代码搜索" class="headerlink" title="1.代码搜索"></a>1.代码搜索</h5><p><img data-src="/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419214843370.png" alt="image-20220419214843370"></p>
 <p>activity里面包含主要代码。其中在main之前的为主界面代码，这里只有mainActivity.</p>
-<p><img data-src="静态分析/image-20220419215044951.png" alt="image-20220419215044951"></p>
+<p><img data-src="/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419215044951.png" alt="image-20220419215044951"></p>
 <p>onCreate、onClick为事件。</p>
 <h4 id="Frida"><a href="#Frida" class="headerlink" title="Frida"></a>Frida</h4><h5 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h5><p>连接到手机后，进入安装frida-serve的位置</p>
-<pre><code class="lang-shell"> adb shell
+<pre><code class="shell"> adb shell
  su 
  cd /data/local/tmp/
 </code></pre>
 <p>ps -A | grep com</p>
 <p>com指代的是过滤条件，该指令可以展示当前进程名，也对应下图xml中的package名。</p>
-<p><img data-src="静态分析/image-20220419221411727.png" alt="image-20220419221411727"></p>
-<pre><code class="lang-python">import frida
+<p><img data-src="/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20220419221411727.png" alt="image-20220419221411727"></p>
+<pre><code class="python">import frida
 import sys
 
 #模板
@@ -182,7 +182,7 @@ Java.perform(
         MainActivity.onClick.implementation = function(val)&#123;
             console.log(&#39;mmmm:&#39;+this.m.value);
             console.log(this.n.value);
-
+            
             this.onClick(val);
         &#125;;
         #下面是匿名类的hook方法,这里要把他自带的.改为$
@@ -210,6 +210,7 @@ function printstack()&#123;
     console.log(Java.use(&quot;android.util.Log&quot;).getStackTraceString(Java.use(&quot;java.lang.Exception&quot;).$new()));
 &#125;
 </code></pre>
+
   </div>
 
    <footer>
@@ -275,7 +276,7 @@ function printstack()&#123;
     <div class="item left">
       
 
-  <a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclfdu6exj20zk0m87hw.jpg" title="app入门">
+  <a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipevo9j1jj20zk0m8e81.jpg" title="app入门">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> app逆向</span>
   <h3>app入门</h3>
@@ -285,7 +286,7 @@ function printstack()&#123;
     <div class="item right">
       
 
-  <a href="/2022/04/21/Frida/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclhtuo6nj20zk0m8ttm.jpg" title="Frida">
+  <a href="/2022/04/21/Frida/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipevuctzzj20zk0m84qp.jpg" title="Frida">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> app逆向</span>
   <h3>Frida</h3>
@@ -419,70 +420,20 @@ function printstack()&#123;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="In 基础知识">基础知识</a>
-</div>
-
-    <span><a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="基础知识">基础知识</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" title="反调试">反调试</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
-</div>
-
-    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
 </div>
 
-    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
+    <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
+</div>
+
+    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
   </li>
 
       
@@ -493,6 +444,56 @@ function printstack()&#123;
 </div>
 
     <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast%E5%BA%94%E7%94%A8/" title="In ast应用">ast应用</a>
+</div>
+
+    <span><a href="/2022/05/05/ast%E8%A7%A3vmp/" title="ast解vmp">ast解vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
+</div>
+
+    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
   </li>
 
       

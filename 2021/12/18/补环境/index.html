@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciukx8a7j20zk0m8aio.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclga70tsj20zk0m84mr.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitcxhpij20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclfw2t96j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicit31ffoj20zk0m8naf.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicljitigmj20zk0m87fp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclj61ylzj20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclffsa1cj20zk0m811l.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitzannuj20zk0m8b29.jpg"></li>
         </ul>
       </div>
     </header>
@@ -163,7 +163,7 @@ Yume Shoka = 菜b的爬虫记录</title>
 </ol>
 <h4 id="显式检测"><a href="#显式检测" class="headerlink" title="显式检测"></a>显式检测</h4><p><strong>定义：</strong>以A[‘B’]、A.function(val),这种方式调用，同时,A、B、function都可能为检测的对象。</p>
 <p>以下面这段js为例:</p>
-<pre><code class="lang-javascript">var _N = function () &#123;
+<pre><code class="javascript">var _N = function () &#123;
     setTimeout(&#39;location.href=location.pathname+location.search.replace(/[\?|&amp;]captcha-challenge/,\&#39;\&#39;)&#39;, 1500);
     document.cookie = &#39;__jsl_clearance=1640094880.604|0|&#39; + (function () &#123;
         var _t = [function (_N) &#123;
@@ -210,20 +210,20 @@ if ((function () &#123;
 <p>在上述代码中，我们可以看到形如document、window这些对象，在node中是不包含这种对象的，因此我们需要构造一个和浏览器一样的对象出来。</p>
 <p>很明显，这里的Window指代全局对象，document指代的是网页源码，DOM对象在node中无法完全模拟，因此我们换一种思路，只需要补到其不报错不就行了嘛？</p>
 <h5 id="STEP1-整体代码分析"><a href="#STEP1-整体代码分析" class="headerlink" title="STEP1 整体代码分析:"></a>STEP1 整体代码分析:</h5><p>先看第一个位置，setTimeout创建了一个定时器，我们在这里直接置空即可。</p>
-<pre><code class="lang-javascript">setTimeout = function()&#123;&#125;;
+<pre><code class="javascript">setTimeout = function()&#123;&#125;;
 </code></pre>
 <p>由于在node中的全局为global,那么我们需要对其进行一个赋值操作，把window构建出来。</p>
 <p>同时由于后面还调用了document,我们先创建一个空对象。</p>
-<pre><code class="lang-javascript">window = global;
+<pre><code class="javascript">window = global;
 document = &#123;&#125;;
 </code></pre>
-<h5 id="STEP2-环境搭建"><a href="#STEP2-环境搭建" class="headerlink" title="STEP2 环境搭建:"></a>STEP2 环境搭建:</h5><p>对于document.createElement(‘div’)，createElement(‘div’)明显是一个方法，在网页端返回了一个dom对象，同时我们发现其后续创建了innerHTML属性,然后通过firstChild.href重新赋值。这样一来，我们在网页中运行_N.firstChild.href,发现，打印的结果为’<span class="exturl" data-url="aHR0cHM6Ly93d3cucHl0aG9uLXNwaWRlci5jb20vJiMzOTss5ZCO57ut6L+Y6Lef5LiK5LqG5a+55YW255qE5pON5L2c44CC5Lmf5bCx5piv6K+077yM5oiR5Lus5Y+q6ZyA6KaB5oqKaHJlZuihpeWHuuadpe+8jOWQjOaXtuiuqWlubmVySFRNTOWxnuaAp+WtmOWcqOWNs+WPr+OAgg==">https://www.python-spider.com/&#39;,后续还跟上了对其的操作。也就是说，我们只需要把href补出来，同时让innerHTML属性存在即可。</span></p>
-<pre><code class="lang-javascript">var _N = document.createElement(&#39;div&#39;)
+<h5 id="STEP2-环境搭建"><a href="#STEP2-环境搭建" class="headerlink" title="STEP2 环境搭建:"></a>STEP2 环境搭建:</h5><p>对于document.createElement(‘div’)，createElement(‘div’)明显是一个方法，在网页端返回了一个dom对象，同时我们发现其后续创建了innerHTML属性,然后通过firstChild.href重新赋值。这样一来，我们在网页中运行_N.firstChild.href,发现，打印的结果为’<span class="exturl" data-url="aHR0cHM6Ly93d3cucHl0aG9uLXNwaWRlci5jb20vJiMzOTssJUU1JTkwJThFJUU3JUJCJUFEJUU4JUJGJTk4JUU4JUI3JTlGJUU0JUI4JThBJUU0JUJBJTg2JUU1JUFGJUI5JUU1JTg1JUI2JUU3JTlBJTg0JUU2JTkzJThEJUU0JUJEJTlDJUUzJTgwJTgyJUU0JUI5JTlGJUU1JUIwJUIxJUU2JTk4JUFGJUU4JUFGJUI0JUVGJUJDJThDJUU2JTg4JTkxJUU0JUJCJUFDJUU1JThGJUFBJUU5JTlDJTgwJUU4JUE2JTgxJUU2JThBJThBaHJlZiVFOCVBMSVBNSVFNSU4NyVCQSVFNiU5RCVBNSVFRiVCQyU4QyVFNSU5MCU4QyVFNiU5NyVCNiVFOCVBRSVBOWlubmVySFRNTCVFNSVCMSU5RSVFNiU4MCVBNyVFNSVBRCU5OCVFNSU5QyVBOCVFNSU4RCVCMyVFNSU4RiVBRiVFMyU4MCU4Mg==">https://www.python-spider.com/&#39;,后续还跟上了对其的操作。也就是说，我们只需要把href补出来，同时让innerHTML属性存在即可。</span></p>
+<pre><code class="javascript">var _N = document.createElement(&#39;div&#39;)
 _N.innerHTML = &#39;&lt;a href=\&#39;/\&#39;&gt;_1H&lt;/a&gt;&#39;;
 _N = _N.firstChild.href;
 var _t = _N.match(/https?:\/\//)[0];
 </code></pre>
-<pre><code class="lang-javascript">document.createElement = function()&#123;
+<pre><code class="javascript">document.createElement = function()&#123;
     return &#123;
         innerHTML:&#39;&#39;,
         firstChild:&#123;
@@ -232,15 +232,15 @@ var _t = _N.match(/https?:\/\//)[0];
     &#125;
 &#125;;
 </code></pre>
-<p>在末尾我们还看到了形如addEventListener的这种调用，对于这种方法，我们不知道其返回了什么，那么我们就需要去<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdOWumOaWueaWh+aho+mHjOafpeaJvuOAgg==">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript官方文档里查找。</span></p>
+<p>在末尾我们还看到了形如addEventListener的这种调用，对于这种方法，我们不知道其返回了什么，那么我们就需要去<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSmF2YVNjcmlwdCVFNSVBRSU5OCVFNiU5NiVCOSVFNiU5NiU4NyVFNiVBMSVBMyVFOSU4NyU4QyVFNiU5RiVBNSVFNiU4OSVCRSVFMyU4MCU4Mg==">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript官方文档里查找。</span></p>
 <p>最后补出来如下：</p>
-<pre><code class="lang-javascript">window.addEventListener = function()&#123;&#125;;
+<pre><code class="javascript">window.addEventListener = function()&#123;&#125;;
 document.addEventListener = function(a,b,c)&#123;return b()&#125;;
 document.attachEvent = function(a,b)&#123;&#125;;
 </code></pre>
 <h4 id="隐式检测"><a href="#隐式检测" class="headerlink" title="隐式检测"></a>隐式检测</h4><p>以显示检测的补环境来看，在代码结构清晰的情况下，我们可以很轻易的找到补环境入口，但是假使代码流程复杂，同时调用方法不是以上述形式调用，那么单纯的看代码几乎找不到补环境入口。</p>
 <p>先看如下例子：</p>
-<pre><code class="lang-javascript">//type1
+<pre><code class="javascript">//type1
 window[&#39;hr&#39;+&#39;ef&#39;];
 //type2
 S = [window,&#39;hr&#39;,&#39;ef&#39;];
@@ -249,10 +249,10 @@ var A = S[0][S[1]+S[2]];
 <p>第一种为稍微明显的调用，但是假如被ASCII码混淆了呢，假如被Ob混淆了呢，当然，针对这种情况，我们可以直接放到node中运行，让其报错后在比对即可。但是，假如我们这里采用第二种方法检测环境，这样，即使在node中运行也不会报错，返回的是undefined，那么这样在运行的流程中就发生了变化，进而导致最终的结果与我们想要的所差甚远。</p>
 <p>我们想要知道到底缺少什么环境，可以通过插桩(logpoint)的方式去寻找。</p>
 <h4 id="奇yin巧计"><a href="#奇yin巧计" class="headerlink" title="奇yin巧计"></a>奇yin巧计</h4><p>补环境可以通过半置空函数，判断其操作。</p>
-<pre><code class="lang-javascript">nullfunction = function()&#123;console.log(arguments)&#125;;
+<pre><code class="javascript">nullfunction = function()&#123;console.log(arguments)&#125;;
 </code></pre>
 <p>代理环境proxy.</p>
-<pre><code class="lang-javascript">test = new Proxy(test,&#123;
+<pre><code class="javascript">test = new Proxy(test,&#123;
     get(target, key) &#123;
         console.log(&#39;获取了&#39;+key+&#39;属性&#39;);
         return target[key];
@@ -326,7 +326,7 @@ var A = S[0][S[1]+S[2]];
     <div class="item left">
       
 
-  <a href="/2021/11/28/ast/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicm0fdw5cj20zk0m8hdt.jpg" title="AST语法树">
+  <a href="/2021/11/28/ast/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeyonbf9j20zk0m8e81.jpg" title="AST语法树">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> ast</span>
   <h3>AST语法树</h3>
@@ -336,7 +336,7 @@ var A = S[0][S[1]+S[2]];
     <div class="item right">
       
 
-  <a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipetlbztpj20zk0m84qp.jpg" title="jy滑块">
+  <a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipewkhf1zj20zk0m81kx.jpg" title="jy滑块">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> 验证码专题</span>
   <h3>jy滑块</h3>
@@ -460,6 +460,26 @@ var A = S[0][S[1]+S[2]];
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/05/03/Ratel/" title="Ratel">Ratel</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
 <a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
 </div>
 
@@ -470,79 +490,10 @@ var A = S[0][S[1]+S[2]];
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+<a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
-</div>
-
-    <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="In 基础知识">基础知识</a>
-</div>
-
-    <span><a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="基础知识">基础知识</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/03/06/redis/" title="redis">redis</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/vue/" title="In vue">vue</a>
-</div>
-
-    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="In 加密算法">加密算法</a>
-</div>
-
-    <span><a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" title="js加密">js加密</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" title="反调试">反调试</a></span>
+    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
   </li>
 
       
@@ -552,7 +503,57 @@ var A = S[0][S[1]+S[2]];
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
+    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/go/" title="In go">go</a>
+</div>
+
+    <span><a href="/2022/05/03/go/" title="go">go</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" title="验证码">验证码</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
   </li>
 
   </ul>

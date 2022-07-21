@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4lm9i7j20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipet8c1a2j20zk0m8kct.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeybxm1pj20zk0m8niv.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitht3xtj20zk0m8k5v.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipewr8iypj20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicliwyw55j20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipetv6p75j20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicivghyooj20zk0m8dir.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciundwu5j20zk0m8n9e.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipesrnqv3j20zk0m8ava.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicm07ih54j20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeubcbajj20zk0m8h1h.jpg"></li>
         </ul>
       </div>
     </header>
@@ -156,7 +156,7 @@ Yume Shoka = 菜b的爬虫记录</title>
 <p>参数如下:gt\challenge\w\callback(其余的貌似不为加密)</p>
 <p>明显，在该请求中生成了这些参数。</p>
 <p>跟值，找到生成参数的位置。</p>
-<pre><code class="lang-javascript"> u = r[$_CAGEe(750)]()
+<pre><code class="javascript"> u = r[$_CAGEe(750)]()
                   , l = V[$_CAGEe(342)](gt[$_CAGEe(209)](o), r[$_CAGEe(742)]())
                   , h = m[$_CAGEe(733)](l)
                   , f = &#123;
@@ -174,11 +174,11 @@ Yume Shoka = 菜b的爬虫记录</title>
 <blockquote>
 <p>首先明确一个观点，这里一定有一个值为定值，因为滑块拖动的轨迹是一定的</p>
 </blockquote>
-<h5 id="u值"><a href="#u值" class="headerlink" title="u值"></a>u值</h5><pre><code class="lang-javascript"> u = r[$_CAGEe(750)]()
+<h5 id="u值"><a href="#u值" class="headerlink" title="u值"></a>u值</h5><pre><code class="javascript"> u = r[$_CAGEe(750)]()
 </code></pre>
 <p>u运行了一个函数，未传参数进去、直接自执行。经过测试，发现其不为定值。</p>
 <p>内部逻辑：</p>
-<pre><code class="lang-javascript"> function(t) &#123;
+<pre><code class="javascript"> function(t) &#123;
                 var $_CBEDU = lTloj.$_CX
                   , $_CBECg = [&#39;$_CBEGr&#39;].concat($_CBEDU)
                   , $_CBEEc = $_CBECg[1];
@@ -212,7 +212,7 @@ var rt = function() &#123;
               , $_BFBEt = $_BFBCi[1];
             $_BFBCi.shift();
             var $_BFBFk = $_BFBCi[0];
-
+    
             function t() &#123;
                 var $_DBFAh = lTloj.$_DP()[0][4];
                 for (; $_DBFAh !== lTloj.$_DP()[2][3]; ) &#123;
@@ -224,14 +224,14 @@ var rt = function() &#123;
                 &#125;
             &#125;
             return function() &#123;
-
+                
                 var $_BFBIl = lTloj.$_CX
                   , $_BFBHs = [&#39;$_BFCBY&#39;].concat($_BFBIl)
                   , $_BFBJq = $_BFBHs[1];
                 $_BFBHs.shift();
                 var $_BFCAQ = $_BFBHs[0];
-
-
+                
+                
                 return t() + t() + t() + t();
             &#125;
             ;
@@ -242,11 +242,11 @@ t = (65536 * (1 + Math[&#39;random&#39;]()) | 0)[&#39;toString&#39;](16)[&#39;su
 <p>首先运行了rt函数，接着看rt函数内部，内部包含两次初始化操作，貌似没啥用。我们可以看到其中真实的返回值为4个t()函数运行之和，那么接着我们只需要分析t函数即可，</p>
 <p>本质上t其实是先通过random了一个随机数，然后位运算，在经过toString、substring将其转化为一个4位字符、接着4次拼接，就生成了16位随机字符。</p>
 <p>接下来，就就可以还原成如下形式：</p>
-<pre><code class="lang-javascript">var decode_u = function()&#123;return (65536 * (1 + Math[&#39;random&#39;]()) | 0)[&#39;toString&#39;](16)[&#39;substring&#39;](1)&#125;;
+<pre><code class="javascript">var decode_u = function()&#123;return (65536 * (1 + Math[&#39;random&#39;]()) | 0)[&#39;toString&#39;](16)[&#39;substring&#39;](1)&#125;;
 var u_decode = decode_u() + decode_u() + decode_u() + decode_u();
 </code></pre>
 <p>接下来再看e的整体部分</p>
-<pre><code class="lang-javascript">//$_CBEEc(342) = &#39;encrypt&#39;;
+<pre><code class="javascript">//$_CBEEc(342) = &#39;encrypt&#39;;
 var e = new X()[$_CBEEc(342)](this[$_CBEEc(742)](t));
  while (!e || 256 !== e[$_CBEEc(182)])
                     e = new X()[$_CBEDU(342)](this[$_CBEDU(742)](!0));
@@ -256,7 +256,7 @@ var e = new X()[$_CBEEc(342)](this[$_CBEEc(742)](t));
 var e = new X()[&#39;encrypt&#39;](u_decode);
 </code></pre>
 <p>while那部分e貌似经过调试也不经过那里，因此可以不用管，将e简单的还原，明显，我们只需要知道这个X()是啥不就行了吗，从字面意思上来看，就是对随机的u_decode的一个加密操作，跟进去：</p>
-<pre><code class="lang-javascript">function E() &#123;
+<pre><code class="javascript">function E() &#123;
                 var $_DBDBL = lTloj.$_DP()[2][4];
                 for (; $_DBDBL !== lTloj.$_DP()[2][3]; ) &#123;
                     switch ($_DBDBL) &#123;
@@ -350,7 +350,7 @@ E[$_HHIO(261)][$_HHJn(342)] = function lt(t) &#123;
 <li>接着调用原型链上的encrypt方法，同时传入了一个16位的随机数。</li>
 <li>最后生成256位结果。</li>
 </ol>
-<h5 id="l值"><a href="#l值" class="headerlink" title="l值"></a>l值</h5><pre><code class="lang-javascript">l = V[&quot;encrypt&quot;](gt[&quot;stringify&quot;](o), r[&quot;$_CBFG&quot;]()),
+<h5 id="l值"><a href="#l值" class="headerlink" title="l值"></a>l值</h5><pre><code class="javascript">l = V[&quot;encrypt&quot;](gt[&quot;stringify&quot;](o), r[&quot;$_CBFG&quot;]()),
 //手动还原
 r[&quot;$_CBFG&quot;]() 
 //这个会生成一个值,每次刷新都不一样，伪动态，同时跟进去分析发现,这个值其实返回的就是一个一开始初始化的值，逻辑就是u值的Ot,可改写为u_decode。
@@ -358,7 +358,7 @@ r[&quot;$_CBFG&quot;]()
 </code></pre>
 <p>通过对比可以发现o，传入了一系列参数，这也是导致两次运行结果不一致的主要原因，其中最后生成的rp也是一个不一致的参数。</p>
 <p>那么我们主要分析点就是o是如何生成的。</p>
-<pre><code class="lang-javascript">r = this,
+<pre><code class="javascript">r = this,
 i = r[&quot;$_CIY&quot;],
 o = &#123;
           &quot;lang&quot;: i[&quot;lang&quot;] || &quot;zh-cn&quot;,
@@ -370,7 +370,7 @@ o = &#123;
         &#125;;
 </code></pre>
 <p>在这部分中，我们可以看到，使用了n、e、t这三个传进来的参数，貌似看起来和鼠标轨迹有关。</p>
-<pre><code class="lang-javascript"> &quot;$_CGHV&quot;: function (t, e) &#123;
+<pre><code class="javascript"> &quot;$_CGHV&quot;: function (t, e) &#123;
         var n = this,
             r = n[&quot;$_BAHt&quot;],
             i = n[&quot;$_BBGR&quot;],
@@ -404,17 +404,17 @@ o = &#123;
 <h6 id="小l："><a href="#小l：" class="headerlink" title="小l："></a>小l：</h6><p>根据分析可知，该部分由一个函数传入了三个参数构成，后面两个参数为服务器返回，第一个参数为一个三维数组，第一维为一个x轴偏移，第二个为y轴偏移，第三个为时间戳偏移。</p>
 <h6 id="n-“-CECK”"><a href="#n-“-CECK”" class="headerlink" title="n[“$_CECK”]:"></a>n[“$_CECK”]:</h6><p>这项就是个时间戳之差，用结束时间戳减去开始的时间戳。</p>
 <h6 id="V-“encrypt”"><a href="#V-“encrypt”" class="headerlink" title="V[“encrypt”]"></a>V[“encrypt”]</h6><p>这部分可以直接导出。</p>
-<h5 id="h值"><a href="#h值" class="headerlink" title="h值"></a>h值</h5><pre><code class="lang-javascript">h = m[&quot;$_GFm&quot;](l);
+<h5 id="h值"><a href="#h值" class="headerlink" title="h值"></a>h值</h5><pre><code class="javascript">h = m[&quot;$_GFm&quot;](l);
 &quot;$_GFm&quot;: function (t) &#123;
         var e = this[&quot;$_GDR&quot;](t);
         return e[&quot;res&quot;] + e[&quot;end&quot;];
-&#125;,
+&#125;,       
 </code></pre>
 <p>这部分也可直接导出。</p>
 <h5 id="AST解混淆"><a href="#AST解混淆" class="headerlink" title="AST解混淆"></a>AST解混淆</h5><p>观察代码，我们可以发现，存在大量混淆，增加了阅读难度，所以首先使用AST解混淆。</p>
 <p>将代码放入在线网站解析，发现分为6块。</p>
 <ol>
-<li>ExpressionStatement    </li>
+<li>ExpressionStatement	</li>
 <li>ExpressionStatement</li>
 <li>ExpressionStatement</li>
 <li>ExpressionStatement</li>
@@ -424,7 +424,7 @@ o = &#123;
 <blockquote>
 <p>其中前四部分可以看作解密函数，第五部分可以看做一个类似声明对象的过程。与之前解的OB混淆原理不太一样，这里面采用了大量的重赋值操作。</p>
 </blockquote>
-<pre><code class="lang-javascript"> var $_DBIV = lTloj.$_CX
+<pre><code class="javascript"> var $_DBIV = lTloj.$_CX
 , $_DBHX = [&#39;$_DCBv&#39;].concat($_DBIV)
 , $_DBJB = $_DBHX[1];
 $_DBHX.shift();
@@ -435,7 +435,7 @@ var $_DCAU = $_DBHX[0];
 <h6 id="STEP1-ASCII码还原"><a href="#STEP1-ASCII码还原" class="headerlink" title="STEP1 ASCII码还原:"></a>STEP1 ASCII码还原:</h6><p>ASCII码还原，增加可读性，没啥好讲的。</p>
 <h6 id="STEP2-解密函数部分还原"><a href="#STEP2-解密函数部分还原" class="headerlink" title="STEP2 解密函数部分还原:"></a>STEP2 解密函数部分还原:</h6><p>由于在后面中，存在变量声明调用解密函数的过程，这里为了方便先直接进行一部分替换。</p>
 <p>通过分析我们可以知道，第三个和第四个解密函数，才为真正的解密函数，因为在后续的代码中，很大一部分都是通过该部分才进行了操作，那么我们只需要遍历MemberExpression节点，同时限制其父节点为声明表达式即可将遍历条件限定在前几个，然后通过遍历作用域，将有变量赋值的部分替换。</p>
-<pre><code class="lang-javascript">/* 
+<pre><code class="javascript">/* 
 a.b = function()&#123;return val&#125;;
 var c = a.b;
 转化为
@@ -467,7 +467,7 @@ const visitor1 =  &#123;
 <p>这一步主要是为后一步生成数组做铺垫。</p>
 </blockquote>
 <h6 id="STEP3-解密函数内存写入"><a href="#STEP3-解密函数内存写入" class="headerlink" title="STEP3 解密函数内存写入:"></a>STEP3 解密函数内存写入:</h6><p>紧接着我们将前5部分全部压入内存中，这样的好处就是后面在有调用的部分处，可以直接通过eval结合解密函数运行出值，直接用于替换。</p>
-<pre><code class="lang-javascript">//解密函数对象昵称
+<pre><code class="javascript">//解密函数对象昵称
 let descrypt_strfun_js = &#39;&#39;;
 for(let i=0;i&lt;=4;i++)&#123;
     //加入代码
@@ -478,7 +478,7 @@ for(let i=0;i&lt;=4;i++)&#123;
 eval(descrypt_strfun_js);
 </code></pre>
 <h6 id="STEP4-赋值表达式替换"><a href="#STEP4-赋值表达式替换" class="headerlink" title="STEP4 赋值表达式替换:"></a>STEP4 赋值表达式替换:</h6><p>由于后续的针对数组变化的插件需要能将数组写入内存中，而concat部分又包含了数组的调用，所以我们要将该部分还原成其原型。</p>
-<pre><code class="lang-javascript">/* 
+<pre><code class="javascript">/* 
 var b = function()&#123;return arguments&#125;;
 var a = [&#39;as&#39;].concat(b)
 还原后
@@ -500,7 +500,7 @@ const var_visitor  = &#123;
 &#125;;
 </code></pre>
 <h6 id="STEP-5-数组还原-临时变量还原："><a href="#STEP-5-数组还原-临时变量还原：" class="headerlink" title="STEP 5 数组还原 + 临时变量还原："></a>STEP 5 数组还原 + 临时变量还原：</h6><p>该部分就是对先前提到的数组进行的还原，临时变量其实指代的也是解密函数。</p>
-<pre><code class="lang-javascript">//变量替换
+<pre><code class="javascript">//变量替换
 const arr_change_visitor = &#123;
     //数组替换
     VariableDeclarator(path) &#123;
@@ -565,7 +565,7 @@ const var_write = &#123;
 &#125;;
 </code></pre>
 <h6 id="STEP-6-解密函数批量还原"><a href="#STEP-6-解密函数批量还原" class="headerlink" title="STEP 6 解密函数批量还原"></a>STEP 6 解密函数批量还原</h6><p>到了这一步，将解密函数全部运行替换即可。</p>
-<pre><code class="lang-javascript">var visitor_sec = &#123;
+<pre><code class="javascript">var visitor_sec = &#123;
     //遍历call节点,将内存中的函数直接计算
     CallExpression(path)&#123;
         const &#123;callee,arguments&#125; = path.node;
@@ -588,7 +588,7 @@ const var_write = &#123;
 &#125;
 </code></pre>
 <h6 id="STEP-7-控制流平坦化："><a href="#STEP-7-控制流平坦化：" class="headerlink" title="STEP 7 控制流平坦化："></a>STEP 7 控制流平坦化：</h6><p>通过上述步骤,已经将代码还原到了一个可以阅读的程度了，但是在整体的代码中还包含着一个及其特殊的部分。</p>
-<pre><code class="lang-javascript">function $_BFf(t) &#123;
+<pre><code class="javascript">function $_BFf(t) &#123;
       var $_DAIEJ = lTloj.$_DP()[0][4];
 
       for (; $_DAIEJ !== lTloj.$_DP()[2][3];) &#123;
@@ -617,8 +617,8 @@ const var_write = &#123;
 <blockquote>
 <p>在该例中图片的格式为312*160</p>
 </blockquote>
-<h6 id="STEP1-观察图片生成原理"><a href="#STEP1-观察图片生成原理" class="headerlink" title="STEP1 观察图片生成原理:"></a>STEP1 观察图片生成原理:</h6><p>在事件断点中打上canvas断点，调试，发现该位置貌似是生成参数的位置，观察l发现，其width = 10、height = 80，我们将其webp格式的图片打开可以发现，其是将图片划分为了两层，也就是说，这里的操作实际上是对一个52块的图片进行一个拼合，而且这里也只循环了52次，接下来只需要搞清楚里面在干什么就能对整体进行还原了。</p>
-<pre><code class="lang-javascript">   for (var a = r / 2, _ = 0; _ &lt; 52; _ += 1) &#123;
+<h6 id="STEP1-观察图片生成原理"><a href="#STEP1-观察图片生成原理" class="headerlink" title="STEP1 观察图片生成原理:"></a>STEP1 观察图片生成原理:</h6><p>在事件断点中打上canvas断点，调试，发现该位置貌似是生成参数的位置，观察l发现，其width &#x3D; 10、height &#x3D; 80，我们将其webp格式的图片打开可以发现，其是将图片划分为了两层，也就是说，这里的操作实际上是对一个52块的图片进行一个拼合，而且这里也只循环了52次，接下来只需要搞清楚里面在干什么就能对整体进行还原了。</p>
+<pre><code class="javascript">   for (var a = r / 2, _ = 0; _ &lt; 52; _ += 1) &#123;
                            //这里应该是确定图片位置
                         var c = Ut[_] % 26 * 12 + 1
                           , u = 25 &lt; Ut[_] ? a : 0
@@ -630,9 +630,9 @@ const var_write = &#123;
 <p>目前思路是，先拼上面的26张，在拼下面的26张，这里的l是将分割的图片一个个展示在画布上，c是x轴坐标，u是y轴坐标，a为y轴高度。</p>
 <p>也就是说我们只需要将图片分割后，一快快的按顺序拼起来即可。</p>
 <blockquote>
-<p>这里每一小块的大小为12 <em> 80 然后在展示的时候只展示了 10 </em> 80的大小，最后拼成一张 260 * 160的图片，其中展示的顺序与传入的那个数组一样，数组中的值为其对应的位置，左上角为0，然后26代表从左下角开始。</p>
+<p>这里每一小块的大小为12 * 80 然后在展示的时候只展示了 10 * 80的大小，最后拼成一张 260 * 160的图片，其中展示的顺序与传入的那个数组一样，数组中的值为其对应的位置，左上角为0，然后26代表从左下角开始。</p>
 </blockquote>
-<pre><code class="lang-python">//a 为传入的大数组
+<pre><code class="python">//a 为传入的大数组
 new_img = Image.new(&#39;RGB&#39;, (260, 160))
 for idx in range(len(a)):
     #获取当前位置的真实图的区域
@@ -646,7 +646,7 @@ for idx in range(len(a)):
     new_img.paste(img_cut, (new_x, new_y))
 </code></pre>
 <h6 id="STEP2-缺口识别："><a href="#STEP2-缺口识别：" class="headerlink" title="STEP2 缺口识别："></a>STEP2 缺口识别：</h6><p>原理上是通过检测二值化的边界，与滑块图进行比对(代码来源网上)。</p>
-<pre><code class="lang-python">def show(name):
+<pre><code class="python">def show(name):
     &#39;&#39;&#39;展示圈出来的位置&#39;&#39;&#39;
     cv2.imshow(&#39;Show&#39;, name)
     cv2.waitKey(0)
@@ -682,10 +682,10 @@ def detect_displacement(img_slider_path, image_background_path):
     return top_left
 
 
-top_left = detect_displacement(&quot;b.png&quot;, &quot;a.jpg&quot;)
+top_left = detect_displacement(&quot;b.png&quot;, &quot;a.jpg&quot;)   
 </code></pre>
 <h6 id="STEP3-轨迹模拟："><a href="#STEP3-轨迹模拟：" class="headerlink" title="STEP3 轨迹模拟："></a>STEP3 轨迹模拟：</h6><p>通过随机数，模拟轨迹。</p>
-<pre><code class="lang-python">def get_random_arr(num):
+<pre><code class="python">def get_random_arr(num):
     &#39;&#39;&#39;
     :param num: 图片的路径差
     :return: 三维数组,x轴,y轴,时间戳
@@ -778,7 +778,7 @@ top_left = detect_displacement(&quot;b.png&quot;, &quot;a.jpg&quot;)
     <div class="item left">
       
 
-  <a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclfw2t96j20zk0m8x6p.jpg" title="补环境">
+  <a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipexbei4hj20zk0m8npd.jpg" title="补环境">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> JS逆向</span>
   <h3>补环境</h3>
@@ -788,7 +788,7 @@ top_left = detect_displacement(&quot;b.png&quot;, &quot;a.jpg&quot;)
     <div class="item right">
       
 
-  <a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipevarprfj20zk0m8npd.jpg" title="反调试">
+  <a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipewf5l51j20zk0m8b29.jpg" title="反调试">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> JS逆向</span>
   <h3>反调试</h3>
@@ -912,10 +912,80 @@ top_left = detect_displacement(&quot;b.png&quot;, &quot;a.jpg&quot;)
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+<a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
+    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
+</div>
+
+    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" title="ast_tools解读">ast_tools解读</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+</div>
+
+    <span><a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" title="数据挖掘介绍">数据挖掘介绍</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
+</div>
+
+    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" title="java基础">java基础</a></span>
   </li>
 
       
@@ -932,80 +1002,10 @@ top_left = detect_displacement(&quot;b.png&quot;, &quot;a.jpg&quot;)
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
-</div>
-
-    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
-</div>
-
-    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/" title="In 社会工程学">社会工程学</a>
-</div>
-
-    <span><a href="/2022/07/03/socialengineer/" title="socialengineer">socialengineer</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/python%E5%BC%80%E5%8F%91/" title="In python开发">python开发</a>
-</div>
-
-    <span><a href="/2022/01/18/python%E5%BC%80%E5%8F%91/" title="python开发">python开发</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
-</div>
-
-    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
+    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
   </li>
 
   </ul>

@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclflwv2aj20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclffsa1cj20zk0m811l.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipey84bjtj20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeu7txpzj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeyhsblkj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipevo9j1jj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipevarprfj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipev1x5e4j20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicliwyw55j20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></li>
         </ul>
       </div>
     </header>
@@ -153,10 +153,10 @@ Yume Shoka = 菜b的爬虫记录</title>
 
     <h3 id="AST语法树介绍"><a href="#AST语法树介绍" class="headerlink" title="AST语法树介绍"></a>AST语法树介绍</h3><p>AST全称Abstract Syntax Tree,中文名称为抽象语法树,主要原理就是把代码通过词法分析和句法分析转化为一颗树的形式，对于树来讲又包含很多节点，其中包含了变量的位置,类别,值等一些参数。</p>
 <p>例如：</p>
-<pre><code class="lang-javascript">var a = 3;
+<pre><code class="javascript">var a = 3;
 </code></pre>
 <p>对应的AST解析结果为(采用Babel解析，结果只取body.declarations中的内容):</p>
-<pre><code class="lang-json">Node &#123;
+<pre><code class="json">Node &#123;
   type: &#39;VariableDeclarator&#39;,
   start: 4,
   end: 9,
@@ -199,20 +199,21 @@ Yume Shoka = 菜b的爬虫记录</title>
 <pre><code>npm install @babel/parser
 npm install @babel/traverse
 npm install @babel/generator
-</code></pre><p>parser主要是用于将代码解析成语法树的形式，traverse主要是用于遍历语法树节点，generator主要是用于将语法树解析回js代码。</p>
+</code></pre>
+<p>parser主要是用于将代码解析成语法树的形式，traverse主要是用于遍历语法树节点，generator主要是用于将语法树解析回js代码。</p>
 <h4 id="parser用法"><a href="#parser用法" class="headerlink" title="parser用法"></a>parser用法</h4><p>导包：</p>
-<pre><code class="lang-javascript">const &#123;parse&#125; = require(&#39;@babel/parser&#39;);
+<pre><code class="javascript">const &#123;parse&#125; = require(&#39;@babel/parser&#39;); 
 </code></pre>
 <p>由于我们需要用的是parser这个包中的parse函数，而parser又是一个对象，所以我们采用{}的方式只导入parse方法。</p>
 <p>然后我们就可以直接的采用以下方式，就可以直接将js代码转化为ast树。</p>
-<pre><code class="lang-javascript">parse(&#39;js_code&#39;);
+<pre><code class="javascript">parse(&#39;js_code&#39;);
 </code></pre>
 <h4 id="traverse用法"><a href="#traverse用法" class="headerlink" title="traverse用法"></a>traverse用法</h4><p> 导包：</p>
-<pre><code class="lang-javascript">const traverse = require(&quot;@babel/traverse&quot;).default;
+<pre><code class="javascript">const traverse = require(&quot;@babel/traverse&quot;).default;
 </code></pre>
 <p>这里是取出的traverse包中的默认方法.</p>
 <p>traverse方法需要两个参数，一个是ast树的对象，一个是要遍历对象。</p>
-<pre><code class="lang-javascript">const visitor = &#123;
+<pre><code class="javascript">const visitor = &#123;
     NumericLiteral(path) &#123;
         path.node.value = 100;
         console.log(path.node.value);
@@ -222,14 +223,14 @@ traverse(ast_code, visitor);
 </code></pre>
 <p>上述通过将ast树中的属性为NumericLiteral的节点的值批量替换成了100。</p>
 <h4 id="generator用法"><a href="#generator用法" class="headerlink" title="generator用法"></a>generator用法</h4><p>导包:</p>
-<pre><code class="lang-javascript">const generator = require(&quot;@babel/generator&quot;).default;
+<pre><code class="javascript">const generator = require(&quot;@babel/generator&quot;).default;
 </code></pre>
 <p>与traverse类似，调用的包中的默认方法。</p>
-<pre><code class="lang-javascript">generator(ast_code).code
+<pre><code class="javascript">generator(ast_code).code
 </code></pre>
 <p>这样就把语法树修改回js的代码样式,然后再另存即可。</p>
 <h4 id="types用法"><a href="#types用法" class="headerlink" title="types用法"></a>types用法</h4><p>导包：</p>
-<pre><code class="lang-javascript">const types = require(&quot;@babel/types&quot;);
+<pre><code class="javascript">const types = require(&quot;@babel/types&quot;);
 </code></pre>
 <p>types主要用于判断节点类型。</p>
 <blockquote>
@@ -246,7 +247,7 @@ traverse(ast_code, visitor);
 <p>对于每一个变量的binding包括4种信息，constant是否会被修改，refererces被修改的次数，violations被重新定义的次数，Kind表明类型。</p>
 <h3 id="AST插件"><a href="#AST插件" class="headerlink" title="AST插件"></a>AST插件</h3><h4 id="常量混淆"><a href="#常量混淆" class="headerlink" title="常量混淆"></a>常量混淆</h4><p>所谓常量混淆主要指的是，将变量的属性用ASCII码，16进制码的方式代替，由于Js的特性，在运行时，会自动的将其解析成实际的值，但是在我们看来，会造成分析的不便。</p>
 <p>在ast语法树中，类似的StringLiteral节点中包含extra节点，其中extra中包含了rawvalue,raw的属性，rawvalue对应的是其展示的值，与value的值相对应，raw包含的是ASCII码、Unicode编码类似的，输入的值。在该处extra节点是无意义的，删掉就可以返回实际的value.</p>
-<pre><code class="lang-javascript">StringLiteral(path) &#123;
+<pre><code class="javascript">StringLiteral(path) &#123;
         if(path.node.extra)&#123;
             console.log(path.node.extra);
             //将其直接置换为未定义，即可删除该节点。
@@ -263,7 +264,7 @@ traverse(ast_code, visitor);
 <li>计算</li>
 <li>替换</li>
 </ol>
-<pre><code class="lang-javascript">//对于字符串类型的常量堆叠
+<pre><code class="javascript">//对于字符串类型的常量堆叠
 BinaryExpression(path)&#123;
            //筛选操作节点
         let left = path.node.left;
@@ -282,17 +283,17 @@ BinaryExpression(path)&#123;
     &#125;
 </code></pre>
 <h4 id="函数还原"><a href="#函数还原" class="headerlink" title="函数还原"></a>函数还原</h4><p>所谓函数还原，就是针对只包含return，且作用域中只包含传入的参数的函数进行替换的操作，达到减少分析量的作用。</p>
-<pre><code class="lang-javascript">function add(a,b)&#123;
+<pre><code class="javascript">function add(a,b)&#123;
       return a + b;
 &#125;
 var c = add(3,4) + add(4,5)
 </code></pre>
-<p>最终目的是将其直接还原成 let c = 3 + 4 + 4 + 5;的形式。</p>
+<p>最终目的是将其直接还原成 let c &#x3D; 3 + 4 + 4 + 5;的形式。</p>
 <p>将上述代码通过babel解析后，发现，上述是由两个部分构成的，</p>
 <p>1.FunctionDeclaration</p>
 <p>2.VariableDeclaration</p>
 <p>由于函数作用域的特性，我们在对函数还原的时候，往往需要遍历函数表达式，函数表达式的关联节点为对应的调用位置（对scope中的binding调用referencePaths方法）,然后上述对应的指向为add，接着就需要将其转移到父节点（add(3,4))的位置进行还原。</p>
-<pre><code class="lang-javascript">const fast_run = &#123;
+<pre><code class="javascript">const fast_run = &#123;
     FunctionDeclaration(path)&#123;
         const &#123;id,body&#125; = path.node;
         //获取函数作用域集
@@ -315,7 +316,7 @@ var c = add(3,4) + add(4,5)
 &#125;
 </code></pre>
 <h4 id="控制流平坦化"><a href="#控制流平坦化" class="headerlink" title="控制流平坦化"></a>控制流平坦化</h4><p>所谓控制流平坦化，就是将类while|switch、case的结构平坦化，可以直接的看到运行流程，这里以一个简要的平坦化过程为例。</p>
-<pre><code class="lang-javascript">var arr = [2,1,0];
+<pre><code class="javascript">var arr = [2,1,0];
 var a = 0;
 while(!![])&#123;
     switch (arr[a++]) &#123;
@@ -338,7 +339,7 @@ while(!![])&#123;
 <li>WhileStatement</li>
 </ol>
 <p>在这里，我们需要对WhileStatement中的内容进行遍历，由于顺序已经知道，这里直接采用,针对改代码的插件如下：</p>
-<pre><code class="lang-javascript">const switch_visitor = &#123;
+<pre><code class="javascript">const switch_visitor = &#123;
     WhileStatement(path)&#123;
         //当前while块对应的节点
         const cur_node = path.node;
@@ -365,20 +366,20 @@ while(!![])&#123;
 </code></pre>
 <p>上述代码中，对于数组部分，是直接采用的已经给定的数组，若要使插件适用性增加，需要优化获取数组，以及对是否包含控制流进行判断。</p>
 <p>还原后的结果如下：</p>
-<pre><code class="lang-javascript">var arr = [2, 1, 0];
+<pre><code class="javascript">var arr = [2, 1, 0];
 var a = 0;
 console.log(2);
 console.log(1);
 console.log(0);
 </code></pre>
 <h3 id="初探OB混淆"><a href="#初探OB混淆" class="headerlink" title="初探OB混淆"></a>初探OB混淆</h3><p>在此以简单的Ob为例。</p>
-<pre><code class="lang-javascript">function hi() &#123;
+<pre><code class="javascript">function hi() &#123;
   console.log(&quot;Hello World!&quot;);
 &#125;
 hi();
 </code></pre>
 <p>在<span class="exturl" data-url="aHR0cHM6Ly93d3cub2JmdXNjYXRvci5pby8=">JavaScript Obfuscator Tool</span>网站经过默认的混淆后结果如下：</p>
-<pre><code class="lang-javascript">var _0x30bb = [&#39;log&#39;, &#39;Hello\x20World!&#39;];
+<pre><code class="javascript">var _0x30bb = [&#39;log&#39;, &#39;Hello\x20World!&#39;];
 
 (function (_0x38d89d, _0x30bbb2) &#123;
     var _0xae0a32 = function (_0x2e4e9d) &#123;
@@ -412,7 +413,7 @@ hi();
 <p>其中第一个声明了变量，第二个为自执行函数，最后一个为表达式，其余的为函数声明式，接下来就需要在各个部分具体发生了什么。</p>
 <p>在开头加入debugger;然后在浏览器中调试，首先直接运行自执行函数(第一个表达式)，</p>
 <p>我们发现,在第一行直接定义了一个数组，接着是一个自执行函数，传入的参数有两个，第一个为之前的数组，第二个为一个字节码的数字，接着我们发现在里面又定义了一个函数，内含对传入的数组的push,shift操作，通过反复调用该函数达到将数组顺序改变的目的。</p>
-<pre><code class="lang-javascript">[&#39;Hello World!&#39;, &#39;log&#39;]
+<pre><code class="javascript">[&#39;Hello World!&#39;, &#39;log&#39;]
 </code></pre>
 <p>在进行顺序改变后，数组就变成了上述的形式，紧接着定义了两个函数，最后执行hi()函数，在hi函数中，我们发现它调用了之前定义的_0xae0这个函数，传入了一个字符串，接着跟进 _0xae0a函数中，我们发现它首先是对传入的字符进行了一个运算操作，得到了1，然后就用得到的数去访问之前声明的数组，然后将该值作为返回值，最后 _0xae0a(‘0x1’)就变成了数组中的一个值，最后就运行了这条语句，输出了结果。</p>
 <blockquote>
@@ -423,7 +424,7 @@ hi();
 <p>4.输出结果</p>
 <p>在4中需要调用3才能拿到结果，我们通常把4成为加密函数，3称为解密函数。</p>
 </blockquote>
-<pre><code class="lang-flow">startID=&gt;start: 声明大数组
+<pre><code class="flow">startID=&gt;start: 声明大数组
 operation1=&gt;operation: 数组位置偏移
 operation2=&gt;operation: 解密函数
 endID=&gt;end: 函数入口
@@ -437,7 +438,7 @@ operation2-&gt;endID
 <p>接下来分析最后一个函数和第二个函数体，发现，最后一个函数是直接调用第二个函数体的，而且其函数名与未混淆前的一样为hi().</p>
 <p>在hi中又重新调用了第三个函数，取出了其中的参数，然后对混淆进行了解除，最终达到了解除混淆的目的。</p>
 <h4 id="AST解OB混淆-lowlevel"><a href="#AST解OB混淆-lowlevel" class="headerlink" title="AST解OB混淆(lowlevel)"></a>AST解OB混淆(lowlevel)</h4><p>还是以上述为例,在此我们采用了lowlevel的加密，首先还是对AST树进行分析。</p>
-<pre><code class="lang-javascript">(function (_0x4becbb, _0x142d2c) &#123;
+<pre><code class="javascript">(function (_0x4becbb, _0x142d2c) &#123;
     var _0x4e95f5 = _0xcf3d,
     _0x5cece4 = _0x4becbb();
     while (!![]) &#123;
@@ -547,7 +548,7 @@ hi();
 </ol>
 <p>对比默认级的ob我们可以发现，在第一个部分，虽然这里变成了3个函数声明式，但是其实在第二个函数声明式中，还是包含了创建数组这一操作，在自执行函数中依旧包含了数组移位的操作。从执行流程来看，上述分别对应，数组移位，声明数组，加密函数，解密函数，调用函数。</p>
 <p>同时，相对之前的Ob来看，这里对数字进行了混淆操作，为了增加代码的可读性，我们先试着对其进行一个数字解混淆的操作。</p>
-<pre><code class="lang-javascript">(function (_0x4becbb, _0x142d2c) &#123;
+<pre><code class="javascript">(function (_0x4becbb, _0x142d2c) &#123;
   var _0x4e95f5 = _0xcf3d,
       _0x5cece4 = _0x4becbb();
 
@@ -669,7 +670,7 @@ hi();
 <p>补充：AST还原主要是为了让干扰项尽可能减少，让代码逻辑尽可能的变清晰，本身并不能达到秒杀的结果。</p>
 </blockquote>
 <h5 id="step1：解密函数内存写入"><a href="#step1：解密函数内存写入" class="headerlink" title="step1：解密函数内存写入"></a>step1：解密函数内存写入</h5><p>函数入口中的内容大部分都是由解密函数生成的，那么我们首先要做的就是将解密函数写入内存中。</p>
-<pre><code class="lang-javascript">//定义解密数组名称,与原函数对其
+<pre><code class="javascript">//定义解密数组名称,与原函数对其
 let descrypt_arr_name = &#39;$b&#39;
 let descrypt_strfun_js = &#39;&#39;;
 for(let i=0;i&lt;=2;i++)&#123;
@@ -683,7 +684,7 @@ eval(descrypt_strfun_js);
 console.log($b);
 </code></pre>
 <h5 id="step2：解密函数还原"><a href="#step2：解密函数还原" class="headerlink" title="step2：解密函数还原"></a>step2：解密函数还原</h5><p>在内存中包含解数组后，我们就只需要将每一个调用解密数组的地方替换即可，不过在此之前还需要对整体的ASCII码类型进行还原，同时若是数组调用类型为a[‘1’+’2’]这种形式也需要先还原成a[‘12’]这种形式。</p>
-<pre><code class="lang-javascript">const ASCII_visitor = &#123;
+<pre><code class="javascript">const ASCII_visitor = &#123;
     //对ASCII码进行还原
     StringLiteral(path) &#123;
         if(path.node.extra)&#123;
@@ -724,7 +725,7 @@ arr_change_visitor = &#123;
 traverse(ast_code, arr_change_visitor);
 </code></pre>
 <h5 id="step3：对象置换与写入"><a href="#step3：对象置换与写入" class="headerlink" title="step3：对象置换与写入"></a>step3：对象置换与写入</h5><p>接下来就发现，存在对象声明以及对象写入,以如下形式表现：</p>
-<pre><code class="lang-javascript">var a = &#123;&#125;;
+<pre><code class="javascript">var a = &#123;&#125;;
 a[&#39;1&#39;] = &#39;1&#39; + &#39;2&#39; + &#39;3&#39;;
 a[&#39;213&#39; + &#39;231&#39;] = function(a,b)&#123;
     return a + b
@@ -733,7 +734,7 @@ var b = a;
 </code></pre>
 <p>这里沿用上述思想，也将对象写入内存中，然后直接替换，由于’1’+’2’+‘3类似这种需要采用上述ASCII_visitor进一步还原，是为了防</p>
 <p>存入内存后，部分函数无法还原。同时，在此基础上还需要加上变量替换、无效代码去除的操作。</p>
-<pre><code class="lang-javascript">//变量替换
+<pre><code class="javascript">//变量替换
 fun_use_visitor = &#123;
     VariableDeclarator(path)&#123;
         const func_name = path.node.id.name;
@@ -872,7 +873,7 @@ traverse(ast_code, dead_visitor);
 // console.log(y1);
 </code></pre>
 <h5 id="step4：扫尾工作"><a href="#step4：扫尾工作" class="headerlink" title="step4：扫尾工作"></a>step4：扫尾工作</h5><p>经过上述步骤，代码已经压缩成了240行，代码(如下)的逻辑已经清晰可见，控制流也不是很复杂，暂时没必要用到还原，其中有个BUG处：</p>
-<pre><code class="lang-javascript">(function $c(k) &#123;
+<pre><code class="javascript">(function $c(k) &#123;
   var B = function () &#123;
     var Y = !![];
     return function (Z, a0) &#123;
@@ -1123,10 +1124,10 @@ traverse(ast_code, dead_visitor);
 &#125;)();
 </code></pre>
 <blockquote>
-<p>PS:运行会报ZKLFz处的错误，可能是由于对’y[“ZKLFz”] = “return /\“ + this + \“/“‘这个还原的时候出现了一点小问题，通过分析该处代码，很明显这里是在对什么东西进行一个检测，然后返回的一个是boolean型变量,将代码修改即可结束。</p>
+<p>PS:运行会报ZKLFz处的错误，可能是由于对’y[“ZKLFz”] &#x3D; “return &#x2F;\“ + this + \“&#x2F;“‘这个还原的时候出现了一点小问题，通过分析该处代码，很明显这里是在对什么东西进行一个检测，然后返回的一个是boolean型变量,将代码修改即可结束。</p>
 </blockquote>
 <p>最后将其中的环境检测补掉，最后即破解结束。</p>
-<pre><code class="lang-javascript">//修改后完整代码如下
+<pre><code class="javascript">//修改后完整代码如下
 //提取hook一个console.log;
 console_hk = console.log;
 var B = function () &#123;
@@ -1454,7 +1455,7 @@ W(X());
     <div class="item left">
       
 
-  <a href="/2021/11/14/js%E9%80%86%E5%90%91/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclip4jbpj20zk0m87cv.jpg" title="js逆向">
+  <a href="/2021/11/14/js%E9%80%86%E5%90%91/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicis3attqj20zk0m8k7l.jpg" title="js逆向">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> JS逆向</span>
   <h3>js逆向</h3>
@@ -1464,7 +1465,7 @@ W(X());
     <div class="item right">
       
 
-  <a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclgrvbd6j20zk0m8qv5.jpg" title="补环境">
+  <a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclfb3vzhj20zk0m8wny.jpg" title="补环境">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> JS逆向</span>
   <h3>补环境</h3>
@@ -1588,70 +1589,10 @@ W(X());
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
-</div>
-
-    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
 </div>
 
-    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/05/14/unidbg/" title="unidbg">unidbg</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
+    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
   </li>
 
       
@@ -1668,10 +1609,50 @@ W(X());
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" title="java基础">java基础</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
   </li>
 
       
@@ -1682,6 +1663,26 @@ W(X());
 </div>
 
     <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/go/" title="In go">go</a>
+</div>
+
+    <span><a href="/2022/05/03/go/" title="go">go</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" title="jy滑块">jy滑块</a></span>
   </li>
 
   </ul>

@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhnx9glj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicliierfjj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeyhsblkj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicm0n457cj20zk0m8e81.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclimtf7dj20zk0m8qav.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciub8ja1j20zk0m81ky.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclil3m4ej20zk0m8tn8.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeun65urj20zk0m81ii.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeu1usa7j20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipet4bz0yj20zk0m8e81.jpg"></li>
         </ul>
       </div>
     </header>
@@ -152,9 +152,9 @@ Yume Shoka = 菜b的爬虫记录</title>
     
 
     <h4 id="JSRPC"><a href="#JSRPC" class="headerlink" title="JSRPC"></a>JSRPC</h4><p>安装websocket服务</p>
-<pre><code class="lang-cmake">npm install nodejs-websocket
+<pre><code class="cmake">npm install nodejs-websocket
 </code></pre>
-<pre><code class="lang-javascript">const ws = require(&quot;nodejs-websocket&quot;);
+<pre><code class="javascript">const ws = require(&quot;nodejs-websocket&quot;);
 var _server = ws.createServer(conn =&gt; &#123;
     // 接收客户端返回的数据
     conn.on(&quot;text&quot;, function(str) &#123;
@@ -182,7 +182,7 @@ _server.listen(port, function() &#123;
 &#125;)
 </code></pre>
 <p>建立连接后，就可以用python和浏览器来回传递信息</p>
-<pre><code class="lang-python">import websocket
+<pre><code class="python">import websocket
 
 ws = websocket.WebSocketApp(&#39;ws://127.0.0.1:8015&#39;)
 def on_message(ws, message):
@@ -193,7 +193,7 @@ ws.on_message = on_message
 ws.run_forever()
 </code></pre>
 <p>浏览器注入，建立通信</p>
-<pre><code class="lang-javascript">(function()&#123;
+<pre><code class="javascript">(function()&#123;
     if(window.WebSocket)&#123;
         ws = new WebSocket(&#39;ws://127.0.0.1:8015/&#39;);
         ws.onopen = function(e)&#123;
@@ -211,9 +211,9 @@ ws.run_forever()
 &#125;)()
 </code></pre>
 <p>注入后和js的websocketServer建立了双向连接，然后就形成了通信。</p>
-<p><img data-src="jsrpc/image-20220320171420496.png" alt="image-20220320171420496"></p>
+<p><img data-src="/jsrpc/image-20220320171420496.png" alt="image-20220320171420496"></p>
 <p>这样，就可以在浏览器中通过send，进行调用。</p>
-<pre><code class="lang-javascript">
+<pre><code class="javascript">
 function SekiroClient(wsURL) &#123;
     this.wsURL = wsURL;
     this.handlers = &#123;&#125;;
@@ -427,7 +427,8 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
 </code></pre>
 <p>sekiro框架注入Js</p>
 <pre><code>http://127.0.0.1:5620/business-demo/invoke?group=****&amp;action=****&amp;page=(这里选用要传的值)
-</code></pre><p>这里的group对应上面的组，action对应其调用的方法，这里是clientTime;</p>
+</code></pre>
+<p>这里的group对应上面的组，action对应其调用的方法，这里是clientTime;</p>
 <p>若要传值，可以采用类似python</p>
 
   </div>
@@ -495,7 +496,7 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
     <div class="item left">
       
 
-  <a href="/2022/03/13/ali/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclgi503lj20zk0m8hdt.jpg" title="ali">
+  <a href="/2022/03/13/ali/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclh5u05ej20zk0m87df.jpg" title="ali">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> ast</span>
   <h3>ali</h3>
@@ -505,7 +506,7 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
     <div class="item right">
       
 
-  <a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclwuom7cj20zk0m8dvn.jpg" title="抖音web">
+  <a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipevarprfj20zk0m8npd.jpg" title="抖音web">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> JSRPC</span>
   <h3>抖音web</h3>
@@ -629,10 +630,10 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+<a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
+    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
   </li>
 
       
@@ -642,17 +643,17 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2021/11/28/ast/" title="AST语法树">AST语法树</a></span>
+    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
+<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
 </div>
 
-    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
+    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
   </li>
 
       
@@ -662,17 +663,17 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
 <a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
 </div>
 
-    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
+    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast%E5%BA%94%E7%94%A8/" title="In ast应用">ast应用</a>
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/05/05/ast%E8%A7%A3vmp/" title="ast解vmp">ast解vmp</a></span>
+    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
   </li>
 
       
@@ -689,10 +690,20 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+<a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
+    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
+</div>
+
+    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
   </li>
 
       
@@ -702,17 +713,7 @@ client.registerAction(&quot;clientTime&quot;,function(request, resolve,reject )&
 <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
 </div>
 
-    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
+    <span><a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" title="数据挖掘介绍">数据挖掘介绍</a></span>
   </li>
 
       

@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclx6phq6j20zk0m8e36.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclj61ylzj20zk0m8b29.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipexbei4hj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4fomxoj20zk0m8axp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclxp31goj20zk0m8qv5.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclfdu6exj20zk0m87hw.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclize41wj20zk0m87gk.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicli9lfebj20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclimtf7dj20zk0m8qav.jpg"></li>
         </ul>
       </div>
     </header>
@@ -155,7 +155,7 @@ Yume Shoka = 菜b的爬虫记录</title>
 <h5 id="ITEM-BUFFER"><a href="#ITEM-BUFFER" class="headerlink" title="ITEM_BUFFER:"></a>ITEM_BUFFER:</h5><p>将数据添加到数据库中，内置去重等方法。</p>
 <h4 id="Core组件"><a href="#Core组件" class="headerlink" title="Core组件"></a>Core组件</h4><h5 id="BaseParser："><a href="#BaseParser：" class="headerlink" title="BaseParser："></a>BaseParser：</h5><p>作为父类，后续继承其中的方法。</p>
 <h5 id="Collector"><a href="#Collector" class="headerlink" title="Collector:"></a>Collector:</h5><p><strong>功能介绍:主要是获取任务，以及分配任务，将request和request对象存入一个队列中</strong></p>
-<h6 id="init-部分："><a href="#init-部分：" class="headerlink" title=" init 部分："></a><strong> init </strong>部分：</h6><p>传入：redis_key</p>
+<h6 id="init-部分："><a href="#init-部分：" class="headerlink" title="__ init __部分："></a>__ init __部分：</h6><p>传入：redis_key</p>
 <p>继承：多线程threading.Thread类</p>
 <p>定义： </p>
 <ul>
@@ -163,10 +163,12 @@ Yume Shoka = 菜b的爬虫记录</title>
 </li>
 <li><p>_todo_request：定义一个空队列</p>
 </li>
-<li>_tab_requests：将redis_key传入requests表</li>
-<li>_tab_spider_status：将redis_key传入爬取状态表</li>
+<li><p>_tab_requests：将redis_key传入requests表</p>
+</li>
+<li><p>_tab_spider_status：将redis_key传入爬取状态表</p>
+</li>
 </ul>
-<p><img data-src="Framework/image-20220303211908320.png" alt="image-20220303211908320"></p>
+<p><img data-src="/Framework/image-20220303211908320.png" alt="image-20220303211908320"></p>
 <ul>
 <li>_spider_mark：获取本地ip+时间，应该是导出日志使用</li>
 <li>_interval ：从任务队列中获取任务到内存队列的间隔</li>
@@ -175,7 +177,7 @@ Yume Shoka = 菜b的爬虫记录</title>
 <li>_first_get_task：boolean 第一次获取任务</li>
 </ul>
 <h6 id="run"><a href="#run" class="headerlink" title="run:"></a>run:</h6><p>使用while循环(使用thread_stop判断)，保证爬虫持续运行。</p>
-<p>运行report_node_heartbeat()—&gt;input_data()，出现异常就打印日志.</p>
+<p>运行report_node_heartbeat()–&gt;input_data()，出现异常就打印日志.</p>
 <h6 id="stop"><a href="#stop" class="headerlink" title="stop:"></a>stop:</h6><p>用于将run中的while循环终止，结束线程</p>
 <h6 id="input-data"><a href="#input-data" class="headerlink" title="__input_data:"></a>__input_data:</h6><ol>
 <li>获取当前时间</li>
@@ -223,7 +225,7 @@ Yume Shoka = 菜b的爬虫记录</title>
 <li>thread_count: 线程数，默认为配置文件中的线程数</li>
 <li>begin_callback: 爬虫开始回调函数</li>
 <li>end_callback: 爬虫结束回调函数</li>
-<li>delete_keys: 爬虫启动时删除的key，类型: 元组/bool/string。 支持正则</li>
+<li>delete_keys: 爬虫启动时删除的key，类型: 元组&#x2F;bool&#x2F;string。 支持正则</li>
 <li>keep_alive: 爬虫是否常驻，默认否</li>
 <li>auto_start_requests: 爬虫是否自动添加任务</li>
 <li>batch_interval: 抓取时间间隔 默认为0 天为单位 多次启动时，只有当前时间与第一次抓取结束的时间间隔大于指定的时间间隔时，爬虫才启动</li>
@@ -240,13 +242,14 @@ Yume Shoka = 菜b的爬虫记录</title>
 </ul>
 <h3 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h3><p>可采用download_midware，将headers及其他，以字典的形式下发</p>
 <ul>
-<li>resoponse.open()可以看打开的网站是否和浏览器。</li>
-<li><p>Requests.feapder(render=True)，表示打开渲染模式，parse_name跟爬虫文件名(用于消费任务) 该爬虫需要继承baseparser，</p>
+<li><p>resoponse.open()可以看打开的网站是否和浏览器。</p>
 </li>
-<li><p>Requests.feapder(params_name=”消费者的类名”),生产者里面是不需要指定</p>
+<li><p>Requests.feapder(render&#x3D;True)，表示打开渲染模式，parse_name跟爬虫文件名(用于消费任务) 该爬虫需要继承baseparser，</p>
+</li>
+<li><p>Requests.feapder(params_name&#x3D;”消费者的类名”),生产者里面是不需要指定</p>
 </li>
 <li><p>在爬虫集成的时候都使用baseparser</p>
-<p>Spider(redis_key,delete_key=True)</p>
+<p>Spider(redis_key,delete_key&#x3D;True)</p>
 <p>delete_key 可以用于重新生成redis_key</p>
 </li>
 </ul>
@@ -316,7 +319,7 @@ Yume Shoka = 菜b的爬虫记录</title>
     <div class="item left">
       
 
-  <a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeu1usa7j20zk0m8b29.jpg" title="sm滑块">
+  <a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipewkhf1zj20zk0m81kx.jpg" title="sm滑块">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> 验证码专题</span>
   <h3>sm滑块</h3>
@@ -326,7 +329,7 @@ Yume Shoka = 菜b的爬虫记录</title>
     <div class="item right">
       
 
-  <a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipey0a334j20zk0m8qpt.jpg" title="ti还原1">
+  <a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipexj2jgzj20zk0m8b09.jpg" title="ti还原1">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> ast</span>
   <h3>ti还原1</h3>
@@ -348,7 +351,7 @@ Yume Shoka = 菜b的爬虫记录</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="Contents">
-          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">源码解读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BUFFER%E7%BB%84%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">BUFFER组件:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#REQUEST-BUFFER"><span class="toc-number">1.1.1.</span> <span class="toc-text">REQUEST_BUFFER:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ITEM-BUFFER"><span class="toc-number">1.1.2.</span> <span class="toc-text">ITEM_BUFFER:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Core%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">Core组件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#BaseParser%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">BaseParser：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Collector"><span class="toc-number">1.2.2.</span> <span class="toc-text">Collector:</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#init-%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">1.2.2.1.</span> <span class="toc-text"> init 部分：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#run"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">run:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#stop"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">stop:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#input-data"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">__input_data:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#report-node-heartbead%EF%BC%9A"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">__report_node_heartbead：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#delete-dead-node"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">__delete_dead_node:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#put-requests"><span class="toc-number">1.2.2.7.</span> <span class="toc-text">__put_requests:</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HANDLE-FAILED-REQUESTS"><span class="toc-number">1.2.3.</span> <span class="toc-text">HANDLE_FAILED_REQUESTS:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PARSER-CONTROL"><span class="toc-number">1.2.4.</span> <span class="toc-text">PARSER_CONTROL:</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#init"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">init:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#run-1"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">run:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#deal-requests%EF%BC%9A"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">deal_requests：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SCHEDULER%EF%BC%9A"><span class="toc-number">1.2.5.</span> <span class="toc-text">SCHEDULER：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#init-1"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">init:</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">使用教程</span></a></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">源码解读</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BUFFER%E7%BB%84%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">BUFFER组件:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#REQUEST-BUFFER"><span class="toc-number">1.1.1.</span> <span class="toc-text">REQUEST_BUFFER:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ITEM-BUFFER"><span class="toc-number">1.1.2.</span> <span class="toc-text">ITEM_BUFFER:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Core%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">Core组件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#BaseParser%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">BaseParser：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Collector"><span class="toc-number">1.2.2.</span> <span class="toc-text">Collector:</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#init-%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">__ init __部分：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#run"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">run:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#stop"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">stop:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#input-data"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">__input_data:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#report-node-heartbead%EF%BC%9A"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">__report_node_heartbead：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#delete-dead-node"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">__delete_dead_node:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#put-requests"><span class="toc-number">1.2.2.7.</span> <span class="toc-text">__put_requests:</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HANDLE-FAILED-REQUESTS"><span class="toc-number">1.2.3.</span> <span class="toc-text">HANDLE_FAILED_REQUESTS:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PARSER-CONTROL"><span class="toc-number">1.2.4.</span> <span class="toc-text">PARSER_CONTROL:</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#init"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">init:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#run-1"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">run:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#deal-requests%EF%BC%9A"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">deal_requests：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SCHEDULER%EF%BC%9A"><span class="toc-number">1.2.5.</span> <span class="toc-text">SCHEDULER：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#init-1"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">init:</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">使用教程</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="Related">
         <ul>
@@ -450,10 +453,70 @@ Yume Shoka = 菜b的爬虫记录</title>
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/ast%E5%BA%94%E7%94%A8/" title="In ast应用">ast应用</a>
+</div>
+
+    <span><a href="/2022/05/05/ast%E8%A7%A3vmp/" title="ast解vmp">ast解vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
+</div>
+
+    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2021/11/28/ast/" title="AST语法树">AST语法树</a></span>
+    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" title="ast_tools解读">ast_tools解读</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
   </li>
 
       
@@ -470,50 +533,10 @@ Yume Shoka = 菜b的爬虫记录</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/NLP/" title="In NLP">NLP</a>
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
 </div>
 
-    <span><a href="/2022/02/26/TF-IDF/" title="TF-IDF">TF-IDF</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="In 加密算法">加密算法</a>
-</div>
-
-    <span><a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" title="js加密">js加密</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/05/03/Ratel/" title="Ratel">Ratel</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="In 基础知识">基础知识</a>
-</div>
-
-    <span><a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="基础知识">基础知识</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
+    <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
   </li>
 
       
@@ -524,26 +547,6 @@ Yume Shoka = 菜b的爬虫记录</title>
 </div>
 
     <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
-</div>
-
-    <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
   </li>
 
   </ul>

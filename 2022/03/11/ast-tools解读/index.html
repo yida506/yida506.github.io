@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipetlbztpj20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipet4bz0yj20zk0m8e81.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeudstjqj20zk0m8k3r.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciszlczyj20zk0m816d.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhtuo6nj20zk0m8ttm.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeuibk9fj20zk0m8ay2.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicivghyooj20zk0m8dir.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclx29mstj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclwrdwyaj20zk0m8are.jpg"></li>
         </ul>
       </div>
     </header>
@@ -152,23 +152,23 @@ Yume Shoka = 菜b的爬虫记录</title>
     
 
     <p> ast_tools源码解读</p>
-<h4 id="IfWithExpressFix"><a href="#IfWithExpressFix" class="headerlink" title="IfWithExpressFix"></a>IfWithExpressFix</h4><p><img data-src="ast-tools解读/image-20220311193502748.png" alt="image-20220311193502748"></p>
+<h4 id="IfWithExpressFix"><a href="#IfWithExpressFix" class="headerlink" title="IfWithExpressFix"></a>IfWithExpressFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311193502748.png" alt="image-20220311193502748"></p>
 <p>主要是给不包含block的if表达式添加上，让其统一化。</p>
-<pre><code class="lang-javascript">if(a=1) var b=3;
+<pre><code class="javascript">if(a=1) var b=3;
 -----------------
 if(a=1)&#123;var b=3&#125;
 </code></pre>
-<h4 id="ForWithExpressFix-amp-ForWithForFix"><a href="#ForWithExpressFix-amp-ForWithForFix" class="headerlink" title="ForWithExpressFix &amp; ForWithForFix"></a>ForWithExpressFix &amp; ForWithForFix</h4><p><img data-src="ast-tools解读/image-20220311193754270.png" alt="image-20220311193754270"></p>
+<h4 id="ForWithExpressFix-amp-ForWithForFix"><a href="#ForWithExpressFix-amp-ForWithForFix" class="headerlink" title="ForWithExpressFix &amp; ForWithForFix"></a>ForWithExpressFix &amp; ForWithForFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311193754270.png" alt="image-20220311193754270"></p>
 <p>都是给For循环规范化。</p>
 <h4 id="ReturnSeqFix"><a href="#ReturnSeqFix" class="headerlink" title="ReturnSeqFix"></a>ReturnSeqFix</h4><p>将return中包含逗号表达式的还原</p>
-<p><img data-src="ast-tools解读/image-20220311194547853.png" alt="image-20220311194547853"></p>
+<p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311194547853.png" alt="image-20220311194547853"></p>
 <p>第一部分用于将所有的逗号表达式添加到数组中，第二步主要是将逗号表达式前n-1项加到return前面，然后将return节点只包含逗号表达式的最后一项。</p>
-<pre><code class="lang-javascript">function add(a,b)&#123;return c=a+1,b&#125;
+<pre><code class="javascript">function add(a,b)&#123;return c=a+1,b&#125;
 --------------------------
 function add(a,b)&#123;c=a+1;return ab&#125;
 </code></pre>
 <h4 id="VariableDeclaratorFix"><a href="#VariableDeclaratorFix" class="headerlink" title="VariableDeclaratorFix"></a>VariableDeclaratorFix</h4><p>声明表达式及赋值表达式还原。</p>
-<pre><code class="lang-javascript">var a,b,c;
+<pre><code class="javascript">var a,b,c;
 m=2,d=3,n=4;
 -----------
 var a;
@@ -179,14 +179,14 @@ d=3;
 n=4;
 </code></pre>
 <h4 id="ConditionalFix"><a href="#ConditionalFix" class="headerlink" title="ConditionalFix"></a>ConditionalFix</h4><p>三目表达式转化为if-else的形式。</p>
-<p><img data-src="ast-tools解读/image-20220311200057628.png" alt="image-20220311200057628"></p>
-<h4 id="SequenceExpressionFix"><a href="#SequenceExpressionFix" class="headerlink" title="SequenceExpressionFix"></a>SequenceExpressionFix</h4><p><img data-src="ast-tools解读/image-20220311200313589.png" alt="image-20220311200313589"></p>
+<p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200057628.png" alt="image-20220311200057628"></p>
+<h4 id="SequenceExpressionFix"><a href="#SequenceExpressionFix" class="headerlink" title="SequenceExpressionFix"></a>SequenceExpressionFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200313589.png" alt="image-20220311200313589"></p>
 <p>本质上还是逗号表达式的还原。</p>
-<h4 id="AssignmentWithConditionalFix"><a href="#AssignmentWithConditionalFix" class="headerlink" title="AssignmentWithConditionalFix"></a>AssignmentWithConditionalFix</h4><p><img data-src="ast-tools解读/image-20220311200459670.png" alt="image-20220311200459670"></p>
+<h4 id="AssignmentWithConditionalFix"><a href="#AssignmentWithConditionalFix" class="headerlink" title="AssignmentWithConditionalFix"></a>AssignmentWithConditionalFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200459670.png" alt="image-20220311200459670"></p>
 <p>还是对三目表达的还原，这里限制了其consequent和alternate部分都为数字。</p>
-<h4 id="LogicalExpressionFix"><a href="#LogicalExpressionFix" class="headerlink" title="LogicalExpressionFix"></a>LogicalExpressionFix</h4><p><img data-src="ast-tools解读/image-20220311200832831.png" alt="image-20220311200832831"></p>
+<h4 id="LogicalExpressionFix"><a href="#LogicalExpressionFix" class="headerlink" title="LogicalExpressionFix"></a>LogicalExpressionFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311200832831.png" alt="image-20220311200832831"></p>
 <p>将逻辑表达式转化为条件表达式。</p>
-<h4 id="UnaryFunctionFix"><a href="#UnaryFunctionFix" class="headerlink" title="UnaryFunctionFix"></a>UnaryFunctionFix</h4><p><img data-src="ast-tools解读/image-20220311201334471.png" alt="image-20220311201334471"></p>
+<h4 id="UnaryFunctionFix"><a href="#UnaryFunctionFix" class="headerlink" title="UnaryFunctionFix"></a>UnaryFunctionFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311201334471.png" alt="image-20220311201334471"></p>
 <p>把自执行函数的壳去掉。</p>
 <h4 id="ControlFlowFix"><a href="#ControlFlowFix" class="headerlink" title="ControlFlowFix"></a>ControlFlowFix</h4><p>控制流平坦化。</p>
 <ul>
@@ -195,7 +195,7 @@ n=4;
 <li><p>定义了两个数组，分别用于存取大控制流的变量</p>
 </li>
 </ul>
-<p><img data-src="ast-tools解读/image-20220311203909800.png" alt="image-20220311203909800"></p>
+<p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311203909800.png" alt="image-20220311203909800"></p>
 <ul>
 <li><p>生成了一个函数，给定一个初始的li然后会返回一个字典包含这五个参数。</p>
 </li>
@@ -203,23 +203,25 @@ n=4;
 </li>
 <li><p>获取主流程switch节点</p>
 </li>
-<li>初始化了get_control_struct函数，steps_hash_list，bodys，get_next_control_param函数，</li>
-<li>定义了一个get_node函数(控制流的另一种形式，初始li参数)</li>
+<li><p>初始化了get_control_struct函数，steps_hash_list，bodys，get_next_control_param函数，</p>
+</li>
+<li><p>定义了一个get_node函数(控制流的另一种形式，初始li参数)</p>
+</li>
 </ul>
 <blockquote>
 <p>控制流的另一种形式：将上述控制流转化为一个类似字典的东西，键指代控制流指向，值包含其内容为node类型。</p>
 </blockquote>
 <h5 id="get-code函数"><a href="#get-code函数" class="headerlink" title="get_code函数"></a>get_code函数</h5><p>控制流的整体流程</p>
-<p><img data-src="ast-tools解读/image-20220311210310953.png" alt="image-20220311210310953"></p>
+<p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311210310953.png" alt="image-20220311210310953"></p>
 <p>这里获取所有初始参数的值</p>
-<p><img data-src="ast-tools解读/image-20220311210631798.png" alt="image-20220311210631798"></p>
+<p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311210631798.png" alt="image-20220311210631798"></p>
 <p>这一步应该是不断计算，获取最下层节点即Ai节点的值。</p>
-<p><img data-src="ast-tools解读/image-20220311211105814.png" alt="image-20220311211105814"></p>
+<p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311211105814.png" alt="image-20220311211105814"></p>
 <p>在这里，由于包含IF的模块，所以还要对其进行一个判断，get_next_control_param用于获取其类型是否包含这种IF。</p>
 <p>向栈中添加这两个节点值。</p>
-<p><img data-src="ast-tools解读/image-20220311211853434.png" alt="image-20220311211853434"></p>
+<p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311211853434.png" alt="image-20220311211853434"></p>
 <p>然后根据这个11490在进行一个这个流程，在进入while流程中，基本上就将控制流还原了。</p>
-<pre><code class="lang-javascript">ba = window;
+<pre><code class="javascript">ba = window;
 Nt = r;
 ur = void 0;
 Jo = void 0;
@@ -233,10 +235,10 @@ if (Nt) &#123;
 <blockquote>
 <p>整体思想，获取初始参数的值，计算出中间参数的值，找到最底层的节点，获取当前节点的表达式，然后获取下一步初始参数的值(要对for循环中的条件进行一个判断)，反复调用并合并节点，最后将整个大FOR循环脱掉。</p>
 </blockquote>
-<h4 id="ConstantFix"><a href="#ConstantFix" class="headerlink" title="ConstantFix"></a>ConstantFix</h4><p><img data-src="ast-tools解读/image-20220311220545744.png" alt="image-20220311220445933"></p>
+<h4 id="ConstantFix"><a href="#ConstantFix" class="headerlink" title="ConstantFix"></a>ConstantFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311220545744.png" alt="image-20220311220445933"></p>
 <p>字符串的还原。</p>
 <h4 id="DecryptVariableFix"><a href="#DecryptVariableFix" class="headerlink" title="DecryptVariableFix"></a>DecryptVariableFix</h4><p>将w.pop()的形式，还原为字符串。</p>
-<h4 id="ReserveStrFix"><a href="#ReserveStrFix" class="headerlink" title="ReserveStrFix"></a>ReserveStrFix</h4><p><img data-src="ast-tools解读/image-20220311215701659.png" alt="image-20220311215701659"></p>
+<h4 id="ReserveStrFix"><a href="#ReserveStrFix" class="headerlink" title="ReserveStrFix"></a>ReserveStrFix</h4><p><img data-src="/ast-tools%E8%A7%A3%E8%AF%BB/image-20220311215701659.png" alt="image-20220311215701659"></p>
 <p>这玩意的还原。</p>
 
   </div>
@@ -304,7 +306,7 @@ if (Nt) &#123;
     <div class="item left">
       
 
-  <a href="/2022/03/06/redis/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicitspjpbj20zk0m81ky.jpg" title="redis">
+  <a href="/2022/03/06/redis/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipewkhf1zj20zk0m81kx.jpg" title="redis">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> </span>
   <h3>redis</h3>
@@ -314,7 +316,7 @@ if (Nt) &#123;
     <div class="item right">
       
 
-  <a href="/2022/03/13/ali/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicitzannuj20zk0m8b29.jpg" title="ali">
+  <a href="/2022/03/13/ali/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipetv6p75j20zk0m8x6p.jpg" title="ali">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> ast</span>
   <h3>ali</h3>
@@ -438,60 +440,10 @@ if (Nt) &#123;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
 </div>
 
-    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/python%E5%BC%80%E5%8F%91/" title="In python开发">python开发</a>
-</div>
-
-    <span><a href="/2022/01/18/python%E5%BC%80%E5%8F%91/" title="python开发">python开发</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/vue/" title="In vue">vue</a>
-</div>
-
-    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
-</div>
-
-    <span><a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" title="jy滑块">jy滑块</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
-</div>
-
-    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
+    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
   </li>
 
       
@@ -511,27 +463,77 @@ if (Nt) &#123;
 <a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
+    <span><a href="/2022/05/14/unidbg/" title="unidbg">unidbg</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/" title="In 社会工程学">社会工程学</a>
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/07/03/socialengineer/" title="socialengineer">socialengineer</a></span>
+    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
 </div>
 
-    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
+    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+</div>
+
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
+</div>
+
+    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast%E5%BA%94%E7%94%A8/" title="In ast应用">ast应用</a>
+</div>
+
+    <span><a href="/2022/05/05/ast%E8%A7%A3vmp/" title="ast解vmp">ast解vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
   </li>
 
   </ul>

@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4fomxoj20zk0m8axp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeuibk9fj20zk0m8ay2.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipesx5fdwj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclx29mstj20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4wqtg4j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipexj2jgzj20zk0m8b09.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciuv0socj20zk0m8qes.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclflwv2aj20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipex2cdtbj20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclwrdwyaj20zk0m8are.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclize41wj20zk0m87gk.jpg"></li>
         </ul>
       </div>
     </header>
@@ -152,22 +152,23 @@ Yume Shoka = 菜b的爬虫记录</title>
     
 
     <h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><p>Java反射是在运行状态中，对于任意类，都能拿到这个类的所有属性和方法。</p>
-<h4 id="XposedAPI"><a href="#XposedAPI" class="headerlink" title="XposedAPI"></a>XposedAPI</h4><h5 id="构造方法HOOK"><a href="#构造方法HOOK" class="headerlink" title="构造方法HOOK"></a>构造方法HOOK</h5><pre><code class="lang-java">//用于hook构造方法
+<h4 id="XposedAPI"><a href="#XposedAPI" class="headerlink" title="XposedAPI"></a>XposedAPI</h4><h5 id="构造方法HOOK"><a href="#构造方法HOOK" class="headerlink" title="构造方法HOOK"></a>构造方法HOOK</h5><pre><code class="java">//用于hook构造方法
 RposedHelpers.findAndHookConstructor(
     String classname, //类名 一般为xxxx.&lt;classname&gt;的形式
     classLoader classloader, //加载类的 不用管 默认就行
     Object..., //传递的参数
     parameterTypesAndCallback // 回调方法 分为hook前和hook后
-
+    
 )
+    
 </code></pre>
 <blockquote>
 <p>若是直接传类，那么就不需要传入classloader</p>
 </blockquote>
 <h5 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h5><p>callcack主要包含两种，一种是HOOK方法使用前，一种是HOOK方法使用后，可以在里面干任何相干的事(修改参数、返回参数etc..)。</p>
-<pre><code class="lang-java">new RC_MethodHook()&#123;
+<pre><code class="java">new RC_MethodHook()&#123;
     @Override
-    protected void beforeHookedMethod(MethodHookParam param) throws Throwable                         &#123;
+    protected void beforeHookedMethod(MethodHookParam param) throws Throwable 						&#123;
                            super.beforeHookedMethod(param);
                            Log.d(tag, &quot;进入内部&quot;);
                        &#125;
@@ -175,19 +176,20 @@ RposedHelpers.findAndHookConstructor(
 &#125;;
 </code></pre>
 <p>这里的param指代的就是传递进来的参数列表，如果要打印参数，那就需要先构建一个对象。</p>
-<pre><code class="lang-java">Object[] objects = param.args;
+<pre><code class="java">Object[] objects = param.args;
 
 params.setResult(); //z
 params.getResult(); // 获取返回值
 </code></pre>
-<h5 id="方法HOOK"><a href="#方法HOOK" class="headerlink" title="方法HOOK"></a>方法HOOK</h5><pre><code>    RposedHelpers.findAndHookMethod(
-        String classname, //类名 一般为xxxx.&lt;classname&gt;的形式
-       classLoader classloader, //加载类的 不用管 默认就行
-       String methodName, //方法名
-       Object..., //传递的参数
-       parameterTypesAndCallback // 回调方法 分为hook前和hook后
-    )
+<h5 id="方法HOOK"><a href="#方法HOOK" class="headerlink" title="方法HOOK"></a>方法HOOK</h5><pre><code>   RposedHelpers.findAndHookMethod(
+       String classname, //类名 一般为xxxx.&lt;classname&gt;的形式
+      classLoader classloader, //加载类的 不用管 默认就行
+      String methodName, //方法名
+      Object..., //传递的参数
+      parameterTypesAndCallback // 回调方法 分为hook前和hook后
+   )
 </code></pre>
+
   </div>
 
    <footer>
@@ -253,7 +255,7 @@ params.getResult(); // 获取返回值
     <div class="item left">
       
 
-  <a href="/2022/05/14/unidbg/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipexe4oykj20zk0m87ji.jpg" title="unidbg">
+  <a href="/2022/05/14/unidbg/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicm0n457cj20zk0m8e81.jpg" title="unidbg">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> app逆向</span>
   <h3>unidbg</h3>
@@ -263,7 +265,7 @@ params.getResult(); // 获取返回值
     <div class="item right">
       
 
-  <a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicm0n457cj20zk0m8e81.jpg" title="抖店vmp">
+  <a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicitht3xtj20zk0m8k5v.jpg" title="抖店vmp">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> jsvmp</span>
   <h3>抖店vmp</h3>
@@ -387,20 +389,20 @@ params.getResult(); // 获取返回值
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/vue/" title="In vue">vue</a>
+<a href="/categories/go/" title="In go">go</a>
 </div>
 
-    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
+    <span><a href="/2022/05/03/go/" title="go">go</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
 </div>
 
-    <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
   </li>
 
       
@@ -417,39 +419,10 @@ params.getResult(); // 获取返回值
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
+<a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" title="反调试">反调试</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/03/06/redis/" title="redis">redis</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
-</div>
-
-    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
+    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
   </li>
 
       
@@ -459,17 +432,7 @@ params.getResult(); // 获取返回值
 <a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
-</div>
-
-    <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
+    <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
   </li>
 
       
@@ -479,7 +442,47 @@ params.getResult(); // 获取返回值
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
+    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
+</div>
+
+    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" title="jy滑块">jy滑块</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/NLP/" title="In NLP">NLP</a>
+</div>
+
+    <span><a href="/2022/02/26/TF-IDF/" title="TF-IDF">TF-IDF</a></span>
   </li>
 
   </ul>

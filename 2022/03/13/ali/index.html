@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclga70tsj20zk0m84mr.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4wqtg4j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipew28b65j20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4fomxoj20zk0m8axp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclx29mstj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitht3xtj20zk0m8k5v.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipey0a334j20zk0m8qpt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclg5ms2rj20zk0m8u0x.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipevo9j1jj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeuv80yoj20zk0m8kjl.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
         </ul>
       </div>
     </header>
@@ -151,7 +151,7 @@ Yume Shoka = 菜b的爬虫记录</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <h6 id="三重控制流平坦化"><a href="#三重控制流平坦化" class="headerlink" title="三重控制流平坦化"></a>三重控制流平坦化</h6><pre><code class="lang-javascript">function n() &#123;
+    <h6 id="三重控制流平坦化"><a href="#三重控制流平坦化" class="headerlink" title="三重控制流平坦化"></a>三重控制流平坦化</h6><pre><code class="javascript">function n() &#123;
   for (var e = 1; void 0 !== e;) &#123;
     var a = 7 &amp; e;
     var r = e &gt;&gt; 3;
@@ -264,45 +264,45 @@ Yume Shoka = 菜b的爬虫记录</title>
 <blockquote>
 <p>思路，从初始for循环出发，初始化变量的值，然后根据SwitchStatement获取到当前变量及其对应的值，然后进入到case节点的位置，这里需要进行一个判断，判断其下一层是否还是SwitchStatemen类型，如果不是，那么就进行节点的合并，在这里面一定会包含一个关于初始值变化的位置，因此需要在这些Expressionstatement中找到其赋值表达式(Assignmentexpression)，然后在进行一次计算，但是在这种情况下，难免会碰到更深层的SwitchStatement，当游走到最深处的时候，需要判断，其是走向该Switch节点下的其他部分，还是赋值了大变量走入其他分支，最后根据return或者是结束语句判断是是否该for循环结束。</p>
 </blockquote>
-<p><strong>核心思路：将初始化和判断语句写入一个函数，这样可以做到一次获取全部初始变量的值，将所有的Switch节点均写为一个类似字典的形式，方便进入对应的节点。</strong> </p>
+<p><strong>核心思路：将初始化和判断语句写入一个函数，这样可以做到一次获取全部初始变量的值，将所有的Switch节点均写为一个类似字典的形式，方便进入对应的节点。</strong></p>
 </li>
 </ol>
 <p><strong>但是，有个致命的问题就是IF表达式判断。</strong></p>
-<p><img data-src="ali/image-20220314224908224.png" alt="image-20220314224908224"></p>
+<p><img data-src="/ali/image-20220314224908224.png" alt="image-20220314224908224"></p>
 <p>通过对这里的分析，发现其本质上是走的一个for循环的流程，同时，其对应的else节点属于结束节点。</p>
-<p>大胆假设，假如test节点的类型为BinaryExpression，同时其right部分为MemberExpression，而且其Identifier部分为length，那么这个就为for循环的test部分，同时其第一次stack包含的var声明式，在这里为var E = 0;代表for循环的起始值，其中有个流程包含E++对应for循环的自增值。本质上这是一个环形结构。</p>
-<h5 id="流程梳理"><a href="#流程梳理" class="headerlink" title="流程梳理"></a>流程梳理</h5><h6 id="STEP1-运行步骤"><a href="#STEP1-运行步骤" class="headerlink" title="STEP1 运行步骤"></a>STEP1 运行步骤</h6><p>初始化b=4</p>
+<p>大胆假设，假如test节点的类型为BinaryExpression，同时其right部分为MemberExpression，而且其Identifier部分为length，那么这个就为for循环的test部分，同时其第一次stack包含的var声明式，在这里为var E &#x3D; 0;代表for循环的起始值，其中有个流程包含E++对应for循环的自增值。本质上这是一个环形结构。</p>
+<h5 id="流程梳理"><a href="#流程梳理" class="headerlink" title="流程梳理"></a>流程梳理</h5><h6 id="STEP1-运行步骤"><a href="#STEP1-运行步骤" class="headerlink" title="STEP1 运行步骤"></a>STEP1 运行步骤</h6><p>初始化b&#x3D;4</p>
 <p>{ k: 4, o: 0, t: 0, b: 4 }</p>
 <p>进入该节点</p>
-<p><img data-src="ali/image-20220317210749234.png" alt="image-20220317210749234"></p>
-<p>然后碰到if流，根据变量名判断，这属于函数参数名，所以这两个分支应该都会走到，进入第一个b=8的分支。</p>
-<p><img data-src="ali/image-20220317210938365.png" alt="image-20220317210938365"></p>
-<p>发现，接下来走到的是b=0的分支。</p>
+<p><img data-src="/ali/image-20220317210749234.png" alt="image-20220317210749234"></p>
+<p>然后碰到if流，根据变量名判断，这属于函数参数名，所以这两个分支应该都会走到，进入第一个b&#x3D;8的分支。</p>
+<p><img data-src="/ali/image-20220317210938365.png" alt="image-20220317210938365"></p>
+<p>发现，接下来走到的是b&#x3D;0的分支。</p>
 <p>{ k: 0, o: 0, t: 0, b: 0 }</p>
-<p><img data-src="ali/image-20220317211033300.png" alt="image-20220317211033300"></p>
-<p>接着又进入了一个if分支，可以发现，这里是对A的长度进行了一个判断，进入b=64分支，</p>
+<p><img data-src="/ali/image-20220317211033300.png" alt="image-20220317211033300"></p>
+<p>接着又进入了一个if分支，可以发现，这里是对A的长度进行了一个判断，进入b&#x3D;64分支，</p>
 <p>{ k: 0, o: 4, t: 4, b: 64 }</p>
-<p><img data-src="ali/image-20220317211633194.png" alt="image-20220317211633194"></p>
+<p><img data-src="/ali/image-20220317211633194.png" alt="image-20220317211633194"></p>
 <p>先走32这个分支，给x赋值</p>
-<p><img data-src="ali/image-20220317222822658.png" alt="image-20220317222822658"></p>
-<p>即接下来走的是b=3这个分支。</p>
+<p><img data-src="/ali/image-20220317222822658.png" alt="image-20220317222822658"></p>
+<p>即接下来走的是b&#x3D;3这个分支。</p>
 <p>{ k: 3, o: 0, t: 0, b: 3 } </p>
-<p><img data-src="ali/image-20220317211912799.png" alt="image-20220317211912799"></p>
+<p><img data-src="/ali/image-20220317211912799.png" alt="image-20220317211912799"></p>
 <p>然后又跳转到128分支</p>
 <p>{ k: 0, o: 8, t: 8, b: 128 }</p>
-<p><img data-src="ali/image-20220317212010367.png" alt="image-20220317212010367"></p>
+<p><img data-src="/ali/image-20220317212010367.png" alt="image-20220317212010367"></p>
 <p>然后又跳回0分支，也就是说，继续重复上述步骤。</p>
-<p>那么我们需要梳理其流程，然后对其进行一个还原，在这里可以看到，我们在进入b=0分支后先进行了一个对其长度判断，然后</p>
-<p>进入一长串循环该步骤，最后跳出到b=2这个分支。</p>
-<p>其初始头为b=0结束头为b=128.</p>
+<p>那么我们需要梳理其流程，然后对其进行一个还原，在这里可以看到，我们在进入b&#x3D;0分支后先进行了一个对其长度判断，然后</p>
+<p>进入一长串循环该步骤，最后跳出到b&#x3D;2这个分支。</p>
+<p>其初始头为b&#x3D;0结束头为b&#x3D;128.</p>
 <p>我们最后希望将其还原为</p>
-<p>var E=0</p>
+<p>var E&#x3D;0</p>
 <p>for(;E&lt;A.length;){</p>
-<p>​    ……</p>
+<p>​	……</p>
 <p>​     E++;</p>
 <p>}</p>
-<p>的形式，后面跟的是b=2的分支。</p>
-<h5 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h5><p><img data-src="ali/image-20220329225917160.png" alt="image-20220329225917160"></p>
+<p>的形式，后面跟的是b&#x3D;2的分支。</p>
+<h5 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h5><p><img data-src="/ali/image-20220329225917160.png" alt="image-20220329225917160"></p>
 <p>也就是说，在if的判断表达式为二元表达式，类似a&lt;b这种形式的时候，都是生成的for循环，这样假如采取栈的形式当下一次的初值和开始的初值相等，那么就可以退出，但是，这是对于单情况而言，假如其中嵌套if表达式，那么还需对其进行一个判断。</p>
 <p>思路：</p>
 <ol>
@@ -310,9 +310,9 @@ Yume Shoka = 菜b的爬虫记录</title>
 <li>进行接下来的流程操作，假如直接是与for循环开始节点一样的值，那么直接返回，但是，假如是经过一个if表达式，其中，if表达式的判断部分为一开始的左节点参数，一般，这个参数初始值为0，即，随着for循环的运行，这个值会进入不同的流程，那么这部分的If表达式的节点都需要保留，那么，就只有在else节点结束后，才算退出for循环。</li>
 </ol>
 <p>个人觉得，如果枚举全部情况，虽然还原后的结果看上去很好看，但是需要耗费大量的时间、精力，退而求其次，我们可以没必要一步到位，可以只还原if表达式，同时不对花指令进行删除，直接生成一个包含花指令的结果。</p>
-<p><img data-src="ali/image-20220416214725791.png" alt="image-20220416214725791"></p>
+<p><img data-src="/ali/image-20220416214725791.png" alt="image-20220416214725791"></p>
 <p>以上述流程为例，这里流程f到流程a实际上是一个假流程，假如采用顺序执行还原，那么就会一直重复abdfabdf这几个部分，那么我们要做的是，建立一个类似栈的东西，将流程存入栈中，同时，这里的栈只包含if流程的初始值(对应if左节点对应的流程参数)，那么栈中的内容就为abdf，如果在碰到a，那么该流程就结束了。</p>
-<pre><code class="lang-javascript">
+<pre><code class="javascript">
 
 /*****************************************************
  *
@@ -564,7 +564,7 @@ exports.fix = traverse_Switch;
     <div class="item left">
       
 
-  <a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipet8c1a2j20zk0m8kct.jpg" title="ast_tools解读">
+  <a href="/2022/03/11/ast-tools%E8%A7%A3%E8%AF%BB/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipew28b65j20zk0m8hdt.jpg" title="ast_tools解读">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> ast</span>
   <h3>ast_tools解读</h3>
@@ -574,7 +574,7 @@ exports.fix = traverse_Switch;
     <div class="item right">
       
 
-  <a href="/2022/03/20/jsrpc/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipetfk5zwj20zk0m8e81.jpg" title="jsrpc">
+  <a href="/2022/03/20/jsrpc/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipey84bjtj20zk0m8hdt.jpg" title="jsrpc">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> JSRPC</span>
   <h3>jsrpc</h3>
@@ -698,10 +698,50 @@ exports.fix = traverse_Switch;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
+<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
 </div>
 
-    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
+    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/go/" title="In go">go</a>
+</div>
+
+    <span><a href="/2022/05/03/go/" title="go">go</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/05/03/Ratel/" title="Ratel">Ratel</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
+</div>
+
+    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" title="jy滑块">jy滑块</a></span>
   </li>
 
       
@@ -711,7 +751,17 @@ exports.fix = traverse_Switch;
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2021/11/28/ast/" title="AST语法树">AST语法树</a></span>
+    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/01/01/app%E5%9F%BA%E7%A1%80/" title="app基础">app基础</a></span>
   </li>
 
       
@@ -728,30 +778,10 @@ exports.fix = traverse_Switch;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/python%E5%BC%80%E5%8F%91/" title="In python开发">python开发</a>
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
 </div>
 
-    <span><a href="/2022/01/18/python%E5%BC%80%E5%8F%91/" title="python开发">python开发</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
-</div>
-
-    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
+    <span><a href="/2022/04/23/Android%E5%9F%BA%E7%A1%80/" title="Android基础">Android基础</a></span>
   </li>
 
       
@@ -762,36 +792,6 @@ exports.fix = traverse_Switch;
 </div>
 
     <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/12/28/%E5%8F%8D%E8%B0%83%E8%AF%95/" title="反调试">反调试</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
   </li>
 
   </ul>

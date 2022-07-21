@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicliwyw55j20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicm0fdw5cj20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclfw2t96j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeu1usa7j20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeyonbf9j20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipesx5fdwj20zk0m81kx.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicm0n457cj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclflwv2aj20zk0m84qp.jpg"></li>
         </ul>
       </div>
     </header>
@@ -152,10 +152,10 @@ Yume Shoka = 菜b的爬虫记录</title>
     
 
     <h3 id="APP介绍"><a href="#APP介绍" class="headerlink" title="APP介绍"></a>APP介绍</h3><h5 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h5><p>直接在android中创建一个hello world项目。</p>
-<p><img data-src="Android基础/image-20220425230616509.png" alt="image-20220425230616509"></p>
+<p><img data-src="/Android%E5%9F%BA%E7%A1%80/image-20220425230616509.png" alt="image-20220425230616509"></p>
 <p>可以看到包含很多内容，这里的java 里面有一个应用名称目录，其中包含了MainActivity,</p>
 <p>Android项目的资源会被存储在res文件夹中。</p>
-<pre><code class="lang-java">package com.example.myapplication;
+<pre><code class="java">package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -171,11 +171,11 @@ public class MainActivity extends AppCompatActivity &#123;
 &#125;
 </code></pre>
 <p>在MainActivity中，基础了一个基础的Activity类，然后又重写了这个onCreate方法，最后设置了layout.activity_main为View.</p>
-<p><img data-src="Android基础/image-20220425232435459.png" alt="image-20220425232435459"></p>
+<p><img data-src="/Android%E5%9F%BA%E7%A1%80/image-20220425232435459.png" alt="image-20220425232435459"></p>
 <p>这里编写了hello world 然后渲染到了app主界面上.</p>
-<h6 id="点击事件添加"><a href="#点击事件添加" class="headerlink" title="点击事件添加"></a>点击事件添加</h6><p>直接修改TextView为Button,然后添加id属性(“@+id/check”)即可。</p>
+<h6 id="点击事件添加"><a href="#点击事件添加" class="headerlink" title="点击事件添加"></a>点击事件添加</h6><p>直接修改TextView为Button,然后添加id属性(“@+id&#x2F;check”)即可。</p>
 <p>然后在MainActivity中添加如下代码，绑定button按钮并添加事件</p>
-<pre><code class="lang-java">Button bt_check = findViewById(R.id.check);
+<pre><code class="java">Button bt_check = findViewById(R.id.check);
         bt_check.setOnClickListener(new View.OnClickListener() &#123;
             @Override
             public void onClick(View view) &#123;
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity &#123;
             &#125;
         &#125;);
 </code></pre>
-<p><img data-src="Android基础/image-20220426231939847.png" alt="image-20220426231939847"></p>
+<p><img data-src="/Android%E5%9F%BA%E7%A1%80/image-20220426231939847.png" alt="image-20220426231939847"></p>
 <p>这样一来每次点击在后台返回了日志。</p>
 <h6 id="Android组成部分"><a href="#Android组成部分" class="headerlink" title="Android组成部分"></a>Android组成部分</h6><ul>
 <li>Activity 表示层 展示UI，响应用户动作</li>
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity &#123;
 <h6 id="gson"><a href="#gson" class="headerlink" title="gson:"></a>gson:</h6><p>序列化</p>
 <h3 id="Android开发"><a href="#Android开发" class="headerlink" title="Android开发"></a>Android开发</h3><h4 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h4><h6 id="intent"><a href="#intent" class="headerlink" title="intent"></a>intent</h6><p>主要用于组件之间的传输，类似从一个activity到另一个activity。</p>
 <p>要实现这种传输，需要实例化intent对象。</p>
-<pre><code class="lang-java">btn.setOnClickListener(new View.OnClickListener() &#123;
+<pre><code class="java">btn.setOnClickListener(new View.OnClickListener() &#123;
             @Override
             public void onClick(View v) &#123;
                 setTitle(&quot;被点击了&quot;);
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity &#123;
     <div class="item left">
       
 
-  <a href="/2022/04/21/Frida/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicljgocqbj20zk0m8e81.jpg" title="Frida">
+  <a href="/2022/04/21/Frida/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclfb3vzhj20zk0m8wny.jpg" title="Frida">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> app逆向</span>
   <h3>Frida</h3>
@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity &#123;
     <div class="item right">
       
 
-  <a href="/2022/05/03/go/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeuv80yoj20zk0m8kjl.jpg" title="go">
+  <a href="/2022/05/03/go/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicliierfjj20zk0m8npd.jpg" title="go">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> go</span>
   <h3>go</h3>
@@ -416,10 +416,10 @@ public class MainActivity extends AppCompatActivity &#123;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
 </div>
 
-    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
+    <span><a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" title="验证码">验证码</a></span>
   </li>
 
       
@@ -429,27 +429,27 @@ public class MainActivity extends AppCompatActivity &#123;
 <a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/05/14/unidbg/" title="unidbg">unidbg</a></span>
+    <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/Java/" title="In Java">Java</a>
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
 </div>
 
-    <span><a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" title="java基础">java基础</a></span>
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/git/" title="In git">git</a>
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/02/21/git%E6%93%8D%E4%BD%9C/" title="git操作">git操作</a></span>
+    <span><a href="/2022/05/03/Ratel/" title="Ratel">Ratel</a></span>
   </li>
 
       
@@ -466,16 +466,6 @@ public class MainActivity extends AppCompatActivity &#123;
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/python%E5%BC%80%E5%8F%91/" title="In python开发">python开发</a>
 </div>
 
@@ -486,30 +476,40 @@ public class MainActivity extends AppCompatActivity &#123;
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/git/" title="In git">git</a>
+</div>
+
+    <span><a href="/2022/02/21/git%E6%93%8D%E4%BD%9C/" title="git操作">git操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
+</div>
+
+    <span><a href="/2022/03/20/jsrpc/" title="jsrpc">jsrpc</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/go/" title="In go">go</a>
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
 </div>
 
-    <span><a href="/2022/05/03/go/" title="go">go</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
-</div>
-
-    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
+    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
   </li>
 
   </ul>

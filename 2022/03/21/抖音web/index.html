@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclh0m9pdj20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipet8c1a2j20zk0m8kct.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciuja1j1j20zk0m8kjl.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljgocqbj20zk0m8e81.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitspjpbj20zk0m81ky.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicmnywqgpj20zk0m8dwx.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexe4oykj20zk0m87ji.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicljitigmj20zk0m87fp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclimtf7dj20zk0m8qav.jpg"></li>
         </ul>
       </div>
     </header>
@@ -153,7 +153,7 @@ Yume Shoka = 菜b的爬虫记录</title>
 
     <p>mysql+redis</p>
 <h4 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h4><p>需要建立三次握手，断开需要建立四次握手。</p>
-<p><img data-src="抖音web/image-20220326225236374.png" alt="image-20220326225236374"></p>
+<p><img data-src="/%E6%8A%96%E9%9F%B3web/image-20220326225236374.png" alt="image-20220326225236374"></p>
 <p>连接过程：Client(客户端)发送连接请求SYN报文，Server段接受连接后回复ACK报文，然后分配资源，客户端接收ACK报文后，也向服务端发送ACK报文，分配资源，然后就建立了TCP连接</p>
 <p>断开连接：客户端发送FIN报文，假如数据还没传完，服务端继续发送ACK报文，之后在发送FIN报文给客户端，然后客户端再发ACK报文回来(告诉服务器可以关闭了)，然后就关闭了TCP连接。</p>
 <h4 id="WebSocket协议"><a href="#WebSocket协议" class="headerlink" title="WebSocket协议"></a>WebSocket协议</h4><p>实现了浏览器与服务器全双工通信(full-duplex)。只需要建立一次连接，就可以一直保持连接状态，并且前后端可以互相通信，不再是单向的了。</p>
@@ -163,7 +163,7 @@ Yume Shoka = 菜b的爬虫记录</title>
 <p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZWdyZXAvcC85NTQ2Mjc1Lmh0bWw=">WebSocket的原理,及如何测试websocket是否连接成功 - Egrep - 博客园 (cnblogs.com)</span></p>
 <h4 id="目标网站"><a href="#目标网站" class="headerlink" title="目标网站"></a>目标网站</h4><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZG91eWluLmNvbS91c2VyL01TNHdMakFCQUFBQWVISjQxc01MSlF2MDZLRkktUHlxeG9jb2lwQmw1QUtoRVY4RVJPcDdIWlU=">https://www.douyin.com/user/MS4wLjABAAAAeHJ41sMLJQv06KFI-PyqxocoipBl5AKhEV8EROp7HZU</span></p>
 <p>RPC注入：</p>
-<pre><code class="lang-javascript">
+<pre><code class="javascript">
 function SekiroClient(wsURL) &#123;
     this.wsURL = wsURL;
     this.handlers = &#123;&#125;;
@@ -371,7 +371,7 @@ function guid() &#123;
 var client = new SekiroClient(&quot;ws://127.0.0.1:5620/business-demo/register?group=dy&amp;clientId=&quot;+guid());
 
 client.registerAction(&quot;getSignature&quot;,function(request, resolve,reject )&#123;
-
+            
     let pageurl = &#39;/aweme/v1/web/aweme/post/?device_platform=webapp&amp;aid=6383&amp;channel=channel_pc_web&amp;sec_user_id=MS4wLjABAAAAGyky76MpsaNiuI6tNX0dogABIPR8P_Od0YV7cGD_9P0&amp;max_cursor=1645674431000&amp;locate_query=false&amp;count=10&amp;publish_video_strategy_type=2&amp;version_code=170400&amp;version_name=17.4.0&amp;cookie_enabled=true&amp;screen_width=1920&amp;screen_height=1080&amp;browser_language=en-US&amp;browser_platform=Win32&amp;browser_name=Chrome&amp;browser_version=99.0.4844.74&amp;browser_online=true&amp;engine_name=Blink&amp;engine_version=99.0.4844.74&amp;os_name=Windows&amp;os_version=10&amp;cpu_core_num=8&amp;device_memory=8&amp;platform=PC&amp;downlink=10&amp;effective_type=4g&amp;round_trip_time=50&amp;webid=7077786468781164044&#39;;
 
     function sendAjax(url)&#123;
@@ -458,7 +458,7 @@ client.registerAction(&quot;getSignature&quot;,function(request, resolve,reject 
     <div class="item left">
       
 
-  <a href="/2022/03/20/jsrpc/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeyhsblkj20zk0m81kx.jpg" title="jsrpc">
+  <a href="/2022/03/20/jsrpc/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipexbei4hj20zk0m8npd.jpg" title="jsrpc">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> JSRPC</span>
   <h3>jsrpc</h3>
@@ -468,7 +468,7 @@ client.registerAction(&quot;getSignature&quot;,function(request, resolve,reject 
     <div class="item right">
       
 
-  <a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclfdu6exj20zk0m87hw.jpg" title="app入门">
+  <a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicmnywqgpj20zk0m8dwx.jpg" title="app入门">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> app逆向</span>
   <h3>app入门</h3>
@@ -592,10 +592,20 @@ client.registerAction(&quot;getSignature&quot;,function(request, resolve,reject 
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/go/" title="In go">go</a>
+<a href="/categories/ast%E5%BA%94%E7%94%A8/" title="In ast应用">ast应用</a>
 </div>
 
-    <span><a href="/2022/05/03/go/" title="go">go</a></span>
+    <span><a href="/2022/05/05/ast%E8%A7%A3vmp/" title="ast解vmp">ast解vmp</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+</div>
+
+    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
   </li>
 
       
@@ -612,30 +622,10 @@ client.registerAction(&quot;getSignature&quot;,function(request, resolve,reject 
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/vue/" title="In vue">vue</a>
-</div>
-
-    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
 </div>
 
-    <span><a href="/2021/12/26/jy%E6%BB%91%E5%9D%97/" title="jy滑块">jy滑块</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="In 基础知识">基础知识</a>
-</div>
-
-    <span><a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="基础知识">基础知识</a></span>
+    <span><a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" title="验证码">验证码</a></span>
   </li>
 
       
@@ -645,46 +635,57 @@ client.registerAction(&quot;getSignature&quot;,function(request, resolve,reject 
 <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
 </div>
 
-    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
+    <span><a href="/2022/03/04/HMM/" title="HMM">HMM</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/03/06/redis/" title="redis">redis</a></span>
+    <span><a href="/2022/05/03/Ratel/" title="Ratel">Ratel</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
 </div>
 
-    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
+    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
+<a href="/categories/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" title="In 加密算法">加密算法</a>
 </div>
 
-    <span><a href="/2022/02/20/ti%E8%BF%98%E5%8E%9F2/" title="ti还原2">ti还原2</a></span>
+    <span><a href="/2022/02/25/js%E5%8A%A0%E5%AF%86/" title="js加密">js加密</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%A1%86%E6%9E%B6/" title="In 框架">框架</a>
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
 </div>
 
-    <span><a href="/2022/02/02/Framework/" title="Framework">Framework</a></span>
+    <span><a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" title="数据挖掘介绍">数据挖掘介绍</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
+</div>
+
+    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
   </li>
 
   </ul>

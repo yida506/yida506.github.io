@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeyvx1d4j20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipetlbztpj20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipesng5oej20zk0m87d4.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipesx5fdwj20zk0m81kx.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitzannuj20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipesrnqv3j20zk0m8ava.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeybxm1pj20zk0m8niv.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicliierfjj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipetfk5zwj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipew8gmvyj20zk0m87wh.jpg"></li>
         </ul>
       </div>
     </header>
@@ -152,7 +152,7 @@ Yume Shoka = 菜b的爬虫记录</title>
     
 
     <h3 id="基础知识篇"><a href="#基础知识篇" class="headerlink" title="基础知识篇"></a>基础知识篇</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h5 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h5><p>线程为程序的最小执行单位，在python中用Thread库来控制线程。</p>
-<pre><code class="lang-python">import threading
+<pre><code class="python">import threading
 import time 
 
 # 通过类携带target参数,直接生成线程类,同时,current_thread().name可以返回当前类的名称,线程的实例化可以通过调用is_alive()来判断线程是否存在。
@@ -181,7 +181,7 @@ for i in range(5):
 <p>daemon设置为True,可以在主线程结束时，结束当前线程。</p>
 </blockquote>
 <p>对线程类继承</p>
-<pre><code class="lang-python">class NewThread(threading.Thread):
+<pre><code class="python">class NewThread(threading.Thread):
 
     def __init__(self, name=None):
         super().__init__(name=name)
@@ -201,7 +201,7 @@ thread.start()
 <li>复用性，结束任务的线程放回线程池，供给下一次使用。</li>
 </ol>
 <p>要满足创造线程的数量恒定，以及线程结束后的复用，那么就需要用到队列。</p>
-<h5 id="quene"><a href="#quene" class="headerlink" title="quene"></a>quene</h5><pre><code class="lang-python">import threading
+<h5 id="quene"><a href="#quene" class="headerlink" title="quene"></a>quene</h5><pre><code class="python">import threading
 import time
 from queue import Queue
 
@@ -305,7 +305,7 @@ print(&#39;success&#39;)
     <div class="item left">
       
 
-  <a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicivghyooj20zk0m8dir.jpg" title="基础知识">
+  <a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipewkhf1zj20zk0m81kx.jpg" title="基础知识">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> 基础知识</span>
   <h3>基础知识</h3>
@@ -315,7 +315,7 @@ print(&#39;success&#39;)
     <div class="item right">
       
 
-  <a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipetfk5zwj20zk0m8e81.jpg" title="sm滑块">
+  <a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipexj2jgzj20zk0m8b09.jpg" title="sm滑块">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> 验证码专题</span>
   <h3>sm滑块</h3>
@@ -442,7 +442,77 @@ print(&#39;success&#39;)
 <a href="/categories/ast/" title="In ast">ast</a>
 </div>
 
-    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
+    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/" title="In 社会工程学">社会工程学</a>
+</div>
+
+    <span><a href="/2022/07/03/socialengineer/" title="socialengineer">socialengineer</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/git/" title="In git">git</a>
+</div>
+
+    <span><a href="/2022/02/21/git%E6%93%8D%E4%BD%9C/" title="git操作">git操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="In 基础知识">基础知识</a>
+</div>
+
+    <span><a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="基础知识">基础知识</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
+</div>
+
+    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/05/03/Ratel/" title="Ratel">Ratel</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast%E5%BA%94%E7%94%A8/" title="In ast应用">ast应用</a>
+</div>
+
+    <span><a href="/2022/05/05/ast%E8%A7%A3vmp/" title="ast解vmp">ast解vmp</a></span>
   </li>
 
       
@@ -459,80 +529,10 @@ print(&#39;success&#39;)
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
 </div>
 
-    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/04/03/app%E5%85%A5%E9%97%A8/" title="app入门">app入门</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
-</div>
-
-    <span><a href="/2022/05/14/unidbg/" title="unidbg">unidbg</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
-</div>
-
-    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
-</div>
-
-    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
-</div>
-
-    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/Java/" title="In Java">Java</a>
-</div>
-
-    <span><a href="/2022/05/15/java%E5%9F%BA%E7%A1%80/" title="java基础">java基础</a></span>
+    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
   </li>
 
   </ul>

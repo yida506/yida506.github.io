@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicliwyw55j20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipexoj0moj20zk0m8kgu.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclx29mstj20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicm07ih54j20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexj2jgzj20zk0m8b09.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclh0m9pdj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipev1x5e4j20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciundwu5j20zk0m8n9e.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclwrdwyaj20zk0m8are.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeyhsblkj20zk0m81kx.jpg"></li>
         </ul>
       </div>
     </header>
@@ -152,7 +152,7 @@ Yume Shoka = 菜b的爬虫记录</title>
     
 
     <h4 id="验证码概述"><a href="#验证码概述" class="headerlink" title="验证码概述"></a>验证码概述</h4><p>所谓验证码，就是采取一定的手段，对爬虫采集数据增加一定的难度，要想从js端突破这个问题，就需要对验证码的传输过程有一定的了解，这里仍然以jy滑块为例。</p>
-<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img data-src="验证码/image-20220109214733411.png" alt="image-20220109214733411"></p>
+<h4 id="JY滑块"><a href="#JY滑块" class="headerlink" title="JY滑块"></a>JY滑块</h4><h5 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h5><h6 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h6><p><img data-src="/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109214733411.png" alt="image-20220109214733411"></p>
 <p>首先F12对网页进行抓包可以看到，这里首先是加载了一个html页面，然后加载了2个js，接着，向服务器发送了一个register请求，这里的t参数是时间戳，然后返回了gt,challenge这两个主要参数，然后是geetype请求，主要是用于请求Js,然后加载了fullpage这个js，之后是向服务器发送了一个get请求，这里使用了gt、challenge、lang、pt、client_type、w、callback，这几个参数。</p>
 <p>其中callback后携带了一个时间戳，w这个参数包含了一系列的加密操作，gt、challenge这两个参数由之前的register请求获取，剩下的可以写死。</p>
 <blockquote>
@@ -161,12 +161,12 @@ Yume Shoka = 菜b的爬虫记录</title>
 <li>u值：生成随机数作为公钥，对其进行加密。</li>
 <li>l值：对一个初始对象以及公钥进行组合加密成一个数组</li>
 <li>h值：对l值进行一个处理。</li>
-<li>w=h+u;</li>
+<li>w&#x3D;h+u;</li>
 </ol>
 </blockquote>
 <p>然后，这个get请求会返回一系列参数其中包含一个s参数(后续会用到)。</p>
 <h6 id="提交过程"><a href="#提交过程" class="headerlink" title="提交过程"></a>提交过程</h6><p>在点击页面的提交按钮的时候，会返回如下数据。</p>
-<p><img data-src="验证码/image-20220109221913141.png" alt="image-20220109221913141"></p>
+<p><img data-src="/%E9%AA%8C%E8%AF%81%E7%A0%81/image-20220109221913141.png" alt="image-20220109221913141"></p>
 <p>首先提交了一个ajax请求，然后，就可以触发下面那个get.php请求，就可以获取到包含滑块等数据的包，但是，这个w值的加密与上述有所不同。</p>
 <blockquote>
 <ol>
@@ -175,10 +175,10 @@ Yume Shoka = 菜b的爬虫记录</title>
 <li>将这些参数进行一个拼接，然后使用公钥进行加密，得到w值。</li>
 </ol>
 </blockquote>
-<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>​    </p>
+<h6 id="滑动过程"><a href="#滑动过程" class="headerlink" title="滑动过程"></a>滑动过程</h6><p>​	</p>
 <p>滑动滑块，会弹出一个请求，这里的w为加密轨迹后的参数。由于进入了另一个js，所以生成了新的公钥，这里的加密过程与页面初始化的流程一模一样，唯一不同的是这里第二步传入的参数和包含鼠标轨迹，不过多赘述。</p>
 <h5 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h5><h4 id="顶象滑块"><a href="#顶象滑块" class="headerlink" title="顶象滑块"></a>顶象滑块</h4><p><span class="exturl" data-url="aHR0cHM6Ly9tLmFpcmNoaW5hLmNvbS5jbi9hYy9jL2ludm9rZS9yZXNldC9jaGVja1Bob25lQHBn">https://m.airchina.com.cn/ac/c/invoke/reset/checkPhone@pg</span></p>
-<h4 id="数美滑块"><a href="#数美滑块" class="headerlink" title="数美滑块"></a>数美滑块</h4><p><span class="exturl" data-url="aHR0cHM6Ly93d3cueGlhb2hvbmdzaHUuY29tL3dlYi1sb2dpbi9jYXB0Y2hhP3JlZGlyZWN0UGF0aD1odHRwJTNBJTJGJTJGd3d3LnhpYW9ob25nc2h1LmNvbSUyRmRpc2NvdmVyeSUyRml0ZW0lMkY2MDVlYjQ5MjAwMDAwMDAwMjEwMzZhYjU=">滑块验证 (xiaohongshu.com)</span></p>
+<h4 id="数美滑块"><a href="#数美滑块" class="headerlink" title="数美滑块"></a>数美滑块</h4><p><span class="exturl" data-url="aHR0cHM6Ly93d3cueGlhb2hvbmdzaHUuY29tL3dlYi1sb2dpbi9jYXB0Y2hhP3JlZGlyZWN0UGF0aD1odHRwOi8vd3d3LnhpYW9ob25nc2h1LmNvbS9kaXNjb3ZlcnkvaXRlbS82MDVlYjQ5MjAwMDAwMDAwMjEwMzZhYjU=">滑块验证 (xiaohongshu.com)</span></p>
 
   </div>
 
@@ -245,7 +245,7 @@ Yume Shoka = 菜b的爬虫记录</title>
     <div class="item left">
       
 
-  <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeuibk9fj20zk0m8ay2.jpg" title="事件监听">
+  <a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipetfk5zwj20zk0m8e81.jpg" title="事件监听">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> JS逆向</span>
   <h3>事件监听</h3>
@@ -255,7 +255,7 @@ Yume Shoka = 菜b的爬虫记录</title>
     <div class="item right">
       
 
-  <a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclwuom7cj20zk0m8dvn.jpg" title="基础知识">
+  <a href="/2022/01/16/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicitf0kl1j20zk0m87fe.jpg" title="基础知识">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> 基础知识</span>
   <h3>基础知识</h3>
@@ -379,20 +379,30 @@ Yume Shoka = 菜b的爬虫记录</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
 </div>
 
-    <span><a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" title="数据挖掘介绍">数据挖掘介绍</a></span>
+    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+<a href="/categories/vue/" title="In vue">vue</a>
 </div>
 
-    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
+    <span><a href="/2022/05/22/vue%E5%88%9D%E6%8E%A2/" title="vue初探">vue初探</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/03/13/ali/" title="ali">ali</a></span>
   </li>
 
       
@@ -409,10 +419,10 @@ Yume Shoka = 菜b的爬虫记录</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/python%E5%BC%80%E5%8F%91/" title="In python开发">python开发</a>
+<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
 </div>
 
-    <span><a href="/2022/01/18/python%E5%BC%80%E5%8F%91/" title="python开发">python开发</a></span>
+    <span><a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" title="数据挖掘介绍">数据挖掘介绍</a></span>
   </li>
 
       
@@ -429,10 +439,10 @@ Yume Shoka = 菜b的爬虫记录</title>
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+<a href="/categories/jsvmp/" title="In jsvmp">jsvmp</a>
 </div>
 
-    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
+    <span><a href="/2022/05/21/%E6%8A%96%E5%BA%97vmp/" title="抖店vmp">抖店vmp</a></span>
   </li>
 
       
@@ -442,37 +452,27 @@ Yume Shoka = 菜b的爬虫记录</title>
 <a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
 </div>
 
-    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
+    <span><a href="/2022/01/09/%E9%AA%8C%E8%AF%81%E7%A0%81/" title="验证码">验证码</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
+<a href="/categories/go/" title="In go">go</a>
 </div>
 
-    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
+    <span><a href="/2022/05/03/go/" title="go">go</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
-</div>
-
-    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
+    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
   </li>
 
   </ul>

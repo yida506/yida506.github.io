@@ -100,12 +100,12 @@ Yume Shoka = 菜b的爬虫记录</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljitigmj20zk0m87fp.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclil3m4ej20zk0m8tn8.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclip4jbpj20zk0m87cv.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciukx8a7j20zk0m8aio.jpg"></li>
-          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipevo9j1jj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclize41wj20zk0m87gk.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciuja1j1j20zk0m8kjl.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeubcbajj20zk0m8h1h.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclh5u05ej20zk0m87df.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giph4baakhj20zk0m8h5q.jpg"></li>
+          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipet4bz0yj20zk0m8e81.jpg"></li>
         </ul>
       </div>
     </header>
@@ -158,12 +158,12 @@ Yume Shoka = 菜b的爬虫记录</title>
 <blockquote>
 <p>pixel 8.0.0貌似会使得后面用frida有小问题</p>
 </blockquote>
-<h6 id="电脑驱动更新"><a href="#电脑驱动更新" class="headerlink" title="电脑驱动更新"></a>电脑驱动更新</h6><p><strong>win10需要更新google usb driver </strong></p>
+<h6 id="电脑驱动更新"><a href="#电脑驱动更新" class="headerlink" title="电脑驱动更新"></a>电脑驱动更新</h6><p>**win10需要更新google usb driver **</p>
 <blockquote>
-<p><img data-src="app入门/image-20220417122821654.png" alt="image-20220417122821654"></p>
+<p><img data-src="/app%E5%85%A5%E9%97%A8/image-20220417122821654.png" alt="image-20220417122821654"></p>
 </blockquote>
 <p>然后到bootloader界面直接运行</p>
-<p><img data-src="app入门/image-20220417135832286.png" alt="image-20220417135832286"></p>
+<p><img data-src="/app%E5%85%A5%E9%97%A8/image-20220417135832286.png" alt="image-20220417135832286"></p>
 <p>即可</p>
 <p>时间同步</p>
 <pre><code>adb shell settings put global captive_portal_http_url https://www.google.cn/generate_204
@@ -173,13 +173,14 @@ adb shell settings put global captive_portal_https_url https://www.google.cn/gen
 adb shell settings put global global ntp_server 1.hk.pool.ntp.org
 
  adb shell reboot
-</code></pre><h4 id="ROOT"><a href="#ROOT" class="headerlink" title="ROOT"></a>ROOT</h4><p>去下一个TWRP镜像，</p>
+</code></pre>
+<h4 id="ROOT"><a href="#ROOT" class="headerlink" title="ROOT"></a>ROOT</h4><p>去下一个TWRP镜像，</p>
 <p>然后用fastboot falsh  recovery twrp镜像推送镜像 ，然后从bootloaders界面进去recovery分区，安装twrp</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvcGpvaG53dS9NYWdpc2svcmVsZWFzZXMvdGFnL3YyMC40">https://github.com/topjohnwu/Magisk/releases/tag/v20.4</span></p>
 <blockquote>
 <p>nexus5和pixel2 xl 的方式不同，pixel2不自带recovery分区，需要先刷临时分区。</p>
 </blockquote>
-<pre><code class="lang-shell">// 刷入临时镜像
+<pre><code class="shell">// 刷入临时镜像
 fastboot flash boot twrp-3.6.0_9-0-taimen.img
 //重启后进入twrp
 fastboot reboot
@@ -189,13 +190,13 @@ adb push twrp-installer-3.6.0_9-0-taimen.zip /sdcard/
 adb push Magisk-v20.4.zip /sdcard/
 </code></pre>
 <p>下载magisk包</p>
-<p>然后通过adb push Magisk-v20.4.zip /sdcard/ 推送到手机上</p>
+<p>然后通过adb push Magisk-v20.4.zip &#x2F;sdcard&#x2F; 推送到手机上</p>
 <p>这里sdcard指代的是默认目录。</p>
 <p>然后通过twrp的install找到传输过来的zip进行安装。</p>
 <blockquote>
 <p>对于pxel 需要安装完永久的twrp后，点击上面的按钮在安装magisk</p>
 </blockquote>
-<p><img data-src="app入门/image-20220417144216066.png" alt="image-20220417144216066"></p>
+<p><img data-src="/app%E5%85%A5%E9%97%A8/image-20220417144216066.png" alt="image-20220417144216066"></p>
 <p>adb shell 连接手机, su是进入root权限.</p>
 <blockquote>
 <p>pixel2 分区在输入magisk时貌似有兼容错误，</p>
@@ -271,7 +272,7 @@ adb push Magisk-v20.4.zip /sdcard/
     <div class="item left">
       
 
-  <a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipev1x5e4j20zk0m8b29.jpg" title="抖音web">
+  <a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclxp31goj20zk0m8qv5.jpg" title="抖音web">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> JSRPC</span>
   <h3>抖音web</h3>
@@ -281,7 +282,7 @@ adb push Magisk-v20.4.zip /sdcard/
     <div class="item right">
       
 
-  <a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclj9410cj20zk0m8h12.jpg" title="静态分析">
+  <a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicm07ih54j20zk0m84qp.jpg" title="静态分析">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> app逆向</span>
   <h3>静态分析</h3>
@@ -405,40 +406,10 @@ adb push Magisk-v20.4.zip /sdcard/
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
+<a href="/categories/app%E5%9F%BA%E7%A1%80/" title="In app基础">app基础</a>
 </div>
 
-    <span><a href="/2022/02/10/ti%E8%BF%98%E5%8E%9F/" title="ti还原1">ti还原1</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6/" title="In 社会工程学">社会工程学</a>
-</div>
-
-    <span><a href="/2022/07/03/socialengineer/" title="socialengineer">socialengineer</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/ast/" title="In ast">ast</a>
-</div>
-
-    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
-</div>
-
-    <span><a href="/2022/01/03/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" title="事件监听">事件监听</a></span>
+    <span><a href="/2022/05/09/%E6%8A%93%E5%8C%85%E4%B8%93%E9%A2%98/" title="抓包专题">抓包专题</a></span>
   </li>
 
       
@@ -455,20 +426,70 @@ adb push Magisk-v20.4.zip /sdcard/
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
 </div>
 
-    <span><a href="/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/" title="数据挖掘介绍">数据挖掘介绍</a></span>
+    <span><a href="/2022/04/19/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="静态分析">静态分析</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="In 机器学习">机器学习</a>
+<a href="/categories/%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%93%E9%A2%98/" title="In 验证码专题">验证码专题</a>
 </div>
 
-    <span><a href="/2022/02/27/%E5%85%B3%E8%81%94%E6%8C%96%E6%8E%98/" title="关联挖掘">关联挖掘</a></span>
+    <span><a href="/2022/01/22/sm%E6%BB%91%E5%9D%97/" title="sm滑块">sm滑块</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2022/01/01/ast%E6%80%9D%E6%83%B3/" title="ast思想">ast思想</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/05/03/Ratel/" title="Ratel">Ratel</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%83%A8%E7%BD%B2%E7%AF%87/" title="In 部署篇">部署篇</a>
+</div>
+
+    <span><a href="/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/" title="服务器部署随笔">服务器部署随笔</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ast/" title="In ast">ast</a>
+</div>
+
+    <span><a href="/2021/12/29/ast%E8%BF%9B%E9%98%B6/" title="ast进阶">ast进阶</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/app%E9%80%86%E5%90%91/" title="In app逆向">app逆向</a>
+</div>
+
+    <span><a href="/2022/04/21/Frida/" title="Frida">Frida</a></span>
   </li>
 
       
@@ -478,26 +499,7 @@ adb push Magisk-v20.4.zip /sdcard/
 <a href="/categories/JS%E9%80%86%E5%90%91/" title="In JS逆向">JS逆向</a>
 </div>
 
-    <span><a href="/2021/12/18/%E8%A1%A5%E7%8E%AF%E5%A2%83/" title="补环境">补环境</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/03/06/redis/" title="redis">redis</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/JSRPC/" title="In JSRPC">JSRPC</a>
-</div>
-
-    <span><a href="/2022/03/21/%E6%8A%96%E9%9F%B3web/" title="抖音web">抖音web</a></span>
+    <span><a href="/2021/11/14/js%E9%80%86%E5%90%91/" title="js逆向">js逆向</a></span>
   </li>
 
   </ul>
