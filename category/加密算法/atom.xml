@@ -19,7 +19,7 @@
 &lt;/blockquote&gt;
 &lt;h6 id=&#34;unicode编码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#unicode编码&#34;&gt;#&lt;/a&gt; Unicode 编码&lt;/h6&gt;
 &lt;p&gt;以  &lt;code&gt;\u&lt;/code&gt; 、 &lt;code&gt;&amp;amp;#&lt;/code&gt;  或  &lt;code&gt;&amp;amp;#x&lt;/code&gt;  开头，后面是数字加字母组合。&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;js%E5%8A%A0%E5%AF%86/image-20220225225020052.png&#34; alt=&#34;image-20220225225020052&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://rfi4er02w.sabkt.gdipper.com/js%E5%8A%A0%E5%AF%86/image-20220225225020052.png&#34; alt=&#34;image-20220225225020052&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;算法加密&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#算法加密&#34;&gt;#&lt;/a&gt; 算法加密&lt;/h5&gt;
 &lt;h6 id=&#34;md5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#md5&#34;&gt;#&lt;/a&gt; MD5&lt;/h6&gt;
 &lt;p&gt;本质上是一种信息摘要算法，对应关系为 n 对 1，也就是不同的数有相同的加密结果，但是一个数只会有唯一的加密值。密文一般是 16 或 32 位。&lt;/p&gt;

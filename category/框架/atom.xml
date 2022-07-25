@@ -37,7 +37,7 @@
 &lt;p&gt;_tab_spider_status：将 redis_key 传入爬取状态表&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img data-src=&#34;Framework/image-20220303211908320.png&#34; alt=&#34;image-20220303211908320&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://rfi4er02w.sabkt.gdipper.com/Framework/image-20220303211908320.png&#34; alt=&#34;image-20220303211908320&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;_spider_mark：获取本地 ip + 时间，应该是导出日志使用&lt;/li&gt;
 &lt;li&gt;_interval ：从任务队列中获取任务到内存队列的间隔&lt;/li&gt;

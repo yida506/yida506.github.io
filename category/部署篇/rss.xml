@@ -8,51 +8,6 @@
         <pubDate>Mon, 21 Feb 2022 21:05:26 +0800</pubDate>
         <lastBuildDate>Mon, 21 Feb 2022 21:05:26 +0800</lastBuildDate>
         <item>
-            <guid isPermalink="true">http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/</guid>
-            <title>服务器部署</title>
-            <link>http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E9%9A%8F%E7%AC%94/</link>
-            <pubDate>Mon, 21 Feb 2022 21:05:26 +0800</pubDate>
-            <description><![CDATA[ &lt;h4 id=&#34;feaplat服务器部署&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#feaplat服务器部署&#34;&gt;#&lt;/a&gt; feaplat 服务器部署&lt;/h4&gt;
-&lt;h5 id=&#34;服务器选择选用centos76&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#服务器选择选用centos76&#34;&gt;#&lt;/a&gt; 服务器选择选用 centos7.6&lt;/h5&gt;
-&lt;p&gt;账号:root&lt;/p&gt;
-&lt;p&gt;密码：大小写混合&lt;/p&gt;
-&lt;p&gt;直接使用 FinalShell 链接，其中 IP 地址对应公网 IP，端口对应 22 (默认)，采用上述账号密码进行账号密码登录。&lt;/p&gt;
-&lt;h4 id=&#34;docker&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#docker&#34;&gt;#&lt;/a&gt; Docker&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;介绍:&lt;/strong&gt; 本质上是通过打包的方式，将环境啥的都集中到一个地方，避免配置的复杂度，做到随用随取，同时里面相当于包含独立的 linux 主机类似 bin 啥的目录&lt;/p&gt;
-&lt;h6 id=&#34;docker-pull&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#docker-pull&#34;&gt;#&lt;/a&gt; docker pull：&lt;/h6&gt;
-&lt;p&gt;下载网上的镜像，一般选用公用镜像，私有的建立仓库啥的&lt;/p&gt;
-&lt;h6 id=&#34;docker-run&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#docker-run&#34;&gt;#&lt;/a&gt; docker run:&lt;/h6&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;参数&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;解释&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;-d&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;表示启动在后台&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;-p&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;8888:8888 表示端口&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;-e&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;环境 (对于 jupyter 镜像来说，加入 JUPYTER_ENABLE_LAB=yes 代表使用 lab 而不是 notebook)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;-v&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;给容器挂载存储卷，挂载到容器的某个目录 (/ 主机目录 : / 容器目录)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;内网穿透：&lt;br&gt;
-&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9vcGVuLmRpbmd0YWxrLmNvbS9kb2N1bWVudC9yZXNvdXJjZWRvd25sb2FkL2h0dHAtaW50cmFuZXQtcGVuZXRyYXRpb24=&#34;&gt;https://open.dingtalk.com/document/resourcedownload/http-intranet-penetration&lt;/span&gt;&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
             <guid isPermalink="true">http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
             <title>服务器部署</title>
             <link>http://yida506.github.io/2022/02/21/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
