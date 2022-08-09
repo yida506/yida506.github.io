@@ -5,6 +5,16 @@
     "home_page_url": "http://yida506.github.io",
     "items": [
         {
+            "id": "http://yida506.github.io/2022/08/04/yrxdemo2/",
+            "url": "http://yida506.github.io/2022/08/04/yrxdemo2/",
+            "title": "yrxdemo2",
+            "date_published": "2022-08-04T00:10:21.000Z",
+            "content_html": "<h4 id=\"第二题-简单so\"><a class=\"anchor\" href=\"#第二题-简单so\">#</a> 第二题 简单 so</h4>\n<p><img data-src=\"yrxdemo2/image-20220804082551141.png\" alt=\"image-20220804082551141\"></p>\n<p>很明显，加密函数对应的 so 文件如图所示，直接用 ida 打开</p>\n<p><img data-src=\"yrxdemo2/image-20220804082634800.png\" alt=\"image-20220804082634800\"></p>\n<p>发现主要的逻辑为 sub_EAD0 里面，接下来 Hook 一下，看里面到底在干啥</p>\n",
+            "tags": [
+                "YRX"
+            ]
+        },
+        {
             "id": "http://yida506.github.io/2022/08/03/yrxdemo1/",
             "url": "http://yida506.github.io/2022/08/03/yrxdemo1/",
             "title": "yrxdemo1",

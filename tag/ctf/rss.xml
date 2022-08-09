@@ -9,6 +9,10 @@
         <lastBuildDate>Wed, 03 Aug 2022 10:47:01 +0800</lastBuildDate>
         <category>CTF</category>
         <category>YRX</category>
+        <category>ast</category>
+        <category>rpc</category>
+        <category>unidbg</category>
+        <category>vmp</category>
         <item>
             <guid isPermalink="true">http://yida506.github.io/2022/08/03/easyso/</guid>
             <title>easyso</title>

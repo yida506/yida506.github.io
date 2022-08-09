@@ -6,6 +6,10 @@
     <updated>2021-09-02T15:19:36.000Z</updated>
     <category term="CTF" />
     <category term="YRX" />
+    <category term="ast" />
+    <category term="rpc" />
+    <category term="unidbg" />
+    <category term="vmp" />
     <entry>
         <id>http://yida506.github.io/2021/09/02/Feadper/</id>
         <title>Feapder</title>

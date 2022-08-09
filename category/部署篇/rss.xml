@@ -9,6 +9,10 @@
         <lastBuildDate>Fri, 01 Jul 2022 23:06:24 +0800</lastBuildDate>
         <category>CTF</category>
         <category>YRX</category>
+        <category>ast</category>
+        <category>rpc</category>
+        <category>unidbg</category>
+        <category>vmp</category>
         <item>
             <guid isPermalink="true">http://yida506.github.io/2022/07/01/docker/</guid>
             <title>docker</title>

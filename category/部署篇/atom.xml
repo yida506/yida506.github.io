@@ -6,6 +6,10 @@
     <updated>2022-07-01T15:06:24.000Z</updated>
     <category term="CTF" />
     <category term="YRX" />
+    <category term="ast" />
+    <category term="rpc" />
+    <category term="unidbg" />
+    <category term="vmp" />
     <entry>
         <id>http://yida506.github.io/2022/07/01/docker/</id>
         <title>docker</title>

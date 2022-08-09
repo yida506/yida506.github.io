@@ -6,6 +6,10 @@
     <updated>2022-06-01T12:34:27.000Z</updated>
     <category term="CTF" />
     <category term="YRX" />
+    <category term="ast" />
+    <category term="rpc" />
+    <category term="unidbg" />
+    <category term="vmp" />
     <entry>
         <id>http://yida506.github.io/2022/06/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%8B%E7%BB%8D/</id>
         <title>数据挖掘介绍</title>

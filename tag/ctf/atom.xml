@@ -6,6 +6,10 @@
     <updated>2022-08-03T02:47:01.000Z</updated>
     <category term="CTF" />
     <category term="YRX" />
+    <category term="ast" />
+    <category term="rpc" />
+    <category term="unidbg" />
+    <category term="vmp" />
     <entry>
         <id>http://yida506.github.io/2022/08/03/easyso/</id>
         <title>easyso</title>

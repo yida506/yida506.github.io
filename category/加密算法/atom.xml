@@ -6,6 +6,10 @@
     <updated>2022-02-25T14:25:27.000Z</updated>
     <category term="CTF" />
     <category term="YRX" />
+    <category term="ast" />
+    <category term="rpc" />
+    <category term="unidbg" />
+    <category term="vmp" />
     <entry>
         <id>http://yida506.github.io/2022/02/25/js%E5%8A%A0%E5%AF%86/</id>
         <title>js加密</title>

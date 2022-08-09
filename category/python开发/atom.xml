@@ -6,6 +6,10 @@
     <updated>2022-01-18T15:42:18.000Z</updated>
     <category term="CTF" />
     <category term="YRX" />
+    <category term="ast" />
+    <category term="rpc" />
+    <category term="unidbg" />
+    <category term="vmp" />
     <entry>
         <id>http://yida506.github.io/2022/01/18/python%E5%BC%80%E5%8F%91/</id>
         <title>python开发</title>
