@@ -20,9 +20,9 @@
             <category>YRX</category>
             <pubDate>Thu, 04 Aug 2022 08:10:21 +0800</pubDate>
             <description><![CDATA[ &lt;h4 id=&#34;第二题-简单so&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#第二题-简单so&#34;&gt;#&lt;/a&gt; 第二题 简单 so&lt;/h4&gt;
-&lt;p&gt;&lt;img data-src=&#34;yrxdemo2/image-20220804082551141.png&#34; alt=&#34;image-20220804082551141&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://rfi4er02w.sabkt.gdipper.com/yrxdemo2/image-20220804082551141.png&#34; alt=&#34;image-20220804082551141&#34;&gt;&lt;/p&gt;
 &lt;p&gt;很明显，加密函数对应的 so 文件如图所示，直接用 ida 打开&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;yrxdemo2/image-20220804082634800.png&#34; alt=&#34;image-20220804082634800&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://rfi4er02w.sabkt.gdipper.com/yrxdemo2/image-20220804082634800.png&#34; alt=&#34;image-20220804082634800&#34;&gt;&lt;/p&gt;
 &lt;p&gt;发现主要的逻辑为 sub_EAD0 里面，接下来 Hook 一下，看里面到底在干啥&lt;/p&gt;
  ]]></description>
         </item>
