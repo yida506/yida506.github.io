@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "菜b的爬虫记录 • All posts by \"akamai\" tag",
+    "description": "",
+    "home_page_url": "http://yida506.github.io",
+    "items": [
+        {
+            "id": "http://yida506.github.io/2022/06/15/Akamai/",
+            "url": "http://yida506.github.io/2022/06/15/Akamai/",
+            "title": "韩国航司akamai1.75",
+            "date_published": "2022-06-15T13:52:39.000Z",
+            "content_html": "<h4 id=\"韩国航司\"><a class=\"anchor\" href=\"#韩国航司\">#</a> 韩国航司</h4>\n<p>网站： <span class=\"exturl\" data-url=\"aHR0cHM6Ly93d3cuZmx5YXNpYW5hLmNvbS9DL0NOL0tPL2luZGV4\">https://www.flyasiana.com/C/CN/KO/index</span></p>\n<h4 id=\"访问流程\"><a class=\"anchor\" href=\"#访问流程\">#</a> 访问流程</h4>\n<p>​\t\t访问 index 页 (200)，然后 set-cookie -&gt;post 请求传 (sensor_data)，在 set-cookie 一次 ---&gt; 带 cookie 直接请求接口。</p>\n<blockquote>\n<p>总的来说流程其实不复杂。</p>\n</blockquote>\n<h4 id=\"sensor_data\"><a class=\"anchor\" href=\"#sensor_data\">#</a> sensor_data</h4>\n<h5 id=\"扣代码\"><a class=\"anchor\" href=\"#扣代码\">#</a> 扣代码</h5>\n<p>​\t\t首先从堆栈进去，把 akm 的 js 扣下来，发现，其实就是套了个数组，然后后续分析使用 netify 插件，保证 js 是脱混淆后的，</p>\n<p>然后，总的来说，里面出现了很多生成这玩意的地方，从 send 往上回溯，然后找到位置慢慢扣就好了。</p>\n<blockquote>\n<p>扣下来，发现，其中计算包括了大量的环境检测，部分可以固定死，还有的就是各种事件的监听，以及 canves 生成的值，取 cookie 中的东西进行计算，时间戳的判断，然后这个会用个  <code>&quot;-1,2,-94,-119,&quot;</code>  的字符串隔开。</p>\n</blockquote>\n<p>​\t\t直接使用测试没啥问题，如过要并发，就得拿到真实的 canvas，以及事件监听的结果尽可能多 (虽说这玩意判断不一定智能，但是一直是一样的就很容易干掉你)，更深层次的估计就是 ja3 啥的检测。</p>\n<h6 id=\"并发假设\"><a class=\"anchor\" href=\"#并发假设\">#</a> 并发假设</h6>\n<ul class=\"task-list\">\n<li class=\"task-list-item\"><input type=\"checkbox\" id=\"cbx_0\" disabled=\"true\"><label for=\"cbx_0\"> 环境随机 (浏览器头等)</label></li>\n<li class=\"task-list-item\"><input type=\"checkbox\" id=\"cbx_1\" disabled=\"true\"><label for=\"cbx_1\"> 时间戳随机，有些是根据他的访问流程来的，所以时间戳还是尽可能的要按他的规律来</label></li>\n<li class=\"task-list-item\"><input type=\"checkbox\" id=\"cbx_2\" disabled=\"true\"><label for=\"cbx_2\"> 事件监听的结果随机 (这玩意收集网页结果就行，其中还获得了其他比较重要的东西，不一致有可能会导致过不了校验)</label></li>\n<li class=\"task-list-item\"><input type=\"checkbox\" id=\"cbx_3\" disabled=\"true\"><label for=\"cbx_3\"> canvas 收集</label></li>\n<li class=\"task-list-item\"><input type=\"checkbox\" id=\"cbx_4\" disabled=\"true\"><label for=\"cbx_4\"> ja3 修改</label></li>\n</ul>\n",
+            "tags": [
+                "Akamai"
+            ]
+        }
+    ]
+}

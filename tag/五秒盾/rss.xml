@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>菜b的爬虫记录 • Posts by &#34;五秒盾&#34; tag</title>
+        <link>http://yida506.github.io</link>
+        <description></description>
+        <language>en</language>
+        <pubDate>Sun, 12 Jun 2022 21:53:20 +0800</pubDate>
+        <lastBuildDate>Sun, 12 Jun 2022 21:53:20 +0800</lastBuildDate>
+        <category>CTF</category>
+        <category>YRX</category>
+        <category>ast</category>
+        <category>rpc</category>
+        <category>unidbg</category>
+        <category>vmp</category>
+        <category>Akamai</category>
+        <category>五秒盾</category>
+        <item>
+            <guid isPermalink="true">http://yida506.github.io/2022/06/12/Cloudflare/</guid>
+            <title>Cloudflare</title>
+            <link>http://yida506.github.io/2022/06/12/Cloudflare/</link>
+            <category>五秒盾</category>
+            <pubDate>Sun, 12 Jun 2022 21:53:20 +0800</pubDate>
+            <description><![CDATA[ &lt;h4 id=&#34;五秒盾分析笔记&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#五秒盾分析笔记&#34;&gt;#&lt;/a&gt; 五秒盾分析笔记&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;	网址  https://pastebin.com/login
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;网站分析&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#网站分析&#34;&gt;#&lt;/a&gt; 网站分析&lt;/h5&gt;
+&lt;p&gt;​		打开会停留五秒，然后才会返回正常的网站，直接抓包分析，看其具体流程 (把 Presever 勾选上)&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220812215705386.png&#34; alt=&#34;image-20220812215705386&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		只有这个返回 200 的时候，才是我们要的网站&lt;/p&gt;
+&lt;p&gt;通过观察，可以看到，先是访问了一个 503 的代码&lt;/p&gt;
+&lt;p&gt;对比 charles 中的抓包&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220812220530890.png&#34; alt=&#34;image-20220812220530890&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		我们可以看到这里的这个 ray 在后面反复出现，接下来就先去 503 的请求中，访问了啥&lt;/p&gt;
+&lt;p&gt;​		将 charles 抓到的放到本地&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220812220847627.png&#34; alt=&#34;image-20220812220847627&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		可以看到，这里的这个 cray 其实就是后面几次访问携带的值&lt;/p&gt;
+&lt;p&gt;​		然后，这个访问获取的 js 经过测试是可以直接 request 访问拿到的，但是这个 js 是每次都是不一样的，也就是说，这里的 js 采用了动态 js 的思路，我们知道 js 发送请求一般都是通过 XMLHTTPREQUEST 这个玩意的，其中发送的时候都用的 send () 方法，直接在网页里面打上 xhr 断点&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813140942887.png&#34; alt=&#34;image-20220813140942887&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		会在这里发送 send 请求， &lt;code&gt;l[c(&#39;0x1cb&#39;)][c(&#39;0x38&#39;)] &lt;/code&gt;  这玩意其实就是第二个请求，然后这个 ax 就是将 &lt;code&gt;l._cf_chl_ctx&lt;/code&gt;  这个东西&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813141350017.png&#34; alt=&#34;image-20220813141350017&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		做了一个处理&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813142115653.png&#34; alt=&#34;image-20220813142115653&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		对比一下，发现这里的这个值其实就是网页一开始这个自执行函数的值，然后直接用插件还原 js 代码，抠出来的这个函数就能直接用，但是因为这个 js 是动态的，所以里面有个值是动态，扣算法要注意，然后这个 请求会放回一段很长的代码，然后这个会返回一段很长的代码。&lt;/p&gt;
+&lt;p&gt;​		然后接下来就一直按下一步，发现，始终在这里来回摇摆，&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813173911368.png&#34; alt=&#34;image-20220813173911368&#34;&gt;&lt;/p&gt;
+&lt;p&gt;但是，观察调用栈，发现，后面的这玩意其实有所不同，一开始是直接调用的，后面的调用栈就包含了 eval，跟进去看，发现一个很骚的操作，就是把那个数组中的值反复替换，然后反复调用才会拿到最后的值，这样一来就极大加强了 ast 还原代码的成本，&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813211453268.png&#34; alt=&#34;image-20220813211453268&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后继续跟，发现  &lt;code&gt;_cf_chl_ctx&lt;/code&gt;  这玩意里面多了点东西，&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813211725224.png&#34; alt=&#34;image-20220813211725224&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在跟一下&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813212631241.png&#34; alt=&#34;image-20220813212631241&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里看着就像检测点&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813215046671.png&#34; alt=&#34;image-20220813215046671&#34;&gt;&lt;/p&gt;
+&lt;p&gt;果然，这里就是在添加环境啥的，然后这里这个 &lt;code&gt;e()&lt;/code&gt;  其实是又是进入一次这个函数，估计又生成了一些环境，&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://pic.ddddhm.cn/Cloudflare/image-20220813221231138.png&#34; alt=&#34;image-20220813221231138&#34;&gt;&lt;/p&gt;
+&lt;p&gt;​		这里还有个 sendRequest，就是指向初次那个 js 的地方&lt;/p&gt;
+&lt;p&gt;​		重新捋一下思路，整个的流程如下：&lt;br&gt;
+首次访问返回 503----&amp;gt; 访问 503 指向的 js (会根据 503 页面的 &lt;code&gt;window._cf_chl_ctx&lt;/code&gt;  生成一段加密参数作为 post 请求的参数) -&amp;gt; 返回一个长度为 10W 的字符串 (这个会用于生成 vm 代码)，然后这时候，就会进行一系列初始化的过程，在 vm 中校验环境等等然后这时候往 &lt;code&gt;window._cf_chl_ctx&lt;/code&gt;  这里面加东西，最终会在发一段比较长的请求，请求成功后，拿到参数 ---&amp;gt; 访问网页&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;主要的难点在于，如何拿到这个环境对象，如果他检测到了你在调试，他就会返回很少的环境，&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这里采用油猴脚本进行 hook，其中关键点其实是在于进入 vm 前后这个环境对象的变化&lt;/p&gt;
+&lt;figure class=&#34;highlight javascript&#34;&gt;&lt;figcaption data-lang=&#34;javascript&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;var&lt;/span&gt; xxa&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;Function&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function-variable function&#34;&gt;Function&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token parameter&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;a&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;env obj ---&gt;&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        console&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;window&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;_cf_chl_ctx&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;debugger&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;xxa&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;a&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;根据堆栈的信息来看，这玩意经过了很多事件的交互。&lt;/p&gt;
+&lt;h4 id=&#34;总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#总结&#34;&gt;#&lt;/a&gt; 总结：&lt;/h4&gt;
+&lt;p&gt;接下来的话就是漫长的补环境&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
