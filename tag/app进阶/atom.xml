@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://yida506.github.io</id>
+    <title>菜b的爬虫记录 • Posts by &#34;app进阶&#34; tag</title>
+    <link href="http://yida506.github.io" />
+    <updated>2022-08-22T13:17:11.000Z</updated>
+    <category term="CTF" />
+    <category term="YRX" />
+    <category term="ast" />
+    <category term="rpc" />
+    <category term="unidbg" />
+    <category term="vmp" />
+    <category term="Akamai" />
+    <category term="五秒盾" />
+    <category term="app进阶" />
+    <entry>
+        <id>http://yida506.github.io/2022/08/22/App%E5%8F%82%E6%95%B0%E5%AE%9A%E4%BD%8D/</id>
+        <title>App参数定位</title>
+        <link rel="alternate" href="http://yida506.github.io/2022/08/22/App%E5%8F%82%E6%95%B0%E5%AE%9A%E4%BD%8D/"/>
+        <content type="html">&lt;h3 id=&#34;参数定位&#34;&gt;&lt;a href=&#34;#参数定位&#34; class=&#34;headerlink&#34; title=&#34;参数定位&#34;&gt;&lt;/a&gt;参数定位&lt;/h3&gt;&lt;p&gt;​        对于一个app来讲，我们往往要获得的是其加密参数，一般来讲，都是通过对网络请求抓包，然后分析参数逻辑，确定加密位置，但是，这样有一个弊端，假使存在了针对抓包的对抗(sslping等)，就会增加定位参数的逻辑成本，基于此，本文提供了另一种思路用于定位参数逻辑。&lt;/p&gt;
+&lt;h5 id=&#34;Intent&#34;&gt;&lt;a href=&#34;#Intent&#34; class=&#34;headerlink&#34; title=&#34;Intent&#34;&gt;&lt;/a&gt;Intent&lt;/h5&gt;&lt;p&gt;​        一般来讲，页面跳转都存在序列化-&amp;gt;反序列化的逻辑。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;lang-java&#34;&gt;btnTwo.setOnClickListener(new View.OnClickListener()&amp;#123;
+            @Override
+            public void onClick(View v) &amp;#123;
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                // 创建一个Bundle对象封装数据
+                Bundle data = new Bundle();
+                data.putInt(&amp;quot;age&amp;quot;,18);
+                data.putString(&amp;quot;name&amp;quot;, &amp;quot;Jack&amp;quot;);
+                intent.putExtra(&amp;quot;data&amp;quot;, data);
+                startActivity(intent);
+            &amp;#125;
+        &amp;#125;);
+// 第二个页面
+Bundle data = getIntent().getBundleExtra(&amp;quot;data&amp;quot;);
+int id = data.getInt(&amp;quot;age&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​        这里的逻辑是给按钮绑定点击事件，然后，&lt;code&gt;startActivity&lt;/code&gt;就是页面跳转的逻辑，然后就把第一页的数据传到了第二页。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;lang-javascript&#34;&gt;// 打印调用堆栈
+function printStack() &amp;#123;
+    Java.perform(function () &amp;#123;
+        var Exception = Java.use(&amp;quot;java.lang.Exception&amp;quot;);
+        var ins = Exception.$new(&amp;quot;Exception&amp;quot;);
+        var straces = ins.getStackTrace();
+        if (straces != undefined &amp;amp;&amp;amp; straces != null) &amp;#123;
+            var strace = straces.toString();
+            var replaceStr = strace.replace(/,/g, &amp;quot;\r\n&amp;quot;);
+            console.log(&amp;quot;=============================Stack strat=======================&amp;quot;);
+            console.log(replaceStr);
+            console.log(&amp;quot;=============================Stack end=======================\r\n&amp;quot;);
+            Exception.$dispose();
+        &amp;#125;
+    &amp;#125;);
+&amp;#125;
+
+
+// hook intent
+function hookintent() &amp;#123;
+    Java.perform(function()&amp;#123;
+        let Intent = Java.use(&amp;quot;android.content.Intent&amp;quot;);
+        // 要注意这里的重载类型
+        Intent.putExtra.overload(&amp;#39;java.lang.String&amp;#39;, &amp;#39;android.os.Bundle&amp;#39;).implementation = function(a, b)&amp;#123;
+            console.log(&amp;quot;hook intent&amp;quot;)
+            printStack()
+            return this.putExtra(a, b);
+        &amp;#125;;
+
+    &amp;#125;)
+&amp;#125;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;TextView&#34;&gt;&lt;a href=&#34;#TextView&#34; class=&#34;headerlink&#34; title=&#34;TextView&#34;&gt;&lt;/a&gt;TextView&lt;/h5&gt;&lt;p&gt;​        第二种就是Hook Android 原生组件，因为，数据如何传输，最终还是会渲染到页面上，这样只需要，hook对应的组件，打印调用堆栈，就能定位到入口。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;lang-javascript&#34;&gt;// hook setText
+function hooksetText()&amp;#123;
+    Java.perform(function()&amp;#123;
+        let TextView = Java.use(&amp;quot;android.widget.TextView&amp;quot;);
+        var stringClzz = Java.use(&amp;#39;java.lang.String&amp;#39;);
+        TextView.setText.overload(&amp;#39;java.lang.CharSequence&amp;#39;).implementation = function(a)&amp;#123;
+            console.log(&amp;quot;hook text View&amp;quot;)
+            var obj1= Java.cast(a, stringClzz); // 类型转化
+            console.log(obj1);
+            if( obj1.indexOf(&amp;quot;test&amp;quot;) &amp;gt; -1) &amp;#123;
+                printStack();
+            &amp;#125;;
+            return this.setText(a);
+        &amp;#125;;
+
+    &amp;#125;);
+&amp;#125;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;缺点就是，只能应对原生组件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;Dialog&#34;&gt;&lt;a href=&#34;#Dialog&#34; class=&#34;headerlink&#34; title=&#34;Dialog&#34;&gt;&lt;/a&gt;Dialog&lt;/h5&gt;&lt;p&gt;​        第三种，就是hook弹窗。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;lang-javascript&#34;&gt;function hookdialog()&amp;#123;
+    Java.perform(function()&amp;#123;
+        let Builder = Java.use(&amp;quot;androidx.appcompat.app.AlertDialog$Builder&amp;quot;);
+        var stringClzz = Java.use(&amp;#39;java.lang.String&amp;#39;);
+        console.log(&amp;#39;hook dialog&amp;#39;);
+        Builder.setMessage.overload(&amp;#39;java.lang.CharSequence&amp;#39;).implementation = function(a)&amp;#123;
+            console.log(&amp;quot;hook dialog1&amp;quot;);
+            var obj1= Java.cast(a, stringClzz); // 类型转化
+            console.log(obj1);
+            printStack()
+            return this.setMessage(a);
+        &amp;#125;;
+
+    &amp;#125;);
+&amp;#125;;
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="app进阶" />
+        <updated>2022-08-22T13:17:11.000Z</updated>
+    </entry>
+</feed>
