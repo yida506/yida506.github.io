@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>菜b的爬虫记录 • Posts by &#34;环境配置&#34; category</title>
+        <link>http://yida506.github.io</link>
+        <description></description>
+        <language>en</language>
+        <pubDate>Mon, 26 Sep 2022 21:52:03 +0800</pubDate>
+        <lastBuildDate>Mon, 26 Sep 2022 21:52:03 +0800</lastBuildDate>
+        <category>CTF</category>
+        <category>YRX</category>
+        <category>ast</category>
+        <category>rpc</category>
+        <category>unidbg</category>
+        <category>vmp</category>
+        <category>Akamai</category>
+        <category>五秒盾</category>
+        <category>app进阶</category>
+        <item>
+            <guid isPermalink="true">http://yida506.github.io/2022/09/26/r0env%E9%85%8D%E7%BD%AE/</guid>
+            <title>r0env配置</title>
+            <link>http://yida506.github.io/2022/09/26/r0env%E9%85%8D%E7%BD%AE/</link>
+            <pubDate>Mon, 26 Sep 2022 21:52:03 +0800</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;逆向环境相关配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#逆向环境相关配置&#34;&gt;#&lt;/a&gt; 逆向环境相关配置&lt;/h3&gt;
+&lt;h4 id=&#34;更新源&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#更新源&#34;&gt;#&lt;/a&gt; 更新源&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;apt-get update&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;安装输入法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装输入法&#34;&gt;#&lt;/a&gt; 安装输入法&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;apt install fcitx fcitx-googlepinyin&lt;/code&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

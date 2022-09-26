@@ -5,6 +5,14 @@
     "home_page_url": "http://yida506.github.io",
     "items": [
         {
+            "id": "http://yida506.github.io/2022/09/26/r0env%E9%85%8D%E7%BD%AE/",
+            "url": "http://yida506.github.io/2022/09/26/r0env%E9%85%8D%E7%BD%AE/",
+            "title": "r0env配置",
+            "date_published": "2022-09-26T13:52:03.000Z",
+            "content_html": "<h3 id=\"逆向环境相关配置\"><a class=\"anchor\" href=\"#逆向环境相关配置\">#</a> 逆向环境相关配置</h3>\n<h4 id=\"更新源\"><a class=\"anchor\" href=\"#更新源\">#</a> 更新源</h4>\n<p><code>apt-get update</code></p>\n<h4 id=\"安装输入法\"><a class=\"anchor\" href=\"#安装输入法\">#</a> 安装输入法</h4>\n<p><code>apt install fcitx fcitx-googlepinyin</code></p>\n",
+            "tags": []
+        },
+        {
             "id": "http://yida506.github.io/2022/08/28/dy-app/",
             "url": "http://yida506.github.io/2022/08/28/dy-app/",
             "title": "dy_app",
